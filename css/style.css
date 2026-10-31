@@ -1,17 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700;800&family=Cairo:wght@600;700;800&display=swap');
 
 :root {
-  --teal-primary: #0f766e;
-  --teal-hover: #115e59;
-  --teal-light: #f0fdfa;
-  --teal-accent: #0d9488;
-  --solar-amber: #d97706;
-  --photon-blue: #0284c7;
-  --slate-dark: #0f172a;
-  --slate-text: #334155;
-  --page-bg: #f8fafc;
-  --card-bg: #ffffff;
-  --border-color: #e2e8f0;
+  --primary-green: #10b981;
+  --primary-dark: #059669;
+  --primary-light: #f0fdf4;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --bg-main: #ffffff;
+  --bg-subtle: #f8fafc;
+  --border-subtle: #e2e8f0;
 }
 
 * {
@@ -21,134 +18,133 @@
 }
 
 body {
-  font-family: 'Readex Pro', 'Tajawal', sans-serif;
-  background-color: var(--page-bg);
-  color: var(--slate-dark);
+  font-family: 'Readex Pro', 'Cairo', sans-serif;
+  background-color: var(--bg-subtle);
+  color: var(--text-primary);
   direction: rtl;
   overflow-x: hidden;
-  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Fluid Layout */
+/* Perfect Layout Containers */
 .app-container {
   width: 100%;
-  max-width: 1240px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 @media (min-width: 640px) {
   .app-container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding: 0 1.5rem;
   }
 }
 
-/* Elevated Modern Cards */
-.modern-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 1.25rem;
-  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.03), 0 2px 4px -2px rgba(15, 23, 42, 0.02);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.modern-card:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.05), 0 4px 6px -4px rgba(15, 23, 42, 0.02);
-}
-
-/* Deep Teal 3D Button */
-.btn-teal {
-  background-color: var(--teal-primary);
-  color: #ffffff;
-  border-bottom: 4px solid var(--teal-hover);
-  border-radius: 0.875rem;
-  font-weight: 700;
-  transition: all 0.15s ease-out;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-teal:hover {
-  background-color: var(--teal-hover);
-}
-
-.btn-teal:active {
-  transform: translateY(3px);
-  border-bottom-width: 1px;
-}
-
-/* Solar Amber 3D Button */
-.btn-solar {
-  background-color: var(--solar-amber);
-  color: #ffffff;
-  border-bottom: 4px solid #b45309;
-  border-radius: 0.875rem;
-  font-weight: 700;
-  transition: all 0.15s ease-out;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-solar:hover {
-  background-color: #b45309;
-}
-
-.btn-solar:active {
-  transform: translateY(3px);
-  border-bottom-width: 1px;
-}
-
-/* Interactive Accordions / Disclosure Box */
-.interactive-chunk {
-  border: 1px solid var(--border-color);
+/* Clean Apple/Stripe-Style Cards */
+.modern-card, .bio-card, .lab-card {
+  background: var(--bg-main);
+  border: 1px solid var(--border-subtle);
   border-radius: 1rem;
-  background: #ffffff;
-  transition: all 0.2s ease;
-}
-
-.interactive-chunk:hover {
-  border-color: #94a3b8;
-}
-
-/* Pill Tabs */
-.view-pill {
-  padding: 0.5rem 1.25rem;
-  border-radius: 0.75rem;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.view-pill.active {
-  background-color: var(--teal-primary);
-  color: #ffffff;
-  box-shadow: 0 4px 10px -1px rgba(15, 118, 110, 0.35);
-}
-
-.view-pill:not(.active) {
-  background-color: #f1f5f9;
-  color: #475569;
-}
-
-/* 3D Lab Box */
-.canvas-holder {
-  width: 100%;
-  height: 340px;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border-radius: 1rem;
-  position: relative;
-  overflow: hidden;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 640px) {
-  .canvas-holder {
-    height: 440px;
+  .modern-card, .bio-card, .lab-card {
+    padding: 1.5rem;
   }
+}
+
+/* Crisp Clean Buttons */
+.btn-emerald, .btn-bio, .btn-teal {
+  background-color: var(--primary-green) !important;
+  color: #ffffff !important;
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+.btn-emerald:hover, .btn-bio:hover, .btn-teal:hover {
+  background-color: var(--primary-dark) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3);
+}
+
+.btn-solar {
+  background-color: #f59e0b !important;
+  color: #ffffff !important;
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2);
+}
+
+.btn-solar:hover {
+  background-color: #d97706 !important;
+  transform: translateY(-1px);
+}
+
+/* Clean Mode Switcher Tabs */
+.view-pill, .tab-pill, .view-tab {
+  padding: 0.45rem 1rem;
+  border-radius: 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+}
+
+.view-pill.active, .tab-pill.active, .view-tab.active {
+  background-color: var(--primary-green) !important;
+  color: #ffffff !important;
+}
+
+/* 3D Canvas Box - Rock-solid Dimensions */
+.canvas-holder, .canvas-box, .canvas-wrapper {
+  width: 100% !important;
+  height: 320px !important;
+  background-color: #f8fafc;
+  border-radius: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+
+@media (min-width: 640px) {
+  .canvas-holder, .canvas-box, .canvas-wrapper {
+    height: 400px !important;
+  }
+}
+
+/* Clean Typography Overrides */
+h1, h2, h3, h4 {
+  color: var(--text-primary);
+  font-weight: 800;
+}
+
+p, span, label {
+  color: var(--text-secondary);
+}
+
+input, button {
+  font-family: inherit;
 }
