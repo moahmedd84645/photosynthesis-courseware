@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لوحة مسار التعلم | مختبر البناء الضوئي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>مسار الاستكشاف المعملي | مختبر البناء الضوئي</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -12,15 +12,15 @@
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-['Cairo']">
 
   <!-- TOP BAR -->
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm py-3 px-4 sm:px-8">
+    <div class="app-container flex items-center justify-between">
       <div class="flex items-center space-x-3 space-x-reverse">
-        <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-md shadow-emerald-600/20">
+        <div class="w-10 h-10 rounded-xl bg-emerald-700 flex items-center justify-center text-white shadow-md shadow-emerald-700/20">
           <i data-lucide="leaf" class="w-5 h-5"></i>
         </div>
         <div>
-          <h1 class="text-sm sm:text-base font-black text-slate-900">مختبر البناء الضوئي التفاعلي</h1>
-          <p class="text-[11px] text-emerald-700 font-semibold">لوحة تحكم ومسار تعلم الطالب (LMS Course Path)</p>
+          <h1 class="text-sm sm:text-base font-black text-slate-900 leading-tight">مختبر البناء الضوئي التفاعلي</h1>
+          <p class="text-[11px] text-emerald-700 font-bold">مسار التعلم للإتقان المعملي (Biology Learning Path)</p>
         </div>
       </div>
 
@@ -37,39 +37,39 @@
   </header>
 
   <!-- MAIN CONTAINER -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1 space-y-8">
+  <main class="app-container py-8 flex-1 space-y-8">
 
-    <!-- WELCOME & HUD STATS BANNER -->
-    <div class="lab-card p-6 sm:p-8 bg-gradient-to-r from-emerald-50 via-white to-slate-50 border border-emerald-200/80 flex flex-col md:flex-row items-center justify-between gap-6">
+    <!-- WELCOME & STATS BANNER -->
+    <div class="lab-card p-6 sm:p-8 bg-gradient-to-r from-emerald-50 via-white to-slate-50 border border-emerald-200 flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="space-y-2">
         <div class="inline-flex items-center space-x-1.5 space-x-reverse px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
           <i data-lucide="award" class="w-3.5 h-3.5"></i>
-          <span>فلسفة التعلم للإتقان الذاتي</span>
+          <span>منظومة التعلم للإتقان الذاتي</span>
         </div>
-        <h2 class="text-2xl font-black text-slate-900">
-          مرحباً بك يا <span id="welcomeName" class="text-emerald-700">بطل الأحياء</span>
+        <h2 class="text-xl sm:text-2xl font-black text-slate-900">
+          مرحباً بك يا <span id="welcomeName" class="text-emerald-700">الباحث العلمي</span>
         </h2>
         <p class="text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed">
-          أمامك 4 محطات معملية تفاعلية ثلاثية الأبعاد مستقلة. كل محطة لها أهداف تعليمية واضحة وشاشتها الخاصة. عند إتقان المحطات الأربع، ستفتح لك بوابة التقويم النهائي لاستخراج شهادة الإتقان والتفوق المعتمدة.
+          أمامك 4 مختبرات استقصائية تفاعلية مستقلة. يتضمن كل مختبر شروحات علمية موثقة ومعملاً ثلاثي الأبعاد خاصاً به. عند إتقانك لكافة المختبرات، ستفتح لك بوابة التقويم الختامي لاعتماد شهادة تفوقك.
         </p>
       </div>
 
-      <!-- HUD Circular Progress Gauge -->
+      <!-- HUD Progress Counter -->
       <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4 space-x-reverse flex-shrink-0">
         <div class="text-center">
-          <span id="completedStationsCount" class="text-3xl font-black text-emerald-700">0</span>
-          <span class="text-xs text-slate-400 block font-bold">من 4 محطات</span>
+          <span id="completedLabsCount" class="text-3xl font-black text-emerald-700">0</span>
+          <span class="text-xs text-slate-400 block font-bold">من 4 مختبرات</span>
         </div>
         <div class="w-px h-10 bg-slate-200"></div>
         <div class="space-y-1">
-          <span class="text-xs font-bold text-slate-600 block">نسبة الإتقان المحققة:</span>
+          <span class="text-xs font-bold text-slate-600 block">نسبة الإتقان الكلية:</span>
           <span id="overallPercentage" class="text-lg font-black text-slate-900">0%</span>
         </div>
       </div>
     </div>
 
-    <!-- FOUNDATIONAL SCIENTIFIC LINK (HUMAN DIGESTION VS AUTOTROPHIC NUTRITION) -->
-    <div class="lab-card p-6 border-r-4 border-r-emerald-500 space-y-3">
+    <!-- FOUNDATIONAL LINK -->
+    <div class="lab-card p-6 border-r-4 border-r-emerald-600 space-y-3">
       <div class="flex items-center space-x-2 space-x-reverse text-emerald-800 font-bold text-sm">
         <i data-lucide="git-commit" class="w-5 h-5 text-emerald-600"></i>
         <span>التمهيد المعرفي التأسيسي: كيف يرتبط ما تدرسه اليوم بما درسته سابقاً؟</span>
@@ -77,16 +77,16 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed text-slate-600">
         <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
           <strong class="text-slate-900 block mb-1">تغذية الإنسان (غير ذاتية التغذية):</strong>
-          يتناول الإنسان جزيئات عضوية جاهزة معقدة (بروتينات، كربوهيدرات، دهون)، ويتولى الجهاز الهضمي تفكيكها إلى جزيئات بسيطة لامتصاصها وأكسدتها في الميتوكوندريا لإنتاج الطاقة (الهدم).
+          يتناول الإنسان جزيئات عضوية جاهزة ومعقدة، ويتولى الجهاز الهضمي تفكيكها إلى جزيئات بسيطة لامتصاصها وأكسدتها في الميتوكوندريا لإنتاج الطاقة (عمليات الهدم).
         </div>
         <div class="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200 text-slate-700">
           <strong class="text-emerald-900 block mb-1">تغذية النبات (ذاتية التغذية - البناء الضوئي):</strong>
-          النبات يصنع غذاءه بنفسه من الصفر! يأخذ مركبات غير عضوية بسيطة فقيرة في الطاقة ($CO_2$ والماء)، ويستخدم طاقة فوتونات الضوء لبناء روابط كيميائية عالية الطاقة في سكر الجلوكوز (البناء).
+          النبات يصنع غذاءه بنفسه! يأخذ مركبات غير عضوية بسيطة فقيرة في الطاقة (الماء وثاني أكسيد الكربون)، ويستخدم فوتونات الضوء لبناء جزيئات الجلوكوز والنشا عالية الطاقة (عمليات البناء).
         </div>
       </div>
     </div>
 
-    <!-- ADAPTIVE LEARNING TRACK SELECTOR -->
+    <!-- ADAPTIVE TRACK SELECTOR -->
     <div class="lab-card p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center space-x-3 space-x-reverse">
         <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
@@ -94,163 +94,163 @@
         </div>
         <div>
           <h4 class="text-xs font-bold text-slate-900">مسار التعلم التكيفي (Adaptive Track):</h4>
-          <p class="text-[11px] text-slate-500">اختر المسار الملائم لقدراتك الحالية لتكييف عمق التحديات المخبرية:</p>
+          <p class="text-[11px] text-slate-500">اختر المسار الملائم لقدراتك لتكييف عمق التحديات المخبرية:</p>
         </div>
       </div>
       <div class="flex space-x-2 space-x-reverse">
-        <button id="trackStdBtn" class="px-3 py-1.5 rounded-xl text-xs font-bold border border-emerald-500 bg-emerald-50 text-emerald-800">
+        <button id="trackStdBtn" class="px-3.5 py-1.5 rounded-xl text-xs font-bold border border-emerald-500 bg-emerald-50 text-emerald-800">
           تأسيسي شامل
         </button>
-        <button id="trackAdvBtn" class="px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600">
+        <button id="trackAdvBtn" class="px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600">
           تحدي المتفوقين
         </button>
       </div>
     </div>
 
-    <!-- MODULAR LMS STATIONS ROADMAP -->
+    <!-- THE 4 VIRTUAL BIOLOGY LABS -->
     <div class="space-y-4">
       <div class="flex items-center justify-between">
         <h3 class="text-base font-black text-slate-900 flex items-center space-x-2 space-x-reverse">
-          <i data-lucide="map" class="w-5 h-5 text-emerald-600"></i>
-          <span>محطات المعمل الاستقصائي المستقلة (المحطات 1 - 4)</span>
+          <i data-lucide="flask-conical" class="w-5 h-5 text-emerald-600"></i>
+          <span>المختبرات الاستقصائية الحيوية (المختبرات 1 - 4)</span>
         </h3>
-        <span class="text-xs text-slate-500 font-medium">كل محطة تحتوي على معمل 3D كامل خاضع للهدف التعليمي</span>
+        <span class="text-xs text-slate-500 font-medium">كل مختبر يشتمل على شرح نظري ومعمل ثلاثي الأبعاد مستقل</span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <!-- Station 1 Card -->
-        <div class="lab-card p-6 flex flex-col justify-between space-y-4 border-t-4 border-t-emerald-500">
+        <!-- Lab 1 Card -->
+        <div class="lab-card p-6 flex flex-col justify-between space-y-4 border-t-4 border-t-emerald-600">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="text-[11px] font-bold text-emerald-700 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200">المحطة 1 (10 دقائق)</span>
+              <span class="text-[11px] font-bold text-emerald-800 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200">المختبر 01 (10 دقائق)</span>
               <span id="st1-status-badge" class="text-xs text-slate-400 font-semibold flex items-center space-x-1 space-x-reverse">
                 <i data-lucide="clock" class="w-3.5 h-3.5"></i>
-                <span>جاهزة للبدء</span>
+                <span>جاهز للاستكشاف</span>
               </span>
             </div>
-            <h4 class="text-base font-bold text-slate-900">لغز شجرة الصفصاف وتجربة فان هيلمونت (1648م)</h4>
-            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1">
-              <strong class="text-slate-800 block">الهدف السلوكي للنشاط:</strong>
-              <p>تفنيد الفرضية التاريخية الخاطئة بأن النبات "يأكل" التراب، واكتشاف سر الزيادة الهائلة (+72.8 كجم) مقابل ثبات كتلة التربة بميزان الكتل 3D.</p>
+            <h4 class="text-base font-bold text-slate-900">مختبر الكتل والاستقصاء التاريخي (تجربة فان هيلمونت)</h4>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1">
+              <strong class="text-slate-800 block">الهدف السلوكي للوحدة:</strong>
+              <p>تفنيد الفرضية التاريخية الخاطئة حول تغذية النبات من التربة، واكتشاف سر الزيادة الهائلة (+72.8 كجم) مقابل ثبات كتلة التربة بميزان الكتل 3D.</p>
             </div>
           </div>
-          <a href="station1.html" class="btn-emerald w-full py-2.5 rounded-xl font-bold text-xs flex items-center justify-center space-x-1.5 space-x-reverse shadow-md shadow-emerald-600/15">
-            <span>دخول معمل شجرة الصفصاف 3D</span>
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <a href="station1.html" class="btn-emerald w-full py-2.5 text-xs shadow-md">
+            <span>دخول مختبر الكتل والصفصاف 3D</span>
+            <i data-lucide="arrow-left" class="w-4 h-4 mr-1.5"></i>
           </a>
         </div>
 
-        <!-- Station 2 Card -->
-        <div class="lab-card p-6 flex flex-col justify-between space-y-4 border-t-4 border-t-blue-500">
+        <!-- Lab 2 Card -->
+        <div class="lab-card p-6 flex flex-col justify-between space-y-4 border-t-4 border-t-blue-600">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="text-[11px] font-bold text-blue-700 px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200">المحطة 2 (12 دقيقة)</span>
+              <span class="text-[11px] font-bold text-blue-800 px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200">المختبر 02 (12 دقيقة)</span>
               <span id="st2-status-badge" class="text-xs text-slate-400 font-semibold flex items-center space-x-1 space-x-reverse">
                 <i data-lucide="clock" class="w-3.5 h-3.5"></i>
-                <span>جاهزة للبدء</span>
+                <span>جاهز للاستكشاف</span>
               </span>
             </div>
-            <h4 class="text-base font-bold text-slate-900">تشريح البلاستيدة الخضراء 3D وفيزياء الضوء</h4>
-            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1">
-              <strong class="text-slate-800 block">الهدف السلوكي للنشاط:</strong>
+            <h4 class="text-base font-bold text-slate-900">مختبر البيولوجيا المجهرية وفيزياء الضوء (تشريح البلاستيدة)</h4>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1">
+              <strong class="text-slate-800 block">الهدف السلوكي للوحدة:</strong>
               <p>فحص الملاءمة الوظيفية للجرانا والستروما والغشاء، وتسليط كشافات الأطياف الضوئية لمشاهدة امتصاص الفوتونات وانعكاس الأخضر للعين.</p>
             </div>
           </div>
-          <a href="station2.html" class="btn-emerald w-full py-2.5 rounded-xl font-bold text-xs flex items-center justify-center space-x-1.5 space-x-reverse shadow-md shadow-emerald-600/15">
-            <span>دخول معمل البلاستيدة وكشافات الضوء 3D</span>
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <a href="station2.html" class="btn-emerald w-full py-2.5 text-xs shadow-md">
+            <span>دخول مختبر البلاستيدة والأطياف 3D</span>
+            <i data-lucide="arrow-left" class="w-4 h-4 mr-1.5"></i>
           </a>
         </div>
 
-        <!-- Station 3 Card -->
-        <div class="lab-card p-6 flex flex-col justify-between space-y-4 border-t-4 border-t-amber-500">
+        <!-- Lab 3 Card -->
+        <div class="lab-card p-6 flex flex-col justify-between space-y-4 border-t-4 border-t-amber-600">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="text-[11px] font-bold text-amber-700 px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200">المحطة 3 (15 دقيقة)</span>
+              <span class="text-[11px] font-bold text-amber-800 px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200">المختبر 03 (15 دقيقة)</span>
               <span id="st3-status-badge" class="text-xs text-slate-400 font-semibold flex items-center space-x-1 space-x-reverse">
                 <i data-lucide="clock" class="w-3.5 h-3.5"></i>
-                <span>جاهزة للبدء</span>
+                <span>جاهز للاستكشاف</span>
               </span>
             </div>
-            <h4 class="text-base font-bold text-slate-900">خط إنتاج الطاقة الحيوي (تفاعلات الجرانا والستروما)</h4>
-            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1">
-              <strong class="text-slate-800 block">الهدف السلوكي للنشاط:</strong>
+            <h4 class="text-base font-bold text-slate-900">مفاعل الكيمياء الحيوية وتدفق الطاقة (تفاعلات الجرانا والستروما)</h4>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1">
+              <strong class="text-slate-800 block">الهدف السلوكي للوحدة:</strong>
               <p>تشغيل خطوات المصنع الجزيئي 3D بالترتيب: شطر $H_2O$ وتحرير $O_2$، شحن بطارية $ATP$، وتثبيت $CO_2$ لإنتاج سكر الجلوكوز.</p>
             </div>
           </div>
-          <a href="station3.html" class="btn-emerald w-full py-2.5 rounded-xl font-bold text-xs flex items-center justify-center space-x-1.5 space-x-reverse shadow-md shadow-emerald-600/15">
-            <span>دخول مفاعل الجزيئات الكيميائية 3D</span>
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <a href="station3.html" class="btn-emerald w-full py-2.5 text-xs shadow-md">
+            <span>دخول مفاعل الجزيئات والطاقة 3D</span>
+            <i data-lucide="arrow-left" class="w-4 h-4 mr-1.5"></i>
           </a>
         </div>
 
-        <!-- Station 4 Card -->
-        <div class="lab-card p-6 flex flex-col justify-between space-y-4 border-t-4 border-t-purple-500">
+        <!-- Lab 4 Card -->
+        <div class="lab-card p-6 flex flex-col justify-between space-y-4 border-t-4 border-t-purple-600">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="text-[11px] font-bold text-purple-700 px-2.5 py-0.5 rounded-full bg-purple-50 border border-purple-200">المحطة 4 (12 دقيقة)</span>
+              <span class="text-[11px] font-bold text-purple-800 px-2.5 py-0.5 rounded-full bg-purple-50 border border-purple-200">المختبر 04 (12 دقيقة)</span>
               <span id="st4-status-badge" class="text-xs text-slate-400 font-semibold flex items-center space-x-1 space-x-reverse">
                 <i data-lucide="clock" class="w-3.5 h-3.5"></i>
-                <span>جاهزة للبدء</span>
+                <span>جاهز للاستكشاف</span>
               </span>
             </div>
-            <h4 class="text-base font-bold text-slate-900">مختبر كاشف النشا 3D وتكنولوجيا الزراعة العمودية</h4>
-            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1">
-              <strong class="text-slate-800 block">الهدف السلوكي للنشاط:</strong>
+            <h4 class="text-base font-bold text-slate-900">مختبر التحليل الكيميائي والتقنيات الحديثة (كاشف النشا)</h4>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1">
+              <strong class="text-slate-800 block">الهدف السلوكي للوحدة:</strong>
               <p>تنفيذ بروتوكول خطوات اليود الأربع وملاحظة التغير اللوني للأزرق الداكن/الأسود، واستشراف تقنيات الزراعة الرأسية المائية بدون تربة.</p>
             </div>
           </div>
-          <a href="station4.html" class="btn-emerald w-full py-2.5 rounded-xl font-bold text-xs flex items-center justify-center space-x-1.5 space-x-reverse shadow-md shadow-emerald-600/15">
-            <span>دخول مختبر كاشف اليود والزراعة 3D</span>
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <a href="station4.html" class="btn-emerald w-full py-2.5 text-xs shadow-md">
+            <span>دخول مختبر كاشف النشا والزراعة 3D</span>
+            <i data-lucide="arrow-left" class="w-4 h-4 mr-1.5"></i>
           </a>
         </div>
 
       </div>
     </div>
 
-    <!-- STATION 5 CALLOUT: COMPREHENSIVE ASSESSMENT -->
+    <!-- MASTERY CERTIFICATION CALLOUT -->
     <div class="lab-card p-6 bg-gradient-to-r from-amber-50/50 via-white to-amber-50/30 border border-amber-300 flex flex-col sm:flex-row items-center justify-between gap-6">
       <div class="space-y-2">
         <div class="flex items-center space-x-2 space-x-reverse text-amber-800 font-bold text-xs">
           <i data-lucide="award" class="w-4 h-4 text-amber-600"></i>
-          <span>المحطة الختامية (المحطة 5)</span>
+          <span>مركز التقويم الشامل واعتماد الإتقان</span>
         </div>
-        <h4 class="text-lg font-bold text-slate-900">التقويم الختامي الشامل واعتماد شهادة الإتقان</h4>
+        <h4 class="text-lg font-bold text-slate-900">التقويم الختامي الشامل واعتماد شهادة التفوق العلمي</h4>
         <p class="text-xs text-slate-600 max-w-2xl leading-relaxed">
           بنك أسئلة متكامل يغطي المفاهيم العلمية ومستويات التفكير العليا (HOTS). بعد إتمام إجاباتك بنجاح، سيقوم النظام تلقائياً بإصدار شهادتك الرسمية المعتمدة باسمك وتاريخ اليوم.
         </p>
       </div>
 
-      <a href="assessment.html" class="btn-amber px-6 py-3 rounded-xl font-bold text-xs flex items-center space-x-2 space-x-reverse flex-shrink-0 shadow-lg shadow-amber-600/20">
-        <span>الانتقال للتقويم والشهادة</span>
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      <a href="assessment.html" class="btn-solar px-6 py-3 text-xs flex-shrink-0 shadow-lg">
+        <span>الانتقال للتقويم واعتماد الشهادة</span>
+        <i data-lucide="arrow-left" class="w-4 h-4 mr-1.5"></i>
       </a>
     </div>
 
   </main>
 
   <script type="module">
-    import { auth, db, onAuthStateChanged, signOut, doc, getDoc, setDoc } from './js/firebase-config.js';
+    import { auth, db, onAuthStateChanged, signOut, doc, getDoc } from './js/firebase-config.js';
     lucide.createIcons();
 
     const studentName = localStorage.getItem('student_name') || 'طالب متميز';
     document.getElementById('studentNameHeader').textContent = studentName;
     document.getElementById('welcomeName').textContent = studentName;
 
-    // Track switching
+    // Track
     const trackStdBtn = document.getElementById('trackStdBtn');
     const trackAdvBtn = document.getElementById('trackAdvBtn');
 
     let currentTrack = localStorage.getItem('student_track') || 'standard';
     function updateTrackUI() {
       if (currentTrack === 'advanced') {
-        trackAdvBtn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold border border-amber-500 bg-amber-50 text-amber-800';
-        trackStdBtn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600';
+        trackAdvBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold border border-amber-500 bg-amber-50 text-amber-800';
+        trackStdBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600';
       } else {
-        trackStdBtn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold border border-emerald-500 bg-emerald-50 text-emerald-800';
-        trackAdvBtn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600';
+        trackStdBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold border border-emerald-500 bg-emerald-50 text-emerald-800';
+        trackAdvBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600';
       }
     }
     updateTrackUI();
@@ -273,7 +273,7 @@
       window.location.href = 'index.html';
     });
 
-    // Load progress from localStorage and Firebase
+    // Progress
     let progress = JSON.parse(localStorage.getItem('student_progress') || '{}');
     function refreshProgressHUD() {
       let count = 0;
@@ -294,7 +294,7 @@
         document.getElementById('st4-status-badge').innerHTML = '<i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i><span class="text-emerald-700 font-bold">مكتمل ✔</span>';
       }
 
-      document.getElementById('completedStationsCount').textContent = count;
+      document.getElementById('completedLabsCount').textContent = count;
       const pct = Math.round((count / 4) * 100);
       document.getElementById('overallPercentage').textContent = `${pct}%`;
       lucide.createIcons();
