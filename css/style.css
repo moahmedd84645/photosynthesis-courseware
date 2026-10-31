@@ -1,15 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@400;600;700;800;900&display=swap');
 
 :root {
-  --emerald-primary: #047857;
-  --emerald-accent: #10b981;
-  --emerald-soft: #ecfdf5;
-  --solar-gold: #d97706;
-  --photon-blue: #1d4ed8;
-  --canvas-bg: #f8fafc;
+  --teal-primary: #0f766e;
+  --teal-hover: #115e59;
+  --teal-light: #f0fdfa;
+  --teal-accent: #0d9488;
+  --solar-amber: #d97706;
+  --photon-blue: #0284c7;
+  --slate-dark: #0f172a;
+  --slate-text: #334155;
+  --page-bg: #f8fafc;
   --card-bg: #ffffff;
-  --text-main: #0f172a;
-  --text-muted: #475569;
+  --border-color: #e2e8f0;
 }
 
 * {
@@ -19,18 +21,18 @@
 }
 
 body {
-  font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--canvas-bg);
-  color: var(--text-main);
+  font-family: 'Readex Pro', 'Tajawal', sans-serif;
+  background-color: var(--page-bg);
+  color: var(--slate-dark);
   direction: rtl;
   overflow-x: hidden;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
-/* Fluid Responsive Container */
+/* Fluid Layout */
 .app-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1240px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 1rem;
@@ -44,25 +46,25 @@ body {
   }
 }
 
-/* Crisp Clean Lab Cards */
-.lab-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+/* Elevated Modern Cards */
+.modern-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 1.25rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.03), 0 2px 4px -2px rgba(15, 23, 42, 0.02);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.lab-card-hover:hover {
+.modern-card:hover {
   border-color: #cbd5e1;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.05), 0 4px 6px -4px rgba(15, 23, 42, 0.02);
 }
 
-/* Tactile High-Contrast Buttons */
-.btn-emerald {
-  background-color: var(--emerald-primary);
+/* Deep Teal 3D Button */
+.btn-teal {
+  background-color: var(--teal-primary);
   color: #ffffff;
-  border-bottom: 4px solid #065f46;
+  border-bottom: 4px solid var(--teal-hover);
   border-radius: 0.875rem;
   font-weight: 700;
   transition: all 0.15s ease-out;
@@ -71,17 +73,18 @@ body {
   justify-content: center;
 }
 
-.btn-emerald:hover {
-  background-color: #065f46;
+.btn-teal:hover {
+  background-color: var(--teal-hover);
 }
 
-.btn-emerald:active {
+.btn-teal:active {
   transform: translateY(3px);
   border-bottom-width: 1px;
 }
 
+/* Solar Amber 3D Button */
 .btn-solar {
-  background-color: var(--solar-gold);
+  background-color: var(--solar-amber);
   color: #ffffff;
   border-bottom: 4px solid #b45309;
   border-radius: 0.875rem;
@@ -101,45 +104,51 @@ body {
   border-bottom-width: 1px;
 }
 
-/* High Contrast View Tabs */
-.view-tab {
-  padding: 0.5rem 1rem;
+/* Interactive Accordions / Disclosure Box */
+.interactive-chunk {
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  background: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.interactive-chunk:hover {
+  border-color: #94a3b8;
+}
+
+/* Pill Tabs */
+.view-pill {
+  padding: 0.5rem 1.25rem;
   border-radius: 0.75rem;
   font-size: 0.8125rem;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.view-tab.active {
-  background-color: var(--emerald-primary);
+.view-pill.active {
+  background-color: var(--teal-primary);
   color: #ffffff;
-  box-shadow: 0 4px 6px -1px rgba(4, 120, 87, 0.3);
+  box-shadow: 0 4px 10px -1px rgba(15, 118, 110, 0.35);
 }
 
-.view-tab:not(.active) {
+.view-pill:not(.active) {
   background-color: #f1f5f9;
-  color: var(--text-muted);
+  color: #475569;
 }
 
-/* Fully Mobile-Optimized 3D Viewport */
-.canvas-box {
+/* 3D Lab Box */
+.canvas-holder {
   width: 100%;
-  height: 320px;
-  background-color: #f1f5f9;
+  height: 340px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   border-radius: 1rem;
   position: relative;
   overflow: hidden;
 }
 
 @media (min-width: 640px) {
-  .canvas-box {
-    height: 420px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .canvas-box {
-    height: 460px;
+  .canvas-holder {
+    height: 440px;
   }
 }
