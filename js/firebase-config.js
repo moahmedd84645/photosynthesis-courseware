@@ -1,10 +1,12 @@
-// Firebase Modular SDK v10 Integration
+// Firebase Modular SDK v10 with Google Auth Provider
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { 
   getAuth, 
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword, 
   signInAnonymously, 
+  GoogleAuthProvider,
+  signInWithPopup,
   onAuthStateChanged, 
   signOut,
   updateProfile
@@ -32,11 +34,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const googleProvider = new GoogleAuthProvider();
 
 export { 
   app, 
   auth, 
   db, 
+  googleProvider,
+  signInWithPopup,
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword, 
   signInAnonymously, 

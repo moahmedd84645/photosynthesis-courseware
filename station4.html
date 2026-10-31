@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المحطة 4: مختبر كاشف النشا والزراعة العمودية | مختبر 3D</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-['Cairo']">
+
+  <!-- TOP HEADER -->
+  <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 py-3 px-6 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-3 space-x-reverse">
+        <a href="dashboard.html" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 transition-colors" title="العودة للوحة المسار">
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+        <div>
+          <span class="text-[10px] font-bold text-purple-700 uppercase tracking-wider block">المحطة الرابعة من 4</span>
+          <h1 class="text-sm sm:text-base font-black text-slate-900">مختبر كاشف النشا 3D وتكنولوجيا الزراعة العمودية</h1>
+        </div>
+      </div>
+      
+      <div class="flex items-center space-x-2 space-x-reverse">
+        <button id="briefingBtn" class="px-3 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-800 text-xs font-bold flex items-center space-x-1.5 space-x-reverse">
+          <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+          <span>بطاقة أهداف المختبر</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- LAB WORKSPACE -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 w-full flex-1 flex flex-col lg:flex-row gap-6">
+    
+    <!-- 3D Canvas Box -->
+    <div class="lg:col-span-2 flex-1 lab-card overflow-hidden flex flex-col">
+      <div class="p-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs">
+        <span class="font-bold text-slate-700 flex items-center space-x-1.5 space-x-reverse">
+          <i data-lucide="box" class="w-4 h-4 text-emerald-600"></i>
+          <span>منضدة المعمل الزجاجية ثلاثية الأبعاد (Glassware Bench 3D)</span>
+        </span>
+        <span id="stageBadge" class="font-bold text-sky-700 px-2.5 py-0.5 rounded-full bg-sky-100 border border-sky-200">المرحلة 1: الغلي في الماء الساخن</span>
+      </div>
+
+      <div id="canvas-container" class="w-full h-96 sm:h-[480px] bg-slate-100 relative"></div>
+
+      <!-- Live Observation Readout -->
+      <div class="p-3.5 bg-slate-50 border-t border-slate-200 text-center text-xs">
+        <span class="text-slate-500 font-semibold">الملاحظة المخبرية والتفسير: </span>
+        <strong id="obsText" class="text-slate-900">غلي الورقة لقتل الخلايا فوراً وإيقاف كافة التفاعلات الإنزيمية لزيادة نفاذية الكواشف.</strong>
+      </div>
+    </div>
+
+    <!-- 4-Step Interactive Iodine Workflow Column -->
+    <div class="w-full lg:w-96 flex flex-col justify-between space-y-4">
+      <div class="lab-card p-6 space-y-3">
+        <div>
+          <h3 class="text-sm font-bold text-slate-900 mb-1 flex items-center space-x-1.5 space-x-reverse">
+            <i data-lucide="list-ordered" class="w-4 h-4 text-emerald-600"></i>
+            <span>بروتوكول الكشف عن النشا (اليود)</span>
+          </h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            تحكم في أدوات المعمل بالترتيب العلمي الدقيق لملاحظة التغير اللوني للورقة:
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <button data-istep="1" class="step-btn active w-full p-3 rounded-2xl border border-sky-400 bg-sky-50 text-sky-900 text-xs font-bold text-right flex items-center justify-between">
+            <span>1. الغلي بالماء (قتل الخلايا)</span>
+            <i data-lucide="check" class="w-4 h-4 text-sky-600"></i>
+          </button>
+          <button data-istep="2" class="step-btn w-full p-3 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold text-right flex items-center justify-between">
+            <span>2. حمام الكحول الساخن (إذابة الكلوروفيل)</span>
+            <i data-lucide="circle" class="w-4 h-4 text-slate-400"></i>
+          </button>
+          <button data-istep="3" class="step-btn w-full p-3 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold text-right flex items-center justify-between">
+            <span>3. الغسيل بالماء الدافئ (التليين)</span>
+            <i data-lucide="circle" class="w-4 h-4 text-slate-400"></i>
+          </button>
+          <button data-istep="4" class="step-btn w-full p-3 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold text-right flex items-center justify-between">
+            <span>4. قطرات اليود (التحول للأزرق الداكن)</span>
+            <i data-lucide="circle" class="w-4 h-4 text-slate-400"></i>
+          </button>
+        </div>
+
+        <!-- Vertical Farming Future Card -->
+        <div class="p-3.5 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 space-y-1">
+          <div class="flex items-center space-x-1.5 space-x-reverse text-xs font-bold text-emerald-900">
+            <i data-lucide="sprout" class="w-4 h-4 text-emerald-600"></i>
+            <span>التكنولوجيا الحيوية: الزراعة العمودية المائية</span>
+          </div>
+          <p class="text-[11px] text-slate-600 leading-relaxed">
+            تعتمد على أرفف رأسية وإضاءة LED زرقاء وحمراء موجهة بدقة للكلوروفيل، موفرة 95% من المياه وبدون الحاجة لتربة (Hydroponics).
+          </p>
+        </div>
+      </div>
+
+      <a href="assessment.html" id="nextStationBtn" class="hidden btn-amber w-full py-3.5 rounded-xl font-bold text-xs flex items-center justify-center space-x-2 space-x-reverse shadow-lg shadow-amber-600/20">
+        <span>تم إتقان المحطات الـ 4 بنجاح.. الانتقال للتقويم والشهادة</span>
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- BRIEFING MODAL -->
+  <div id="briefingModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 w-full max-w-lg p-6 sm:p-8 rounded-3xl shadow-2xl space-y-5">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center space-x-2 space-x-reverse text-purple-900 font-bold text-sm">
+          <i data-lucide="clipboard-check" class="w-5 h-5 text-purple-600"></i>
+          <span>دليل المعمل: بطاقة أهداف بروتوكول كاشف النشا</span>
+        </div>
+        <button id="closeBriefingBtn" class="p-1 rounded-lg text-slate-400 hover:text-slate-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs text-slate-600 leading-relaxed">
+        <div class="p-3.5 rounded-xl bg-purple-50 border border-purple-200 text-slate-800">
+          <strong class="text-purple-900 block mb-1">الهدف السلوكي للنشاط:</strong>
+          أن ينفذ الطالب الخطوات المخبرية الأربع للكشف عن النشا في أنسجة الورقة النباتية، ويفسر دلالة التغير اللوني لليود إلى الأزرق الداكن/الأسود كدليل قاطع على حدوث البناء الضوئي.
+        </div>
+
+        <div class="space-y-1.5">
+          <strong class="text-slate-900 block">إرشادات خطوات العمل:</strong>
+          <ul class="list-disc list-inside space-y-1 text-slate-600">
+            <li><strong>خطوة 1:</strong> الغلي بالماء لقتل الخلايا وزيادة نفاذية الكواشف.</li>
+            <li><strong>خطوة 2:</strong> وضع الورقة في كحول إيثيلي ساخن بحمام مائي لإذابة صبغ الكلوروفيل الأخضر.</li>
+            <li><strong>خطوة 3:</strong> غسل الورقة بالماء الدافئ لاستعادة ليونتها ومرونتها.</li>
+            <li><strong>خطوة 4:</strong> إضافة قطرات محلول اليود وملاحظة تحول لون الورقة للأزرق الداكن المسود.</li>
+          </ul>
+        </div>
+      </div>
+
+      <button id="startActivityBtn" class="btn-emerald w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center space-x-1.5 space-x-reverse cursor-pointer shadow-md">
+        <span>فهمت الهدف.. ابدأ اختبار كاشف النشا</span>
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { auth, db, doc, setDoc } from './js/firebase-config.js';
+    import { labAudio } from './js/sound-fx.js';
+    import { sims3D } from './js/simulations-3d.js';
+    lucide.createIcons();
+
+    // Briefing
+    const briefingModal = document.getElementById('briefingModal');
+    document.getElementById('briefingBtn').addEventListener('click', () => briefingModal.classList.remove('hidden'));
+    document.getElementById('closeBriefingBtn').addEventListener('click', () => briefingModal.classList.add('hidden'));
+    document.getElementById('startActivityBtn').addEventListener('click', () => briefingModal.classList.add('hidden'));
+
+    // 3D
+    sims3D.initStation4('canvas-container');
+
+    document.querySelectorAll('.step-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        labAudio.click();
+        const step = parseInt(btn.getAttribute('data-istep'));
+
+        document.querySelectorAll('.step-btn').forEach(b => {
+          b.classList.remove('active', 'border-sky-400', 'bg-sky-50', 'text-sky-900');
+          b.classList.add('border-slate-200', 'bg-white', 'text-slate-700');
+        });
+        btn.classList.add('active', 'border-sky-400', 'bg-sky-50', 'text-sky-900');
+
+        const badge = document.getElementById('stageBadge');
+        const obs = document.getElementById('obsText');
+
+        if (step === 1) {
+          badge.textContent = 'المرحلة 1: الغلي في الماء الساخن';
+          obs.textContent = 'غلي الورقة لقتل الخلايا النباتية فوراً وإيقاف كافة الإنزيمات الحيوية لزيادة نفاذية الكواشف.';
+        } else if (step === 2) {
+          badge.textContent = 'المرحلة 2: حمام الكحول الساخن';
+          obs.textContent = 'إذابة واستخلاص صبغ الكلوروفيل الأخضر حتى تصبح الورقة شاحبة بيضاء، لكي لا يحجب اللون الأخضر لون اليود.';
+          labAudio.chemicalReaction();
+        } else if (step === 3) {
+          badge.textContent = 'المرحلة 3: الغسيل بالماء الدافئ';
+          obs.textContent = 'تليين الورقة واستعادة مرونتها بعد جفاف وتصلب الكحول لتجنب تفتتها.';
+        } else if (step === 4) {
+          badge.textContent = 'المرحلة 4: قطرات اليود المخفف';
+          obs.textContent = 'تحول لون اليود على الورقة فورياً من البني/الأصفر إلى الأزرق الداكن / الأسود دليلاً قاطعاً على تكون النشا.';
+          labAudio.success();
+          document.getElementById('nextStationBtn').classList.remove('hidden');
+
+          // Save progress
+          let prog = JSON.parse(localStorage.getItem('student_progress') || '{}');
+          prog.station4 = true;
+          localStorage.setItem('student_progress', JSON.stringify(prog));
+
+          if (auth.currentUser) {
+            await setDoc(doc(db, "students", auth.currentUser.uid), {
+              "progress.station4": true,
+              lastActive: new Date().toISOString()
+            }, { merge: true });
+          }
+        }
+
+        if (sims3D.activeSims.station4) sims3D.activeSims.station4.applyStage(step);
+      });
+    });
+  </script>
+</body>
+</html>
