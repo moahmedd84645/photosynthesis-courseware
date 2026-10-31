@@ -1,82 +1,135 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
 
 :root {
-  --primary-emerald: #059669;
-  --primary-emerald-hover: #047857;
-  --accent-amber: #d97706;
-  --bg-slate-light: #f8fafc;
+  --bio-green: #059669;
+  --bio-green-dark: #047857;
+  --bio-green-light: #ecfdf5;
+  --solar-amber: #d97706;
+  --photon-blue: #2563eb;
+  --lab-bg: #f8fafc;
   --card-bg: #ffffff;
-  --border-subtle: #e2e8f0;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Cairo', sans-serif;
-  background-color: var(--bg-slate-light);
+  font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--lab-bg);
   color: #0f172a;
   direction: rtl;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Crisp Clean Lab Cards */
-.lab-card {
+/* Responsive Container Fix */
+.responsive-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* Card Styling */
+.bio-card {
   background: #ffffff;
-  border: 1px solid var(--border-subtle);
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #e2e8f0;
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
 }
 
-.lab-card-hover:hover {
-  transform: translateY(-3px);
-  border-color: #cbd5e1;
-  box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-}
-
-/* 3D Lab Tactile Buttons */
-.btn-emerald {
-  background-color: #059669;
+/* Tactile 3D Buttons */
+.btn-bio {
+  background-color: var(--bio-green);
   color: #ffffff;
-  border-bottom: 4px solid #047857;
+  border-bottom: 4px solid var(--bio-green-dark);
+  border-radius: 0.875rem;
+  font-weight: 700;
   transition: all 0.15s ease-out;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn-emerald:hover {
-  background-color: #047857;
+.btn-bio:hover {
+  background-color: var(--bio-green-dark);
 }
 
-.btn-emerald:active {
+.btn-bio:active {
   transform: translateY(3px);
   border-bottom-width: 1px;
 }
 
-.btn-amber {
-  background-color: #d97706;
+.btn-solar {
+  background-color: var(--solar-amber);
   color: #ffffff;
   border-bottom: 4px solid #b45309;
+  border-radius: 0.875rem;
+  font-weight: 700;
   transition: all 0.15s ease-out;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn-amber:hover {
+.btn-solar:hover {
   background-color: #b45309;
 }
 
-.btn-amber:active {
+.btn-solar:active {
   transform: translateY(3px);
   border-bottom-width: 1px;
 }
 
-/* Custom Scrollbars */
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+/* Interactive Tabs for Mobile */
+.tab-pill {
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
+
+.tab-pill.active {
+  background-color: var(--bio-green);
+  color: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.3);
 }
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
+
+.tab-pill:not(.active) {
+  background-color: #f1f5f9;
+  color: #475569;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #059669;
+
+/* 3D Canvas Responsive Wrap */
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  background-color: #f1f5f9;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .canvas-wrapper {
+    height: 420px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .canvas-wrapper {
+    height: 480px;
+  }
 }

@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>المحطة 3: خط إنتاج الطاقة الحيوي | مختبر 3D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>المحطة 3: خط إنتاج الطاقة الحيوي</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -12,151 +12,274 @@
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-['Cairo']">
 
-  <!-- TOP HEADER -->
-  <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 py-3 px-6 sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
+  <!-- TOP APP BAR -->
+  <header class="bg-white border-b border-slate-200 py-3 px-4 sm:px-8 sticky top-0 z-40 shadow-sm">
+    <div class="responsive-container flex items-center justify-between">
       <div class="flex items-center space-x-3 space-x-reverse">
-        <a href="dashboard.html" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 transition-colors" title="العودة للوحة المسار">
+        <a href="dashboard.html" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors" title="العودة للوحة المسار">
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
         <div>
           <span class="text-[10px] font-bold text-amber-700 uppercase tracking-wider block">المحطة الثالثة من 4</span>
-          <h1 class="text-sm sm:text-base font-black text-slate-900">خط إنتاج الطاقة الحيوي (التفاعلات الضوئية واللاضوئية)</h1>
+          <h1 class="text-sm sm:text-base font-black text-slate-900 leading-tight">خط إنتاج الطاقة الحيوي (التفاعلات الضوئية واللاضوئية)</h1>
         </div>
       </div>
-      
-      <div class="flex items-center space-x-2 space-x-reverse">
-        <button id="briefingBtn" class="px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 text-xs font-bold flex items-center space-x-1.5 space-x-reverse">
-          <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
-          <span>بطاقة أهداف المصنع الحيوي</span>
+
+      <!-- Mode Switcher Tabs -->
+      <div class="flex p-1 bg-slate-100 rounded-xl border border-slate-200">
+        <button id="tabTheoryBtn" class="tab-pill active flex items-center space-x-1 space-x-reverse">
+          <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+          <span>الشرح العلمي</span>
+        </button>
+        <button id="tabLabBtn" class="tab-pill flex items-center space-x-1 space-x-reverse">
+          <i data-lucide="box" class="w-3.5 h-3.5"></i>
+          <span>المعمل ثلاثي الأبعاد</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- LAB WORKSPACE -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 w-full flex-1 flex flex-col lg:flex-row gap-6">
-    
-    <!-- 3D Canvas Box -->
-    <div class="lg:col-span-2 flex-1 lab-card overflow-hidden flex flex-col">
-      <div class="p-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs">
-        <span class="font-bold text-slate-700 flex items-center space-x-1.5 space-x-reverse">
-          <i data-lucide="box" class="w-4 h-4 text-emerald-600"></i>
-          <span>المفاعل الجزيئي ثلاثي الأبعاد (Molecular Reactor 3D)</span>
-        </span>
-        <span id="stepBadge" class="font-bold text-amber-700 px-2.5 py-0.5 rounded-full bg-amber-100 border border-amber-200">الخطوة 1: شطر جزيئات الماء (H₂O)</span>
+  <!-- MAIN BODY -->
+  <main class="responsive-container py-6 flex-1 flex flex-col space-y-6">
+
+    <!-- ======================================================== -->
+    <!-- TAB 1: SCIENTIFIC CONTENT & THEORY                      -->
+    <!-- ======================================================== -->
+    <div id="theoryView" class="space-y-6">
+      
+      <!-- Behavioral Objective Banner -->
+      <div class="bio-card p-5 bg-gradient-to-r from-amber-50 via-white to-amber-50/50 border-r-4 border-r-amber-600">
+        <div class="flex items-center space-x-2 space-x-reverse text-amber-900 font-bold text-xs mb-1">
+          <i data-lucide="target" class="w-4 h-4 text-amber-600"></i>
+          <span>الهدف التعليمي السلوكي للمحطة:</span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-semibold">
+          أن يقارن الطالب بدقة بين التفاعلات الضوئية في الجرانا واللاضوئية في الستروما من حيث الشروط والمدخلات والنواتج، ويتتبع مسار الطاقة وشطر الماء وتثبيت غاز ثاني أكسيد الكربون.
+        </p>
       </div>
 
-      <div id="canvas-container" class="w-full h-96 sm:h-[480px] bg-slate-100 relative"></div>
-
-      <!-- Molecular Equation Display -->
-      <div class="p-3.5 bg-slate-50 border-t border-slate-200 text-center font-mono text-xs sm:text-sm text-emerald-800 tracking-wider">
-        <span id="eqText">2 H₂O  →  4 H⁺ + 4 e⁻ + O₂ ↑ (تصاعد غاز الأكسجين كناتج ثانوي)</span>
+      <!-- Overall Equation Banner -->
+      <div class="bio-card p-5 bg-emerald-50 border border-emerald-200 text-center space-y-2">
+        <span class="text-xs font-bold text-emerald-900 block">المعادلة الكيميائية الرمزية الموزونة الشاملة للبناء الضوئي:</span>
+        <div class="text-base sm:text-lg font-mono font-black text-emerald-800 dir-ltr tracking-wider">
+          6 CO₂ + 6 H₂O —(ضوء الشمس / الكلوروفيل)→ C₆H₁₂O₆ + 6 O₂ ↑
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600 pt-2 border-t border-emerald-200">
+          <div><strong>المتفاعلات:</strong> 6 جزيئات CO₂ (عبر الثغور) + 6 جزيئات H₂O (عبر الجذور).</div>
+          <div><strong>النواتج:</strong> جزيء سكر جلوكوز (ناتج رئيسي) + 6 جزيئات أكسجين (ناتج ثانوي يتصاعد).</div>
+        </div>
       </div>
-    </div>
 
-    <!-- Assembly Line Interactive Steps -->
-    <div class="w-full lg:w-96 flex flex-col justify-between space-y-4">
-      <div class="lab-card p-6 space-y-3">
-        <div>
-          <h3 class="text-sm font-bold text-slate-900 mb-1 flex items-center space-x-1.5 space-x-reverse">
-            <i data-lucide="play" class="w-4 h-4 text-emerald-600"></i>
-            <span>خطوات خط الإنتاج المتتابع</span>
-          </h3>
+      <!-- Biochemical Stages Deep-Dive -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Light Reactions -->
+        <div class="bio-card p-6 border-t-4 border-t-emerald-600 space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-sm font-bold text-slate-900 flex items-center space-x-1.5 space-x-reverse">
+              <i data-lucide="sun" class="w-4 h-4 text-emerald-600"></i>
+              <span>مرحلة التفاعلات الضوئية (مسار الجرانا)</span>
+            </h4>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">تعتمد مباشرة على الضوء</span>
+          </div>
           <p class="text-xs text-slate-600 leading-relaxed">
-            شغل محطات المصنع الحيوي بالترتيب العلمي الدقيق لتصنيع أول جزيء سكر جلوكوز:
+            تتم على أغشية الثايلاكويد داخل الجرانا. تمتص جزيئات الكلوروفيل فوتونات الضوء وتستثار إلكتروناتها، وتتحرر طاقتها لتُستغل في مسارين متزامنين:
           </p>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <strong class="text-emerald-800 block mb-0.5">1. شطر جزيئات الماء (Photolysis of Water):</strong>
+              <span class="font-mono text-[11px] block text-slate-700 dir-ltr">2 H₂O → 4 H⁺ + 4 e⁻ + O₂ ↑</span>
+              <p class="text-[11px] text-slate-500 mt-1">يتصاعد الأكسجين إلى الهواء الجوي كناتج ثانوي نافع، بينما يتحد الهيدروجين بمركبات ناقلة لحمله إلى الستروما.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <strong class="text-emerald-800 block mb-0.5">2. الفسفرة الضوئية وتكوين ATP:</strong>
+              <span class="font-mono text-[11px] block text-slate-700 dir-ltr">ADP + Pi + طاقة → ATP</span>
+              <p class="text-[11px] text-slate-500 mt-1">تخزين باقي الطاقة في جزيء ATP كبطارية خلوية مشحونة تنقل الطاقة للستروما.</p>
+            </div>
+          </div>
         </div>
 
-        <!-- Step 1 -->
-        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+        <!-- Dark / Independent Reactions -->
+        <div class="bio-card p-6 border-t-4 border-t-amber-600 space-y-3">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-800 flex items-center space-x-1.5 space-x-reverse">
-              <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px]">1</span>
-              <span>شطر الماء (مسار الجرانا)</span>
-            </span>
-            <span id="s1State" class="text-[10px] text-amber-600 font-bold">جاهز للتشغيل</span>
+            <h4 class="text-sm font-bold text-slate-900 flex items-center space-x-1.5 space-x-reverse">
+              <i data-lucide="moon" class="w-4 h-4 text-amber-600"></i>
+              <span>مرحلة التفاعلات اللاضوئية (مسار الستروما)</span>
+            </h4>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">لا تتطلب الضوء مباشرة</span>
           </div>
-          <p class="text-[11px] text-slate-600">كسر الروابط التساهمية بالضوء وإطلاق غاز الأكسجين O₂ كنافذة تنفس للأرض.</p>
-          <button id="act1Btn" class="btn-emerald w-full py-2 rounded-xl text-xs font-bold">
-            شطر جزيء H₂O بالضوء
-          </button>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            تحدث في أرضية البلاستيدة (الستروما)، وتعتمد حتمياً على نواتج التفاعلات الضوئية (الهيدروجين وطاقة ATP)، وتسمى أيضاً تفاعلات تثبيت الكربون:
+          </p>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <strong class="text-amber-800 block mb-0.5">المدخلات الأساسية:</strong>
+              <p class="text-[11px] text-slate-600">غاز ثاني أكسيد الكربون (CO₂) من الهواء، الهيدروجين المنقول من الجرانا، طاقة جزيئات ATP، وإنزيمات الستروما الحيوية المتخصصة.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <strong class="text-amber-800 block mb-0.5">النتيجة النهائية:</strong>
+              <p class="text-[11px] text-slate-600">اختزال غاز CO₂ وتكوين سكر الجلوكوز البسيط (C₆H₁₂O₆)، وتتحرر جزيئات ADP والفوسفات لتعود إلى الجرانا لإعادة شحنها مجدداً في دورة مستمرة.</p>
+            </div>
+          </div>
         </div>
 
-        <!-- Step 2 -->
-        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-800 flex items-center space-x-1.5 space-x-reverse">
-              <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-[10px]">2</span>
-              <span>شحن بطارية الطاقة (الفسفرة)</span>
-            </span>
-            <span id="s2State" class="text-[10px] text-slate-400 font-bold">بانتظار الخطوة 1</span>
-          </div>
-          <p class="text-[11px] text-slate-600">ربط ADP مع فوسفات Pi لتوليد جزيء ATP عالي الطاقة لنقل الطاقة إلى الستروما.</p>
-          <button id="act2Btn" disabled class="w-full py-2 rounded-xl bg-slate-100 text-slate-400 text-xs font-bold cursor-not-allowed">
-            فسفرة ADP إلى ATP
-          </button>
-        </div>
+      </div>
 
-        <!-- Step 3 -->
-        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-800 flex items-center space-x-1.5 space-x-reverse">
-              <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-[10px]">3</span>
-              <span>تثبيت الكربون (مسار الستروما)</span>
-            </span>
-            <span id="s3State" class="text-[10px] text-slate-400 font-bold">بانتظار الخطوة 2</span>
-          </div>
-          <p class="text-[11px] text-slate-600">دمج CO₂ مع الهيدروجين وطاقة ATP لإنتاج سكر الجلوكوز C₆H₁₂O₆.</p>
-          <button id="act3Btn" disabled class="w-full py-2 rounded-xl bg-slate-100 text-slate-400 text-xs font-bold cursor-not-allowed">
-            تثبيت CO₂ وإنتاج الجلوكوز
-          </button>
+      <!-- Ministry Comprehensive Comparison Table -->
+      <div class="bio-card p-6 space-y-4">
+        <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2 space-x-reverse">
+          <i data-lucide="table" class="w-5 h-5 text-blue-600"></i>
+          <span>جدول المقارنة الشامل المعتمد بين التفاعلات الضوئية واللاضوئية:</span>
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-right text-xs">
+            <thead class="bg-slate-100 text-slate-700 border-b border-slate-200">
+              <tr>
+                <th class="p-3 font-bold">وجه المقارنة</th>
+                <th class="p-3 font-bold text-emerald-700">التفاعلات الضوئية (Light Reactions)</th>
+                <th class="p-3 font-bold text-amber-700">التفاعلات اللاضوئية (Dark Reactions)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="p-3 font-bold text-slate-900">مكان الحدوث بالبلاستيدة</td>
+                <td class="p-3 text-slate-600">الجرانا (على أغشية أقراص الثايلاكويد)</td>
+                <td class="p-3 text-slate-600">الستروما / الحشوة (أرضية البلاستيدة)</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-slate-900">الاعتماد على الضوء</td>
+                <td class="p-3 text-slate-600">تعتمد اعتماداً مباشراً وإلزامياً على وجود الضوء</td>
+                <td class="p-3 text-slate-600">لا تعتمد على الضوء مباشرة وتحدث في الضوء والظلام</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-slate-900">العامل المحدد للسرعة</td>
+                <td class="p-3 text-slate-600">شدة الإضاءة المتوفرة</td>
+                <td class="p-3 text-slate-600">درجة الحرارة (لتأثيرها على نشاط الإنزيمات)</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-slate-900">المواد المتفاعلة (المدخلات)</td>
+                <td class="p-3 text-slate-600">طاقة الضوء، الماء (H₂O)، صبغ الكلوروفيل، ADP، فوسفات</td>
+                <td class="p-3 text-slate-600">ثاني أكسيد الكربون (CO₂)، الهيدروجين المحمول، طاقة ATP، إنزيمات</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-slate-900">النواتج الأساسية</td>
+                <td class="p-3 text-slate-600">غاز الأكسجين O₂ (ناتج ثانوي)، هيدروجين محمول، جزيئات ATP</td>
+                <td class="p-3 text-slate-600">سكر الجلوكوز C₆H₁₂O₆ (ناتج رئيسي)، جزيئات ADP، فوسفات، ماء</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-slate-900">التعليل العلمي لمكان الحدوث</td>
+                <td class="p-3 text-slate-600">لتواجد أصباغ الكلوروفيل وأنظمة نقل الإلكترون وأنزيمات ATP بأغشية الجرانا.</td>
+                <td class="p-3 text-slate-600">لتوافر وتمركز الإنزيمات الخاصة بتثبيت الكربون في سائل الستروما.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <a href="station4.html" id="nextStationBtn" class="hidden btn-emerald w-full py-3.5 rounded-xl font-bold text-xs flex items-center justify-center space-x-2 space-x-reverse shadow-lg shadow-emerald-600/20">
-        <span>تم إتقان المحطة 3 بنجاح.. الانتقال للمحطة 4</span>
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
-      </a>
-    </div>
-
-  </main>
-
-  <!-- BRIEFING MODAL -->
-  <div id="briefingModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-white border border-slate-200 w-full max-w-lg p-6 sm:p-8 rounded-3xl shadow-2xl space-y-5">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-        <div class="flex items-center space-x-2 space-x-reverse text-amber-900 font-bold text-sm">
-          <i data-lucide="clipboard-check" class="w-5 h-5 text-amber-600"></i>
-          <span>دليل المعمل: بطاقة أهداف خط إنتاج الطاقة الحيوي</span>
-        </div>
-        <button id="closeBriefingBtn" class="p-1 rounded-lg text-slate-400 hover:text-slate-700">
-          <i data-lucide="x" class="w-5 h-5"></i>
+      <!-- Launch 3D Lab Button -->
+      <div class="text-center pt-2">
+        <button id="goToLabFromTheoryBtn" class="btn-bio px-8 py-3.5 text-xs font-bold space-x-2 space-x-reverse shadow-lg">
+          <span>انتقل لتشغيل خط إنتاج الطاقة الحيوي 3D بنفسك</span>
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <div class="space-y-3 text-xs text-slate-600 leading-relaxed">
-        <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-slate-800">
-          <strong class="text-amber-900 block mb-1">الهدف السلوكي للنشاط:</strong>
-          أن يربط الطالب عملياً بين تفاعلات الجرانا الضوئية وتفاعلات الستروما اللاضوئية، ويتقن مسار تدفق الإلكترونات وتوليد جزيئات ATP واختزال ثاني أكسيد الكربون لإنتاج سكر الجلوكوز.
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 2: 3D INTERACTIVE LAB                                -->
+    <!-- ======================================================== -->
+    <div id="labView" class="hidden flex-col space-y-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- 3D Canvas Box -->
+        <div class="lg:col-span-2 bio-card overflow-hidden flex flex-col">
+          <div class="p-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs">
+            <span class="font-bold text-slate-800 flex items-center space-x-1.5 space-x-reverse">
+              <i data-lucide="box" class="w-4 h-4 text-emerald-600"></i>
+              <span>المفاعل الجزيئي ثلاثي الأبعاد (Molecular Reactor 3D)</span>
+            </span>
+            <span id="stepBadge" class="font-bold text-amber-700 px-2.5 py-0.5 rounded-full bg-amber-100 border border-amber-200">الخطوة 1: شطر جزيئات الماء (H₂O)</span>
+          </div>
+
+          <div id="canvas-container" class="canvas-wrapper"></div>
+
+          <div class="p-3.5 bg-slate-50 border-t border-slate-200 text-center font-mono text-xs sm:text-sm text-emerald-800 tracking-wider">
+            <span id="eqText">2 H₂O  →  4 H⁺ + 4 e⁻ + O₂ ↑ (تصاعد غاز الأكسجين كناتج ثانوي)</span>
+          </div>
         </div>
 
-        <div class="space-y-1.5">
-          <strong class="text-slate-900 block">إرشادات خطوات العمل:</strong>
-          <ul class="list-disc list-inside space-y-1 text-slate-600">
-            <li>اضغط لتنفيذ <strong>شطر الماء H₂O</strong> بالضوء وتحرير فقاعات الأكسجين O₂.</li>
-            <li>قم بتشغيل <strong>الفسفرة الضوئية</strong> لتحويل ADP إلى جزيء الطاقة ATP ثلاثي الفوسفات.</li>
-            <li>ثبّت جزيئات غاز CO₂ في الستروما لتوليد حلقة الجلوكوز سداسية الكربون C₆H₁₂O₆.</li>
-          </ul>
+        <!-- Assembly Controls Column -->
+        <div class="bio-card p-6 flex flex-col justify-between space-y-3">
+          <div class="space-y-3">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 mb-1 flex items-center space-x-1.5 space-x-reverse">
+                <i data-lucide="play" class="w-4 h-4 text-emerald-600"></i>
+                <span>خطوات خط الإنتاج المتتابع</span>
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                شغل محطات المصنع الحيوي بالترتيب العلمي الدقيق لتصنيع أول جزيء سكر جلوكوز:
+              </p>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800 flex items-center space-x-1.5 space-x-reverse">
+                  <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px]">1</span>
+                  <span>شطر الماء (مسار الجرانا)</span>
+                </span>
+                <span id="s1State" class="text-[10px] text-amber-600 font-bold">جاهز للتشغيل</span>
+              </div>
+              <p class="text-[11px] text-slate-600">كسر الروابط التساهمية بالضوء وإطلاق غاز الأكسجين O₂ كنافذة تنفس للأرض.</p>
+              <button id="act1Btn" class="btn-bio w-full py-2 text-xs">
+                شطر جزيء H₂O بالضوء
+              </button>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800 flex items-center space-x-1.5 space-x-reverse">
+                  <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-[10px]">2</span>
+                  <span>شحن بطارية الطاقة (الفسفرة)</span>
+                </span>
+                <span id="s2State" class="text-[10px] text-slate-400 font-bold">بانتظار الخطوة 1</span>
+              </div>
+              <p class="text-[11px] text-slate-600">ربط ADP مع فوسفات Pi لتوليد جزيء ATP عالي الطاقة لنقل الطاقة إلى الستروما.</p>
+              <button id="act2Btn" disabled class="w-full py-2 rounded-xl bg-slate-100 text-slate-400 text-xs font-bold cursor-not-allowed">
+                فسفرة ADP إلى ATP
+              </button>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800 flex items-center space-x-1.5 space-x-reverse">
+                  <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-[10px]">3</span>
+                  <span>تثبيت الكربون (مسار الستروما)</span>
+                </span>
+                <span id="s3State" class="text-[10px] text-slate-400 font-bold">بانتظار الخطوة 2</span>
+              </div>
+              <p class="text-[11px] text-slate-600">دمج CO₂ مع الهيدروجين وطاقة ATP لإنتاج سكر الجلوكوز C₆H₁₂O₆.</p>
+              <button id="act3Btn" disabled class="w-full py-2 rounded-xl bg-slate-100 text-slate-400 text-xs font-bold cursor-not-allowed">
+                تثبيت CO₂ وإنتاج الجلوكوز
+              </button>
+            </div>
+          </div>
+
+          <a href="station4.html" id="nextStationBtn" class="hidden btn-bio w-full py-3.5 text-xs shadow-lg">
+            <span>تم إتقان المحطة 3 بنجاح.. الانتقال للمحطة 4</span>
+            <i data-lucide="arrow-left" class="w-4 h-4 mr-1.5"></i>
+          </a>
         </div>
+
       </div>
 
-      <button id="startActivityBtn" class="btn-emerald w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center space-x-1.5 space-x-reverse cursor-pointer shadow-md">
-        <span>فهمت الهدف.. ابدأ خط الإنتاج الحيوي</span>
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
-      </button>
     </div>
-  </div>
+
+  </main>
 
   <script type="module">
     import { auth, db, doc, setDoc } from './js/firebase-config.js';
@@ -164,14 +287,30 @@
     import { sims3D } from './js/simulations-3d.js';
     lucide.createIcons();
 
-    // Briefing
-    const briefingModal = document.getElementById('briefingModal');
-    document.getElementById('briefingBtn').addEventListener('click', () => briefingModal.classList.remove('hidden'));
-    document.getElementById('closeBriefingBtn').addEventListener('click', () => briefingModal.classList.add('hidden'));
-    document.getElementById('startActivityBtn').addEventListener('click', () => briefingModal.classList.add('hidden'));
+    // Tab Switcher
+    const tabTheoryBtn = document.getElementById('tabTheoryBtn');
+    const tabLabBtn = document.getElementById('tabLabBtn');
+    const theoryView = document.getElementById('theoryView');
+    const labView = document.getElementById('labView');
 
-    // 3D
-    sims3D.initStation3('canvas-container');
+    function showTheory() {
+      tabTheoryBtn.classList.add('active');
+      tabLabBtn.classList.remove('active');
+      theoryView.classList.remove('hidden');
+      labView.classList.add('hidden');
+    }
+
+    function showLab() {
+      tabLabBtn.classList.add('active');
+      tabTheoryBtn.classList.remove('active');
+      labView.classList.remove('hidden');
+      theoryView.classList.add('hidden');
+      sims3D.initStation3('canvas-container');
+    }
+
+    tabTheoryBtn.addEventListener('click', showTheory);
+    tabLabBtn.addEventListener('click', showLab);
+    document.getElementById('goToLabFromTheoryBtn').addEventListener('click', showLab);
 
     const act1 = document.getElementById('act1Btn');
     const act2 = document.getElementById('act2Btn');
@@ -186,7 +325,7 @@
       document.getElementById('s1State').className = 'text-[10px] text-emerald-700 font-bold';
 
       act2.disabled = false;
-      act2.className = 'btn-emerald w-full py-2 rounded-xl text-xs font-bold cursor-pointer';
+      act2.className = 'btn-bio w-full py-2 text-xs cursor-pointer';
       document.getElementById('s2State').textContent = 'جاهز للتشغيل';
       document.getElementById('s2State').className = 'text-[10px] text-amber-600 font-bold';
       document.getElementById('stepBadge').textContent = 'الخطوة 2: الفسفرة الضوئية وتكوين ATP';
@@ -202,7 +341,7 @@
       document.getElementById('s2State').className = 'text-[10px] text-emerald-700 font-bold';
 
       act3.disabled = false;
-      act3.className = 'btn-emerald w-full py-2 rounded-xl text-xs font-bold cursor-pointer';
+      act3.className = 'btn-bio w-full py-2 text-xs cursor-pointer';
       document.getElementById('s3State').textContent = 'جاهز للتشغيل';
       document.getElementById('s3State').className = 'text-[10px] text-amber-600 font-bold';
       document.getElementById('stepBadge').textContent = 'الخطوة 3: تثبيت ثاني أكسيد الكربون وتكوين الجلوكوز';
@@ -219,7 +358,6 @@
       document.getElementById('s3State').className = 'text-[10px] text-emerald-700 font-bold';
       document.getElementById('nextStationBtn').classList.remove('hidden');
 
-      // Save progress
       let prog = JSON.parse(localStorage.getItem('student_progress') || '{}');
       prog.station3 = true;
       localStorage.setItem('student_progress', JSON.stringify(prog));

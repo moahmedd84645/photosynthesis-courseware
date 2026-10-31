@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>المحطة 1: لغز شجرة الصفصاف وتجربة فان هيلمونت | مختبر 3D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>المحطة 1: لغز شجرة الصفصاف وتجربة فان هيلمونت</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -12,138 +12,240 @@
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-['Cairo']">
 
-  <!-- TOP HEADER -->
-  <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 py-3 px-6 sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
+  <!-- TOP APP BAR -->
+  <header class="bg-white border-b border-slate-200 py-3 px-4 sm:px-8 sticky top-0 z-40 shadow-sm">
+    <div class="responsive-container flex items-center justify-between">
       <div class="flex items-center space-x-3 space-x-reverse">
-        <a href="dashboard.html" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 transition-colors" title="العودة للوحة المسار">
+        <a href="dashboard.html" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors" title="العودة للوحة المسار">
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
         <div>
           <span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider block">المحطة الأولى من 4</span>
-          <h1 class="text-sm sm:text-base font-black text-slate-900">لغز شجرة الصفصاف وتجربة فان هيلمونت (1648م)</h1>
+          <h1 class="text-sm sm:text-base font-black text-slate-900 leading-tight">لغز شجرة الصفصاف وتجربة فان هيلمونت (1648م)</h1>
         </div>
       </div>
-      
-      <div class="flex items-center space-x-2 space-x-reverse">
-        <button id="briefingBtn" class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center space-x-1.5 space-x-reverse">
-          <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
-          <span>بطاقة تعليمات النشاط</span>
+
+      <!-- Mode Switcher Tabs (Theory vs 3D Lab) -->
+      <div class="flex p-1 bg-slate-100 rounded-xl border border-slate-200">
+        <button id="tabTheoryBtn" class="tab-pill active flex items-center space-x-1 space-x-reverse">
+          <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+          <span>الشرح العلمي</span>
+        </button>
+        <button id="tabLabBtn" class="tab-pill flex items-center space-x-1 space-x-reverse">
+          <i data-lucide="box" class="w-3.5 h-3.5"></i>
+          <span>المعمل ثلاثي الأبعاد</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- LAB WORKSPACE -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 w-full flex-1 flex flex-col lg:flex-row gap-6">
-    
-    <!-- 3D Viewport Box -->
-    <div class="lg:col-span-2 flex-1 lab-card overflow-hidden flex flex-col">
-      <div class="p-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs">
-        <span class="font-bold text-slate-700 flex items-center space-x-1.5 space-x-reverse">
-          <i data-lucide="box" class="w-4 h-4 text-emerald-600"></i>
-          <span>المشهد التفاعلي ثلاثي الأبعاد: ميزان الكتل المعملي ووعاء الصفصاف</span>
-        </span>
-        <span id="st1Timeline" class="font-bold text-emerald-800 px-2.5 py-0.5 rounded-full bg-emerald-100 border border-emerald-200">الزمن: البداية (سنة 0)</span>
+  <!-- MAIN BODY -->
+  <main class="responsive-container py-6 flex-1 flex flex-col space-y-6">
+
+    <!-- ======================================================== -->
+    <!-- TAB 1: SCIENTIFIC CONTENT & THEORY (من التفريغ العلمي) -->
+    <!-- ======================================================== -->
+    <div id="theoryView" class="space-y-6">
+      
+      <!-- Behavioral Objective Banner -->
+      <div class="bio-card p-5 bg-gradient-to-r from-emerald-50 via-white to-emerald-50/50 border-r-4 border-r-emerald-600">
+        <div class="flex items-center space-x-2 space-x-reverse text-emerald-900 font-bold text-xs mb-1">
+          <i data-lucide="target" class="w-4 h-4 text-emerald-600"></i>
+          <span>الهدف التعليمي السلوكي للمحطة:</span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-semibold">
+          أن يحلل الطالب الخطوات المنهجية لتجربة فان هيلمونت، ويفند المفهوم التاريخي الخاطئ حول تغذية النبات من التربة فقط، ويستنتج دور ماء الري وثاني أكسيد الكربون في بناء الكتلة الحيوية.
+        </p>
       </div>
 
-      <div id="canvas-container" class="w-full h-96 sm:h-[480px] bg-slate-100 relative"></div>
+      <!-- Historical Context Card -->
+      <div class="bio-card p-6 space-y-4">
+        <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2 space-x-reverse">
+          <i data-lucide="history" class="w-5 h-5 text-amber-600"></i>
+          <span>1. السياق التاريخي: هل يتغذى النبات بابتلاع التربة؟</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          ساد الاعتقاد بين الفلاسفة والعلماء حتى بدايات القرن السابع عشر الميلادي بأن النباتات "تأكل" التراب كما تتغذى الحيوانات، وأن كل كتلة النبات المتنامية مستمدة كلياً من مواد التربة الجافة. حتى جاء العالم البلجيكي <strong>جان بابتيست فان هيلمونت (عام 1648م)</strong> ليخضع هذه الفرضية لأول اختبار كمي دقيق في تاريخ علم الأحياء.
+        </p>
+      </div>
 
-      <!-- Live Mass Readout HUD -->
-      <div class="p-4 bg-slate-50 border-t border-slate-200 grid grid-cols-2 gap-4 text-center">
-        <div class="p-3 rounded-2xl bg-white border border-slate-200 shadow-sm">
-          <span class="text-xs text-slate-500 font-semibold block mb-1">كتلة شجرة الصفصاف</span>
-          <span id="treeMassVal" class="text-2xl font-black text-emerald-700">2.2 كجم</span>
-        </div>
-        <div class="p-3 rounded-2xl bg-white border border-slate-200 shadow-sm">
-          <span class="text-xs text-slate-500 font-semibold block mb-1">كتلة التربة المجففة بدقة</span>
-          <span id="soilMassVal" class="text-2xl font-black text-amber-700">90.000 كجم</span>
+      <!-- Methodology 5 Steps -->
+      <div class="bio-card p-6 space-y-4">
+        <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2 space-x-reverse">
+          <i data-lucide="list-ordered" class="w-5 h-5 text-emerald-600"></i>
+          <span>2. الخطوات المنهجية لتجربة فان هيلمونت:</span>
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[11px] mb-2">1</span>
+            <strong class="text-slate-900 block">غرس الشتلة:</strong>
+            <p class="text-slate-600">غرس شتلة صغيرة من شجر الصفصاف تزن بالضبط <strong>2.2 كجم</strong> في وعاء خزفي ضخم.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[11px] mb-2">2</span>
+            <strong class="text-slate-900 block">وزن التربة المجففة:</strong>
+            <p class="text-slate-600">ملأ الوعاء بكمية تربة تم تجفيفها في فرن مخصص ووزنها بدقة لتكون <strong>90 كجم</strong>.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[11px] mb-2">3</span>
+            <strong class="text-slate-900 block">حماية الوعاء:</strong>
+            <p class="text-slate-600">غطى فتحة الوعاء بصفيحة مثقوبة لمنع استقرار ذرات الغبار العالقة بالهواء في التربة.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[11px] mb-2">4</span>
+            <strong class="text-slate-900 block">الري المنتظم بماء المطر:</strong>
+            <p class="text-slate-600">سقى الشتلة بانتظام بماء المطر النقي فقط لمدة <strong>5 سنوات متتالية</strong> دون إضافة تربة أو سماد.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1 sm:col-span-2">
+            <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[11px] mb-2">5</span>
+            <strong class="text-slate-900 block">إعادة القياس والتجفيف:</strong>
+            <p class="text-slate-600">اقتلع الشجرة بعناية، ونظف جذورها تماماً، وأعاد تجفيف التربة في الفرن بنفس الشروط لوزن كل منهما بدقة متناهية.</p>
+          </div>
         </div>
       </div>
+
+      <!-- Official Data Table -->
+      <div class="bio-card p-6 space-y-4">
+        <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2 space-x-reverse">
+          <i data-lucide="table" class="w-5 h-5 text-blue-600"></i>
+          <span>3. الملاحظات والبيانات المسجلة المعتمدة:</span>
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-right text-xs">
+            <thead class="bg-slate-100 text-slate-700 border-b border-slate-200">
+              <tr>
+                <th class="p-3 font-bold">عنصر القياس</th>
+                <th class="p-3 font-bold">الكتلة في بداية التجربة</th>
+                <th class="p-3 font-bold">الكتلة بعد مرور 5 سنوات</th>
+                <th class="p-3 font-bold">مقدار التغير</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="p-3 font-bold text-slate-900">شجرة الصفصاف</td>
+                <td class="p-3 text-slate-600">2.2 كجم</td>
+                <td class="p-3 font-bold text-emerald-700">حوالي 75 كجم</td>
+                <td class="p-3 font-black text-emerald-700">زيادة هائلة بلغت نحو +72.8 كجم</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-slate-900">التربة الجافة</td>
+                <td class="p-3 text-slate-600">90 كجم</td>
+                <td class="p-3 font-bold text-amber-700">89.943 كجم تقريباً</td>
+                <td class="p-3 font-black text-amber-700">نقص طفيف للغاية لا يتجاوز -57 جراماً</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Real Role of Soil and Vascular Bundles -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bio-card p-5 border-r-4 border-r-emerald-500 space-y-2">
+          <h4 class="text-xs font-bold text-slate-900">الدور الحقيقي للتربة:</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            التربة توفر <strong>الدعامة الميكانيكية</strong> لتثبيت الجذور، وإمداد النبات بالماء والأملاح المعدنية الذائبة، وليست مصدراً للكتلة الحيوية.
+          </p>
+        </div>
+        <div class="bio-card p-5 border-r-4 border-r-blue-500 space-y-2">
+          <h4 class="text-xs font-bold text-slate-900">مسارات النقل (الخشب واللحاء):</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            <strong>أوعية الخشب (X):</strong> تنقل الماء والأملاح صعوداً من الجذور إلى الأوراق.<br>
+            <strong>أنابيب اللحاء (Y):</strong> تنقل الغذاء العضوي المصنع (السكريات) من الأوراق إلى كافة أجزاء النبات صعوداً وهبوطاً.
+          </p>
+        </div>
+      </div>
+
+      <!-- Action Button to Launch 3D -->
+      <div class="text-center pt-2">
+        <button id="goToLabFromTheoryBtn" class="btn-bio px-8 py-3.5 text-xs font-bold space-x-2 space-x-reverse shadow-lg">
+          <span>انتقل للمعمل ثلاثي الأبعاد لاختبار التجربة بيدك</span>
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        </button>
+      </div>
+
     </div>
 
-    <!-- Side Control & Deductive Interaction Column -->
-    <div class="w-full lg:w-96 flex flex-col justify-between space-y-4">
-      <div class="lab-card p-6 space-y-4">
-        <div class="space-y-1">
-          <h3 class="text-sm font-bold text-slate-900 flex items-center space-x-1.5 space-x-reverse">
-            <i data-lucide="play-circle" class="w-4 h-4 text-emerald-600"></i>
-            <span>التحكم في المحاكاة الزمنية</span>
-          </h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            قام فان هيلمونت بغرس شتلة (2.2 كجم) في 90 كجم تربة، وسقاها بماء المطر النقي لمدة 5 سنوات دون سماد أو تراب.
-          </p>
-        </div>
-
-        <button id="runTimeLapseBtn" class="btn-emerald w-full py-3.5 rounded-xl font-bold text-xs flex items-center justify-center space-x-2 space-x-reverse cursor-pointer shadow-md shadow-emerald-600/20">
-          <i data-lucide="fast-forward" class="w-4 h-4"></i>
-          <span>تشغيل محاكاة: تسريع الزمن 5 سنوات</span>
-        </button>
-
-        <!-- Deductive Card (Appears after 5 years) -->
-        <div id="deductiveBox" class="hidden p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-3">
-          <div class="flex items-center space-x-1.5 space-x-reverse text-emerald-900 font-bold text-xs">
-            <i data-lucide="help-circle" class="w-4 h-4 text-emerald-600"></i>
-            <span>تفسير لغز الكتلة المحيرة:</span>
+    <!-- ======================================================== -->
+    <!-- TAB 2: 3D INTERACTIVE LAB (المحاكاة ثلاثية الأبعاد)      -->
+    <!-- ======================================================== -->
+    <div id="labView" class="hidden flex-col space-y-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- 3D Canvas Box -->
+        <div class="lg:col-span-2 bio-card overflow-hidden flex flex-col">
+          <div class="p-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs">
+            <span class="font-bold text-slate-800 flex items-center space-x-1.5 space-x-reverse">
+              <i data-lucide="box" class="w-4 h-4 text-emerald-600"></i>
+              <span>ميزان الكتل الافتراضي ثلاثي الأبعاد</span>
+            </span>
+            <span id="st1Timeline" class="font-bold text-emerald-800 px-2.5 py-0.5 rounded-full bg-emerald-100 border border-emerald-200">الزمن: البداية (سنة 0)</span>
           </div>
-          <p class="text-[11px] text-slate-700 leading-relaxed">
-            الشجرة قفزت لـ <strong class="text-emerald-700">+72.8 كجم</strong>، والتربة لم تنقص سوى <strong class="text-amber-700">-57 جراماً</strong>! حدد التفسير العلمي الصحيح لمصدر تلك الكتلة:
-          </p>
-          <div class="space-y-2">
-            <button data-ans="wrong" class="ans-btn w-full text-right p-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-xs text-slate-700 transition-colors">
-              امتصت الشجرة جزيئات التربة الدقيقة ولكنها تبخرت أثناء التجفيف.
-            </button>
-            <button data-ans="correct" class="ans-btn w-full text-right p-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-xs text-slate-700 transition-colors">
-              الكتلة تكونت من تفاعل ماء الري مع غاز ثنائي أكسيد الكربون من الهواء بتأثير الضوء.
-            </button>
+
+          <div id="canvas-container" class="canvas-wrapper"></div>
+
+          <!-- Digital Readouts -->
+          <div class="p-4 bg-slate-50 border-t border-slate-200 grid grid-cols-2 gap-3 text-center">
+            <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-sm">
+              <span class="text-[11px] text-slate-500 font-semibold block mb-1">كتلة شجرة الصفصاف</span>
+              <span id="treeMassVal" class="text-xl sm:text-2xl font-black text-emerald-700">2.2 كجم</span>
+            </div>
+            <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-sm">
+              <span class="text-[11px] text-slate-500 font-semibold block mb-1">كتلة التربة المجففة</span>
+              <span id="soilMassVal" class="text-xl sm:text-2xl font-black text-amber-700">90.000 كجم</span>
+            </div>
           </div>
         </div>
+
+        <!-- Controls & Deduction Panel -->
+        <div class="bio-card p-6 flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 mb-1 flex items-center space-x-1.5 space-x-reverse">
+                <i data-lucide="play-circle" class="w-4 h-4 text-emerald-600"></i>
+                <span>التحكم في المحاكاة المعملية</span>
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                اضغط على زر تسريع الزمن لتشاهد نمو الشجرة وفروعها على مدار 5 سنوات وملاحظة مؤشرات الميزان:
+              </p>
+            </div>
+
+            <button id="runTimeLapseBtn" class="btn-bio w-full py-3 text-xs shadow-md">
+              <i data-lucide="fast-forward" class="w-4 h-4 ml-1.5"></i>
+              <span>تسريع الزمن 5 سنوات</span>
+            </button>
+
+            <!-- Deductive Interactive Puzzle -->
+            <div id="deductiveBox" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 space-y-3">
+              <div class="flex items-center space-x-1.5 space-x-reverse text-emerald-900 font-bold text-xs">
+                <i data-lucide="help-circle" class="w-4 h-4 text-emerald-600"></i>
+                <span>تفسير لغز الكتلة المحيرة:</span>
+              </div>
+              <p class="text-xs text-slate-700 leading-relaxed">
+                الشجرة قفزت لـ <strong class="text-emerald-700">+72.8 كجم</strong>، والتربة لم تنقص سوى <strong class="text-amber-700">-57 جراماً</strong>! فسر مصدر تلك الزيادة الهائلة:
+              </p>
+              <div class="space-y-2">
+                <button data-ans="wrong" class="ans-btn w-full text-right p-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-xs text-slate-700 transition-colors">
+                  امتصت الشجرة كميات خفية من تراب الوعاء تبخرت أثناء التجفيف.
+                </button>
+                <button data-ans="correct" class="ans-btn w-full text-right p-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-xs text-slate-700 transition-colors">
+                  الكتلة متكونة من ماء الري وغاز ثاني أكسيد الكربون من الهواء بتأثير الضوء.
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <a href="station2.html" id="nextStationBtn" class="hidden btn-bio w-full py-3.5 text-xs shadow-lg">
+            <span>تم إتقان المحطة 1 بنجاح.. الانتقال للمحطة 2</span>
+            <i data-lucide="arrow-left" class="w-4 h-4 mr-1.5"></i>
+          </a>
+        </div>
+
       </div>
 
-      <!-- Next Station Action Button -->
-      <a href="station2.html" id="nextStationBtn" class="hidden btn-emerald w-full py-3.5 rounded-xl font-bold text-xs flex items-center justify-center space-x-2 space-x-reverse shadow-lg shadow-emerald-600/20">
-        <span>تم إتقان المحطة 1 بنجاح.. الانتقال للمحطة 2</span>
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
-      </a>
     </div>
 
   </main>
-
-  <!-- PRE-LAB INSTRUCTIONAL BRIEFING MODAL (LMS OBJECTIVE CARD) -->
-  <div id="briefingModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-white border border-slate-200 w-full max-w-lg p-6 sm:p-8 rounded-3xl shadow-2xl space-y-5">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-        <div class="flex items-center space-x-2 space-x-reverse text-emerald-800 font-bold text-sm">
-          <i data-lucide="clipboard-check" class="w-5 h-5 text-emerald-600"></i>
-          <span>دليل المعمل: بطاقة الأهداف والإرشادات</span>
-        </div>
-        <button id="closeBriefingBtn" class="p-1 rounded-lg text-slate-400 hover:text-slate-700">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <div class="space-y-3 text-xs text-slate-600 leading-relaxed">
-        <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-slate-800">
-          <strong class="text-emerald-900 block mb-1">الهدف السلوكي للنشاط:</strong>
-          أن يثبت الطالب علمياً بالدليل الرقمي خطأ فرضية تغذية النبات من التربة، ويدرك أن الكتلة الحيوية متولدة من الماء وثاني أكسيد الكربون.
-        </div>
-
-        <div class="space-y-1.5">
-          <strong class="text-slate-900 block">إرشادات تنفيذ التجربة:</strong>
-          <ul class="list-disc list-inside space-y-1 text-slate-600">
-            <li>لاحظ كتلة شتلة الصفصاف الأولية (2.2 كجم) وكتلة التربة الجافة (90 كجم).</li>
-            <li>اضغط على زر <strong>تسريع الزمن 5 سنوات</strong> وشاهد نمو الشجرة ثلاثية الأبعاد.</li>
-            <li>قارن القراءات الرقمية على الميزان وقم بحل لغز الكتلة للانتقال للمحطة التالية.</li>
-          </ul>
-        </div>
-      </div>
-
-      <button id="startActivityBtn" class="btn-emerald w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center space-x-1.5 space-x-reverse cursor-pointer shadow-md">
-        <span>فهمت الهدف.. ابدأ النشاط العملي</span>
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
-      </button>
-    </div>
-  </div>
 
   <!-- REMEDIAL SMART DRAWER -->
   <div id="smartDrawerBackdrop" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden transition-opacity"></div>
@@ -170,36 +272,57 @@
         <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
           <span class="text-xs font-bold text-slate-800 block mb-1">الشرح العلمي الدقيق:</span>
           <p class="text-xs text-slate-600 leading-relaxed">
-            الزيادة الكبرى في كتلة الشجرة لم تأتِ من التراب، بل جاءت من ماء الري الممتص بالجذور وغاز ثاني أكسيد الكربون الممتص عبر ثغور الأوراق بتأثير ضوء الشمس.
+            لو كانت الشجرة تأكل التراب لكان نقص التربة مساوياً لزيادة وزن الشجرة! الزيادة ناتجة من تفاعل ماء الري مع غاز ثاني أكسيد الكربون الممتص من الهواء لتصنيع الكتلة الحيوية.
           </p>
         </div>
       </div>
     </div>
 
-    <button id="retryDrawerBtn" class="btn-emerald w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center space-x-2 space-x-reverse cursor-pointer">
-      <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+    <button id="retryDrawerBtn" class="btn-bio w-full py-3 text-xs">
+      <i data-lucide="rotate-ccw" class="w-4 h-4 ml-1.5"></i>
       <span>فهمت الفكرة.. هحاول تاني!</span>
     </button>
   </aside>
 
-  <!-- SCRIPT -->
   <script type="module">
-    import { auth, db, doc, setDoc, onAuthStateChanged } from './js/firebase-config.js';
+    import { auth, db, doc, setDoc } from './js/firebase-config.js';
     import { labAudio } from './js/sound-fx.js';
     import { sims3D } from './js/simulations-3d.js';
     lucide.createIcons();
 
-    // Briefing Modal Controls
-    const briefingModal = document.getElementById('briefingModal');
-    const briefingBtn = document.getElementById('briefingBtn');
-    const closeBriefingBtn = document.getElementById('closeBriefingBtn');
-    const startActivityBtn = document.getElementById('startActivityBtn');
+    // Tab Switcher
+    const tabTheoryBtn = document.getElementById('tabTheoryBtn');
+    const tabLabBtn = document.getElementById('tabLabBtn');
+    const theoryView = document.getElementById('theoryView');
+    const labView = document.getElementById('labView');
 
-    briefingBtn.addEventListener('click', () => briefingModal.classList.remove('hidden'));
-    closeBriefingBtn.addEventListener('click', () => briefingModal.classList.add('hidden'));
-    startActivityBtn.addEventListener('click', () => briefingModal.classList.add('hidden'));
+    function showTheory() {
+      tabTheoryBtn.classList.add('active');
+      tabLabBtn.classList.remove('active');
+      theoryView.classList.remove('hidden');
+      labView.classList.add('hidden');
+    }
 
-    // Drawer Controls
+    function showLab() {
+      tabLabBtn.classList.add('active');
+      tabTheoryBtn.classList.remove('active');
+      labView.classList.remove('hidden');
+      theoryView.classList.add('hidden');
+      // trigger simulation init if not loaded
+      sims3D.initStation1('canvas-container', () => {
+        document.getElementById('treeMassVal').textContent = '75.0 كجم (+72.8)';
+        document.getElementById('soilMassVal').textContent = '89.943 كجم (-57 جم)';
+        document.getElementById('st1Timeline').textContent = 'الزمن: بعد 5 سنوات كاملة';
+        document.getElementById('deductiveBox').classList.remove('hidden');
+        labAudio.success();
+      });
+    }
+
+    tabTheoryBtn.addEventListener('click', showTheory);
+    tabLabBtn.addEventListener('click', showLab);
+    document.getElementById('goToLabFromTheoryBtn').addEventListener('click', showLab);
+
+    // Remedial Drawer
     const smartDrawer = document.getElementById('smartDrawer');
     const smartDrawerBackdrop = document.getElementById('smartDrawerBackdrop');
     const closeDrawerBtn = document.getElementById('closeDrawerBtn');
@@ -218,15 +341,7 @@
     smartDrawerBackdrop.addEventListener('click', closeDrawer);
     retryDrawerBtn.addEventListener('click', closeDrawer);
 
-    // Initialize 3D Simulation
-    sims3D.initStation1('canvas-container', () => {
-      document.getElementById('treeMassVal').textContent = '75.0 كجم (+72.8)';
-      document.getElementById('soilMassVal').textContent = '89.943 كجم (-57 جم)';
-      document.getElementById('st1Timeline').textContent = 'الزمن: بعد 5 سنوات كاملة';
-      document.getElementById('deductiveBox').classList.remove('hidden');
-      labAudio.success();
-    });
-
+    // Time lapse
     const runBtn = document.getElementById('runTimeLapseBtn');
     runBtn.addEventListener('click', () => {
       labAudio.chemicalReaction();
@@ -235,6 +350,7 @@
       if (sims3D.activeSims.station1) sims3D.activeSims.station1.grow();
     });
 
+    // Choices
     document.querySelectorAll('.ans-btn').forEach(btn => {
       btn.addEventListener('click', async () => {
         if (btn.getAttribute('data-ans') === 'correct') {
@@ -242,7 +358,6 @@
           btn.classList.add('bg-emerald-100', 'border-emerald-400', 'text-emerald-900', 'font-bold');
           document.getElementById('nextStationBtn').classList.remove('hidden');
 
-          // Save progress
           let prog = JSON.parse(localStorage.getItem('student_progress') || '{}');
           prog.station1 = true;
           localStorage.setItem('student_progress', JSON.stringify(prog));

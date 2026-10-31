@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>المحطة 2: تشريح البلاستيدة وفيزياء الضوء | مختبر 3D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>المحطة 2: تشريح البلاستيدة وفيزياء الضوء</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -12,152 +12,243 @@
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-['Cairo']">
 
-  <!-- TOP HEADER -->
-  <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 py-3 px-6 sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
+  <!-- TOP APP BAR -->
+  <header class="bg-white border-b border-slate-200 py-3 px-4 sm:px-8 sticky top-0 z-40 shadow-sm">
+    <div class="responsive-container flex items-center justify-between">
       <div class="flex items-center space-x-3 space-x-reverse">
-        <a href="dashboard.html" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 transition-colors" title="العودة للوحة المسار">
+        <a href="dashboard.html" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors" title="العودة للوحة المسار">
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
         <div>
           <span class="text-[10px] font-bold text-blue-700 uppercase tracking-wider block">المحطة الثانية من 4</span>
-          <h1 class="text-sm sm:text-base font-black text-slate-900">تشريح البلاستيدة الخضراء 3D وفيزياء الأطياف الضوئية</h1>
+          <h1 class="text-sm sm:text-base font-black text-slate-900 leading-tight">تشريح البلاستيدة الخضراء 3D وفيزياء الأطياف الضوئية</h1>
         </div>
       </div>
-      
-      <div class="flex items-center space-x-2 space-x-reverse">
-        <button id="briefingBtn" class="px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-800 text-xs font-bold flex items-center space-x-1.5 space-x-reverse">
-          <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
-          <span>بطاقة أهداف المحطة</span>
+
+      <!-- Mode Switcher Tabs -->
+      <div class="flex p-1 bg-slate-100 rounded-xl border border-slate-200">
+        <button id="tabTheoryBtn" class="tab-pill active flex items-center space-x-1 space-x-reverse">
+          <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+          <span>الشرح العلمي</span>
+        </button>
+        <button id="tabLabBtn" class="tab-pill flex items-center space-x-1 space-x-reverse">
+          <i data-lucide="box" class="w-3.5 h-3.5"></i>
+          <span>المعمل ثلاثي الأبعاد</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- LAB WORKSPACE -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 w-full flex-1 flex flex-col lg:flex-row gap-6">
-    
-    <!-- 3D Canvas Box -->
-    <div class="lg:col-span-2 flex-1 lab-card overflow-hidden flex flex-col">
-      <div class="p-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs">
-        <span class="font-bold text-slate-700 flex items-center space-x-1.5 space-x-reverse">
-          <i data-lucide="box" class="w-4 h-4 text-emerald-600"></i>
-          <span>المجسم التشريحي المجهري ثلاثي الأبعاد وتدفق الفوتونات</span>
-        </span>
-        <span id="lightBadge" class="font-bold text-blue-700 px-2.5 py-0.5 rounded-full bg-blue-100 border border-blue-200">الضوء المسلط: الأزرق (430nm)</span>
+  <!-- MAIN BODY -->
+  <main class="responsive-container py-6 flex-1 flex flex-col space-y-6">
+
+    <!-- ======================================================== -->
+    <!-- TAB 1: SCIENTIFIC CONTENT & THEORY                      -->
+    <!-- ======================================================== -->
+    <div id="theoryView" class="space-y-6">
+      
+      <!-- Behavioral Objective Banner -->
+      <div class="bio-card p-5 bg-gradient-to-r from-blue-50 via-white to-blue-50/50 border-r-4 border-r-blue-600">
+        <div class="flex items-center space-x-2 space-x-reverse text-blue-900 font-bold text-xs mb-1">
+          <i data-lucide="target" class="w-4 h-4 text-blue-600"></i>
+          <span>الهدف التعليمي السلوكي للمحطة:</span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-semibold">
+          أن يحدد الطالب التركيب الدقيق للبلاستيدة وملاءمتها الوظيفية، ويصنف البلاستيدات حسب الأصباغ السائدة، ويفسر الطبيعة الفيزيائية للضوء وسبب رؤية أوراق النبات خضراء للعين المجردة.
+        </p>
       </div>
 
-      <div id="canvas-container" class="w-full h-96 sm:h-[480px] bg-slate-100 relative"></div>
+      <!-- Chloroplast Anatomy Structure Breakdown -->
+      <div class="bio-card p-6 space-y-4">
+        <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2 space-x-reverse">
+          <i data-lucide="microscope" class="w-5 h-5 text-emerald-600"></i>
+          <span>1. التركيب الدقيق والملاءمة الوظيفية للبلاستيدة الخضراء:</span>
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <!-- Double Membrane -->
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-800 font-bold text-[11px] block w-max">الغشاء المزدوج (Double Membrane)</span>
+            <p class="text-slate-600 leading-relaxed">
+              يتكون من غشائين أملسين رقيقين للغاية (غشاء خارجي وغشاء داخلي) يبلغ سمكهما معاً حوالي <strong>10 نانومتر</strong>، يوفران حماية داخلية وينظمان النفاذية الاختيارية للمواد من وإلى السيتوبلازم.
+            </p>
+          </div>
 
-      <!-- Parts Selection Sensors -->
-      <div class="p-3 bg-slate-50 border-t border-slate-200 grid grid-cols-3 gap-2">
-        <button data-part="membrane" class="part-btn active p-2.5 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-bold text-center">
-          الغشاء المزدوج (10nm)
-        </button>
-        <button data-part="grana" class="part-btn p-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold text-center">
-          الجرانا والثايلاكويدات
-        </button>
-        <button data-part="stroma" class="part-btn p-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold text-center">
-          الستروما (الحشوة)
+          <!-- Stroma -->
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="px-2.5 py-1 rounded-md bg-teal-100 text-teal-800 font-bold text-[11px] block w-max">الستروما / الحشوة (Stroma)</span>
+            <p class="text-slate-600 leading-relaxed">
+              مادة بروتينية شفافة هلامية عديمة اللون تملأ الفراغ الداخلي بالكامل. تخلو تماماً من صبغ الكلوروفيل، ولكنها تحتوي على: إنزيمات تثبيت CO₂، جزيئات DNA خاصة للتضاعف الذاتي، ريبوسومات لبناء البروتين، وحبيبات نشا مؤقتة سريعة التحلل.
+            </p>
+          </div>
+
+          <!-- Grana & Thylakoids -->
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="px-2.5 py-1 rounded-md bg-blue-100 text-blue-800 font-bold text-[11px] block w-max">الجرانا والثايلاكويدات (Grana)</span>
+            <p class="text-slate-600 leading-relaxed">
+              حبيبات قرصية مجوفة تسبح في الستروما، تتكون كل حبيبة من تراكب حوالي 15 قرصاً غشائياً (الثايلاكويد). <strong>امتداد الحواف:</strong> تمتد حواف الأقراص لتلتحم بحبيبات مجاورة لزيادة مساحة السطح المعرض لامتصاص الضوء. تستقر عليها أصباغ الكلوروفيل وسلاسل نقل الإلكترون وإنزيم ATP Synthase.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparative Classification Table of Plastids -->
+      <div class="bio-card p-6 space-y-4">
+        <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2 space-x-reverse">
+          <i data-lucide="layers" class="w-5 h-5 text-amber-600"></i>
+          <span>2. تصنيف البلاستيدات وفقاً للأصباغ الملونة (دراسة مقارنة معتمدة):</span>
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-right text-xs">
+            <thead class="bg-slate-100 text-slate-700 border-b border-slate-200">
+              <tr>
+                <th class="p-3 font-bold">نوع البلاستيدة</th>
+                <th class="p-3 font-bold">الصبغة السائدة</th>
+                <th class="p-3 font-bold">أماكن التواجد في النبات</th>
+                <th class="p-3 font-bold">الوظيفة البيولوجية الأساسية</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="p-3 font-bold text-emerald-700">البلاستيدات الخضراء (Chloroplasts)</td>
+                <td class="p-3 text-slate-600">الكلوروفيل (أ، ب) ذو اللون الأخضر</td>
+                <td class="p-3 text-slate-600">أوراق النباتات، والسيقان العشبية الخضراء (الملوخية، البقدونس، النجيل).</td>
+                <td class="p-3 font-semibold text-slate-800">القيام بعملية البناء الضوئي وتحويل الطاقة الضوئية لطاقة كيميائية.</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-amber-700">البلاستيدات الملونة (Chromoplasts)</td>
+                <td class="p-3 text-slate-600">الكاروتينويدات (تتدرج بين الأحمر والبرتقالي والأصفر)</td>
+                <td class="p-3 text-slate-600">بتلات الأزهار، قشور الثمار الناضجة (كالطماطم)، جذور اللفت والجزر.</td>
+                <td class="p-3 font-semibold text-slate-800">إكساب الأزهار والثمار ألواناً جذابة لجذب الحشرات للتلقيح ونشر البذور.</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-slate-700">البلاستيدات عديمة اللون (Leucoplasts)</td>
+                <td class="p-3 text-slate-600">تخلو تماماً من الأصباغ الملونة</td>
+                <td class="p-3 text-slate-600">درنات البطاطس، جذور البطاطا المنتفخة، ساق الموز الداخلية، بذور الحبوب.</td>
+                <td class="p-3 font-semibold text-slate-800">مراكز حيوية لتجميع وتخزين الغذاء، خاصة تحويل سكر الجلوكوز إلى نشا.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Integration with Physics: Why leaves look green? -->
+      <div class="bio-card p-6 bg-gradient-to-r from-emerald-50 via-white to-emerald-50 border-r-4 border-r-emerald-600 space-y-3">
+        <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2 space-x-reverse">
+          <i data-lucide="sun" class="w-5 h-5 text-emerald-600"></i>
+          <span>3. التكامل مع علم الفيزياء: علل - لماذا تبدو أوراق النباتات خضراء للعين المجردة؟</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+          الضوء المرئي الأبيض الصادر من الشمس مزيج مركب من أطياف سبعة. جزيئات صبغ الكلوروفيل في البلاستيدات <strong>تمتص الأطوال الموجية ذات الطاقة العالية في الطيفين الأزرق والأحمر بكفاءة تامة</strong> وتستغلها في البناء الضوئي، <strong>بينما تعكس وتنفذ موجات الضوء الأخضر (الصفراء-الخضراء)</strong> فلا تمتصها، وتنعكس مباشرة نحو أعيننا فنراها خضراء!
+        </p>
+      </div>
+
+      <!-- Launch 3D Button -->
+      <div class="text-center pt-2">
+        <button id="goToLabFromTheoryBtn" class="btn-bio px-8 py-3.5 text-xs font-bold space-x-2 space-x-reverse shadow-lg">
+          <span>انتقل للمعمل ثلاثي الأبعاد لاختبار كشافات الضوء وتشريح البلاستيدة</span>
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
         </button>
       </div>
+
     </div>
 
-    <!-- Controls Column -->
-    <div class="w-full lg:w-96 flex flex-col justify-between space-y-4">
-      <div class="lab-card p-6 space-y-4">
-        <div>
-          <h3 class="text-sm font-bold text-slate-900 mb-1 flex items-center space-x-1.5 space-x-reverse">
-            <i data-lucide="sun" class="w-4 h-4 text-emerald-600"></i>
-            <span>معمل كشافات الضوء والامتصاص</span>
-          </h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            سلط الكشافات الملونة واكتشف سبب رؤية أوراق النباتات خضراء للعين المجردة:
-          </p>
-        </div>
-
-        <!-- Light Torches Buttons -->
-        <div class="grid grid-cols-3 gap-2">
-          <button data-light="blue" class="light-btn active p-2.5 rounded-xl border border-blue-500 bg-blue-50 text-blue-900 text-xs font-bold flex flex-col items-center justify-center space-y-1">
-            <i data-lucide="zap" class="w-4 h-4 text-blue-600"></i>
-            <span>أزرق (430nm)</span>
-          </button>
-          <button data-light="red" class="light-btn p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex flex-col items-center justify-center space-y-1">
-            <i data-lucide="zap" class="w-4 h-4 text-red-600"></i>
-            <span>أحمر (660nm)</span>
-          </button>
-          <button data-light="green" class="light-btn p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex flex-col items-center justify-center space-y-1">
-            <i data-lucide="zap" class="w-4 h-4 text-emerald-600"></i>
-            <span>أخضر (550nm)</span>
-          </button>
-        </div>
-
-        <!-- Part Details Card -->
-        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
-          <span id="partTitle" class="text-xs font-bold text-slate-900 block">الغشاء المزدوج (Double Membrane)</span>
-          <p id="partDesc" class="text-[11px] text-slate-600 leading-relaxed">
-            غشاءان أملسان رقيقان بسمك 10 نانومتر، يوفران الحماية وينظمان النفاذية الاختيارية وتبادل المواد مع السيتوبلازم الخلوي.
-          </p>
-        </div>
-
-        <!-- Absorption Metric Bar -->
-        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
-          <div class="flex items-center justify-between text-xs">
-            <span class="text-slate-600 font-semibold">معدل امتصاص الفوتونات:</span>
-            <span id="absorptionVal" class="font-bold text-emerald-700">95% (امتصاص فائق)</span>
+    <!-- ======================================================== -->
+    <!-- TAB 2: 3D INTERACTIVE LAB                                -->
+    <!-- ======================================================== -->
+    <div id="labView" class="hidden flex-col space-y-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- 3D Canvas Box -->
+        <div class="lg:col-span-2 bio-card overflow-hidden flex flex-col">
+          <div class="p-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs">
+            <span class="font-bold text-slate-800 flex items-center space-x-1.5 space-x-reverse">
+              <i data-lucide="box" class="w-4 h-4 text-emerald-600"></i>
+              <span>المجسم التشريحي للبلاستيدة وتدفق الفوتونات</span>
+            </span>
+            <span id="lightBadge" class="font-bold text-blue-700 px-2.5 py-0.5 rounded-full bg-blue-100 border border-blue-200">الضوء المسلط: الأزرق (430nm)</span>
           </div>
-          <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
-            <div id="absorptionBar" class="h-full bg-emerald-600 rounded-full transition-all duration-300" style="width: 95%"></div>
+
+          <div id="canvas-container" class="canvas-wrapper"></div>
+
+          <!-- Parts Sensors -->
+          <div class="p-3 bg-slate-50 border-t border-slate-200 grid grid-cols-3 gap-2">
+            <button data-part="membrane" class="part-btn active p-2 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-bold text-center">
+              الغشاء المزدوج (10nm)
+            </button>
+            <button data-part="grana" class="part-btn p-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold text-center">
+              الجرانا والثايلاكويدات
+            </button>
+            <button data-part="stroma" class="part-btn p-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold text-center">
+              الستروما (الحشوة)
+            </button>
           </div>
-          <p id="physicsExpl" class="text-[10px] text-slate-500 leading-relaxed">
-            تمتص أصباغ الكلوروفيل الضوء الأزرق والأحمر بكفاءة قصوى لاستثارة الإلكترونات إلى مدارات طاقة أعلى.
-          </p>
         </div>
+
+        <!-- Controls Column -->
+        <div class="bio-card p-6 flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 mb-1 flex items-center space-x-1.5 space-x-reverse">
+                <i data-lucide="sun" class="w-4 h-4 text-emerald-600"></i>
+                <span>معمل كشافات الضوء والامتصاص</span>
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                سلط الكشافات الملونة على البلاستيدة وشاهد سلوك الفوتونات ومؤشر الامتصاص:
+              </p>
+            </div>
+
+            <!-- Light Buttons -->
+            <div class="grid grid-cols-3 gap-2">
+              <button data-light="blue" class="light-btn active p-2.5 rounded-xl border border-blue-500 bg-blue-50 text-blue-900 text-xs font-bold flex flex-col items-center justify-center space-y-1">
+                <i data-lucide="zap" class="w-4 h-4 text-blue-600"></i>
+                <span>أزرق (430nm)</span>
+              </button>
+              <button data-light="red" class="light-btn p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex flex-col items-center justify-center space-y-1">
+                <i data-lucide="zap" class="w-4 h-4 text-red-600"></i>
+                <span>أحمر (660nm)</span>
+              </button>
+              <button data-light="green" class="light-btn p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex flex-col items-center justify-center space-y-1">
+                <i data-lucide="zap" class="w-4 h-4 text-emerald-600"></i>
+                <span>أخضر (550nm)</span>
+              </button>
+            </div>
+
+            <!-- Part Details -->
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span id="partTitle" class="text-xs font-bold text-slate-900 block">الغشاء المزدوج (Double Membrane)</span>
+              <p id="partDesc" class="text-[11px] text-slate-600 leading-relaxed">
+                غشاءان أملسان رقيقان بسمك 10 نانومتر، يوفران الحماية وينظمان النفاذية الاختيارية وتبادل المواد مع السيتوبلازم الخلوي.
+              </p>
+            </div>
+
+            <!-- Absorption Bar -->
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-600 font-semibold">معدل امتصاص الفوتونات:</span>
+                <span id="absorptionVal" class="font-bold text-emerald-700">95% (امتصاص فائق)</span>
+              </div>
+              <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                <div id="absorptionBar" class="h-full bg-emerald-600 rounded-full transition-all duration-300" style="width: 95%"></div>
+              </div>
+              <p id="physicsExpl" class="text-[10px] text-slate-500 leading-relaxed">
+                تمتص أصباغ الكلوروفيل الضوء الأزرق والأحمر بكفاءة قصوى لاستثارة الإلكترونات إلى مدارات طاقة أعلى.
+              </p>
+            </div>
+          </div>
+
+          <a href="station3.html" id="nextStationBtn" class="btn-bio w-full py-3.5 text-xs shadow-lg">
+            <span>تم إتقان المحطة 2 بنجاح.. الانتقال للمحطة 3</span>
+            <i data-lucide="arrow-left" class="w-4 h-4 mr-1.5"></i>
+          </a>
+        </div>
+
       </div>
 
-      <a href="station3.html" id="nextStationBtn" class="btn-emerald w-full py-3.5 rounded-xl font-bold text-xs flex items-center justify-center space-x-2 space-x-reverse shadow-lg shadow-emerald-600/20">
-        <span>تم إتقان المحطة 2 بنجاح.. الانتقال للمحطة 3</span>
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
-      </a>
     </div>
 
   </main>
-
-  <!-- BRIEFING MODAL -->
-  <div id="briefingModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-white border border-slate-200 w-full max-w-lg p-6 sm:p-8 rounded-3xl shadow-2xl space-y-5">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-        <div class="flex items-center space-x-2 space-x-reverse text-blue-900 font-bold text-sm">
-          <i data-lucide="clipboard-check" class="w-5 h-5 text-blue-600"></i>
-          <span>دليل المعمل: بطاقة أهداف تشريح البلاستيدة</span>
-        </div>
-        <button id="closeBriefingBtn" class="p-1 rounded-lg text-slate-400 hover:text-slate-700">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <div class="space-y-3 text-xs text-slate-600 leading-relaxed">
-        <div class="p-3.5 rounded-xl bg-blue-50 border border-blue-200 text-slate-800">
-          <strong class="text-blue-900 block mb-1">الهدف السلوكي للنشاط:</strong>
-          أن يتعرف الطالب على البنية المجهرية للبلاستيدة وملاءمتها الوظيفية، ويفسر سبب ظهور أوراق النباتات خضراء من خلال فيزياء امتصاص الأطياف الزرقاء والحمراء وانعكاس الأخضر.
-        </div>
-
-        <div class="space-y-1.5">
-          <strong class="text-slate-900 block">إرشادات تنفيذ التجربة:</strong>
-          <ul class="list-disc list-inside space-y-1 text-slate-600">
-            <li>اضغط على أزرار أجزاء البلاستيدة (الغشاء، الجرانا، الستروما) لفحص ملاءمتها الوظيفية.</li>
-            <li>جرب تسليط الكشافات الثلاثة (الأزرق، الأحمر، الأخضر) ولاحظ سلوك الفوتونات ومؤشر الامتصاص.</li>
-            <li>لاحظ ارتداد وانعكاس فوتونات الضوء الأخضر نحو أعيننا لتفسير سبب رؤية الأوراق خضراء.</li>
-          </ul>
-        </div>
-      </div>
-
-      <button id="startActivityBtn" class="btn-emerald w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center space-x-1.5 space-x-reverse cursor-pointer shadow-md">
-        <span>فهمت الهدف.. ابدأ فحص البلاستيدة</span>
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
-      </button>
-    </div>
-  </div>
 
   <script type="module">
     import { auth, db, doc, setDoc } from './js/firebase-config.js';
@@ -165,14 +256,30 @@
     import { sims3D } from './js/simulations-3d.js';
     lucide.createIcons();
 
-    // Briefing
-    const briefingModal = document.getElementById('briefingModal');
-    document.getElementById('briefingBtn').addEventListener('click', () => briefingModal.classList.remove('hidden'));
-    document.getElementById('closeBriefingBtn').addEventListener('click', () => briefingModal.classList.add('hidden'));
-    document.getElementById('startActivityBtn').addEventListener('click', () => briefingModal.classList.add('hidden'));
+    // Tab Switcher
+    const tabTheoryBtn = document.getElementById('tabTheoryBtn');
+    const tabLabBtn = document.getElementById('tabLabBtn');
+    const theoryView = document.getElementById('theoryView');
+    const labView = document.getElementById('labView');
 
-    // 3D
-    sims3D.initStation2('canvas-container');
+    function showTheory() {
+      tabTheoryBtn.classList.add('active');
+      tabLabBtn.classList.remove('active');
+      theoryView.classList.remove('hidden');
+      labView.classList.add('hidden');
+    }
+
+    function showLab() {
+      tabLabBtn.classList.add('active');
+      tabTheoryBtn.classList.remove('active');
+      labView.classList.remove('hidden');
+      theoryView.classList.add('hidden');
+      sims3D.initStation2('canvas-container');
+    }
+
+    tabTheoryBtn.addEventListener('click', showTheory);
+    tabLabBtn.addEventListener('click', showLab);
+    document.getElementById('goToLabFromTheoryBtn').addEventListener('click', showLab);
 
     // Part details
     document.querySelectorAll('.part-btn').forEach(btn => {
@@ -247,7 +354,6 @@
           labAudio.chemicalReaction();
         }
 
-        // Save progress
         let prog = JSON.parse(localStorage.getItem('student_progress') || '{}');
         prog.station2 = true;
         localStorage.setItem('student_progress', JSON.stringify(prog));
