@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap');
+
+:root {
+  --primary-emerald: #059669;
+  --primary-emerald-hover: #047857;
+  --accent-amber: #d97706;
+  --bg-slate-light: #f8fafc;
+  --card-bg: #ffffff;
+  --border-subtle: #e2e8f0;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background-color: var(--bg-slate-light);
+  color: #0f172a;
+  direction: rtl;
+  overflow-x: hidden;
+}
+
+/* Crisp Clean Lab Cards */
+.lab-card {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lab-card-hover:hover {
+  transform: translateY(-3px);
+  border-color: #cbd5e1;
+  box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+}
+
+/* 3D Lab Tactile Buttons */
+.btn-emerald {
+  background-color: #059669;
+  color: #ffffff;
+  border-bottom: 4px solid #047857;
+  transition: all 0.15s ease-out;
+}
+
+.btn-emerald:hover {
+  background-color: #047857;
+}
+
+.btn-emerald:active {
+  transform: translateY(3px);
+  border-bottom-width: 1px;
+}
+
+.btn-amber {
+  background-color: #d97706;
+  color: #ffffff;
+  border-bottom: 4px solid #b45309;
+  transition: all 0.15s ease-out;
+}
+
+.btn-amber:hover {
+  background-color: #b45309;
+}
+
+.btn-amber:active {
+  transform: translateY(3px);
+  border-bottom-width: 1px;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #059669;
+}

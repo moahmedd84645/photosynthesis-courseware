@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المختبر التفاعلي للبناء الضوئي | تدفق الطاقة الحيوية</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- TOP APP BAR -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand & Lesson Identity -->
+      <div class="flex items-center space-x-3 space-x-reverse">
+        <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-md shadow-emerald-600/20">
+          <i data-lucide="leaf" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h1 class="text-sm sm:text-base font-black text-slate-900">مختبر البناء الضوئي التفاعلي</h1>
+          <p class="text-[11px] text-emerald-700 font-semibold">منصة التعلم للإتقان والمحاكاة ثلاثية الأبعاد</p>
+        </div>
+      </div>
+
+      <!-- Controls & User Badge -->
+      <div class="flex items-center space-x-3 space-x-reverse">
+        <!-- Audio Synthesizer Control -->
+        <button id="soundToggleBtn" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 transition-colors" title="التحكم في المؤثرات الصوتية">
+          <i data-lucide="volume-2" id="soundIcon" class="w-4 h-4"></i>
+        </button>
+
+        <!-- Current Track Badge -->
+        <div class="hidden sm:flex items-center px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold space-x-1 space-x-reverse">
+          <i data-lucide="compass" class="w-3.5 h-3.5 text-emerald-600"></i>
+          <span id="trackBadgeText">المسار التأسيسي</span>
+        </div>
+
+        <!-- Student Profile Display -->
+        <div class="flex items-center space-x-2 space-x-reverse">
+          <span id="studentNameDisplay" class="text-xs font-bold text-slate-700 hidden sm:inline-block">طالب مستكشف</span>
+          <a href="login.html" id="authActionBtn" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 flex items-center space-x-1 space-x-reverse transition-colors">
+            <i data-lucide="log-in" class="w-3.5 h-3.5"></i>
+            <span id="authActionText">تسجيل</span>
+          </a>
+          <a href="teacher.html" class="px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 text-xs font-bold flex items-center space-x-1 space-x-reverse transition-colors" title="لوحة المعلم">
+            <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+            <span class="hidden md:inline">لوحة المعلم</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- DASHBOARD WORKSPACE -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1 flex flex-col lg:flex-row gap-6">
+
+    <!-- SIDEBAR: LEARNING MAP & HUD -->
+    <aside class="w-full lg:w-72 flex-shrink-0 flex flex-col space-y-4">
+      
+      <!-- Progress HUD Card -->
+      <div class="lab-card p-5">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5 space-x-reverse">
+            <i data-lucide="target" class="w-4 h-4 text-emerald-600"></i>
+            <span>مؤشر الإتقان الكلي</span>
+          </span>
+          <span id="overallPercentage" class="text-sm font-black text-emerald-700">0%</span>
+        </div>
+        <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200">
+          <div id="overallProgressBar" class="h-full bg-emerald-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+        <p class="mt-2 text-[11px] text-slate-500 leading-relaxed">أتمم الأنشطة المعملية الأربعة لفتح المحطة الختامية للتقويم والشهادة.</p>
+      </div>
+
+      <!-- Navigation Stations List -->
+      <nav class="lab-card p-3 flex flex-col space-y-1.5">
+        <div class="px-3 py-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center space-x-1.5 space-x-reverse">
+          <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+          <span>محطات المسار التعليمي</span>
+        </div>
+
+        <!-- Station 0: Onboarding & Link -->
+        <button data-station="0" class="station-tab-btn active w-full text-right p-3 rounded-xl transition-all flex items-center justify-between bg-emerald-50 border border-emerald-300 text-emerald-900 font-bold">
+          <div class="flex items-center space-x-2.5 space-x-reverse">
+            <div class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
+              <i data-lucide="info" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <p class="text-xs leading-tight">التمهيد المعرفي والتأسيس</p>
+              <p class="text-[10px] text-emerald-700 font-normal">ربط الهضم بتصنيع الغذاء</p>
+            </div>
+          </div>
+          <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>
+        </button>
+
+        <!-- Station 1 -->
+        <button data-station="1" class="station-tab-btn w-full text-right p-3 rounded-xl transition-all flex items-center justify-between bg-white hover:bg-slate-50 border border-slate-200 text-slate-700">
+          <div class="flex items-center space-x-2.5 space-x-reverse">
+            <div class="w-7 h-7 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center">
+              <i data-lucide="scale" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <p class="text-xs font-bold leading-tight">1. لغز شجرة الصفصاف</p>
+              <p class="text-[10px] text-slate-500">ميزان فان هيلمونت والكتلة</p>
+            </div>
+          </div>
+          <span id="st1-badge" class="text-xs text-slate-400"><i data-lucide="clock" class="w-3.5 h-3.5"></i></span>
+        </button>
+
+        <!-- Station 2 -->
+        <button data-station="2" class="station-tab-btn w-full text-right p-3 rounded-xl transition-all flex items-center justify-between bg-white hover:bg-slate-50 border border-slate-200 text-slate-700">
+          <div class="flex items-center space-x-2.5 space-x-reverse">
+            <div class="w-7 h-7 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center">
+              <i data-lucide="microscope" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <p class="text-xs font-bold leading-tight">2. تشريح البلاستيدة وفيزياء الضوء</p>
+              <p class="text-[10px] text-slate-500">كشافات الفوتونات والأطياف</p>
+            </div>
+          </div>
+          <span id="st2-badge" class="text-xs text-slate-400"><i data-lucide="lock" class="w-3.5 h-3.5"></i></span>
+        </button>
+
+        <!-- Station 3 -->
+        <button data-station="3" class="station-tab-btn w-full text-right p-3 rounded-xl transition-all flex items-center justify-between bg-white hover:bg-slate-50 border border-slate-200 text-slate-700">
+          <div class="flex items-center space-x-2.5 space-x-reverse">
+            <div class="w-7 h-7 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center">
+              <i data-lucide="cpu" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <p class="text-xs font-bold leading-tight">3. خط إنتاج الطاقة الحيوي</p>
+              <p class="text-[10px] text-slate-500">شطر الماء وتثبيت الكربون</p>
+            </div>
+          </div>
+          <span id="st3-badge" class="text-xs text-slate-400"><i data-lucide="lock" class="w-3.5 h-3.5"></i></span>
+        </button>
+
+        <!-- Station 4 -->
+        <button data-station="4" class="station-tab-btn w-full text-right p-3 rounded-xl transition-all flex items-center justify-between bg-white hover:bg-slate-50 border border-slate-200 text-slate-700">
+          <div class="flex items-center space-x-2.5 space-x-reverse">
+            <div class="w-7 h-7 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center">
+              <i data-lucide="flask-conical" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <p class="text-xs font-bold leading-tight">4. مختبر كاشف النشا والزراعة</p>
+              <p class="text-[10px] text-slate-500">اختبار اليود والزراعة المائية</p>
+            </div>
+          </div>
+          <span id="st4-badge" class="text-xs text-slate-400"><i data-lucide="lock" class="w-3.5 h-3.5"></i></span>
+        </button>
+
+        <!-- Station 5 -->
+        <button data-station="5" class="station-tab-btn w-full text-right p-3 rounded-xl transition-all flex items-center justify-between bg-white hover:bg-slate-50 border border-slate-200 text-slate-700">
+          <div class="flex items-center space-x-2.5 space-x-reverse">
+            <div class="w-7 h-7 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center">
+              <i data-lucide="award" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <p class="text-xs font-bold leading-tight">5. التقويم الختامي والشهادة</p>
+              <p class="text-[10px] text-slate-500">تقييم الإتقان والاعتماد</p>
+            </div>
+          </div>
+          <span id="st5-badge" class="text-xs text-slate-400"><i data-lucide="lock" class="w-3.5 h-3.5"></i></span>
+        </button>
+
+      </nav>
+
+      <!-- Differentiation Box -->
+      <div class="lab-card p-4 space-y-2">
+        <div class="flex items-center space-x-2 space-x-reverse text-xs font-bold text-slate-800">
+          <i data-lucide="sliders" class="w-4 h-4 text-emerald-600"></i>
+          <span>مسار التعلم المخصص</span>
+        </div>
+        <p class="text-[11px] text-slate-500 leading-relaxed">
+          تغيير المسار يكيف عمق الشروحات المخبرية وتحديات التحليل البياني:
+        </p>
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <button id="trackStandardBtn" class="py-2 rounded-xl text-xs font-bold border border-emerald-500 bg-emerald-50 text-emerald-800">
+            تأسيسي شامل
+          </button>
+          <button id="trackAdvancedBtn" class="py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600">
+            تحدي المتفوقين
+          </button>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN VIEWPORT -->
+    <main class="flex-1 flex flex-col space-y-6">
+
+      <!-- ============================================== -->
+      <!-- STATION 0: WELCOME & FOUNDATIONAL LINK -->
+      <!-- ============================================== -->
+      <section id="stationView-0" class="station-view flex flex-col space-y-6">
+        
+        <!-- Welcome Hero Banner -->
+        <div class="lab-card p-8 bg-gradient-to-br from-white via-emerald-50/30 to-slate-50 border-emerald-200/80 relative overflow-hidden">
+          <div class="relative z-10">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 mb-3">
+              الوحدة الثالثة: تدفق الطاقة في النظم الحيوية
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-3">
+              عملية البناء الضوئي: كيف تُصنع الحياة من فوتونات الضوء؟
+            </h2>
+            <p class="text-sm text-slate-600 leading-relaxed max-w-3xl mb-6">
+              مرحباً بك في المختبر الافتراضي الذكي. هنا ستختبر بنفسك عبر نماذج ثلاثية الأبعاد تفاعلية كيف تُحول البلاستيدات الخضراء فوتونات الضوء الشاردة إلى سكر عالي الطاقة يغذي العالم بأسره.
+            </p>
+            <button id="startLessonBtn" class="btn-emerald px-6 py-3 rounded-xl font-bold text-xs flex items-center space-x-2 space-x-reverse cursor-pointer shadow-lg shadow-emerald-600/20">
+              <span>انطلق في المعمل الافتراضي</span>
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Foundational Scientific Link -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="lab-card p-6 border-r-4 border-r-amber-500">
+            <div class="flex items-center space-x-3 space-x-reverse mb-3">
+              <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                <i data-lucide="activity" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-base font-bold text-slate-900">ما درسته سابقاً: تغذية الإنسان والحيوان</h3>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              الكائنات غير ذاتية التغذية كالإنسان تعتمد على تناول مركبات عضوية جاهزة ومعقدة، ثم يقوم الجهاز الهضمي بتفكيكها إلى جزيئات بسيطة لامتصاصها وأكسدتها خلوياً في الميتوكوندريا لإنتاج الطاقة.
+            </p>
+          </div>
+
+          <div class="lab-card p-6 border-r-4 border-r-emerald-500">
+            <div class="flex items-center space-x-3 space-x-reverse mb-3">
+              <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                <i data-lucide="sun" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-base font-bold text-slate-900">محور درسنا اليوم: تصنيع الغذاء الذاتي</h3>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              النباتات الخضراء كائنات ذاتية التغذية تصنع غذائها بنفسها من مواد أولية بسيطة منخفضة الطاقة (الماء وثاني أكسيد الكربون) وتحولها بالضوء في البلاستيدة الخضراء إلى مركبات عضوية معقدة عالية الطاقة (الجلوكوز والنشا).
+            </p>
+          </div>
+        </div>
+
+        <!-- Behavioral Objectives -->
+        <div class="lab-card p-6">
+          <h4 class="text-sm font-bold text-slate-800 mb-4 flex items-center space-x-2 space-x-reverse">
+            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+            <span>الأهداف التعليمية السلوكية المستهدفة</span>
+          </h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs text-slate-600">
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start space-x-2 space-x-reverse">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5"></i>
+              <span>تفنيد الاعتقاد التاريخي الخاطئ حول تغذية النبات من التربة.</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start space-x-2 space-x-reverse">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5"></i>
+              <span>تحليل الملاءمة الوظيفية للبلاستيدة (الجرانا، الستروما، الغشاء).</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start space-x-2 space-x-reverse">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5"></i>
+              <span>تفسير فيزياء امتصاص الأطياف الزرقاء والحمراء وانعكاس الأخضر.</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start space-x-2 space-x-reverse">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5"></i>
+              <span>تتبع خطوات شطر الماء وتوليد ATP وتثبيت غاز CO₂.</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start space-x-2 space-x-reverse">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5"></i>
+              <span>تنفيذ البروتوكول المعملي لكاشف اليود للكشف عن النشا.</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start space-x-2 space-x-reverse">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5"></i>
+              <span>استشراف حلول الأمن الغذائي عبر تقنية الزراعة العمودية.</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================== -->
+      <!-- STATION 1: WILLOW TREE & VAN HELMONT -->
+      <!-- ============================================== -->
+      <section id="stationView-1" class="station-view hidden flex-col space-y-6">
+        
+        <div class="lab-card p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold text-emerald-700 flex items-center space-x-1.5 space-x-reverse mb-1">
+              <i data-lucide="scale" class="w-4 h-4"></i>
+              <span>المحطة 1: المحاكاة الاستقصائية التاريخية</span>
+            </span>
+            <h3 class="text-lg sm:text-xl font-bold text-slate-900">لغز شجرة الصفصاف وتجربة فان هيلمونت (1648م)</h3>
+          </div>
+          <span class="text-xs px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-600">نشاط عملي تفاعلي</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <div class="lg:col-span-2 lab-card overflow-hidden flex flex-col">
+            <div class="p-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs">
+              <span class="font-bold text-slate-700 flex items-center space-x-1.5 space-x-reverse">
+                <i data-lucide="box" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>المشهد ثلاثي الأبعاد: ميزان الكتل المعملي</span>
+              </span>
+              <span id="st1-timeline" class="font-bold text-emerald-700 px-2 py-0.5 rounded bg-emerald-50 border border-emerald-200">الزمن: البداية (سنة 0)</span>
+            </div>
+            
+            <div id="canvas-station1" class="w-full h-80 sm:h-96 relative bg-slate-100"></div>
+
+            <div class="p-4 bg-slate-50 border-t border-slate-200 grid grid-cols-2 gap-4 text-center">
+              <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-sm">
+                <span class="text-[11px] text-slate-500 block mb-1 font-semibold">كتلة شجرة الصفصاف</span>
+                <span id="st1-tree-mass" class="text-xl font-black text-emerald-700">2.2 كجم</span>
+              </div>
+              <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-sm">
+                <span class="text-[11px] text-slate-500 block mb-1 font-semibold">كتلة التربة المجففة</span>
+                <span id="st1-soil-mass" class="text-xl font-black text-amber-700">90.000 كجم</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lab-card p-5 flex flex-col justify-between space-y-4">
+            <div>
+              <h4 class="text-sm font-bold text-slate-900 mb-2 flex items-center space-x-2 space-x-reverse">
+                <i data-lucide="play-circle" class="w-4 h-4 text-emerald-600"></i>
+                <span>لوحة التحكم المعملية</span>
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                ساد الاعتقاد قديماً أن النباتات تبتلع التربة لتنمو. قام فان هيلمونت بغرس شتلة صغيرة ورعايتها بماء المطر فقط لمدة 5 سنوات دون إضافة سماد أو تراب إضافي.
+              </p>
+
+              <button id="st1-growBtn" class="btn-emerald w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center space-x-2 space-x-reverse cursor-pointer mb-4 shadow-md shadow-emerald-600/20">
+                <i data-lucide="fast-forward" class="w-4 h-4"></i>
+                <span>تسريع الزمن 5 سنوات</span>
+              </button>
+
+              <div id="st1-puzzle" class="hidden p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-2">
+                <p class="text-xs font-bold text-emerald-900">لغز الكتلة المحيرة:</p>
+                <p class="text-[11px] text-slate-700 leading-relaxed">
+                  قفزت كتلة الشجرة إلى <strong class="text-emerald-700">+72.8 كجم</strong>، بينما نقصت التربة فقط <strong class="text-amber-700">-57 جراماً</strong>! فسر مصدر تلك الزيادة الهائلة:
+                </p>
+                <div class="space-y-2">
+                  <button data-ans="wrong" class="st1-ans-btn w-full text-right p-2.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-xs text-slate-700 transition-colors">
+                    امتصت الشجرة كميات خفية من تراب الوعاء تبخرت أثناء التجفيف.
+                  </button>
+                  <button data-ans="correct" class="st1-ans-btn w-full text-right p-2.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-xs text-slate-700 transition-colors">
+                    جاءت الكتلة من ماء الري وغاز ثاني أكسيد الكربون من الهواء بتأثير الضوء.
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button id="st1-nextBtn" class="hidden btn-emerald w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center space-x-2 space-x-reverse transition-all">
+              <span>تم إتقان المحطة 1 بنجاح.. الانتقال للمحطة 2</span>
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ============================================== -->
+      <!-- STATION 2: CHLOROPLAST & LIGHT PHYSICS -->
+      <!-- ============================================== -->
+      <section id="stationView-2" class="station-view hidden flex-col space-y-6">
+        
+        <div class="lab-card p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold text-emerald-700 flex items-center space-x-1.5 space-x-reverse mb-1">
+              <i data-lucide="microscope" class="w-4 h-4"></i>
+              <span>المحطة 2: التشريح المجهري وفيزياء الضوء</span>
+            </span>
+            <h3 class="text-lg sm:text-xl font-bold text-slate-900">تشريح البلاستيدة الخضراء 3D وفيزياء الفوتونات</h3>
+          </div>
+          <span class="text-xs px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-600">نشاط عملي تفاعلي</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <div class="lg:col-span-2 lab-card overflow-hidden flex flex-col">
+            <div class="p-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs">
+              <span class="font-bold text-slate-700 flex items-center space-x-1.5 space-x-reverse">
+                <i data-lucide="box" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>المجسم التشريحي للبلاستيدة وتدفق الفوتونات</span>
+              </span>
+              <span id="st2-lightState" class="font-bold text-blue-700 px-2 py-0.5 rounded bg-blue-50 border border-blue-200">الضوء المسلط: الأزرق (430 نانومتر)</span>
+            </div>
+            
+            <div id="canvas-station2" class="w-full h-80 sm:h-96 relative bg-slate-100"></div>
+
+            <div class="p-3 bg-slate-50 border-t border-slate-200 grid grid-cols-3 gap-2">
+              <button data-part="membrane" class="st2-part-btn active p-2 rounded-lg bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-bold text-center">
+                الغشاء المزدوج (10nm)
+              </button>
+              <button data-part="grana" class="st2-part-btn p-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold text-center">
+                الجرانا والثايلاكويدات
+              </button>
+              <button data-part="stroma" class="st2-part-btn p-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold text-center">
+                الستروما (الحشوة)
+              </button>
+            </div>
+          </div>
+
+          <div class="lab-card p-5 flex flex-col justify-between space-y-4">
+            <div>
+              <h4 class="text-sm font-bold text-slate-900 mb-2 flex items-center space-x-2 space-x-reverse">
+                <i data-lucide="sun" class="w-4 h-4 text-emerald-600"></i>
+                <span>معمل كشافات الضوء والامتصاص</span>
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                سلط الكشافات الملونة وشاهد تفاعل الفوتونات مع أصباغ الكلوروفيل:
+              </p>
+
+              <div class="grid grid-cols-3 gap-2 mb-4">
+                <button data-light="blue" class="st2-light-btn active p-2.5 rounded-xl border border-blue-500 bg-blue-50 text-blue-900 text-xs font-bold flex flex-col items-center justify-center space-y-1">
+                  <i data-lucide="zap" class="w-4 h-4 text-blue-600"></i>
+                  <span>أزرق (430nm)</span>
+                </button>
+                <button data-light="red" class="st2-light-btn p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex flex-col items-center justify-center space-y-1">
+                  <i data-lucide="zap" class="w-4 h-4 text-red-600"></i>
+                  <span>أحمر (660nm)</span>
+                </button>
+                <button data-light="green" class="st2-light-btn p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex flex-col items-center justify-center space-y-1">
+                  <i data-lucide="zap" class="w-4 h-4 text-emerald-600"></i>
+                  <span>أخضر (550nm)</span>
+                </button>
+              </div>
+
+              <div id="st2-partInfo" class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 mb-4">
+                <p id="st2-partTitle" class="text-xs font-bold text-slate-900 mb-1">الغشاء المزدوج (Double Membrane)</p>
+                <p id="st2-partDesc" class="text-[11px] text-slate-600 leading-relaxed">
+                  غشاءان أملسان رقيقان بسمك 10 نانومتر، يوفران الحماية وينظمان النفاذية الاختيارية وتبادل المواد مع السيتوبلازم.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                <div class="flex items-center justify-between text-xs mb-1.5">
+                  <span class="text-slate-600">معدل امتصاص الفوتونات:</span>
+                  <span id="st2-absorptionRate" class="font-bold text-emerald-700">95% (امتصاص فائق)</span>
+                </div>
+                <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div id="st2-absorptionBar" class="h-full bg-emerald-600 rounded-full transition-all duration-300" style="width: 95%"></div>
+                </div>
+                <p id="st2-physicsExplanation" class="text-[10px] text-slate-500 mt-2">
+                  يمتص الكلوروفيل الضوء الأزرق والأحمر بكفاءة قصوى لاستثارة الإلكترونات إلى مدارات طاقة أعلى.
+                </p>
+              </div>
+
+            </div>
+
+            <button id="st2-nextBtn" class="btn-emerald w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center space-x-2 space-x-reverse transition-all">
+              <span>تم إتقان المحطة 2 بنجاح.. الانتقال للمحطة 3</span>
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ============================================== -->
+      <!-- STATION 3: ENERGY PRODUCTION FACTORY -->
+      <!-- ============================================== -->
+      <section id="stationView-3" class="station-view hidden flex-col space-y-6">
+        
+        <div class="lab-card p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold text-emerald-700 flex items-center space-x-1.5 space-x-reverse mb-1">
+              <i data-lucide="cpu" class="w-4 h-4"></i>
+              <span>المحطة 3: المسارات الكيميائية الحيوية</span>
+            </span>
+            <h3 class="text-lg sm:text-xl font-bold text-slate-900">خط إنتاج الطاقة الحيوي (التفاعلات الضوئية واللاضوئية)</h3>
+          </div>
+          <span class="text-xs px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-600">لعبة خط الإنتاج اليدوية</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <div class="lg:col-span-2 lab-card overflow-hidden flex flex-col">
+            <div class="p-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs">
+              <span class="font-bold text-slate-700 flex items-center space-x-1.5 space-x-reverse">
+                <i data-lucide="box" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>مفاعل الجزيئات ثلاثي الأبعاد (Molecular Reactor)</span>
+              </span>
+              <span id="st3-stepLabel" class="font-bold text-amber-700 px-2 py-0.5 rounded bg-amber-50 border border-amber-200">الخطوة 1: شطر جزيئات الماء (H₂O)</span>
+            </div>
+            
+            <div id="canvas-station3" class="w-full h-80 sm:h-96 relative bg-slate-100"></div>
+
+            <div class="p-3 bg-slate-50 border-t border-slate-200 text-center font-mono text-xs sm:text-sm text-emerald-800 tracking-wider">
+              <span id="st3-equation">2 H₂O  →  4 H⁺ + 4 e⁻ + O₂ ↑ (تصاعد الأكسجين ناتج ثانوي)</span>
+            </div>
+          </div>
+
+          <div class="lab-card p-5 flex flex-col justify-between space-y-4">
+            <div>
+              <h4 class="text-sm font-bold text-slate-900 mb-2 flex items-center space-x-2 space-x-reverse">
+                <i data-lucide="play" class="w-4 h-4 text-emerald-600"></i>
+                <span>محطات خط الإنتاج المتتابع</span>
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                شغل خطوات المصنع الحيوي بالترتيب العلمي الدقيق لتصنيع أول جزيء سكر جلوكوز:
+              </p>
+
+              <!-- Step 1 -->
+              <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 mb-3 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-800 flex items-center space-x-1.5 space-x-reverse">
+                    <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px]">1</span>
+                    <span>شطر الماء (مسار الجرانا)</span>
+                  </span>
+                  <span id="st3-s1-state" class="text-[10px] text-amber-600 font-bold">جاهز للتشغيل</span>
+                </div>
+                <p class="text-[11px] text-slate-600">كسر الروابط التساهمية بالضوء وإطلاق غاز الأكسجين O₂ كنافذة تنفس للأرض.</p>
+                <button id="st3-act1-btn" class="btn-emerald w-full py-2 rounded-lg text-xs font-bold">
+                  شطر جزيء H₂O بالضوء
+                </button>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 mb-3 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-800 flex items-center space-x-1.5 space-x-reverse">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-[10px]">2</span>
+                    <span>شحن بطارية الطاقة (الفسفرة)</span>
+                  </span>
+                  <span id="st3-s2-state" class="text-[10px] text-slate-400 font-bold">بانتظار الخطوة 1</span>
+                </div>
+                <p class="text-[11px] text-slate-600">استغلال الطاقة في ربط ADP مع فوسفات Pi لتوليد جزيء ATP عالي الطاقة.</p>
+                <button id="st3-act2-btn" disabled class="w-full py-2 rounded-lg bg-slate-100 text-slate-400 text-xs font-bold cursor-not-allowed">
+                  فسفرة ADP إلى ATP
+                </button>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 mb-3 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-800 flex items-center space-x-1.5 space-x-reverse">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-[10px]">3</span>
+                    <span>تثبيت الكربون (مسار الستروما)</span>
+                  </span>
+                  <span id="st3-s3-state" class="text-[10px] text-slate-400 font-bold">بانتظار الخطوة 2</span>
+                </div>
+                <p class="text-[11px] text-slate-600">دمج CO₂ مع الهيدروجين وطاقة ATP لإنتاج سكر الجلوكوز C₆H₁₂O₆.</p>
+                <button id="st3-act3-btn" disabled class="w-full py-2 rounded-lg bg-slate-100 text-slate-400 text-xs font-bold cursor-not-allowed">
+                  تثبيت CO₂ وإنتاج الجلوكوز
+                </button>
+              </div>
+
+            </div>
+
+            <button id="st3-nextBtn" class="hidden btn-emerald w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center space-x-2 space-x-reverse transition-all">
+              <span>تم إتقان المحطة 3 بنجاح.. الانتقال للمحطة 4</span>
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ============================================== -->
+      <!-- STATION 4: IODINE STARCH LAB & VERTICAL FARM -->
+      <!-- ============================================== -->
+      <section id="stationView-4" class="station-view hidden flex-col space-y-6">
+        
+        <div class="lab-card p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold text-emerald-700 flex items-center space-x-1.5 space-x-reverse mb-1">
+              <i data-lucide="flask-conical" class="w-4 h-4"></i>
+              <span>المحطة 4: التحقق العملي ومستقبل التكنولوجيا</span>
+            </span>
+            <h3 class="text-lg sm:text-xl font-bold text-slate-900">مختبر كاشف النشا 3D وتكنولوجيا الزراعة العمودية</h3>
+          </div>
+          <span class="text-xs px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-600">نشاط عملي تفاعلي</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <div class="lg:col-span-2 lab-card overflow-hidden flex flex-col">
+            <div class="p-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs">
+              <span class="font-bold text-slate-700 flex items-center space-x-1.5 space-x-reverse">
+                <i data-lucide="box" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>منضدة المعمل الزجاجية ثلاثية الأبعاد</span>
+              </span>
+              <span id="st4-stageBadge" class="font-bold text-sky-700 px-2 py-0.5 rounded bg-sky-50 border border-sky-200">المرحلة 1: الغلي في الماء الساخن</span>
+            </div>
+            
+            <div id="canvas-station4" class="w-full h-80 sm:h-96 relative bg-slate-100"></div>
+
+            <div class="p-3.5 bg-slate-50 border-t border-slate-200 text-center text-xs">
+              <span class="text-slate-500 font-semibold">الملاحظة والتفسير العلمي: </span>
+              <strong id="st4-obs" class="text-slate-900">غلي الورقة لقتل الخلايا فوراً وإيقاف كافة الإنزيمات الحيوية لزيادة نفاذية الكواشف.</strong>
+            </div>
+          </div>
+
+          <div class="lab-card p-5 flex flex-col justify-between space-y-4">
+            <div>
+              <h4 class="text-sm font-bold text-slate-900 mb-2 flex items-center space-x-2 space-x-reverse">
+                <i data-lucide="list-ordered" class="w-4 h-4 text-emerald-600"></i>
+                <span>خطوات بروتوكول الكشف عن النشا</span>
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                تحكم في أدوات المعمل بالترتيب العلمي الدقيق لملاحظة التغير اللوني لصبغ النشا:
+              </p>
+
+              <div class="space-y-2 mb-4">
+                <button data-istep="1" class="st4-step-btn active w-full p-2.5 rounded-xl border border-sky-400 bg-sky-50 text-sky-900 text-xs font-bold text-right flex items-center justify-between">
+                  <span>1. الغلي بالماء (قتل الخلايا)</span>
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-sky-600"></i>
+                </button>
+                <button data-istep="2" class="st4-step-btn w-full p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold text-right flex items-center justify-between">
+                  <span>2. حمام الكحول الساخن (إذابة الكلوروفيل)</span>
+                  <i data-lucide="circle" class="w-3.5 h-3.5 text-slate-400"></i>
+                </button>
+                <button data-istep="3" class="st4-step-btn w-full p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold text-right flex items-center justify-between">
+                  <span>3. الغسيل بالماء الدافئ (التليين)</span>
+                  <i data-lucide="circle" class="w-3.5 h-3.5 text-slate-400"></i>
+                </button>
+                <button data-istep="4" class="st4-step-btn w-full p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold text-right flex items-center justify-between">
+                  <span>4. قطرات اليود (التحول للأزرق الداكن)</span>
+                  <i data-lucide="circle" class="w-3.5 h-3.5 text-slate-400"></i>
+                </button>
+              </div>
+
+              <!-- Vertical Farming Future Card -->
+              <div class="p-3.5 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200">
+                <div class="flex items-center space-x-2 space-x-reverse text-xs font-bold text-emerald-800 mb-1">
+                  <i data-lucide="sprout" class="w-4 h-4 text-emerald-600"></i>
+                  <span>التكنولوجيا الحيوية: الزراعة العمودية</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-relaxed">
+                  تعتمد على إضاءة LED بالأطياف الزرقاء والحمراء الموجهة بدقة للكلوروفيل بدون هدر، موفرة 95% من المياه وبدون تربة (Hydroponics).
+                </p>
+              </div>
+            </div>
+
+            <button id="st4-nextBtn" class="btn-emerald w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center space-x-2 space-x-reverse transition-all">
+              <span>تم إتقان المحطة 4 بنجاح.. الانتقال للتقويم الختامي</span>
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ============================================== -->
+      <!-- STATION 5: ASSESSMENT & CERTIFICATE -->
+      <!-- ============================================== -->
+      <section id="stationView-5" class="station-view hidden flex-col space-y-6">
+        
+        <div class="lab-card p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold text-amber-700 flex items-center space-x-1.5 space-x-reverse mb-1">
+              <i data-lucide="award" class="w-4 h-4"></i>
+              <span>المحطة 5: التقويم الختامي واعتماد الإتقان</span>
+            </span>
+            <h3 class="text-lg sm:text-xl font-bold text-slate-900">اختبار الإتقان ومستويات التفكير العليا (HOTS)</h3>
+          </div>
+          <span class="text-xs px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 font-bold">نسبة الاجتياز المطلوبة: 75%+</span>
+        </div>
+
+        <div id="quizFormContainer" class="space-y-4">
+          
+          <!-- Q1 -->
+          <div class="lab-card p-5 space-y-3">
+            <span class="text-xs font-bold text-emerald-700">سؤال 1: استقصاء وتحليل كتل</span>
+            <p class="text-sm font-bold text-slate-900">في تجربة فان هيلمونت، زادت كتلة شجرة الصفصاف بمقدار 72.8 كجم بينما نقصت كتلة التربة الجافة بمقدار 57 جراماً فقط. يثبت هذا علمياً أن:</p>
+            <div class="space-y-2 text-xs">
+              <label class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+                <input type="radio" name="q1" value="A" class="accent-emerald-600">
+                <span class="text-slate-800">النباتات تتغذى أساساً بابتلاع مواد التربة العضوية والمعدنية.</span>
+              </label>
+              <label class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+                <input type="radio" name="q1" value="B" class="accent-emerald-600">
+                <span class="text-slate-800">الكتلة المتكونة مستمدة من ماء السقيا وثاني أكسيد الكربون من الهواء بتأثير الضوء.</span>
+              </label>
+              <label class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+                <input type="radio" name="q1" value="C" class="accent-emerald-600">
+                <span class="text-slate-800">التجربة غير دقيقة لأن التربة تبخرت بالكامل في الهواء.</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="lab-card p-5 space-y-3">
+            <span class="text-xs font-bold text-emerald-700">سؤال 2: فيزياء الضوء والأصباغ</span>
+            <p class="text-sm font-bold text-slate-900">لماذا تبدو أوراق النباتات بلون أخضر للعين المجردة؟</p>
+            <div class="space-y-2 text-xs">
+              <label class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+                <input type="radio" name="q2" value="A" class="accent-emerald-600">
+                <span class="text-slate-800">لأن الكلوروفيل يمتص الضوء الأخضر بكفاءة عظمى ويحولها إلى سكر.</span>
+              </label>
+              <label class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+                <input type="radio" name="q2" value="B" class="accent-emerald-600">
+                <span class="text-slate-800">لأن أصباغ الكلوروفيل تمتص الأطياف الزرقاء والحمراء وتعكس وتنفذ الموجات الخضراء إلى أعيننا.</span>
+              </label>
+              <label class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+                <input type="radio" name="q2" value="C" class="accent-emerald-600">
+                <span class="text-slate-800">لأن الستروما تفرز صبغة خضراء سائلة تنعكس في النهار فقط.</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="lab-card p-5 space-y-3">
+            <span class="text-xs font-bold text-emerald-700">سؤال 3: المسارات الكيميائية الحيوية</span>
+            <p class="text-sm font-bold text-slate-900">مصدر غاز الأكسجين (O₂) المتصاعد في عملية البناء الضوئي هو:</p>
+            <div class="space-y-2 text-xs">
+              <label class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+                <input type="radio" name="q3" value="A" class="accent-emerald-600">
+                <span class="text-slate-800">شطر جزيئات الماء (H₂O) الممتصة من الجذور أثناء التفاعلات الضوئية في الجرانا.</span>
+              </label>
+              <label class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+                <input type="radio" name="q3" value="B" class="accent-emerald-600">
+                <span class="text-slate-800">تفكك غاز ثاني أكسيد الكربون (CO₂) في الستروما أثناء الظلام.</span>
+              </label>
+              <label class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+                <input type="radio" name="q3" value="C" class="accent-emerald-600">
+                <span class="text-slate-800">تحلل سكر الجلوكوز الفائض داخل الميتوكوندريا.</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Q4 (HOTS) -->
+          <div class="lab-card p-5 space-y-3">
+            <span class="text-xs font-bold text-emerald-700">سؤال 4: تفكير عليا وتحليل بياني (HOTS)</span>
+            <p class="text-sm font-bold text-slate-900">لماذا لا تكتفي النباتات بجزيئات ATP الناتجة من التفاعلات الضوئية، وتستمر في استهلاك الطاقة لبناء سكر الجلوكوز وتخزينه كنشا؟</p>
+            <div class="space-y-2 text-xs">
+              <label class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+                <input type="radio" name="q4" value="A" class="accent-emerald-600">
+                <span class="text-slate-800">لأن ATP مركب طاقة سريع التحلل وغير مستقر ولا يصلح للتخزين طويل المدى أو النقل عبر اللحاء.</span>
+              </label>
+              <label class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+                <input type="radio" name="q4" value="B" class="accent-emerald-600">
+                <span class="text-slate-800">لأن جزيء ATP سام للخلايا النباتية إذا تراكم لأكثر من دقيقة.</span>
+              </label>
+              <label class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+                <input type="radio" name="q4" value="C" class="accent-emerald-600">
+                <span class="text-slate-800">لأن الجلوكوز يقلل الضغط الأسموزي للخلية ويمنع انفجارها بالكامل.</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-center pt-2">
+            <button id="submitQuizBtn" class="btn-amber px-8 py-3.5 rounded-xl font-bold text-xs inline-flex items-center space-x-2 space-x-reverse cursor-pointer shadow-lg shadow-amber-600/20">
+              <i data-lucide="check-check" class="w-4 h-4"></i>
+              <span>اعتماد الإجابات واستخراج شهادة الإتقان</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- CERTIFICATE OF MASTERY -->
+        <div id="certificateCard" class="hidden lab-card p-8 sm:p-10 border-2 border-amber-300 bg-gradient-to-b from-amber-50/40 via-white to-amber-50/20 text-center relative overflow-hidden shadow-xl">
+          <div class="border-2 border-dashed border-amber-300 p-8 rounded-2xl relative">
+            
+            <div class="flex items-center justify-center space-x-2 space-x-reverse mb-3">
+              <i data-lucide="award" class="w-8 h-8 text-amber-600"></i>
+              <span class="text-xs uppercase font-black tracking-widest text-amber-800">شهادة إتقان وتفوق علمي معتمدة</span>
+            </div>
+            
+            <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-2">منصة مختبر البناء الضوئي ثلاثي الأبعاد</h2>
+            <p class="text-xs text-slate-500 mb-6">Mastery Learning & Virtual 3D Simulations Credential</p>
+
+            <p class="text-xs sm:text-sm text-slate-600 mb-2">تشهد المنصة التعليمية بأن الطالب المتميز /</p>
+            <h3 id="certStudentName" class="text-xl sm:text-2xl font-black text-emerald-800 underline decoration-emerald-400 underline-offset-8 mb-4">أحمد المتفوق</h3>
+            
+            <p class="text-xs sm:text-sm text-slate-700 max-w-xl mx-auto leading-relaxed mb-6">
+              قد أتم بنجاح واقتدار كافة الأنشطة المعملية الاستقصائية، وأتقن مفاهيم مسارات تدفق الطاقة الحيوية، وحقق درجة الامتياز بنسبة 
+              <strong id="certScore" class="text-amber-700 font-black">100%</strong> في التقييم الختامي الشامل.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between border-t border-slate-200 pt-6 max-w-lg mx-auto text-xs text-slate-500 gap-4">
+              <div>
+                <span class="block text-[11px] text-slate-400">تاريخ الإنجاز:</span>
+                <span id="certDate" class="font-bold text-slate-800">1 نوفمبر 2026</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-amber-100/70 border border-amber-200 text-amber-900 font-mono text-[11px]">
+                رمز الاعتماد: BIO-PHT-2026-OK
+              </div>
+              <div>
+                <span class="block text-[11px] text-slate-400">الاعتماد:</span>
+                <span class="font-bold text-emerald-800">مختبر الأحياء الافتراضي</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mt-6 flex justify-center gap-4">
+            <button onclick="window.print()" class="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-bold text-white flex items-center space-x-1.5 space-x-reverse shadow-md transition-colors">
+              <i data-lucide="printer" class="w-4 h-4"></i>
+              <span>طباعة الشهادة الرسمية</span>
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- REMEDIAL SMART DRAWER -->
+  <div id="smartDrawerBackdrop" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden transition-opacity"></div>
+  <aside id="smartDrawer" class="fixed top-0 bottom-0 left-0 w-full sm:w-96 bg-white border-r border-slate-200 shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 flex flex-col justify-between p-6">
+    <div>
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-4">
+        <div class="flex items-center space-x-2 space-x-reverse text-emerald-800 font-bold text-sm">
+          <i data-lucide="compass" class="w-5 h-5 text-emerald-600"></i>
+          <span>مساعد الفهم وتثبيت المعلومة</span>
+        </div>
+        <button id="closeDrawerBtn" class="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4">
+        <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
+          <span class="text-xs font-bold text-emerald-900 block mb-1">تلميح ذكي موجه:</span>
+          <p id="drawerHint" class="text-xs text-slate-700 leading-relaxed">
+            تذكر أن التربة لم ينقص منها سوى 57 جراماً، في حين أن الشجرة زادت 72 كجم! الكتلة الحيوية الجديدة تتكون من عناصر C و H و O المتوفرة بكثرة في الهواء وماء الري.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="text-xs font-bold text-slate-800 block mb-1">التأصيل العلمي الدقيق:</span>
+          <p id="drawerScientificText" class="text-xs text-slate-600 leading-relaxed">
+            أثبتت التجربة أن النبات لا يتغذى بابتلاع التراب، وإنما يمتص الماء والأملاح المعدنية عبر الخشب صعوداً، ويستقبل ثاني أكسيد الكربون عبر ثغور الأوراق ليدمجهما بواسطة طاقة الضوء لتصنيع الجلوكوز والنشا.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <button id="retryDrawerBtn" class="btn-emerald w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center space-x-2 space-x-reverse cursor-pointer">
+      <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+      <span>فهمت الفكرة.. هحاول تاني!</span>
+    </button>
+  </aside>
+
+  <!-- APP SCRIPT -->
+  <script type="module">
+    import { auth, db, onAuthStateChanged, signOut, doc, getDoc, setDoc } from './js/firebase-config.js';
+    import { labAudio } from './js/sound-fx.js';
+    import { sims3D } from './js/simulations-3d.js';
+
+    lucide.createIcons();
+
+    let currentUser = null;
+    let currentTrack = localStorage.getItem('student_track') || 'standard';
+    let studentName = localStorage.getItem('student_name') || 'طالب متميز';
+
+    let progress = {
+      station0: true,
+      station1: false,
+      station2: false,
+      station3: false,
+      station4: false,
+      station5: false
+    };
+
+    // Elements
+    const soundToggleBtn = document.getElementById('soundToggleBtn');
+    const soundIcon = document.getElementById('soundIcon');
+    const trackStandardBtn = document.getElementById('trackStandardBtn');
+    const trackAdvancedBtn = document.getElementById('trackAdvancedBtn');
+    const trackBadgeText = document.getElementById('trackBadgeText');
+    const studentNameDisplay = document.getElementById('studentNameDisplay');
+    const authActionBtn = document.getElementById('authActionBtn');
+    const authActionText = document.getElementById('authActionText');
+    const startLessonBtn = document.getElementById('startLessonBtn');
+    const stationBtns = document.querySelectorAll('.station-tab-btn');
+    const stationViews = document.querySelectorAll('.station-view');
+    const smartDrawer = document.getElementById('smartDrawer');
+    const smartDrawerBackdrop = document.getElementById('smartDrawerBackdrop');
+    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+    const retryDrawerBtn = document.getElementById('retryDrawerBtn');
+    const certStudentName = document.getElementById('certStudentName');
+    const certDate = document.getElementById('certDate');
+
+    certStudentName.textContent = studentName;
+    studentNameDisplay.textContent = studentName;
+    certDate.textContent = new Date().toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    // Sound toggle
+    soundToggleBtn.addEventListener('click', () => {
+      const isMuted = labAudio.toggleMute();
+      soundIcon.setAttribute('data-lucide', isMuted ? 'volume-x' : 'volume-2');
+      lucide.createIcons();
+    });
+
+    // Navigation Switcher
+    function switchStation(stationNum) {
+      labAudio.click();
+      stationViews.forEach(v => v.classList.add('hidden'));
+      stationBtns.forEach(b => {
+        b.classList.remove('active', 'bg-emerald-50', 'border-emerald-300', 'text-emerald-900', 'font-bold');
+        b.classList.add('bg-white', 'border-slate-200', 'text-slate-700');
+      });
+
+      const targetView = document.getElementById(`stationView-${stationNum}`);
+      if (targetView) targetView.classList.remove('hidden');
+
+      const targetBtn = document.querySelector(`[data-station="${stationNum}"]`);
+      if (targetBtn) {
+        targetBtn.classList.add('active', 'bg-emerald-50', 'border-emerald-300', 'text-emerald-900', 'font-bold');
+        targetBtn.classList.remove('bg-white', 'border-slate-200', 'text-slate-700');
+      }
+
+      // Initialize 3D scenes
+      if (stationNum === 1) {
+        sims3D.initStation1('canvas-station1', () => {
+          document.getElementById('st1-tree-mass').textContent = '75.0 كجم (+72.8)';
+          document.getElementById('st1-soil-mass').textContent = '89.943 كجم (-57 جم)';
+          document.getElementById('st1-timeline').textContent = 'الزمن: بعد 5 سنوات كاملة';
+          document.getElementById('st1-puzzle').classList.remove('hidden');
+          labAudio.success();
+        });
+      } else if (stationNum === 2) {
+        sims3D.initStation2('canvas-station2', (color) => {
+          // photon absorb
+        });
+      } else if (stationNum === 3) {
+        sims3D.initStation3('canvas-station3');
+      } else if (stationNum === 4) {
+        sims3D.initStation4('canvas-station4');
+      }
+    }
+
+    stationBtns.forEach(btn => {
+      btn.addEventListener('click', () => switchStation(parseInt(btn.getAttribute('data-station'))));
+    });
+
+    startLessonBtn.addEventListener('click', () => switchStation(1));
+
+    // Progress updates
+    function updateProgressUI() {
+      let count = 0;
+      for (let k in progress) if (progress[k]) count++;
+      const pct = Math.round((count / 6) * 100);
+      document.getElementById('overallPercentage').textContent = `${pct}%`;
+      document.getElementById('overallProgressBar').style.width = `${pct}%`;
+
+      if (progress.station1) document.getElementById('st1-badge').innerHTML = '<i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>';
+      if (progress.station2) document.getElementById('st2-badge').innerHTML = '<i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>';
+      if (progress.station3) document.getElementById('st3-badge').innerHTML = '<i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>';
+      if (progress.station4) document.getElementById('st4-badge').innerHTML = '<i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>';
+      if (progress.station5) document.getElementById('st5-badge').innerHTML = '<i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>';
+      lucide.createIcons();
+    }
+
+    // Smart Drawer
+    function openDrawer(hint, text) {
+      labAudio.drawer();
+      document.getElementById('drawerHint').textContent = hint;
+      document.getElementById('drawerScientificText').textContent = text;
+      smartDrawer.classList.remove('-translate-x-full');
+      smartDrawerBackdrop.classList.remove('hidden');
+    }
+
+    function closeDrawer() {
+      smartDrawer.classList.add('-translate-x-full');
+      smartDrawerBackdrop.classList.add('hidden');
+    }
+
+    closeDrawerBtn.addEventListener('click', closeDrawer);
+    smartDrawerBackdrop.addEventListener('click', closeDrawer);
+    retryDrawerBtn.addEventListener('click', closeDrawer);
+
+    // ==========================================
+    // STATION 1 HANDLERS
+    // ==========================================
+    const st1GrowBtn = document.getElementById('st1-growBtn');
+    st1GrowBtn.addEventListener('click', () => {
+      labAudio.chemicalReaction();
+      st1GrowBtn.disabled = true;
+      st1GrowBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      if (sims3D.activeSims.station1) sims3D.activeSims.station1.grow();
+    });
+
+    document.querySelectorAll('.st1-ans-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.getAttribute('data-ans') === 'correct') {
+          labAudio.success();
+          btn.classList.add('bg-emerald-100', 'border-emerald-400', 'text-emerald-900', 'font-bold');
+          document.getElementById('st1-nextBtn').classList.remove('hidden');
+          progress.station1 = true;
+          updateProgressUI();
+          syncCloud();
+        } else {
+          openDrawer(
+            'تذكر أن التربة نقصت 57 جراماً فقط بعد 5 سنوات!',
+            'لو كانت الشجرة تأكل التراب لكان نقص التربة 72.8 كجم مساوياً لزيادة الشجرة! بما أن النقص ضئيل جداً، فإن الكتلة الحيوية الهائلة جاءت من غاز ثاني أكسيد الكربون من الهواء وماء السقيا.'
+          );
+        }
+      });
+    });
+
+    document.getElementById('st1-nextBtn').addEventListener('click', () => switchStation(2));
+
+    // ==========================================
+    // STATION 2 HANDLERS
+    // ==========================================
+    document.querySelectorAll('.st2-part-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        labAudio.click();
+        document.querySelectorAll('.st2-part-btn').forEach(b => {
+          b.classList.remove('active', 'bg-emerald-100', 'border-emerald-300', 'text-emerald-900');
+          b.classList.add('bg-white', 'border-slate-200', 'text-slate-700');
+        });
+        btn.classList.add('active', 'bg-emerald-100', 'border-emerald-300', 'text-emerald-900');
+
+        const part = btn.getAttribute('data-part');
+        const titleEl = document.getElementById('st2-partTitle');
+        const descEl = document.getElementById('st2-partDesc');
+
+        if (part === 'membrane') {
+          titleEl.textContent = 'الغشاء المزدوج (Double Membrane)';
+          descEl.textContent = 'غشاءان أملسان رقيقان بسمك 10 نانومتر، يوفران الحماية وينظمان النفاذية الاختيارية وتبادل المواد مع السيتوبلازم.';
+        } else if (part === 'grana') {
+          titleEl.textContent = 'الجرانا والثايلاكويدات (Grana & Thylakoids)';
+          descEl.textContent = 'أقراص غشائية مرصوصة (15 قرص أو أكثر) تزيد مساحة السطح لامتصاص الضوء، وتستقر عليها أصباغ الكلوروفيل وسلاسل نقل الإلكترون وإنزيم ATP Synthase.';
+        } else if (part === 'stroma') {
+          titleEl.textContent = 'الستروما / الحشوة (Stroma)';
+          descEl.textContent = 'المادة الأرضية البروتينية الشفافة الخالية من الكلوروفيل، وتحتوي على جميع الإنزيمات الحيوية لتثبيت CO2، مع DNA وريبوسومات خاصة.';
+        }
+      });
+    });
+
+    document.querySelectorAll('.st2-light-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        labAudio.click();
+        document.querySelectorAll('.st2-light-btn').forEach(b => {
+          b.classList.remove('active', 'border-blue-500', 'border-red-500', 'border-emerald-500', 'bg-blue-50', 'bg-red-50', 'bg-emerald-50');
+          b.classList.add('border-slate-200', 'bg-white');
+        });
+
+        const color = btn.getAttribute('data-light');
+        if (sims3D.activeSims.station2) sims3D.activeSims.station2.setLight(color);
+
+        const stateLabel = document.getElementById('st2-lightState');
+        const rateLabel = document.getElementById('st2-absorptionRate');
+        const barEl = document.getElementById('st2-absorptionBar');
+        const expEl = document.getElementById('st2-physicsExplanation');
+
+        if (color === 'blue') {
+          btn.classList.add('border-blue-500', 'bg-blue-50');
+          stateLabel.textContent = 'الضوء المسلط: الأزرق (430 نانومتر)';
+          stateLabel.className = 'font-bold text-blue-700 px-2 py-0.5 rounded bg-blue-50 border border-blue-200';
+          rateLabel.textContent = '95% (امتصاص فائق)';
+          barEl.style.width = '95%';
+          barEl.className = 'h-full bg-blue-600 rounded-full transition-all duration-300';
+          expEl.textContent = 'تمتص أصباغ الكلوروفيل الفوتونات الزرقاء عالية الطاقة بكفاءة قصوى لاستثارة الإلكترونات.';
+          labAudio.energyCharge();
+        } else if (color === 'red') {
+          btn.classList.add('border-red-500', 'bg-red-50');
+          stateLabel.textContent = 'الضوء المسلط: الأحمر (660 نانومتر)';
+          stateLabel.className = 'font-bold text-red-700 px-2 py-0.5 rounded bg-red-50 border border-red-200';
+          rateLabel.textContent = '90% (امتصاص فائق)';
+          barEl.style.width = '90%';
+          barEl.className = 'h-full bg-red-600 rounded-full transition-all duration-300';
+          expEl.textContent = 'يمتص الكلوروفيل الطول الموجي الأحمر بكفاءة عالية جداً لإتمام التفاعلات الكيميائية الضوئية.';
+          labAudio.energyCharge();
+        } else if (color === 'green') {
+          btn.classList.add('border-emerald-500', 'bg-emerald-50');
+          stateLabel.textContent = 'الضوء المسلط: الأخضر (550 نانومتر)';
+          stateLabel.className = 'font-bold text-emerald-700 px-2 py-0.5 rounded bg-emerald-50 border border-emerald-200';
+          rateLabel.textContent = '5% (انعكاس ونفاذ)';
+          barEl.style.width = '5%';
+          barEl.className = 'h-full bg-emerald-600 rounded-full transition-all duration-300';
+          expEl.textContent = 'لا تمتص جزيئات الكلوروفيل الضوء الأخضر، بل تعكسه وتنفذه نحو أعيننا، ولهذا تظهر أوراق النباتات خضراء!';
+          labAudio.chemicalReaction();
+        }
+
+        progress.station2 = true;
+        updateProgressUI();
+        syncCloud();
+      });
+    });
+
+    document.getElementById('st2-nextBtn').addEventListener('click', () => switchStation(3));
+
+    // ==========================================
+    // STATION 3 HANDLERS
+    // ==========================================
+    const act1 = document.getElementById('st3-act1-btn');
+    const act2 = document.getElementById('st3-act2-btn');
+    const act3 = document.getElementById('st3-act3-btn');
+
+    act1.addEventListener('click', () => {
+      labAudio.chemicalReaction();
+      act1.disabled = true;
+      act1.textContent = 'تم شطر الماء وتحرير الأكسجين ✔';
+      act1.className = 'w-full py-2 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-bold';
+      document.getElementById('st3-s1-state').textContent = 'مكتمل بنجاح';
+      document.getElementById('st3-s1-state').className = 'text-[10px] text-emerald-700 font-bold';
+
+      act2.disabled = false;
+      act2.className = 'btn-emerald w-full py-2 rounded-lg text-xs font-bold cursor-pointer';
+      document.getElementById('st3-s2-state').textContent = 'جاهز للتشغيل';
+      document.getElementById('st3-s2-state').className = 'text-[10px] text-amber-600 font-bold';
+      document.getElementById('st3-stepLabel').textContent = 'الخطوة 2: الفسفرة الضوئية وتكوين ATP';
+      if (sims3D.activeSims.station3) sims3D.activeSims.station3.setStep(2);
+    });
+
+    act2.addEventListener('click', () => {
+      labAudio.energyCharge();
+      act2.disabled = true;
+      act2.textContent = 'تم شحن جزيئات ATP بنجاح ✔';
+      act2.className = 'w-full py-2 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-bold';
+      document.getElementById('st3-s2-state').textContent = 'مكتمل بنجاح';
+      document.getElementById('st3-s2-state').className = 'text-[10px] text-emerald-700 font-bold';
+
+      act3.disabled = false;
+      act3.className = 'btn-emerald w-full py-2 rounded-lg text-xs font-bold cursor-pointer';
+      document.getElementById('st3-s3-state').textContent = 'جاهز للتشغيل';
+      document.getElementById('st3-s3-state').className = 'text-[10px] text-amber-600 font-bold';
+      document.getElementById('st3-stepLabel').textContent = 'الخطوة 3: تثبيت ثاني أكسيد الكربون وتكوين الجلوكوز';
+      document.getElementById('st3-equation').textContent = '6 CO₂ + 6 H₂O  →  C₆H₁₂O₆ (سكر الجلوكوز) + 6 O₂';
+      if (sims3D.activeSims.station3) sims3D.activeSims.station3.setStep(3);
+    });
+
+    act3.addEventListener('click', () => {
+      labAudio.success();
+      act3.disabled = true;
+      act3.textContent = 'تم إنتاج جزيء الجلوكوز C₆H₁₂O₆ ✔';
+      act3.className = 'w-full py-2 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-bold';
+      document.getElementById('st3-s3-state').textContent = 'مكتمل بنجاح';
+      document.getElementById('st3-s3-state').className = 'text-[10px] text-emerald-700 font-bold';
+      document.getElementById('st3-nextBtn').classList.remove('hidden');
+
+      progress.station3 = true;
+      updateProgressUI();
+      syncCloud();
+    });
+
+    document.getElementById('st3-nextBtn').addEventListener('click', () => switchStation(4));
+
+    // ==========================================
+    // STATION 4 HANDLERS
+    // ==========================================
+    document.querySelectorAll('.st4-step-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        labAudio.click();
+        const step = parseInt(btn.getAttribute('data-istep'));
+
+        document.querySelectorAll('.st4-step-btn').forEach(b => {
+          b.classList.remove('active', 'border-sky-400', 'bg-sky-50', 'text-sky-900');
+          b.classList.add('border-slate-200', 'bg-white', 'text-slate-700');
+        });
+        btn.classList.add('active', 'border-sky-400', 'bg-sky-50', 'text-sky-900');
+
+        const badge = document.getElementById('st4-stageBadge');
+        const obs = document.getElementById('st4-obs');
+
+        if (step === 1) {
+          badge.textContent = 'المرحلة 1: الغلي في الماء الساخن';
+          obs.textContent = 'غلي الورقة لقتل الخلايا فوراً وإيقاف كافة الإنزيمات الحيوية لزيادة نفاذية الكواشف.';
+        } else if (step === 2) {
+          badge.textContent = 'المرحلة 2: حمام الكحول الساخن';
+          obs.textContent = 'إذابة واستخلاص صبغ الكلوروفيل الأخضر حتى تصبح الورقة بيضاء شاحبة حتى لا يحجب اللون الأخضر لون اليود.';
+          labAudio.chemicalReaction();
+        } else if (step === 3) {
+          badge.textContent = 'المرحلة 3: الغسيل بالماء الدافئ';
+          obs.textContent = 'تليين الورقة واستعادة مرونتها بعد جفاف وتصلب الكحول لتجنب تفتتها.';
+        } else if (step === 4) {
+          badge.textContent = 'المرحلة 4: قطرات اليود المخفف';
+          obs.textContent = 'تحول لون اليود على الورقة فورياً من البني/الأصفر إلى الأزرق الداكن / الأسود دليلاً قاطعاً على تكون النشا.';
+          labAudio.success();
+          progress.station4 = true;
+          updateProgressUI();
+          syncCloud();
+        }
+
+        if (sims3D.activeSims.station4) sims3D.activeSims.station4.applyStage(step);
+      });
+    });
+
+    document.getElementById('st4-nextBtn').addEventListener('click', () => switchStation(5));
+
+    // ==========================================
+    // STATION 5 HANDLERS (ASSESSMENT & CERTIFICATE)
+    // ==========================================
+    document.getElementById('submitQuizBtn').addEventListener('click', () => {
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      const q3 = document.querySelector('input[name="q3"]:checked');
+      const q4 = document.querySelector('input[name="q4"]:checked');
+
+      if (!q1 || !q2 || !q3 || !q4) {
+        alert('برجاء الإجابة على جميع الأسئلة أولاً.');
+        return;
+      }
+
+      let score = 0;
+      if (q1.value === 'B') score += 25;
+      if (q2.value === 'B') score += 25;
+      if (q3.value === 'A') score += 25;
+      if (q4.value === 'A') score += 25;
+
+      if (score >= 75) {
+        labAudio.success();
+        document.getElementById('quizFormContainer').classList.add('hidden');
+        document.getElementById('certificateCard').classList.remove('hidden');
+        document.getElementById('certScore').textContent = `${score}%`;
+        progress.station5 = true;
+        updateProgressUI();
+        syncCloud(score);
+      } else {
+        openDrawer(
+          'راجع مفاهيم التفاعلات وانعكاس الضوء الأخضر.',
+          'تذكر أن أصل O₂ هو الماء H₂O، وأن الكلوروفيل يعكس اللون الأخضر، وأن النشا يخزن لأن جزيء ATP سريع التحلل وغير مستقر للنقل لمسافات طويلة.'
+        );
+      }
+    });
+
+    // Track Switchers
+    trackStandardBtn.addEventListener('click', () => {
+      currentTrack = 'standard';
+      trackStandardBtn.className = 'py-2 rounded-xl text-xs font-bold border border-emerald-500 bg-emerald-50 text-emerald-800';
+      trackAdvancedBtn.className = 'py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600';
+      trackBadgeText.textContent = 'المسار التأسيسي';
+      localStorage.setItem('student_track', 'standard');
+      labAudio.click();
+    });
+
+    trackAdvancedBtn.addEventListener('click', () => {
+      currentTrack = 'advanced';
+      trackAdvancedBtn.className = 'py-2 rounded-xl text-xs font-bold border border-amber-500 bg-amber-50 text-amber-800';
+      trackStandardBtn.className = 'py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600';
+      trackBadgeText.textContent = 'تحدي المتفوقين';
+      localStorage.setItem('student_track', 'advanced');
+      labAudio.click();
+    });
+
+    // Cloud Sync
+    async function syncCloud(score = null) {
+      if (!currentUser) return;
+      try {
+        const payload = {
+          progress: progress,
+          track: currentTrack,
+          lastActive: new Date().toISOString()
+        };
+        if (score !== null) payload.score = score;
+        await setDoc(doc(db, "students", currentUser.uid), payload, { merge: true });
+      } catch (e) {
+        console.warn("Cloud sync offline mode", e);
+      }
+    }
+
+    // Auth state listener
+    onAuthStateChanged(auth, async (user) => {
+      currentUser = user;
+      if (user) {
+        authActionText.textContent = 'خروج';
+        authActionBtn.href = "#";
+        authActionBtn.onclick = (e) => { e.preventDefault(); signOut(auth); location.reload(); };
+
+        const snap = await getDoc(doc(db, "students", user.uid));
+        if (snap.exists()) {
+          const d = snap.data();
+          if (d.name) {
+            studentName = d.name;
+            studentNameDisplay.textContent = studentName;
+            certStudentName.textContent = studentName;
+          }
+          if (d.progress) {
+            progress = d.progress;
+            updateProgressUI();
+          }
+        }
+      } else {
+        authActionText.textContent = 'تسجيل';
+        authActionBtn.href = "login.html";
+        authActionBtn.onclick = null;
+      }
+    });
+
+    updateProgressUI();
+  </script>
+</body>
+</html>
