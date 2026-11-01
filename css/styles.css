@@ -1,4 +1,4 @@
-﻿/* ============================================
+/* ============================================
    رحلة الطاقة - Energy Journey
    Educational Website Stylesheet
    ============================================ */
@@ -1682,4 +1682,233 @@ strong { font-weight: 700; color: var(--text-primary); }
     #certificateCard, #certificateCard * { visibility: visible; }
     #certificateCard { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 99999; }
     .no-print { display: none !important; }
+}
+
+/* =========================================================
+   Cognitive Load Reduction: Progressive Topic Tabs & 3D HUD
+   ========================================================= */
+
+/* Top Topic Tabs */
+.topic-tabs {
+    display: flex;
+    gap: 0.75rem;
+    background: #ffffff;
+    padding: 0.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e0e6ed;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+.topic-tab {
+    flex: 1;
+    min-width: 170px;
+    padding: 0.85rem 1.25rem;
+    border-radius: var(--radius-md);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: var(--transition-fast);
+}
+.topic-tab:hover {
+    background: var(--bg-section);
+    color: var(--primary);
+}
+.topic-tab.active {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.25);
+}
+.topic-panel {
+    display: none;
+    animation: fadeInTab 0.25s ease-out;
+}
+.topic-panel.active {
+    display: block;
+}
+@keyframes fadeInTab {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3D Stage with Centered Card HUD */
+.sim-3d-stage {
+    position: relative;
+    width: 100%;
+    min-height: 480px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+    border: 1px solid #c8e6c9;
+    box-shadow: var(--shadow-md);
+    margin: 1.2rem 0;
+}
+.sim-3d-stage .simulation-canvas-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: none;
+    background: transparent;
+}
+.sim-3d-stage canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+/* Left & Right 3D Organelle Targets */
+.sim-target-zone {
+    position: absolute;
+    top: 16px;
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(8px);
+    z-index: 5;
+    border: 2px dashed rgba(255, 255, 255, 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    transition: var(--transition-fast);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+.sim-target-zone.left-target {
+    left: 18px;
+    background: rgba(46, 125, 50, 0.92);
+    color: #ffffff;
+    border-color: #a5d6a7;
+}
+.sim-target-zone.right-target {
+    right: 18px;
+    background: rgba(230, 81, 0, 0.92);
+    color: #ffffff;
+    border-color: #ffcc80;
+}
+.sim-target-zone:hover, .sim-target-zone.highlight {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+    border-style: solid;
+}
+.sim-target-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.sim-target-badge {
+    font-size: 0.72rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
+/* Centered HUD Overlay for Cards */
+.sim-hud-center {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 92%;
+    max-width: 620px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(46, 125, 50, 0.25);
+    text-align: center;
+    transition: var(--transition-fast);
+}
+.sim-hud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #eef2f6;
+    padding-bottom: 0.5rem;
+}
+.sim-hud-title {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.sim-hud-score {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--secondary-dark);
+    background: #fff8e1;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid #ffe082;
+}
+.sim-cards-row {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.sim-interactive-card {
+    background: #ffffff;
+    border: 1.5px solid #c8e6c9;
+    border-radius: var(--radius-sm);
+    padding: 0.55rem 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    cursor: pointer;
+    user-select: none;
+    transition: var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.sim-interactive-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(46, 125, 50, 0.15);
+}
+.sim-interactive-card.selected {
+    border-color: var(--secondary-dark);
+    background: #fffde7;
+    box-shadow: 0 0 0 2px var(--secondary);
+    transform: scale(1.04);
+}
+.sim-interactive-card.placed {
+    background: #e8f5e9;
+    color: var(--primary);
+    border-color: var(--primary);
+    opacity: 0.5;
+    pointer-events: none;
+    text-decoration: line-through;
+}
+.sim-hud-feedback {
+    margin-top: 0.6rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    min-height: 1.2rem;
+}
+.sim-hud-feedback.correct {
+    color: var(--success);
+}
+.sim-hud-feedback.wrong {
+    color: var(--error);
 }

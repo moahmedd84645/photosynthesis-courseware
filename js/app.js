@@ -1,4 +1,4 @@
-﻿/* ============================================
+/* ============================================
    رحلة الطاقة - Energy Journey
    Core Application JavaScript
    ============================================ */
@@ -146,7 +146,7 @@ class QuizEngine {
         });
 
         html += `<button class="check-btn" id="check-${this.quizId}" onclick="quizEngines['${this.quizId}'].submit()">
-                    ✅ تحقق من إجاباتك
+                    تحقق من إجاباتك
                  </button>`;
 
         html += `<div class="score-display" id="score-${this.quizId}" style="display:none;"></div>`;
@@ -459,11 +459,11 @@ class QuizEngine {
                 correct++;
                 card.classList.add('answered-correct');
                 feedbackEl.className = 'feedback correct show';
-                feedbackEl.innerHTML = `<span class="feedback-icon">✅</span> ${q.correctFeedback || 'إجابة صحيحة! أحسنت!'}`;
+                feedbackEl.innerHTML = `<span class="feedback-icon" style="color:var(--success); font-weight:900;">✓</span> ${q.correctFeedback || 'إجابة صحيحة! أحسنت!'}`;
             } else {
                 card.classList.add('answered-wrong');
                 feedbackEl.className = 'feedback wrong show';
-                feedbackEl.innerHTML = `<span class="feedback-icon">❌</span> ${q.wrongFeedback || 'إجابة خاطئة. راجع الشرح مرة أخرى.'}`;
+                feedbackEl.innerHTML = `<span class="feedback-icon" style="color:var(--error); font-weight:900;">✕</span> ${q.wrongFeedback || 'إجابة خاطئة. راجع الشرح مرة أخرى.'}`;
             }
         });
 
@@ -592,16 +592,16 @@ class QuizEngine {
 
         if (percentage >= 90) {
             level = 'excellent';
-            message = '🌟 ممتاز! أداء رائع!';
+            message = 'ممتاز! أداء استثنائي متقن!';
         } else if (percentage >= 70) {
             level = 'good';
-            message = '👍 جيد جدًا! استمر في التعلم.';
+            message = 'جيد جدًا! استمر في مسار التقدم.';
         } else if (percentage >= 50) {
             level = 'needs-work';
-            message = '📖 جيد، لكن تحتاج مراجعة بعض الأجزاء.';
+            message = 'جيد، لكن تحتاج مراجعة بعض المفاهيم.';
         } else {
             level = 'poor';
-            message = '🔄 تحتاج إلى مراجعة الشرح مرة أخرى.';
+            message = 'تحتاج إلى مراجعة الشرح والمعمل مرة أخرى.';
         }
 
         scoreEl.style.display = 'block';
@@ -647,7 +647,7 @@ class ClickExploreActivity {
 
         html += `</div>`;
         html += `<p style="text-align:center;color:var(--text-light);font-size:0.85rem;margin-top:0.5rem;">
-                    🔍 اضغط على النقاط المضيئة لتكتشف (<span id="discover-count-${this.activityId}">0</span>/${this.hotspots.length})
+                    اضغط على النقاط المضيئة لتكتشف (<span id="discover-count-${this.activityId}">0</span>/${this.hotspots.length})
                  </p>`;
 
         this.container.innerHTML = html;
@@ -762,7 +762,7 @@ class MatchingActivity {
             const feedbackEl = document.getElementById(`mfeedback-${this.activityId}`);
             if (feedbackEl) {
                 feedbackEl.className = 'feedback correct show';
-                feedbackEl.innerHTML = `<span class="feedback-icon">🎉</span> ${this.feedback.complete || 'أحسنت! وصّلت كل الأجزاء صح!'}`;
+                feedbackEl.innerHTML = `<span class="feedback-icon" style="color:var(--success); font-weight:900;">✓</span> ${this.feedback.complete || 'أحسنت! وصّلت كل الأجزاء صح!'}`;
             }
             if (window.progress) window.progress.markActivity(this.activityId);
             if (this.onComplete) this.onComplete();
@@ -797,7 +797,7 @@ class OrderingActivity {
                      </div>`;
         });
         html += '</div>';
-        html += `<button class="check-btn" onclick="orderingActivities['${this.activityId}'].check()">✅ تحقق من الترتيب</button>`;
+        html += `<button class="check-btn" onclick="orderingActivities['${this.activityId}'].check()">تحقق من الترتيب</button>`;
         html += `<div class="feedback" id="ofeedback-${this.activityId}"></div>`;
 
         this.container.innerHTML = html;
@@ -842,12 +842,12 @@ class OrderingActivity {
         const feedbackEl = document.getElementById(`ofeedback-${this.activityId}`);
         if (allCorrect) {
             feedbackEl.className = 'feedback correct show';
-            feedbackEl.innerHTML = `<span class="feedback-icon">🎉</span> ${this.feedback.correct || 'ترتيب صحيح! ممتاز!'}`;
+            feedbackEl.innerHTML = `<span class="feedback-icon" style="color:var(--success); font-weight:900;">✓</span> ${this.feedback.correct || 'ترتيب صحيح! ممتاز!'}`;
             if (window.progress) window.progress.markActivity(this.activityId);
             if (this.onComplete) this.onComplete();
         } else {
             feedbackEl.className = 'feedback wrong show';
-            feedbackEl.innerHTML = `<span class="feedback-icon">❌</span> ${this.feedback.wrong || 'الترتيب غير صحيح. حاول مرة أخرى!'}`;
+            feedbackEl.innerHTML = `<span class="feedback-icon" style="color:var(--error); font-weight:900;">✕</span> ${this.feedback.wrong || 'الترتيب غير صحيح. حاول مرة أخرى!'}`;
             // Allow retry
             setTimeout(() => {
                 items.forEach(item => item.classList.remove('correct-order', 'wrong-order'));
@@ -893,7 +893,7 @@ class SimulationActivity {
 
         if (this.explanation) {
             html += `<div class="info-box note" style="margin-top:1rem;">
-                        <span class="icon">💡</span>
+                        <span class="icon" style="color:var(--info); font-weight:bold;">•</span>
                         <span>${this.explanation}</span>
                      </div>`;
         }
@@ -957,7 +957,7 @@ class DragDropActivity {
                      </div>`;
         });
         html += '</div>';
-        html += `<button class="check-btn" onclick="ddActivities['${this.activityId}'].check()">✅ تحقق</button>`;
+        html += `<button class="check-btn" onclick="ddActivities['${this.activityId}'].check()">تحقق من الإجابة</button>`;
         html += `<div class="feedback" id="ddfeedback-${this.activityId}"></div>`;
 
         this.container.innerHTML = html;
@@ -1063,12 +1063,12 @@ class DragDropActivity {
         const feedbackEl = document.getElementById(`ddfeedback-${this.activityId}`);
         if (allCorrect) {
             feedbackEl.className = 'feedback correct show';
-            feedbackEl.innerHTML = `<span class="feedback-icon">🎉</span> ${this.feedback.correct || 'إجابة صحيحة! أحسنت!'}`;
+            feedbackEl.innerHTML = `<span class="feedback-icon" style="color:var(--success); font-weight:900;">✓</span> ${this.feedback.correct || 'إجابة صحيحة! أحسنت!'}`;
             if (window.progress) window.progress.markActivity(this.activityId);
             if (this.onComplete) this.onComplete();
         } else {
             feedbackEl.className = 'feedback wrong show';
-            feedbackEl.innerHTML = `<span class="feedback-icon">❌</span> ${this.feedback.wrong || 'بعض العناصر في المكان الخطأ. حاول مرة أخرى!'}`;
+            feedbackEl.innerHTML = `<span class="feedback-icon" style="color:var(--error); font-weight:900;">✕</span> ${this.feedback.wrong || 'بعض العناصر في المكان الخطأ. حاول مرة أخرى!'}`;
             setTimeout(() => {
                 this.container.querySelectorAll('.drag-item.wrong').forEach(item => {
                     item.classList.remove('wrong');

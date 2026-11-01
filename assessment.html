@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>التقويم الختامي الشامل | رحلة تدفق الطاقة</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -13,7 +14,7 @@
     <nav class="top-nav">
         <div class="container">
             <a href="dashboard.html" class="logo">
-                <span class="logo-icon">🌱</span>
+                <span class="logo-icon"><i data-lucide="sprout" class="w-6 h-6 text-emerald-600"></i></span>
                 <span>رحلة الطاقة</span>
             </a>
             <div class="nav-links">
@@ -33,11 +34,18 @@
     <div class="content-header">
         <div class="container">
             <div class="breadcrumb">
-                <a href="dashboard.html">الرئيسية</a> <span class="sep">›</span>
+                <a href="dashboard.html">الرئيسية</a> <span class="sep"><i data-lucide="chevron-left" class="w-3.5 h-3.5 inline"></i></span>
                 <span>التقويم الختامي واعتماد الشهادة</span>
             </div>
-            <h1>🏆 التقييم الختامي الشامل (15 سؤالاً معيارياً - HOTS)</h1>
-            <p class="lesson-meta">مستخلص من صلب أسئلة كتاب الوزارة وبنك أسئلة كتاب الامتحان — نسبة الاجتياز 75%+</p>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem;">
+                <div style="background: rgba(255,255,255,0.2); padding: 0.5rem; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                    <i data-lucide="award" class="w-7 h-7 text-white"></i>
+                </div>
+                <div>
+                    <h1 style="margin: 0; font-size: 1.6rem; color: #ffffff;">التقييم الختامي الشامل (15 سؤالاً معيارياً - HOTS)</h1>
+                    <p class="lesson-meta" style="margin: 0.2rem 0 0; color: rgba(255,255,255,0.9);">مستخلص من صلب أسئلة كتاب الوزارة وبنك أسئلة كتاب الامتحان — نسبة الاجتياز 75%+</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -46,7 +54,7 @@
 
             <!-- Intro Info Box -->
             <div id="quizHeaderBox" class="info-box important">
-                <div style="font-size: 1.4rem;">🎯</div>
+                <div class="icon"><i data-lucide="target" class="w-5 h-5 text-emerald-700"></i></div>
                 <div>
                     <strong>تعليمات الاختبار الختامي:</strong>
                     يتكون هذا الاختبار من <strong>15 سؤالاً</strong> تغطي المصطلحات، الاستقصاء التاريخي، فيزياء الأطياف، التفاعلات الضوئية واللاضوئية، ومستويات التفكير العليا (HOTS). عند تحقيقك لنسبة 75%+ سيتم فورياً توليد واعتماد <strong>شهادة إتقان وتفوق رسمية</strong> باسمك قابلة للطباعة PDF.
@@ -368,7 +376,11 @@
             <!-- OFFICIAL CERTIFICATE CARD -->
             <div id="certificateCard" style="display: none; background: white; border: 3px solid #2e7d32; border-radius: var(--radius-xl); padding: 3rem 2rem; text-align: center; margin: 2rem 0; box-shadow: var(--shadow-xl); position: relative;">
                 
-                <div style="font-size: 3rem; margin-bottom: 0.5rem;">🏆</div>
+                <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+                    <div style="width: 72px; height: 72px; border-radius: 50%; background: #e8f5e9; color: #2e7d32; display: flex; align-items: center; justify-content: center; border: 2px solid #a5d6a7;">
+                        <i data-lucide="award" class="w-10 h-10"></i>
+                    </div>
+                </div>
                 <span style="color: var(--primary); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
                     شهادة إتقان وتفوق علمي معتمدة
                 </span>
@@ -401,11 +413,13 @@
                 </div>
 
                 <div style="margin-top: 2.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                    <button type="button" onclick="window.print()" class="station-btn" style="background: #1e293b; color: white;">
-                        🖨️ طباعة الشهادة كـ PDF
+                    <button type="button" onclick="window.print()" class="station-btn" style="background: #1e293b; color: white; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="printer" class="w-4 h-4"></i>
+                        <span>طباعة الشهادة كـ PDF</span>
                     </button>
-                    <a href="dashboard.html" class="station-btn" style="background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1;">
-                        ← العودة للمسار التعليمي
+                    <a href="dashboard.html" class="station-btn" style="background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        <span>العودة للمسار التعليمي</span>
                     </a>
                 </div>
 
@@ -416,13 +430,14 @@
 
     <footer class="site-footer" style="background: var(--bg-card); border-top: 1px solid #e0e0e0; padding: 1.5rem 0; text-align: center; font-size: 0.85rem; color: var(--text-light);">
         <div class="container">
-            <p>🌱 رحلة تدفق الطاقة — منظومة التعلم للإتقان المعملي</p>
+            <p>منصة تدفق الطاقة في الأحياء — منظومة التعلم للإتقان المعملي</p>
         </div>
     </footer>
 </div>
 
 <script src="js/app.js"></script>
 <script>
+    if (window.lucide) lucide.createIcons();
     var studentName = localStorage.getItem('student_name') || 'الباحث العلمي';
     var certNameEl = document.getElementById('certStudentName');
     var certDateEl = document.getElementById('certDate');
