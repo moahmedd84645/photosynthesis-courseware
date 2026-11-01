@@ -1,215 +1,228 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>الوحدة 6: الزراعة العمودية وخريطة المفاهيم | معمل 3D</title>
-  
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/styles.css">
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-['Cairo',sans-serif]">
+<body>
+<div class="page-wrapper">
 
-  <!-- HEADER -->
-  <header class="bg-white border-b border-slate-200 py-3 px-4 sm:px-8 sticky top-0 z-40 shadow-sm">
-    <div class="app-container flex items-center justify-between">
-      <div class="flex items-center space-x-3 space-x-reverse">
-        <a href="dashboard.html" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors" title="العودة للجدول">
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </a>
-        <div>
-          <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">الوحدة التعليمية 6 من 6</span>
-          <h1 class="text-sm sm:text-base font-black text-slate-900 leading-tight">العوامل المؤثرة، محاكي الزراعة العمودية 3D، وخريطة المفاهيم</h1>
-        </div>
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <div class="container">
+      <a href="dashboard.html" class="logo">
+        <span class="logo-icon"><i data-lucide="sprout" class="w-6 h-6 text-emerald-600"></i></span>
+        <span>رحلة الطاقة</span>
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html" class="nav-link">الوحدات التعليمية</a>
+        <a href="relationship.html" class="nav-link">العلاقة التكاملية</a>
+        <a href="guide.html" class="nav-link">دليل الاستخدام</a>
+        <a href="assessment.html" class="nav-link">التقييم النهائي</a>
       </div>
-
-      <div class="flex items-center space-x-2 space-x-reverse">
-        <span class="text-xs font-bold text-slate-500 hidden sm:inline">مسار الإتقان</span>
-        <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">6/6</div>
-      </div>
-    </div>
-  </header>
-
-  <!-- CONTENT -->
-  <main class="app-container py-6 flex-1 space-y-6">
-
-    <!-- LMS GOAL BANNER -->
-    <div class="lms-goal-banner flex flex-col md:flex-row md:items-center justify-between gap-3">
-      <div class="space-y-1">
-        <div class="flex items-center space-x-2 space-x-reverse text-blue-800 font-extrabold text-xs">
-          <i data-lucide="target" class="w-4 h-4 text-blue-600"></i>
-          <span>الهدف التعليمي للنشاط (وفق نظام إدارة التعلم LMS):</span>
-        </div>
-        <p class="text-xs text-slate-700 leading-relaxed font-semibold">
-          في نهاية هذا النشاط، يجب أن تكون قادراً على: <strong>(1)</strong> تحديد العوامل المؤثرة على البناء الضوئي (الضوء، الحرارة، CO₂) وتفسير تأثيرها بيولوجياً، <strong>(2)</strong> تطبيق مفهوم الزراعة العمودية في بيئة محاكاة 3D، <strong>(3)</strong> الربط الشامل لكافة مفاهيم الدرس عبر استكمال خريطة المفاهيم التفاعلية.
-        </p>
-      </div>
-      <div class="flex-shrink-0">
-        <span class="inline-flex items-center space-x-1 space-x-reverse px-3 py-1 rounded-xl bg-blue-100 text-blue-800 text-xs font-bold">
-          <i data-lucide="clock" class="w-3.5 h-3.5"></i>
-          <span>الزمن المقدر: 15 دقيقة</span>
+      <div class="progress-mini">
+        <span class="badge" style="background: rgba(255,255,255,0.2); color: white; font-weight: 700; border: none; padding: 0.3rem 0.8rem; border-radius: 999px;">
+          الوحدة 6 من 6
         </span>
       </div>
     </div>
+  </nav>
+
+  <!-- Content Header -->
+  <div class="content-header" style="padding: 1.5rem 0; margin-bottom: 1.5rem;">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="dashboard.html">الرئيسية</a> <span class="sep"><i data-lucide="chevron-left" class="w-3.5 h-3.5 inline"></i></span>
+        <span>الوحدة 6: العوامل المؤثرة، الزراعة العمودية وخريطة المفاهيم</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0.4rem;">
+        <div style="background: rgba(255,255,255,0.2); padding: 0.5rem; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+          <i data-lucide="building-2" class="w-6 h-6 text-white"></i>
+        </div>
+        <div>
+          <h1 style="margin: 0; font-size: 1.5rem; color: #ffffff;">العوامل المؤثرة ومحاكي الزراعة العمودية 3D</h1>
+          <p class="lesson-meta" style="margin: 0.2rem 0 0; color: rgba(255,255,255,0.9);">تطبيقات التكنولوجيا الحديثة، إنتاجية المحاصيل، وخريطة المفاهيم الختامية الشاملة</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="container" style="flex: 1; padding-bottom: 2rem;">
+
+    <!-- LMS Goal Banner -->
+    <div class="lms-goal-banner" style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; color: #1b5e20; font-weight: 800; font-size: 0.9rem;">
+        <i data-lucide="target" class="w-4 h-4 text-emerald-600"></i>
+        <span>الهدف التعليمي للنشاط (وفق نظام إدارة التعلم LMS):</span>
+      </div>
+      <p style="margin: 0; font-size: 0.85rem; color: #2e7d32; line-height: 1.6;">
+        في نهاية هذا النشاط، يجب أن تكون قادراً على: <strong>(1)</strong> تحديد العوامل المؤثرة على البناء الضوئي (الضوء، الحرارة، CO₂) وتفسير تأثيرها بيولوجياً، <strong>(2)</strong> تطبيق مفهوم الزراعة العمودية في بيئة محاكاة 3D، <strong>(3)</strong> الربط الشامل لكافة مفاهيم الدرس عبر استكمال خريطة المفاهيم التفاعلية.
+      </p>
+    </div>
 
     <!-- 2-COL LAYOUT -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; align-items: start;">
 
-      <!-- LEFT: THEORY (5 cols) -->
-      <div class="lg:col-span-5 space-y-4">
+      <!-- LEFT: THEORY -->
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
         
         <!-- CARD: Limiting Factors -->
-        <div class="modern-card space-y-3">
-          <div class="flex items-center space-x-2 space-x-reverse text-slate-900 font-black text-sm">
-            <div class="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center">
+        <div class="modern-card">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; font-weight: 800; font-size: 1rem; color: #1b5e20;">
+            <div style="width: 32px; height: 32px; border-radius: 8px; background: #e8f5e9; color: #2e7d32; display: flex; align-items: center; justify-content: center;">
               <i data-lucide="sliders" class="w-4 h-4"></i>
             </div>
             <span>العوامل البيئية المؤثرة في كفاءة البناء الضوئي</span>
           </div>
 
-          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
-            <div class="p-2 rounded-xl bg-slate-50 border border-slate-200">
-              <strong class="text-slate-900 font-bold block">1. شدة الاستضاءة (Light Intensity):</strong>
-              يزداد معدل التفاعلات الضوئية في الجرانا بزيادة شدة الضوء حتى يصل لحد التشبع.
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.85rem; color: #4b5563; line-height: 1.6;">
+            <div style="padding: 0.75rem; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0;">
+              <strong style="color: #1e293b; display: block; margin-bottom: 0.25rem;">1. شدة الاستضاءة (Light Intensity):</strong>
+              يزداد معدل التفاعلات الضوئية في الجرانا بزيادة شدة الضوء حتى يصل لحد التشبع الضوئي.
             </div>
-            <div class="p-2 rounded-xl bg-slate-50 border border-slate-200">
-              <strong class="text-slate-900 font-bold block">2. تركيز ثاني أكسيد الكربون (CO₂):</strong>
+            <div style="padding: 0.75rem; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0;">
+              <strong style="color: #1e293b; display: block; margin-bottom: 0.25rem;">2. تركيز ثاني أكسيد الكربون (CO₂):</strong>
               زيادة CO₂ في الستروما تزيد معدل تصنيع الجلوكوز، ونقصه يمثل عاملاً محدداً للسرعة.
             </div>
-            <div class="p-2 rounded-xl bg-slate-50 border border-slate-200">
-              <strong class="text-slate-900 font-bold block">3. درجة الحرارة (Temperature):</strong>
+            <div style="padding: 0.75rem; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0;">
+              <strong style="color: #1e293b; display: block; margin-bottom: 0.25rem;">3. درجة الحرارة (Temperature):</strong>
               تؤثر مباشرة على نشاط <strong>الإنزيمات</strong>؛ حيث يبلغ التفاعل أقصاه عند درجة الحرارة المثلى (25° - 35°C)، بينما تؤدي الحرارة العالية لتلف الإنزيمات وتوقف البناء الضوئي.
             </div>
           </div>
         </div>
 
         <!-- CARD: Vertical Farming Concept -->
-        <div class="modern-card space-y-3">
-          <div class="flex items-center space-x-2 space-x-reverse text-slate-900 font-black text-sm">
-            <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+        <div class="modern-card">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; font-weight: 800; font-size: 1rem; color: #1b5e20;">
+            <div style="width: 32px; height: 32px; border-radius: 8px; background: #e8f5e9; color: #2e7d32; display: flex; align-items: center; justify-content: center;">
               <i data-lucide="building-2" class="w-4 h-4"></i>
             </div>
             <span>التطبيق المستقبلي: الزراعة العمودية (Vertical Farming)</span>
           </div>
 
-          <div class="text-xs text-slate-600 space-y-2 leading-relaxed">
-            <p>
-              تقنية حديثة لزراعة المحاصيل في طبقات مكدسة رأسياً داخل بيئات مغلقة ومتحكم بها بالكامل:
+          <div style="font-size: 0.85rem; color: #4b5563; line-height: 1.6;">
+            <p style="margin-top: 0; margin-bottom: 0.75rem;">
+              تقنية حديثة لزراعة المحاصيل في طبقات مكدسة رأسياً داخل بيئات مغلقة ومتحكم بها بالكامل دون الحاجة إلى تربة تقليدية:
             </p>
-            <ul class="list-disc list-inside space-y-1 font-medium text-slate-700 text-[11px]">
-              <li>استخدام إضاءة LED مخصصة بأطياف الأحمر والأزرق فقط لتوفير الطاقة.</li>
-              <li>توفير ما يصل إلى <strong>95% من مياه الري</strong> مقارنة بالزراعة التقليدية.</li>
-              <li>إنتاج مستمر على مدار العام ومواجهة التغير المناخي.</li>
+            <ul style="padding-right: 1.25rem; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.85rem; color: #334155;">
+              <li>استخدام إضاءة LED مخصصة بأطياف الأحمر والأزرق فقط لتعظيم امتصاص الكلوروفيل وتوفير الطاقة.</li>
+              <li>توفير ما يصل إلى <strong>95% من مياه الري</strong> مقارنة بالحقول المفتوحة عبر إعادة التدوير.</li>
+              <li>إنتاج مستمر على مدار العام بغض النظر عن تقلبات الطقس والتغير المناخي مع حماية الأمن الغذائي.</li>
             </ul>
           </div>
         </div>
 
       </div>
 
-      <!-- RIGHT: 3D VERTICAL FARM & CONCEPT MAP (7 cols) -->
-      <div class="lg:col-span-7 space-y-4">
+      <!-- RIGHT: 3D VERTICAL FARM & CONCEPT MAP -->
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
         
         <!-- VERTICAL FARM 3D SIMULATOR -->
-        <div class="modern-card space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2 space-x-reverse">
-              <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center">
-                <i data-lucide="gauge" class="w-4 h-4"></i>
+        <div class="modern-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <div style="width: 36px; height: 36px; border-radius: 10px; background: #2e7d32; color: #ffffff; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="gauge" class="w-5 h-5"></i>
               </div>
               <div>
-                <h3 class="text-sm font-black text-slate-900">محاكي غرفة الزراعة العمودية ثلاثي الأبعاد 3D</h3>
-                <p class="text-[11px] text-slate-500 font-medium">عدّل منزلقات الضوء والحرارة وCO₂ وشاهد تفاعل المحاصيل في مشهد 3D</p>
+                <h3 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: #1e293b;">محاكي غرفة الزراعة العمودية ثلاثي الأبعاد 3D</h3>
+                <p style="margin: 0.15rem 0 0; font-size: 0.75rem; color: #64748b;">عدّل منزلقات الضوء والحرارة وCO₂ وشاهد تفاعل المحاصيل في مشهد 3D</p>
               </div>
             </div>
-            <span class="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">الإنتاجية: <span id="rateValue">75</span>%</span>
+            <span style="font-family: monospace; font-weight: 800; color: #1b5e20; background: #e8f5e9; padding: 0.3rem 0.8rem; border-radius: 999px; border: 1px solid #c8e6c9; font-size: 0.85rem;">
+              الإنتاجية: <span id="rateValue">75</span>%
+            </span>
           </div>
 
           <!-- 3D Canvas -->
-          <div class="simulation-canvas-wrapper relative" id="verticalFarm3DCanvas"></div>
+          <div class="simulation-canvas-wrapper" id="verticalFarm3DCanvas" style="height: 280px; width: 100%; border-radius: 12px; overflow: hidden; background: #0f172a; position: relative;"></div>
 
           <!-- Controls Sliders -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; padding: 1rem; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; margin-top: 1rem;">
             
-            <div class="space-y-1">
-              <div class="flex justify-between font-bold">
-                <span class="text-slate-700">شدة إضاءة LED:</span>
-                <span id="lightValLabel" class="text-blue-600 font-mono">80%</span>
+            <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+              <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 0.75rem;">
+                <span style="color: #334155;">شدة إضاءة LED:</span>
+                <span id="lightValLabel" style="color: #2563eb; font-family: monospace;">80%</span>
               </div>
-              <input type="range" id="sliderLight" min="0" max="100" value="80" class="w-full accent-blue-600 cursor-pointer">
+              <input type="range" id="sliderLight" min="0" max="100" value="80" style="width: 100%; cursor: pointer;">
             </div>
 
-            <div class="space-y-1">
-              <div class="flex justify-between font-bold">
-                <span class="text-slate-700">درجة الحرارة:</span>
-                <span id="tempValLabel" class="text-amber-600 font-mono">28°C</span>
+            <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+              <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 0.75rem;">
+                <span style="color: #334155;">درجة الحرارة:</span>
+                <span id="tempValLabel" style="color: #d97706; font-family: monospace;">28°C</span>
               </div>
-              <input type="range" id="sliderTemp" min="5" max="50" value="28" class="w-full accent-amber-600 cursor-pointer">
+              <input type="range" id="sliderTemp" min="5" max="50" value="28" style="width: 100%; cursor: pointer;">
             </div>
 
-            <div class="space-y-1">
-              <div class="flex justify-between font-bold">
-                <span class="text-slate-700">نسبة غاز CO₂:</span>
-                <span id="co2ValLabel" class="text-emerald-600 font-mono">70%</span>
+            <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+              <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 0.75rem;">
+                <span style="color: #334155;">نسبة غاز CO₂:</span>
+                <span id="co2ValLabel" style="color: #059669; font-family: monospace;">70%</span>
               </div>
-              <input type="range" id="sliderCO2" min="0" max="100" value="70" class="w-full accent-emerald-600 cursor-pointer">
+              <input type="range" id="sliderCO2" min="0" max="100" value="70" style="width: 100%; cursor: pointer;">
             </div>
 
           </div>
 
           <!-- Live Output Visual Feedback -->
-          <div class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between text-xs">
-            <div class="flex items-center space-x-2 space-x-reverse">
-              <div id="farmStatusLight" class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></div>
-              <span id="farmStatusSummary" class="font-bold text-emerald-700">ظروف إنتاج مثالية لمصنع الجلوكوز والنشا!</span>
+          <div style="margin-top: 0.75rem; padding: 0.75rem 1rem; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <div id="farmStatusLight" style="width: 10px; height: 10px; border-radius: 50%; background: #10b981;"></div>
+              <span id="farmStatusSummary" style="font-weight: 800; color: #1b5e20;">ظروف إنتاج مثالية لمصنع الجلوكوز والنشا!</span>
             </div>
-            <span class="text-[10px] text-slate-500 font-mono">كفاءة الأنزيمات: نشطة 100%</span>
+            <span style="font-size: 0.75rem; color: #64748b; font-family: monospace;">كفاءة الإنزيمات: نشطة 100%</span>
           </div>
         </div>
 
         <!-- INTERACTIVE CONCEPT MAP -->
-        <div class="modern-card space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2 space-x-reverse">
-              <div class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center">
-                <i data-lucide="network" class="w-4 h-4"></i>
+        <div class="modern-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <div style="width: 36px; height: 36px; border-radius: 10px; background: #2563eb; color: #ffffff; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="network" class="w-5 h-5"></i>
               </div>
               <div>
-                <h3 class="text-sm font-black text-slate-900">خريطة المفاهيم الختامية لعملية البناء الضوئي</h3>
-                <p class="text-[11px] text-slate-500 font-medium">أكمل الفراغات في الخريطة لربط مفاهيم الدرس الستة بدقة</p>
+                <h3 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: #1e293b;">خريطة المفاهيم الختامية لعملية البناء الضوئي</h3>
+                <p style="margin: 0.15rem 0 0; font-size: 0.75rem; color: #64748b;">أكمل الفراغات في الخريطة لربط مفاهيم الدرس بدقة علمية</p>
               </div>
             </div>
-            <button id="btnCheckMap" type="button" class="btn-primary py-1.5 px-3 text-xs font-bold cursor-pointer">تحقق من الربط</button>
+            <button id="btnCheckMap" type="button" class="btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem; cursor: pointer;">تحقق من الربط</button>
           </div>
 
           <!-- Concept Map Flow -->
-          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-4 text-xs">
+          <div style="padding: 1.25rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; display: flex; flex-direction: column; gap: 1rem; font-size: 0.8rem;">
             
-            <div class="text-center">
-              <div class="inline-block p-2 rounded-xl bg-blue-600 text-white font-black shadow-sm">
+            <div style="text-align: center;">
+              <div style="display: inline-block; padding: 0.5rem 1.25rem; border-radius: 12px; background: #1e3a8a; color: #ffffff; font-weight: 800; box-shadow: 0 2px 4px rgba(0,0,0,0.06);">
                 عضيات البناء الضوئي: البلاستيدة الخضراء
               </div>
             </div>
 
             <!-- Two Main Pathways -->
-            <div class="grid grid-cols-2 gap-3">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               
               <!-- Grana Path -->
-              <div class="p-3 bg-white border border-slate-200 rounded-xl space-y-2 text-center">
-                <span class="font-bold text-slate-700 block text-[11px]">تحدث في الأقراص:</span>
-                <div class="p-2 rounded-lg bg-emerald-50 text-emerald-900 font-bold border border-emerald-200">
+              <div style="padding: 1rem; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; flex-direction: column; gap: 0.5rem; text-align: center;">
+                <span style="font-weight: 700; color: #334155; font-size: 0.75rem; display: block;">تحدث في الأقراص:</span>
+                <div style="padding: 0.4rem; border-radius: 8px; background: #e8f5e9; color: #1b5e20; font-weight: 800; border: 1px solid #c8e6c9;">
                   الجرانا (Grana)
                 </div>
-                <div class="text-[11px] text-slate-500 font-bold">نوع التفاعلات:</div>
-                <select id="mapSlot1" class="w-full p-1.5 rounded-lg border border-slate-300 text-xs font-semibold bg-slate-50 cursor-pointer">
+                <div style="font-size: 0.75rem; color: #64748b; font-weight: 700;">نوع التفاعلات:</div>
+                <select id="mapSlot1" style="width: 100%; padding: 0.4rem; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.75rem; font-weight: 600; background: #f8fafc; cursor: pointer;">
                   <option value="">-- اختر نوع التفاعل --</option>
                   <option value="light">تفاعلات ضوئية (تعتمد على الضوء)</option>
                   <option value="dark">تفاعلات لاضوئية إنزيمية</option>
                 </select>
-                <div class="text-[11px] text-slate-500 font-bold">الغاز المتصاعد:</div>
-                <select id="mapSlot2" class="w-full p-1.5 rounded-lg border border-slate-300 text-xs font-semibold bg-slate-50 cursor-pointer">
+                <div style="font-size: 0.75rem; color: #64748b; font-weight: 700;">الغاز المتصاعد:</div>
+                <select id="mapSlot2" style="width: 100%; padding: 0.4rem; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.75rem; font-weight: 600; background: #f8fafc; cursor: pointer;">
                   <option value="">-- اختر الغاز الناتج --</option>
                   <option value="O2">غاز الأكسجين (O₂)</option>
                   <option value="CO2">غاز ثاني أكسيد الكربون (CO₂)</option>
@@ -217,19 +230,19 @@
               </div>
 
               <!-- Stroma Path -->
-              <div class="p-3 bg-white border border-slate-200 rounded-xl space-y-2 text-center">
-                <span class="font-bold text-slate-700 block text-[11px]">تحدث في الحشوة:</span>
-                <div class="p-2 rounded-lg bg-amber-50 text-amber-900 font-bold border border-amber-200">
+              <div style="padding: 1rem; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; flex-direction: column; gap: 0.5rem; text-align: center;">
+                <span style="font-weight: 700; color: #334155; font-size: 0.75rem; display: block;">تحدث في الحشوة:</span>
+                <div style="padding: 0.4rem; border-radius: 8px; background: #fffbeb; color: #92400e; font-weight: 800; border: 1px solid #fde68a;">
                   الستروما (Stroma)
                 </div>
-                <div class="text-[11px] text-slate-500 font-bold">نوع التفاعلات:</div>
-                <select id="mapSlot3" class="w-full p-1.5 rounded-lg border border-slate-300 text-xs font-semibold bg-slate-50 cursor-pointer">
+                <div style="font-size: 0.75rem; color: #64748b; font-weight: 700;">نوع التفاعلات:</div>
+                <select id="mapSlot3" style="width: 100%; padding: 0.4rem; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.75rem; font-weight: 600; background: #f8fafc; cursor: pointer;">
                   <option value="">-- اختر نوع التفاعل --</option>
                   <option value="dark">تفاعلات لاضوئية (إنزيمية)</option>
                   <option value="light">تفاعلات ضوئية</option>
                 </select>
-                <div class="text-[11px] text-slate-500 font-bold">المركب السكري الناتج:</div>
-                <select id="mapSlot4" class="w-full p-1.5 rounded-lg border border-slate-300 text-xs font-semibold bg-slate-50 cursor-pointer">
+                <div style="font-size: 0.75rem; color: #64748b; font-weight: 700;">المركب السكري الناتج:</div>
+                <select id="mapSlot4" style="width: 100%; padding: 0.4rem; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.75rem; font-weight: 600; background: #f8fafc; cursor: pointer;">
                   <option value="">-- اختر المركب --</option>
                   <option value="glucose">سكر الجلوكوز (يخزن كنشاء)</option>
                   <option value="protein">بروتينات فقط</option>
@@ -238,24 +251,24 @@
 
             </div>
 
-            <div id="mapFeedbackBox" class="hidden p-3 rounded-xl text-xs font-bold text-center"></div>
+            <div id="mapFeedbackBox" style="display: none; padding: 0.75rem; border-radius: 10px; font-size: 0.8rem; font-weight: 800; text-align: center;"></div>
 
           </div>
 
         </div>
 
         <!-- NAV TO NEXT STAGES -->
-        <div class="flex flex-col sm:flex-row justify-between items-center gap-3 pt-2">
-          <a href="module5.html" class="btn-secondary py-3 px-5 text-xs font-bold space-x-1.5 space-x-reverse cursor-pointer w-full sm:w-auto text-center">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem; padding-top: 0.5rem;">
+          <a href="module5.html" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.75rem 1.25rem; font-size: 0.85rem; text-decoration: none; border-radius: 10px; font-weight: 700;">
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
             <span>الوحدة السابقة: كشف النشا</span>
           </a>
-          <div class="flex flex-wrap gap-2 w-full sm:w-auto justify-end">
-            <a href="relationship.html" class="station-btn py-3 px-5 text-xs font-bold space-x-1.5 space-x-reverse cursor-pointer inline-flex items-center gap-1.5" style="background: #2e7d32; color: white;">
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: flex-end;">
+            <a href="relationship.html" class="station-btn" style="background: #2e7d32; color: #ffffff; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.75rem 1.25rem; font-size: 0.85rem; text-decoration: none; border-radius: 10px; font-weight: 700;">
               <i data-lucide="refresh-cw" class="w-4 h-4"></i>
               <span>وحدة العلاقة التكاملية (3D)</span>
             </a>
-            <a href="assessment.html" class="btn-primary py-3 px-6 text-xs font-bold space-x-2 space-x-reverse shadow-lg bg-emerald-600 hover:bg-emerald-700 cursor-pointer">
+            <a href="assessment.html" class="btn-primary" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.75rem 1.5rem; font-size: 0.85rem; text-decoration: none; border-radius: 10px; font-weight: 700; box-shadow: 0 4px 10px rgba(46,125,50,0.3);">
               <i data-lucide="award" class="w-4 h-4 text-amber-300"></i>
               <span>الاختبار الختامي الشامل (15 سؤالاً)</span>
               <i data-lucide="arrow-left" class="w-4 h-4"></i>
@@ -269,87 +282,91 @@
 
   </main>
 
-  <footer class="w-full border-t border-slate-200 py-3 text-center text-xs text-slate-400 bg-white">
+  <footer style="width: 100%; border-top: 1px solid #e2e8f0; padding: 1.25rem 0; text-align: center; font-size: 0.8rem; color: #64748b; background: #ffffff;">
     منظومة التعلم للإتقان المعملية | الوحدة 6: الزراعة العمودية وخريطة المفاهيم
   </footer>
 
-  <script type="module">
-    import { sims3D } from './js/simulations-3d.js';
-    import { markStationComplete } from './js/firebase-config.js';
-    if (window.lucide) lucide.createIcons();
+</div>
 
-    // Mount 3D Vertical Farm
-    sims3D.initStation6('verticalFarm3DCanvas');
+<script type="module">
+  import { sims3D } from './js/simulations-3d.js';
+  import { markStationComplete } from './js/firebase-config.js';
+  if (window.lucide) lucide.createIcons();
 
-    const sliderLight = document.getElementById('sliderLight');
-    const sliderTemp = document.getElementById('sliderTemp');
-    const sliderCO2 = document.getElementById('sliderCO2');
-    const lightValLabel = document.getElementById('lightValLabel');
-    const tempValLabel = document.getElementById('tempValLabel');
-    const co2ValLabel = document.getElementById('co2ValLabel');
-    const rateValue = document.getElementById('rateValue');
-    const farmStatusSummary = document.getElementById('farmStatusSummary');
-    const farmStatusLight = document.getElementById('farmStatusLight');
+  // Mount 3D Vertical Farm
+  sims3D.initStation6('verticalFarm3DCanvas');
 
-    function calculateProduction() {
-      const light = parseInt(sliderLight.value);
-      const temp = parseInt(sliderTemp.value);
-      const co2 = parseInt(sliderCO2.value);
+  const sliderLight = document.getElementById('sliderLight');
+  const sliderTemp = document.getElementById('sliderTemp');
+  const sliderCO2 = document.getElementById('sliderCO2');
+  const lightValLabel = document.getElementById('lightValLabel');
+  const tempValLabel = document.getElementById('tempValLabel');
+  const co2ValLabel = document.getElementById('co2ValLabel');
+  const rateValue = document.getElementById('rateValue');
+  const farmStatusSummary = document.getElementById('farmStatusSummary');
+  const farmStatusLight = document.getElementById('farmStatusLight');
 
-      lightValLabel.innerText = light + '%';
-      tempValLabel.innerText = temp + '°C';
-      co2ValLabel.innerText = co2 + '%';
+  function calculateProduction() {
+    const light = parseInt(sliderLight.value);
+    const temp = parseInt(sliderTemp.value);
+    const co2 = parseInt(sliderCO2.value);
 
-      let tempFactor = 1.0;
-      if (temp < 15 || temp > 40) tempFactor = 0.3;
-      else if (temp >= 25 && temp <= 35) tempFactor = 1.0;
-      else tempFactor = 0.7;
+    lightValLabel.innerText = light + '%';
+    tempValLabel.innerText = temp + '°C';
+    co2ValLabel.innerText = co2 + '%';
 
-      const rate = Math.round(((light * 0.4) + (co2 * 0.4) + (tempFactor * 20)));
-      rateValue.innerText = Math.min(100, Math.max(5, rate));
+    let tempFactor = 1.0;
+    if (temp < 15 || temp > 40) tempFactor = 0.3;
+    else if (temp >= 25 && temp <= 35) tempFactor = 1.0;
+    else tempFactor = 0.7;
 
-      if (temp > 42) {
-        farmStatusSummary.innerText = 'تحذير: حرارة مرتفعة جداً تسببت في تلف الإنزيمات وتوقف البناء الضوئي!';
-        farmStatusSummary.className = 'font-bold text-rose-600';
-        farmStatusLight.className = 'w-3 h-3 rounded-full bg-rose-500 animate-ping';
-        if (sims3D.activeSims.station6) sims3D.activeSims.station6.setLightHue(0xef4444);
-      } else if (rate > 70) {
-        farmStatusSummary.innerText = 'ظروف إنتاج ممتازة لمصنع الجلوكوز وتوفير المياه بنسبة 95%!';
-        farmStatusSummary.className = 'font-bold text-emerald-700';
-        farmStatusLight.className = 'w-3 h-3 rounded-full bg-emerald-500 animate-ping';
-        if (sims3D.activeSims.station6) sims3D.activeSims.station6.setLightHue(0xa855f7);
-      } else {
-        farmStatusSummary.innerText = 'الإنتاجية محدودة، قم بزيادة الضوء أو ثاني أكسيد الكربون للوصول للمعدل الأقصى.';
-        farmStatusSummary.className = 'font-bold text-amber-700';
-        farmStatusLight.className = 'w-3 h-3 rounded-full bg-amber-400';
-        if (sims3D.activeSims.station6) sims3D.activeSims.station6.setLightHue(0x3b82f6);
-      }
+    const rate = Math.round(((light * 0.4) + (co2 * 0.4) + (tempFactor * 20)));
+    rateValue.innerText = Math.min(100, Math.max(5, rate));
+
+    if (temp > 42) {
+      farmStatusSummary.innerText = 'تحذير: حرارة مرتفعة جداً تسببت في تلف الإنزيمات وتوقف البناء الضوئي!';
+      farmStatusSummary.style.color = '#dc2626';
+      farmStatusLight.style.background = '#ef4444';
+      if (sims3D.activeSims.station6) sims3D.activeSims.station6.setLightHue(0xef4444);
+    } else if (rate > 70) {
+      farmStatusSummary.innerText = 'ظروف إنتاج ممتازة لمصنع الجلوكوز وتوفير المياه بنسبة 95%!';
+      farmStatusSummary.style.color = '#1b5e20';
+      farmStatusLight.style.background = '#10b981';
+      if (sims3D.activeSims.station6) sims3D.activeSims.station6.setLightHue(0xa855f7);
+    } else {
+      farmStatusSummary.innerText = 'الإنتاجية محدودة، قم بزيادة الضوء أو ثاني أكسيد الكربون للوصول للمعدل الأقصى.';
+      farmStatusSummary.style.color = '#b45309';
+      farmStatusLight.style.background = '#f59e0b';
+      if (sims3D.activeSims.station6) sims3D.activeSims.station6.setLightHue(0x3b82f6);
     }
+  }
 
-    sliderLight.addEventListener('input', calculateProduction);
-    sliderTemp.addEventListener('input', calculateProduction);
-    sliderCO2.addEventListener('input', calculateProduction);
+  sliderLight.addEventListener('input', calculateProduction);
+  sliderTemp.addEventListener('input', calculateProduction);
+  sliderCO2.addEventListener('input', calculateProduction);
 
-    // Concept Map Check
-    document.getElementById('btnCheckMap').addEventListener('click', () => {
-      const s1 = document.getElementById('mapSlot1').value;
-      const s2 = document.getElementById('mapSlot2').value;
-      const s3 = document.getElementById('mapSlot3').value;
-      const s4 = document.getElementById('mapSlot4').value;
-      const fb = document.getElementById('mapFeedbackBox');
-      fb.classList.remove('hidden');
+  // Concept Map Check
+  document.getElementById('btnCheckMap').addEventListener('click', () => {
+    const s1 = document.getElementById('mapSlot1').value;
+    const s2 = document.getElementById('mapSlot2').value;
+    const s3 = document.getElementById('mapSlot3').value;
+    const s4 = document.getElementById('mapSlot4').value;
+    const fb = document.getElementById('mapFeedbackBox');
+    fb.style.display = 'block';
 
-      if (s1 === 'light' && s2 === 'O2' && s3 === 'dark' && s4 === 'glucose') {
-        fb.className = 'p-3 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
-        fb.innerText = 'أحسنت صنعاً! خريطة المفاهيم مكتملة بنسبة 100%. لقد أتقنت جميع مفاهيم الدرس وأنت الآن مستعد تماماً للاختبار الختامي.';
-        markStationComplete(6, 100);
-      } else {
-        fb.className = 'p-3 rounded-xl text-xs font-bold bg-amber-100 text-amber-800 border border-amber-300';
-        fb.innerText = 'هناك اختيارات غير دقيقة في الخريطة؛ راجع نوع تفاعلات الجرانا وغاز الأكسجين، وتفاعلات الستروما وتكوين الجلوكوز ثم تحقق مجدداً.';
-      }
-    });
-  </script>
+    if (s1 === 'light' && s2 === 'O2' && s3 === 'dark' && s4 === 'glucose') {
+      fb.style.background = '#dcfce7';
+      fb.style.color = '#166534';
+      fb.style.border = '1px solid #86efac';
+      fb.innerText = 'أحسنت صنعاً! خريطة المفاهيم مكتملة بنسبة 100%. لقد أتقنت جميع مفاهيم الدرس وأنت الآن مستعد تماماً للاختبار الختامي.';
+      markStationComplete(6, 100);
+    } else {
+      fb.style.background = '#fef3c7';
+      fb.style.color = '#92400e';
+      fb.style.border = '1px solid #fcd34d';
+      fb.innerText = 'هناك اختيارات غير دقيقة في الخريطة؛ راجع نوع تفاعلات الجرانا وغاز الأكسجين، وتفاعلات الستروما وتكوين الجلوكوز ثم تحقق مجدداً.';
+    }
+  });
+</script>
 </body>
 </html>
-
-

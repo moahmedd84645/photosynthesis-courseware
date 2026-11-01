@@ -1,272 +1,302 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>الوحدة 4: مسار الطاقة والتفاعلات الضوئية واللاضوئية | معمل 3D</title>
-  
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/styles.css">
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-['Cairo',sans-serif]">
+<body>
+<div class="page-wrapper">
 
-  <!-- HEADER -->
-  <header class="bg-white border-b border-slate-200 py-3 px-4 sm:px-8 sticky top-0 z-40 shadow-sm">
-    <div class="app-container flex items-center justify-between">
-      <div class="flex items-center space-x-3 space-x-reverse">
-        <a href="dashboard.html" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors" title="العودة للجدول">
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </a>
-        <div>
-          <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">الوحدة التعليمية 4 من 6</span>
-          <h1 class="text-sm sm:text-base font-black text-slate-900 leading-tight">آلية حدوث البناء الضوئي ومسار الطاقة (تفاعلات ضوئية ولاضوئية)</h1>
-        </div>
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <div class="container">
+      <a href="dashboard.html" class="logo">
+        <span class="logo-icon"><i data-lucide="sprout" class="w-6 h-6 text-emerald-600"></i></span>
+        <span>رحلة الطاقة</span>
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html" class="nav-link">الوحدات التعليمية</a>
+        <a href="relationship.html" class="nav-link">العلاقة التكاملية</a>
+        <a href="guide.html" class="nav-link">دليل الاستخدام</a>
+        <a href="assessment.html" class="nav-link">التقييم النهائي</a>
       </div>
-
-      <div class="flex items-center space-x-2 space-x-reverse">
-        <span class="text-xs font-bold text-slate-500 hidden sm:inline">مسار الإتقان</span>
-        <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">4/6</div>
-      </div>
-    </div>
-  </header>
-
-  <!-- CONTENT -->
-  <main class="app-container py-6 flex-1 space-y-6">
-
-    <!-- LMS GOAL BANNER -->
-    <div class="lms-goal-banner flex flex-col md:flex-row md:items-center justify-between gap-3">
-      <div class="space-y-1">
-        <div class="flex items-center space-x-2 space-x-reverse text-blue-800 font-extrabold text-xs">
-          <i data-lucide="target" class="w-4 h-4 text-blue-600"></i>
-          <span>الهدف التعليمي للنشاط (وفق نظام إدارة التعلم LMS):</span>
-        </div>
-        <p class="text-xs text-slate-700 leading-relaxed font-semibold">
-          في نهاية هذا النشاط، يجب أن تكون قادراً على: <strong>(1)</strong> المقارنة بين التفاعلات الضوئية والتفاعلات اللاضوئية من حيث مكان الحدوث والعوامل المحددة والمتفاعلات والنواتج، <strong>(2)</strong> تتبع شطر جزيء الماء وانطلاق غاز الأكسجين، <strong>(3)</strong> توضيح دور بطاريات الخلية (ADP / ATP) ثلاثية الأبعاد وإنزيمات الستروما في تصنيع الجلوكوز.
-        </p>
-      </div>
-      <div class="flex-shrink-0">
-        <span class="inline-flex items-center space-x-1 space-x-reverse px-3 py-1 rounded-xl bg-blue-100 text-blue-800 text-xs font-bold">
-          <i data-lucide="clock" class="w-3.5 h-3.5"></i>
-          <span>الزمن المقدر: 12 دقيقة</span>
+      <div class="progress-mini">
+        <span class="badge" style="background: rgba(255,255,255,0.2); color: white; font-weight: 700; border: none; padding: 0.3rem 0.8rem; border-radius: 999px;">
+          الوحدة 4 من 6
         </span>
       </div>
     </div>
+  </nav>
 
-    <!-- 2-COL LAYOUT -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-
-      <!-- LEFT: THEORY (5 cols) -->
-      <div class="lg:col-span-5 space-y-4">
-        
-        <!-- CARD: Comparative Table -->
-        <div class="modern-card space-y-3">
-          <div class="flex items-center space-x-2 space-x-reverse text-slate-900 font-black text-sm">
-            <div class="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center">
-              <i data-lucide="split" class="w-4 h-4"></i>
-            </div>
-            <span>مقارنة التفاعلات الضوئية واللاضوئية (منهج الوزارة)</span>
-          </div>
-
-          <div class="space-y-2 text-xs">
-            <!-- Light Reactions -->
-            <div class="p-3 rounded-xl bg-blue-50/70 border border-blue-200 space-y-1">
-              <div class="flex justify-between items-center font-bold text-blue-900">
-                <span class="text-xs">1. التفاعلات الضوئية (Light Reactions)</span>
-                <span class="text-[10px] bg-blue-200 text-blue-800 px-2 py-0.5 rounded-full">في الجرانا (Grana)</span>
-              </div>
-              <ul class="list-disc list-inside text-slate-700 space-y-0.5 text-[11px]">
-                <li><strong>الشرط الأساسي:</strong> وجود الضوء (العامل المحدد هو شدة الاستضاءة).</li>
-                <li><strong>المتفاعلات:</strong> الماء (H₂O) والطاقة الضوئية الممتصة بالكلوروفيل.</li>
-                <li><strong>الآلية:</strong> شطر الماء، ينطلق <strong>الأكسجين (O₂) كناتج ثانوي</strong>.</li>
-                <li><strong>الناتج الطاقي:</strong> شحن مركب ADP إلى <strong>ATP</strong> المحمل بالطاقة.</li>
-              </ul>
-            </div>
-
-            <!-- Dark / Independent Reactions -->
-            <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-200 space-y-1">
-              <div class="flex justify-between items-center font-bold text-amber-900">
-                <span class="text-xs">2. التفاعلات اللاضوئية (Dark / Enzymatic)</span>
-                <span class="text-[10px] bg-amber-200 text-amber-800 px-2 py-0.5 rounded-full">في الستروما (Stroma)</span>
-              </div>
-              <ul class="list-disc list-inside text-slate-700 space-y-0.5 text-[11px]">
-                <li><strong>الشرط الأساسي:</strong> الإنزيمات والحرارة الملائمة (لا تشترط الضوء).</li>
-                <li><strong>المتفاعلات:</strong> ثاني أكسيد الكربون (CO₂) + الهيدروجين + طاقة ATP.</li>
-                <li><strong>الناتج الرئيسي:</strong> بناء سكر <strong>الجلوكوز (C₆H₁₂O₆)</strong>.</li>
-              </ul>
-            </div>
-          </div>
+  <!-- Content Header -->
+  <div class="content-header" style="padding: 1.5rem 0; margin-bottom: 1.5rem;">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="dashboard.html">الرئيسية</a> <span class="sep"><i data-lucide="chevron-left" class="w-3.5 h-3.5 inline"></i></span>
+        <span>الوحدة 4: التفاعلات الضوئية واللاضوئية</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0.4rem;">
+        <div style="background: rgba(255,255,255,0.2); padding: 0.5rem; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+          <i data-lucide="split" class="w-6 h-6 text-white"></i>
         </div>
-
-        <!-- CARD: ATP Battery Concept -->
-        <div class="modern-card space-y-3">
-          <div class="flex items-center space-x-2 space-x-reverse text-slate-900 font-black text-sm">
-            <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
-              <i data-lucide="battery-charging" class="w-4 h-4"></i>
-            </div>
-            <span>عملة الطاقة الحيوية: شحن وتفريغ ATP</span>
-          </div>
-
-          <div class="text-xs text-slate-600 space-y-1 leading-relaxed">
-            <p>
-              جزيء <strong>ADP</strong> (أدينوسين ثنائي الفوسفات) يمثل بطارية فارغة، يلتقط مجموعة فوسفات وطاقة الضوء في الجرانا ليتحول إلى <strong>ATP</strong> (أدينوسين ثلاثي الفوسفات) مشحونة، ثم تهاجر إلى الستروما وتفرغ طاقتها لبناء الجلوكوز وتعود ADP مجدداً!
-            </p>
-          </div>
+        <div>
+          <h1 style="margin: 0; font-size: 1.5rem; color: #ffffff;">آلية حدوث البناء الضوئي ومسار الطاقة</h1>
+          <p class="lesson-meta" style="margin: 0.2rem 0 0; color: rgba(255,255,255,0.9);">تفكيك جزيئات الماء، شحن بطارية ATP، وتخليق حلقة الجلوكوز 3D</p>
         </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- CONTENT -->
+  <main class="page-content">
+    <div class="container">
+
+      <!-- LMS GOAL BANNER -->
+      <div class="lms-goal-banner">
+        <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+          <div style="display: flex; align-items: center; gap: 0.4rem; color: var(--primary-dark); font-weight: 800; font-size: 0.88rem;">
+            <i data-lucide="target" class="w-4 h-4 text-emerald-600"></i>
+            <span>الهدف التعليمي للنشاط (وفق نظام إدارة التعلم LMS):</span>
+          </div>
+          <p style="margin: 0; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+            في نهاية هذا النشاط، يجب أن تكون قادراً على: <strong>(1)</strong> المقارنة بين التفاعلات الضوئية والتفاعلات اللاضوئية من حيث مكان الحدوث والعوامل المحددة والمتفاعلات والنواتج، <strong>(2)</strong> تتبع شطر جزيء الماء وانطلاق غاز الأكسجين، <strong>(3)</strong> توضيح دور بطاريات الخلية (ADP / ATP) ثلاثية الأبعاد وإنزيمات الستروما في تصنيع الجلوكوز.
+          </p>
+        </div>
+        <div style="flex-shrink: 0;">
+          <span style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.8rem; border-radius: var(--radius-sm); background: #ffffff; color: var(--primary-dark); font-size: 0.82rem; font-weight: 700; border: 1px solid #c8e6c9;">
+            <i data-lucide="clock" class="w-4 h-4 text-emerald-600"></i>
+            <span>الزمن المقدر: 12 دقيقة</span>
+          </span>
+        </div>
       </div>
 
-      <!-- RIGHT: 3D MOLECULAR SYNTHESIS LAB (7 cols) -->
-      <div class="lg:col-span-7 space-y-4">
-        
-        <div class="modern-card space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2 space-x-reverse">
-              <div class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center">
-                <i data-lucide="cpu" class="w-4 h-4"></i>
-              </div>
-              <div>
-                <h3 class="text-sm font-black text-slate-900">مختبر التركيب الجزيئي ثلاثي الأبعاد 3D</h3>
-                <p class="text-[11px] text-slate-500 font-medium">شاهد تفكيك جزيئات الماء وشحن بطارية ATP وتخليق حلقة الجلوكوز 3D</p>
-              </div>
-            </div>
-            <span id="cycleStepBadge" class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-bold text-xs border border-slate-200">الخطوة 1: جزيء الماء H₂O</span>
-          </div>
+      <!-- 2-COL LAYOUT -->
+      <div class="module-grid">
 
-          <!-- 3D Canvas -->
-          <div class="simulation-canvas-wrapper relative" id="reactionCanvas">
-            
-            <!-- Molecular HUD -->
-            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md border border-slate-300 text-slate-900 p-3 rounded-2xl shadow-md text-xs space-y-1 z-10 min-w-[190px]">
-              <span class="text-slate-500 text-[10px] font-bold block">المجسم الجزيئي النشط 3D:</span>
-              <h4 id="moleculeTitle" class="font-black text-blue-700 text-sm">جزيء الماء (H₂O)</h4>
-              <p id="moleculeDesc" class="text-[11px] text-slate-600">ذرة أكسجين مركزية مرتبطة بذرتي هيدروجين.</p>
+        <!-- RIGHT: THEORY (5 cols) -->
+        <div>
+          
+          <!-- CARD: Comparative Table -->
+          <div class="modern-card">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; color: var(--primary-dark); font-weight: 800; font-size: 1rem;">
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: #e8f5e9; color: var(--primary); display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="split" class="w-4 h-4"></i>
+              </div>
+              <span>مقارنة التفاعلات الضوئية واللاضوئية (منهج الوزارة)</span>
             </div>
 
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.85rem;">
+              <!-- Light Reactions -->
+              <div style="padding: 0.85rem; border-radius: var(--radius-sm); background: #f0fdf4; border: 1px solid #bbf7d0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 800; color: #166534; margin-bottom: 0.4rem;">
+                  <span>1. التفاعلات الضوئية (Light Reactions)</span>
+                  <span style="font-size: 0.72rem; background: #dcfce7; color: #15803d; padding: 0.15rem 0.6rem; border-radius: 999px;">في الجرانا (Grana)</span>
+                </div>
+                <ul style="padding-right: 1.2rem; margin: 0; line-height: 1.6; font-size: 0.82rem; color: var(--text-secondary);">
+                  <li><strong>الشرط الأساسي:</strong> وجود الضوء (العامل المحدد هو شدة الاستضاءة).</li>
+                  <li><strong>المتفاعلات:</strong> الماء (H₂O) والطاقة الضوئية الممتصة بالكلوروفيل.</li>
+                  <li><strong>الآلية:</strong> شطر الماء، ينطلق <strong>الأكسجين (O₂) كناتج ثانوي</strong>.</li>
+                  <li><strong>الناتج الطاقي:</strong> شحن مركب ADP إلى <strong>ATP</strong> المحمل بالطاقة.</li>
+                </ul>
+              </div>
+
+              <!-- Dark / Independent Reactions -->
+              <div style="padding: 0.85rem; border-radius: var(--radius-sm); background: #fff7ed; border: 1px solid #fed7aa;">
+                <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 800; color: #9a3412; margin-bottom: 0.4rem;">
+                  <span>2. التفاعلات اللاضوئية (Dark / Enzymatic)</span>
+                  <span style="font-size: 0.72rem; background: #ffedd5; color: #c2410c; padding: 0.15rem 0.6rem; border-radius: 999px;">في الستروما (Stroma)</span>
+                </div>
+                <ul style="padding-right: 1.2rem; margin: 0; line-height: 1.6; font-size: 0.82rem; color: var(--text-secondary);">
+                  <li><strong>الشرط الأساسي:</strong> الإنزيمات والحرارة الملائمة (لا تشترط الضوء).</li>
+                  <li><strong>المتفاعلات:</strong> ثاني أكسيد الكربون (CO₂) + الهيدروجين + طاقة ATP.</li>
+                  <li><strong>الناتج الرئيسي:</strong> بناء سكر <strong>الجلوكوز (C₆H₁₂O₆)</strong>.</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
-          <!-- Action Buttons -->
-          <div class="grid grid-cols-3 gap-2">
-            <button id="btnMolH2O" type="button" class="btn-primary py-2.5 text-xs font-bold flex items-center justify-center space-x-1 space-x-reverse cursor-pointer">
-              <span>1. شطر الماء (H₂O)</span>
-            </button>
-            <button id="btnMolATP" type="button" class="btn-secondary py-2.5 text-xs font-bold flex items-center justify-center space-x-1 space-x-reverse cursor-pointer">
-              <span>2. شحن ATP المشحونة</span>
-            </button>
-            <button id="btnMolGlucose" type="button" class="btn-secondary py-2.5 text-xs font-bold flex items-center justify-center space-x-1 space-x-reverse cursor-pointer">
-              <span>3. تخليق الجلوكوز 3D</span>
-            </button>
+          <!-- CARD: ATP Battery Concept -->
+          <div class="modern-card">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; color: var(--primary-dark); font-weight: 800; font-size: 0.95rem;">
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: #fff8e1; color: #f57f17; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="battery-charging" class="w-4 h-4"></i>
+              </div>
+              <span>عملة الطاقة الحيوية: شحن وتفريغ ATP</span>
+            </div>
+
+            <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7;">
+              <p style="margin: 0;">
+                جزيء <strong>ADP</strong> (أدينوسين ثنائي الفوسفات) يمثل بطارية فارغة، يلتقط مجموعة فوسفات وطاقة الضوء في الجرانا ليتحول إلى <strong>ATP</strong> (أدينوسين ثلاثي الفوسفات) مشحونة، ثم تهاجر إلى الستروما وتفرغ طاقتها لبناء الجلوكوز وتعود ADP مجدداً!
+              </p>
+            </div>
           </div>
 
         </div>
 
-        <!-- Formative Quick Check -->
-        <div class="modern-card space-y-3">
-          <div class="flex items-center space-x-2 space-x-reverse text-slate-900 font-black text-xs">
-            <i data-lucide="help-circle" class="w-4 h-4 text-blue-600"></i>
-            <span>تطبيق تكاملي (من بنك أسئلة كتاب الامتحان):</span>
-          </div>
-          <p class="text-xs text-slate-700 font-medium">
-            مصدر غاز الأكسجين (O₂) المتصاعد من عملية البناء الضوئي هو:
-          </p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-            <button id="chkOxy1" type="button" class="p-2.5 text-right rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 transition-all font-medium cursor-pointer">
-              أ) جزيء الماء (H₂O) في التفاعلات الضوئية
-            </button>
-            <button id="chkOxy2" type="button" class="p-2.5 text-right rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 transition-all font-medium cursor-pointer">
-              ب) ثاني أكسيد الكربون (CO₂) في التفاعلات اللاضوئية
-            </button>
-          </div>
-          <div id="oxygenFeedback" class="hidden p-3 rounded-xl text-xs font-bold"></div>
-        </div>
+        <!-- LEFT: 3D MOLECULAR SYNTHESIS LAB -->
+        <div>
+          
+          <div class="modern-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <div style="width: 34px; height: 34px; border-radius: 10px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center;">
+                  <i data-lucide="box" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h3 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--primary-dark);">مختبر التركيب الجزيئي ثلاثي الأبعاد 3D</h3>
+                  <p style="margin: 0; font-size: 0.78rem; color: var(--text-light);">شاهد تفكيك جزيئات الماء وشحن بطارية ATP وتخليق حلقة الجلوكوز 3D</p>
+                </div>
+              </div>
+              <span id="cycleStepBadge" style="padding: 0.25rem 0.7rem; border-radius: 999px; background: #e8f5e9; color: var(--primary-dark); font-weight: 800; font-size: 0.75rem; border: 1px solid #a5d6a7;">الخطوة 1: جزيء الماء H₂O</span>
+            </div>
 
-        <!-- NAV -->
-        <div class="flex justify-between items-center pt-2">
-          <a href="module3.html" class="btn-secondary py-3 px-5 text-xs font-bold space-x-1.5 space-x-reverse cursor-pointer">
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            <span>الوحدة السابقة</span>
-          </a>
-          <a href="module5.html" class="btn-primary py-3 px-6 text-xs font-bold space-x-1.5 space-x-reverse shadow-md cursor-pointer">
-            <span>الانتقال إلى الوحدة 5: اختبار اليود 3D</span>
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-          </a>
+            <!-- 3D Canvas -->
+            <div class="simulation-canvas-wrapper" id="reactionCanvas" style="position: relative; height: 340px;">
+              
+              <!-- Molecular HUD -->
+              <div class="digital-scale-hud" style="top: 12px; left: 12px; min-width: 190px;">
+                <span style="color: var(--text-light); font-size: 0.72rem; font-weight: 700; display: block; margin-bottom: 0.2rem;">المجسم الجزيئي النشط 3D:</span>
+                <h4 id="moleculeTitle" style="color: #0369a1; font-weight: 900; font-size: 0.95rem; margin: 0 0 0.2rem;">جزيء الماء (H₂O)</h4>
+                <p id="moleculeDesc" style="margin: 0; font-size: 0.75rem; color: var(--text-secondary); line-height: 1.4;">ذرة أكسجين مركزية مرتبطة بذرتي هيدروجين.</p>
+              </div>
+
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 0.75rem;">
+              <button id="btnMolH2O" type="button" class="station-btn" style="padding: 0.6rem 0.5rem; font-size: 0.8rem;">
+                <span>1. شطر الماء (H₂O)</span>
+              </button>
+              <button id="btnMolATP" type="button" class="btn-secondary" style="padding: 0.6rem 0.5rem; font-size: 0.8rem;">
+                <span>2. شحن ATP المشحونة</span>
+              </button>
+              <button id="btnMolGlucose" type="button" class="btn-secondary" style="padding: 0.6rem 0.5rem; font-size: 0.8rem;">
+                <span>3. تخليق الجلوكوز 3D</span>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Formative Quick Check -->
+          <div class="modern-card">
+            <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.6rem; color: var(--primary-dark); font-weight: 800; font-size: 0.88rem;">
+              <i data-lucide="help-circle" class="w-4 h-4 text-emerald-600"></i>
+              <span>تطبيق تكاملي (من بنك أسئلة كتاب الامتحان):</span>
+            </div>
+            <p style="margin: 0 0 0.75rem; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
+              مصدر غاز الأكسجين (O₂) المتصاعد من عملية البناء الضوئي هو:
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 0.5rem;">
+              <button id="chkOxy1" type="button" class="btn-secondary" style="text-align: right; justify-content: flex-start; padding: 0.65rem 0.9rem; font-size: 0.82rem;">
+                أ) جزيء الماء (H₂O) في التفاعلات الضوئية
+              </button>
+              <button id="chkOxy2" type="button" class="btn-secondary" style="text-align: right; justify-content: flex-start; padding: 0.65rem 0.9rem; font-size: 0.82rem;">
+                ب) ثاني أكسيد الكربون (CO₂) في التفاعلات اللاضوئية
+              </button>
+            </div>
+            <div id="oxygenFeedback" style="display: none; margin-top: 0.75rem; padding: 0.65rem 0.9rem; border-radius: var(--radius-sm); font-size: 0.82rem; font-weight: 700;"></div>
+          </div>
+
+          <!-- NAV -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+            <a href="module3.html" class="btn-secondary" style="padding: 0.75rem 1.5rem;">
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              <span>الوحدة السابقة: فيزياء الضوء</span>
+            </a>
+            <a href="module5.html" class="station-btn" style="padding: 0.75rem 1.5rem;">
+              <span>الانتقال إلى الوحدة 5: اختبار اليود 3D</span>
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </a>
+          </div>
+
         </div>
 
       </div>
 
     </div>
-
   </main>
 
-  <footer class="w-full border-t border-slate-200 py-3 text-center text-xs text-slate-400 bg-white">
-    منظومة التعلم للإتقان المعملية | الوحدة 4: مسار الطاقة والتفاعلات الضوئية واللاضوئية
+  <footer class="site-footer" style="background: var(--bg-card); border-top: 1px solid #e0e0e0; padding: 1.5rem 0; text-align: center; font-size: 0.85rem; color: var(--text-light); margin-top: 2rem;">
+    <div class="container">
+      <p>منظومة التعلم للإتقان المعملية | الوحدة 4: مسار الطاقة والتفاعلات الضوئية واللاضوئية</p>
+    </div>
   </footer>
+</div>
 
-  <script type="module">
-    import { sims3D } from './js/simulations-3d.js';
-    import { markStationComplete } from './js/firebase-config.js';
-    if (window.lucide) lucide.createIcons();
+<script src="js/app.js"></script>
+<script type="module">
+  import { sims3D } from './js/simulations-3d.js';
+  import { markStationComplete } from './js/firebase-config.js';
+  if (window.lucide) lucide.createIcons();
 
-    // Mount 3D Molecules
-    sims3D.initStation4('reactionCanvas');
+  // Mount 3D Molecules
+  sims3D.initStation4('reactionCanvas');
 
-    const moleculeTitle = document.getElementById('moleculeTitle');
-    const moleculeDesc = document.getElementById('moleculeDesc');
-    const cycleStepBadge = document.getElementById('cycleStepBadge');
+  const moleculeTitle = document.getElementById('moleculeTitle');
+  const moleculeDesc = document.getElementById('moleculeDesc');
+  const cycleStepBadge = document.getElementById('cycleStepBadge');
 
-    const btnMolH2O = document.getElementById('btnMolH2O');
-    const btnMolATP = document.getElementById('btnMolATP');
-    const btnMolGlucose = document.getElementById('btnMolGlucose');
+  const btnMolH2O = document.getElementById('btnMolH2O');
+  const btnMolATP = document.getElementById('btnMolATP');
+  const btnMolGlucose = document.getElementById('btnMolGlucose');
 
-    btnMolH2O.addEventListener('click', () => {
-      if (sims3D.activeSims.station4) sims3D.activeSims.station4.setStep(1);
-      moleculeTitle.innerText = 'جزيء الماء (H₂O)';
-      moleculeDesc.innerText = 'ينشطر في الجرانا بواسطة طاقة الضوء لينطلق غاز الأكسجين O₂.';
-      cycleStepBadge.innerText = 'الخطوة 1: جزيء الماء H₂O';
-      btnMolH2O.className = 'btn-primary py-2.5 text-xs font-bold flex items-center justify-center space-x-1 space-x-reverse cursor-pointer';
-      btnMolATP.className = 'btn-secondary py-2.5 text-xs font-bold flex items-center justify-center space-x-1 space-x-reverse cursor-pointer';
-      btnMolGlucose.className = 'btn-secondary py-2.5 text-xs font-bold flex items-center justify-center space-x-1 space-x-reverse cursor-pointer';
-    });
+  btnMolH2O.addEventListener('click', () => {
+    if (sims3D.activeSims.station4) sims3D.activeSims.station4.setStep(1);
+    moleculeTitle.innerText = 'جزيء الماء (H₂O)';
+    moleculeDesc.innerText = 'ينشطر في الجرانا بواسطة طاقة الضوء لينطلق غاز الأكسجين O₂.';
+    cycleStepBadge.innerText = 'الخطوة 1: جزيء الماء H₂O';
+    btnMolH2O.className = 'station-btn';
+    btnMolH2O.style.background = 'var(--primary)';
+    btnMolATP.className = 'btn-secondary';
+    btnMolGlucose.className = 'btn-secondary';
+  });
 
-    btnMolATP.addEventListener('click', () => {
-      if (sims3D.activeSims.station4) sims3D.activeSims.station4.setStep(2);
-      moleculeTitle.innerText = 'جزيء ATP (بطارية الطاقة)';
-      moleculeDesc.innerText = 'أدينوسين مرتبط بثلاث مجموعات فوسفات تخزن الطاقة الكيميائية.';
-      cycleStepBadge.innerText = 'الخطوة 2: شحن ATP';
-      btnMolATP.className = 'btn-primary py-2.5 text-xs font-bold flex items-center justify-center space-x-1 space-x-reverse cursor-pointer';
-      btnMolH2O.className = 'btn-secondary py-2.5 text-xs font-bold flex items-center justify-center space-x-1 space-x-reverse cursor-pointer';
-      btnMolGlucose.className = 'btn-secondary py-2.5 text-xs font-bold flex items-center justify-center space-x-1 space-x-reverse cursor-pointer';
-    });
+  btnMolATP.addEventListener('click', () => {
+    if (sims3D.activeSims.station4) sims3D.activeSims.station4.setStep(2);
+    moleculeTitle.innerText = 'جزيء ATP (بطارية الطاقة)';
+    moleculeDesc.innerText = 'أدينوسين مرتبط بثلاث مجموعات فوسفات تخزن الطاقة الكيميائية.';
+    cycleStepBadge.innerText = 'الخطوة 2: شحن ATP';
+    btnMolATP.className = 'station-btn';
+    btnMolATP.style.background = 'var(--primary)';
+    btnMolH2O.className = 'btn-secondary';
+    btnMolGlucose.className = 'btn-secondary';
+  });
 
-    btnMolGlucose.addEventListener('click', () => {
-      if (sims3D.activeSims.station4) sims3D.activeSims.station4.setStep(3);
-      moleculeTitle.innerText = 'سكر الجلوكوز (C₆H₁₂O₆)';
-      moleculeDesc.innerText = 'حلقة سداسية الكربون تم تخليقها في الستروما باستخدام طاقة ATP.';
-      cycleStepBadge.innerText = 'الخطوة 3: تخليق الجلوكوز';
-      btnMolGlucose.className = 'btn-primary py-2.5 text-xs font-bold flex items-center justify-center space-x-1 space-x-reverse cursor-pointer';
-      btnMolH2O.className = 'btn-secondary py-2.5 text-xs font-bold flex items-center justify-center space-x-1 space-x-reverse cursor-pointer';
-      btnMolATP.className = 'btn-secondary py-2.5 text-xs font-bold flex items-center justify-center space-x-1 space-x-reverse cursor-pointer';
-      markStationComplete(4, 100);
-    });
+  btnMolGlucose.addEventListener('click', () => {
+    if (sims3D.activeSims.station4) sims3D.activeSims.station4.setStep(3);
+    moleculeTitle.innerText = 'سكر الجلوكوز (C₆H₁₂O₆)';
+    moleculeDesc.innerText = 'حلقة سداسية الكربون تم تخليقها في الستروما باستخدام طاقة ATP.';
+    cycleStepBadge.innerText = 'الخطوة 3: تخليق الجلوكوز';
+    btnMolGlucose.className = 'station-btn';
+    btnMolGlucose.style.background = 'var(--primary)';
+    btnMolH2O.className = 'btn-secondary';
+    btnMolATP.className = 'btn-secondary';
+    markStationComplete(4, 100);
+  });
 
-    // Formative check
-    document.getElementById('chkOxy1').addEventListener('click', () => {
-      const fb = document.getElementById('oxygenFeedback');
-      fb.classList.remove('hidden');
-      fb.className = 'p-3 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
-      fb.innerHTML = 'إجابة ممتازة وصحيحة! أثبتت الدراسات العلمية أن الأكسجين المتصاعد مصدره انشطار جزيء الماء (H₂O) في التفاعلات الضوئية وليس CO₂.';
-    });
+  // Formative check
+  document.getElementById('chkOxy1').addEventListener('click', () => {
+    const fb = document.getElementById('oxygenFeedback');
+    fb.style.display = 'block';
+    fb.style.background = '#e8f5e9';
+    fb.style.color = '#1b5e20';
+    fb.style.border = '1px solid #a5d6a7';
+    fb.innerHTML = 'إجابة ممتازة وصحيحة! أثبتت الدراسات العلمية أن الأكسجين المتصاعد مصدره انشطار جزيء الماء (H₂O) في التفاعلات الضوئية وليس CO₂.';
+  });
 
-    document.getElementById('chkOxy2').addEventListener('click', () => {
-      const fb = document.getElementById('oxygenFeedback');
-      fb.classList.remove('hidden');
-      fb.className = 'p-3 rounded-xl text-xs font-bold bg-red-100 text-red-800 border border-red-300';
-      fb.innerHTML = 'غير صحيح. انتبه: مصدر الأكسجين المتصاعد هو الماء (H₂O) عند شطره بالضوء في الجرانا، بينما أكسجين CO₂ يدخل في تركيب الجلوكوز.';
-    });
-  </script>
+  document.getElementById('chkOxy2').addEventListener('click', () => {
+    const fb = document.getElementById('oxygenFeedback');
+    fb.style.display = 'block';
+    fb.style.background = '#ffebee';
+    fb.style.color = '#b71c1c';
+    fb.style.border = '1px solid #ffcdd2';
+    fb.innerHTML = 'غير صحيح. انتبه: مصدر الأكسجين المتصاعد هو الماء (H₂O) عند شطره بالضوء في الجرانا، بينما أكسجين CO₂ يدخل في تركيب الجلوكوز.';
+  });
+</script>
 </body>
 </html>
-
-
