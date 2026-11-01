@@ -1,9 +1,56 @@
 // Studio Grade 3D Simulations using Three.js
-// Enhanced with clean laboratory lighting, crisp rendering, and high-fidelity models
+// Enhanced with clean laboratory lighting, crisp rendering, high-fidelity models,
+// and full 360-degree pointer drag & scroll zoom interactivity.
 
 export class Simulations3D {
   constructor() {
     this.activeSims = {};
+  }
+
+  // Helper: Pointer Drag & Wheel Zoom Interactivity
+  setupPointerControls(container, targetGroup, camera) {
+    if (!container) return () => {};
+    let isDragging = false;
+    let previousPos = { x: 0, y: 0 };
+    container.style.cursor = 'grab';
+
+    const onPointerDown = (e) => {
+      isDragging = true;
+      previousPos = { x: e.clientX, y: e.clientY };
+      container.style.cursor = 'grabbing';
+    };
+
+    const onPointerMove = (e) => {
+      if (!isDragging || !targetGroup) return;
+      const deltaX = e.clientX - previousPos.x;
+      const deltaY = e.clientY - previousPos.y;
+      targetGroup.rotation.y += deltaX * 0.008;
+      targetGroup.rotation.x = Math.max(-0.6, Math.min(0.8, targetGroup.rotation.x + deltaY * 0.006));
+      previousPos = { x: e.clientX, y: e.clientY };
+    };
+
+    const onPointerUp = () => {
+      isDragging = false;
+      container.style.cursor = 'grab';
+    };
+
+    const onWheel = (e) => {
+      e.preventDefault();
+      if (!camera) return;
+      camera.position.z = Math.max(3.0, Math.min(14.0, camera.position.z + e.deltaY * 0.008));
+    };
+
+    container.addEventListener('pointerdown', onPointerDown);
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
+    container.addEventListener('wheel', onWheel, { passive: false });
+
+    return () => {
+      container.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
+      container.removeEventListener('wheel', onWheel);
+    };
   }
 
   // LAB 1: Willow Tree & Analytical Scale Simulation
@@ -16,7 +63,7 @@ export class Simulations3D {
     const height = container.clientHeight || 360;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf8fafc); // Clean laboratory light slate
+    scene.background = new THREE.Color(0xf8fafc);
 
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
     camera.position.set(0, 3.2, 8.0);
@@ -40,13 +87,17 @@ export class Simulations3D {
     softFill.position.set(-4, 3, 2);
     scene.add(softFill);
 
+    // Group for entire interactive assembly
+    const labGroup = new THREE.Group();
+    scene.add(labGroup);
+
     // Laboratory Desk / Scale Base
     const baseGeo = new THREE.CylinderGeometry(3.0, 3.0, 0.2, 32);
     const baseMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.3 });
     const desk = new THREE.Mesh(baseGeo, baseMat);
     desk.position.y = -1.1;
     desk.receiveShadow = true;
-    scene.add(desk);
+    labGroup.add(desk);
 
     // Ceramic Pot
     const potGeo = new THREE.CylinderGeometry(1.25, 0.85, 1.3, 24);
@@ -89,7 +140,7 @@ export class Simulations3D {
     }
 
     pot.add(treeGroup);
-    scene.add(pot);
+    labGroup.add(pot);
 
     let isGrowing = false;
     let growth = 0;
@@ -97,7 +148,9 @@ export class Simulations3D {
 
     const animate = () => {
       reqId = requestAnimationFrame(animate);
-      pot.rotation.y += 0.003;
+      if (!isGrowing) {
+        labGroup.rotation.y += 0.002;
+      }
 
       if (isGrowing) {
         if (growth < 1.0) {
@@ -118,6 +171,8 @@ export class Simulations3D {
     };
     animate();
 
+    const cleanupControls = this.setupPointerControls(container, labGroup, camera);
+
     const handleResize = () => {
       if (!container) return;
       const w = container.clientWidth || 600;
@@ -131,6 +186,7 @@ export class Simulations3D {
     this.activeSims.station1 = {
       cleanup: () => {
         cancelAnimationFrame(reqId);
+        cleanupControls();
         window.removeEventListener('resize', handleResize);
         renderer.dispose();
       },
@@ -202,13 +258,11 @@ export class Simulations3D {
       { x: 0.8, z: 0.4, count: 5 }
     ];
 
-    const granaMeshes = [];
     stackPoints.forEach(pt => {
       for (let d = 0; d < pt.count; d++) {
         const disc = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.06, 16), thylakoidMat);
         disc.position.set(pt.x, 0.18 + d * 0.09, pt.z);
         chloroplast.add(disc);
-        granaMeshes.push(disc);
       }
     });
 
@@ -217,10 +271,12 @@ export class Simulations3D {
     let reqId;
     const animate = () => {
       reqId = requestAnimationFrame(animate);
-      chloroplast.rotation.y += 0.004;
+      chloroplast.rotation.y += 0.003;
       renderer.render(scene, camera);
     };
     animate();
+
+    const cleanupControls = this.setupPointerControls(container, chloroplast, camera);
 
     const handleResize = () => {
       if (!container) return;
@@ -235,6 +291,7 @@ export class Simulations3D {
     this.activeSims.station2 = {
       cleanup: () => {
         cancelAnimationFrame(reqId);
+        cleanupControls();
         window.removeEventListener('resize', handleResize);
         renderer.dispose();
       },
@@ -278,23 +335,26 @@ export class Simulations3D {
     light.position.set(2, 6, 4);
     scene.add(light);
 
+    const photonStage = new THREE.Group();
+    scene.add(photonStage);
+
     // Leaf Plate in Center
     const leafGeo = new THREE.BoxGeometry(2.4, 0.1, 2.0);
     const leafMat = new THREE.MeshStandardMaterial({ color: 0x16a34a, roughness: 0.3 });
     const leaf = new THREE.Mesh(leafGeo, leafMat);
     leaf.position.y = -0.5;
-    scene.add(leaf);
+    photonStage.add(leaf);
 
     // Photons
     const photons = [];
     const pGeo = new THREE.SphereGeometry(0.08, 8, 8);
-    let activeColor = 0xdc2626; // Red default
+    let activeColor = 0xdc2626;
     let activeMode = "red";
 
     for (let i = 0; i < 35; i++) {
       const pMesh = new THREE.Mesh(pGeo, new THREE.MeshBasicMaterial({ color: activeColor }));
       pMesh.position.set((Math.random() - 0.5) * 2.8, 3.2 + Math.random() * 2.5, (Math.random() - 0.5) * 2.2);
-      scene.add(pMesh);
+      photonStage.add(pMesh);
       photons.push({ mesh: pMesh, speed: 0.045 + Math.random() * 0.04, reflected: false });
     }
 
@@ -308,7 +368,7 @@ export class Simulations3D {
           p.mesh.position.y -= p.speed;
           if (p.mesh.position.y <= -0.4) {
             if (activeMode === "green") {
-              p.reflected = true; // bounces up
+              p.reflected = true;
             } else {
               p.mesh.position.y = 3.5 + Math.random() * 1.5;
               p.mesh.position.x = (Math.random() - 0.5) * 2.8;
@@ -330,6 +390,8 @@ export class Simulations3D {
     };
     animate();
 
+    const cleanupControls = this.setupPointerControls(container, photonStage, camera);
+
     const handleResize = () => {
       if (!container) return;
       const w = container.clientWidth || 600;
@@ -343,6 +405,7 @@ export class Simulations3D {
     this.activeSims.station3 = {
       cleanup: () => {
         cancelAnimationFrame(reqId);
+        cleanupControls();
         window.removeEventListener('resize', handleResize);
         renderer.dispose();
       },
@@ -433,11 +496,13 @@ export class Simulations3D {
     let reqId;
     const animate = () => {
       reqId = requestAnimationFrame(animate);
-      activeMesh.rotation.y += 0.015;
-      activeMesh.rotation.x += 0.008;
+      activeMesh.rotation.y += 0.012;
+      activeMesh.rotation.x += 0.006;
       renderer.render(scene, camera);
     };
     animate();
+
+    const cleanupControls = this.setupPointerControls(container, stage, camera);
 
     const handleResize = () => {
       if (!container) return;
@@ -452,6 +517,7 @@ export class Simulations3D {
     this.activeSims.station4 = {
       cleanup: () => {
         cancelAnimationFrame(reqId);
+        cleanupControls();
         window.removeEventListener('resize', handleResize);
         renderer.dispose();
       },
@@ -490,18 +556,21 @@ export class Simulations3D {
     spot.position.set(0, 5, 4);
     scene.add(spot);
 
+    const beakerGroup = new THREE.Group();
+    scene.add(beakerGroup);
+
     // Beaker
     const beaker = new THREE.Mesh(
       new THREE.CylinderGeometry(1.2, 1.1, 2.0, 24, 1, true),
       new THREE.MeshPhysicalMaterial({ color: 0xffffff, transmission: 0.92, opacity: 1, transparent: true, roughness: 0.1 })
     );
-    scene.add(beaker);
+    beakerGroup.add(beaker);
 
     // Fluid
     const fluidMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.55 });
     const fluid = new THREE.Mesh(new THREE.CylinderGeometry(1.15, 1.05, 1.2, 24), fluidMat);
     fluid.position.y = -0.35;
-    scene.add(fluid);
+    beakerGroup.add(fluid);
 
     // Leaf
     const leafMat = new THREE.MeshStandardMaterial({ color: 0x16a34a, roughness: 0.4 });
@@ -509,16 +578,18 @@ export class Simulations3D {
     const leaf = new THREE.Mesh(leafGeo, leafMat);
     leaf.position.y = -0.2;
     leaf.rotation.x = 0.2;
-    scene.add(leaf);
+    beakerGroup.add(leaf);
 
     let reqId;
     const animate = () => {
       reqId = requestAnimationFrame(animate);
-      leaf.rotation.y += 0.01;
-      beaker.rotation.y += 0.005;
+      leaf.rotation.y += 0.008;
+      beakerGroup.rotation.y += 0.003;
       renderer.render(scene, camera);
     };
     animate();
+
+    const cleanupControls = this.setupPointerControls(container, beakerGroup, camera);
 
     const handleResize = () => {
       if (!container) return;
@@ -533,22 +604,23 @@ export class Simulations3D {
     this.activeSims.station5 = {
       cleanup: () => {
         cancelAnimationFrame(reqId);
+        cleanupControls();
         window.removeEventListener('resize', handleResize);
         renderer.dispose();
       },
       applyStage: (stage) => {
-        if (stage === 1) { // Boiling water
+        if (stage === 1) {
           fluidMat.color.setHex(0x38bdf8);
           leafMat.color.setHex(0x15803d);
-        } else if (stage === 2) { // Warm alcohol
+        } else if (stage === 2) {
           fluidMat.color.setHex(0xe2e8f0);
-          leafMat.color.setHex(0xfef08a); // Bleached
-        } else if (stage === 3) { // Water rinse
+          leafMat.color.setHex(0xfef08a);
+        } else if (stage === 3) {
           fluidMat.color.setHex(0xbfdbfe);
           leafMat.color.setHex(0xf8fafc);
-        } else if (stage === 4) { // Iodine reagent
+        } else if (stage === 4) {
           fluidMat.color.setHex(0xd97706);
-          leafMat.color.setHex(0x1e1b4b); // Midnight blue/purple reaction!
+          leafMat.color.setHex(0x1e1b4b);
         }
       }
     };
@@ -591,7 +663,6 @@ export class Simulations3D {
       rack.position.y = -1.2 + tier * 1.3;
       farmGroup.add(rack);
 
-      // LED strip above each tier
       const led = new THREE.Mesh(
         new THREE.BoxGeometry(3.2, 0.05, 0.1),
         new THREE.MeshBasicMaterial({ color: 0xec4899 })
@@ -599,7 +670,6 @@ export class Simulations3D {
       led.position.set(0, rack.position.y + 1.15, 0);
       farmGroup.add(led);
 
-      // Crop row
       for (let c = -1.3; c <= 1.3; c += 0.55) {
         const crop = new THREE.Mesh(
           new THREE.SphereGeometry(0.2, 8, 8),
@@ -613,10 +683,12 @@ export class Simulations3D {
     let reqId;
     const animate = () => {
       reqId = requestAnimationFrame(animate);
-      farmGroup.rotation.y += 0.005;
+      farmGroup.rotation.y += 0.003;
       renderer.render(scene, camera);
     };
     animate();
+
+    const cleanupControls = this.setupPointerControls(container, farmGroup, camera);
 
     const handleResize = () => {
       if (!container) return;
@@ -631,6 +703,7 @@ export class Simulations3D {
     this.activeSims.station6 = {
       cleanup: () => {
         cancelAnimationFrame(reqId);
+        cleanupControls();
         window.removeEventListener('resize', handleResize);
         renderer.dispose();
       },
@@ -666,7 +739,6 @@ export class Simulations3D {
     container.innerHTML = '';
     container.appendChild(renderer.domElement);
 
-    // Lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
     scene.add(ambientLight);
 
@@ -677,7 +749,7 @@ export class Simulations3D {
     const mainGroup = new THREE.Group();
     scene.add(mainGroup);
 
-    // Left: Chloroplast (Green disc)
+    // Left: Chloroplast
     const chloroGroup = new THREE.Group();
     chloroGroup.position.set(-3.2, 0, 0);
     mainGroup.add(chloroGroup);
@@ -694,7 +766,6 @@ export class Simulations3D {
     const chloroplastMesh = new THREE.Mesh(chloroGeo, chloroMat);
     chloroGroup.add(chloroplastMesh);
 
-    // Thylakoid stacks inside chloroplast
     for (let i = -0.5; i <= 0.5; i += 0.5) {
       const thyl = new THREE.Mesh(
         new THREE.CylinderGeometry(0.35, 0.35, 0.08, 16),
@@ -704,7 +775,7 @@ export class Simulations3D {
       chloroGroup.add(thyl);
     }
 
-    // Right: Mitochondria (Amber/Orange capsule)
+    // Right: Mitochondria
     const mitoGroup = new THREE.Group();
     mitoGroup.position.set(3.2, 0, 0);
     mainGroup.add(mitoGroup);
@@ -721,7 +792,6 @@ export class Simulations3D {
     const mitoMesh = new THREE.Mesh(mitoGeo, mitoMat);
     mitoGroup.add(mitoMesh);
 
-    // Inner folded cristae representation
     for (let c = -0.6; c <= 0.6; c += 0.4) {
       const crista = new THREE.Mesh(
         new THREE.TorusGeometry(0.5, 0.08, 8, 16),
@@ -732,15 +802,14 @@ export class Simulations3D {
       mitoGroup.add(crista);
     }
 
-    // Circulating exchange particles (Glucose & O2 top arc, CO2 & H2O bottom arc)
     const particleCount = 28;
     const particles = [];
     const particleGroup = new THREE.Group();
     mainGroup.add(particleGroup);
 
-    const pMatGreen = new THREE.MeshBasicMaterial({ color: 0x2e7d32 }); // Glucose/O2
-    const pMatBlue = new THREE.MeshBasicMaterial({ color: 0x0288d1 });  // H2O/CO2
-    const pMatGold = new THREE.MeshBasicMaterial({ color: 0xfbc02d });  // ATP energy
+    const pMatGreen = new THREE.MeshBasicMaterial({ color: 0x2e7d32 });
+    const pMatBlue = new THREE.MeshBasicMaterial({ color: 0x0288d1 });
+    const pMatGold = new THREE.MeshBasicMaterial({ color: 0xfbc02d });
 
     for (let i = 0; i < particleCount; i++) {
       const isTopArc = i < particleCount / 2;
@@ -748,7 +817,6 @@ export class Simulations3D {
         new THREE.SphereGeometry(0.12, 12, 12),
         isTopArc ? pMatGreen : pMatBlue
       );
-      const angle = (i / (particleCount / 2)) * Math.PI;
       sphere.userData = {
         arc: isTopArc ? 'top' : 'bottom',
         t: Math.random(),
@@ -759,12 +827,10 @@ export class Simulations3D {
     }
 
     let reqId;
-    let focusMode = 'all';
-
     const animate = () => {
       reqId = requestAnimationFrame(animate);
-      chloroGroup.rotation.y += 0.008;
-      mitoGroup.rotation.y += 0.008;
+      chloroGroup.rotation.y += 0.005;
+      mitoGroup.rotation.y += 0.005;
 
       particles.forEach((p) => {
         p.userData.t += p.userData.speed;
@@ -772,12 +838,10 @@ export class Simulations3D {
 
         const t = p.userData.t;
         if (p.userData.arc === 'top') {
-          // Flow from Chloroplast (-3.2) to Mitochondrion (+3.2)
           const x = -3.2 + t * 6.4;
           const y = Math.sin(t * Math.PI) * 1.5;
           p.position.set(x, y + 0.3, 0);
         } else {
-          // Flow from Mitochondrion (+3.2) to Chloroplast (-3.2)
           const x = 3.2 - t * 6.4;
           const y = -Math.sin(t * Math.PI) * 1.5;
           p.position.set(x, y - 0.3, 0);
@@ -787,6 +851,8 @@ export class Simulations3D {
       renderer.render(scene, camera);
     };
     animate();
+
+    const cleanupControls = this.setupPointerControls(container, mainGroup, camera);
 
     const handleResize = () => {
       if (!container) return;
@@ -801,26 +867,24 @@ export class Simulations3D {
     this.activeSims.relationship = {
       cleanup: () => {
         cancelAnimationFrame(reqId);
+        cleanupControls();
         window.removeEventListener('resize', handleResize);
         renderer.dispose();
       },
       setStep: (step) => {
         if (step === 1) {
-          // Reactants (H2O + CO2)
           particles.forEach(p => {
             p.material = p.userData.arc === 'bottom' ? pMatBlue : pMatBlue;
             p.scale.set(1.4, 1.4, 1.4);
           });
-          chloroplastMesh.scale.set(1.15, 0.65, 1.15);
+          chloroplastMesh.scale.set(1.15, 0.55, 1.15);
           mitoMesh.scale.set(1, 1, 1);
         } else if (step === 2) {
-          // ATP energy batteries
           particles.forEach(p => {
             p.material = pMatGold;
             p.scale.set(1.6, 1.6, 1.6);
           });
         } else if (step === 3) {
-          // Glucose + O2 flow
           particles.forEach(p => {
             p.material = p.userData.arc === 'top' ? pMatGreen : pMatGreen;
             p.scale.set(1.4, 1.4, 1.4);
