@@ -1,275 +1,244 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>لوحة مسار التعلم للإتقان | كورس البناء الضوئي</title>
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مسار التعلم للإتقان المعملي | رحلة تدفق الطاقة</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-['Cairo',sans-serif]">
-
-  <!-- TOP APP BAR -->
-  <header class="bg-white border-b border-slate-200 py-3 px-4 sm:px-8 shadow-sm sticky top-0 z-40">
-    <div class="app-container flex items-center justify-between">
-      <div class="flex items-center space-x-2.5 space-x-reverse">
-        <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-sm">
-          <i data-lucide="layers" class="w-5 h-5"></i>
+<body>
+<div class="page-wrapper">
+    <!-- Top Nav -->
+    <nav class="top-nav">
+        <div class="container">
+            <a href="dashboard.html" class="logo">
+                <span class="logo-icon">🌱</span>
+                <span>رحلة الطاقة</span>
+            </a>
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-link active">الوحدات التعليمية</a>
+                <a href="relationship.html" class="nav-link">العلاقة التكاملية</a>
+                <a href="guide.html" class="nav-link">دليل الاستخدام</a>
+                <a href="assessment.html" class="nav-link">التقييم النهائي</a>
+            </div>
+            <div class="progress-mini">
+                <span id="navProgressText" class="progress-text">0%</span>
+                <div class="progress-bar-mini"><div id="navProgressBar" class="fill" style="width:0%"></div></div>
+            </div>
         </div>
-        <div>
-          <h1 class="text-sm font-black text-slate-900 leading-tight">منصة تدفق الطاقة التفاعلية</h1>
-          <p class="text-[11px] text-blue-600 font-bold">مسار التعلم للإتقان المعملي (LMS)</p>
+    </nav>
+
+    <!-- Hero / Welcome Header -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-text">
+                <span class="badge">🌱 منظومة التعلم للإتقان والمعامل ثلاثية الأبعاد (3D)</span>
+                <h1>مرحباً بك يا <span id="welcomeName" style="color: var(--secondary-light);">الباحث العلمي</span></h1>
+                <p>
+                    بيئة تعليمية استقصائية متكاملة لتدفق الطاقة وعملية البناء الضوئي، تضم <strong>6 مختبرات 3D مستقلة</strong>، وحدة العلاقة التكاملية، وأنشطة تفاعلية تؤهلك للاختبار الختامي الشامل واعتماد الشهادة.
+                </p>
+                <div style="display: flex; gap: 0.8rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                    <a href="guide.html" class="station-btn" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);">
+                        📘 استعراض دليل الاستخدام
+                    </a>
+                    <a href="relationship.html" class="station-btn" style="background: var(--secondary); color: #1f2937;">
+                        🔄 استكشاف العلاقة بين البناء والتنفس
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
+    </header>
 
-      <div class="flex items-center space-x-2.5 space-x-reverse">
-        <div class="flex items-center space-x-2 space-x-reverse bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200">
-          <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-          <span id="studentNameHeader" class="text-xs font-bold text-slate-700">طالب مستكشف</span>
+    <main class="page-content">
+        <div class="container">
+
+            <!-- USER GUIDE CARDS HIGHLIGHT SECTION (بطاقات دليل الاستخدام بالأيقونات) -->
+            <div style="margin-bottom: 2.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <div>
+                        <h2 style="color: var(--primary-dark); font-size: 1.4rem; margin: 0;"><span class="icon">🧭</span> بطاقات دليل الاستخدام السريع</h2>
+                        <p style="margin: 0; font-size: 0.9rem; color: var(--text-light);">تعرف على كيفية التفاعل مع المنصة والمعامل ثلاثية الأبعاد</p>
+                    </div>
+                    <a href="guide.html" style="color: var(--primary); font-weight: 700; font-size: 0.85rem;">عرض الدليل كاملاً ←</a>
+                </div>
+
+                <div class="guide-cards-grid">
+                    
+                    <div class="guide-card">
+                        <div class="guide-icon-box" style="background: #e8f5e9; color: #2e7d32;">🎯</div>
+                        <h3>الأهداف السلوكية (LMS)</h3>
+                        <p>لكل وحدة هدف تعليمي واضح يوضح لك ما ستكتشفه وتتقنه قبل بدء النشاط.</p>
+                        <div class="guide-tip">تتبع الأهداف المعرفية في كل صفحة</div>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="guide-icon-box" style="background: #e1f5fe; color: #0288d1;">🧊</div>
+                        <h3>معامل 3D التفاعلية</h3>
+                        <p>مجسمات حية بالغة الدقة (تشريح البلاستيدة، مسار الفوتونات، ونمو الشجرة) قابلة للتدوير بالماوس واللمس.</p>
+                        <div class="guide-tip">اسحب لتدوير المجسم 360 درجة</div>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="guide-icon-box" style="background: #fff3e0; color: #e65100;">🧩</div>
+                        <h3>أنشطة السحب والإفلات</h3>
+                        <p>تطبيق عملي بسحب المواد المتفاعلة وبطاقات الطاقة في مناطقها الصحيحة للتحقق الفوري.</p>
+                        <div class="guide-tip">اسحب البطاقة لمكانها واضغط تحقق</div>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="guide-icon-box" style="background: #fff8e1; color: #f57f17;">🏆</div>
+                        <h3>شهادة الإتقان المعتمدة</h3>
+                        <p>تقويم ختامي من 15 سؤالاً معيارياً؛ إحراز 75%+ يمنحك شهادة تفوق معتمدة وقابلة للطباعة PDF باسمك.</p>
+                        <div class="guide-tip">إصدار وتوثيق فوري للشهادة</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- LEARNING MODULES GRID -->
+            <div class="learning-path" style="padding: 1rem 0 3rem;">
+                <h2 style="color: var(--primary-dark); font-size: 1.6rem; text-align: center; margin-bottom: 0.3rem;">
+                    🌿 الوحدات التعليمية الاستقصائية الستة (المنهج الكامل)
+                </h2>
+                <p class="subtitle" style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">
+                    لكل وحدة هدف معرفي محدد ومختبر 3D مستقل يغطي درس البناء الضوئي للصف الثاني الإعدادي
+                </p>
+
+                <div class="stations-grid">
+
+                    <!-- MODULE 1 -->
+                    <div class="station-card">
+                        <div class="station-header">
+                            <span class="station-num">1</span>
+                            <span class="badge" id="badgeMod1" style="background:#e8f5e9; color:#2e7d32;">معمل 3D</span>
+                        </div>
+                        <h3 class="station-title">هل يحصل النبات على غذائه من التربة؟</h3>
+                        <p class="station-desc">
+                            تجربة فان هيلمونت، ميزان الكتل المعملي، والنمو التفاعلي ثلاثي الأبعاد مع أوعية الخشب واللحاء.
+                        </p>
+                        <a href="module1.html" class="station-btn">دخول المختبر 3D ←</a>
+                    </div>
+
+                    <!-- MODULE 2 -->
+                    <div class="station-card">
+                        <div class="station-header">
+                            <span class="station-num">2</span>
+                            <span class="badge" id="badgeMod2" style="background:#e8f5e9; color:#2e7d32;">معمل 3D</span>
+                        </div>
+                        <h3 class="station-title">تركيب وتصنيف البلاستيدات</h3>
+                        <p class="station-desc">
+                            تشريح 3D مقطوع للغشاء المزدوج والجرانا والستروما، ومجهر فحص عينات البطاطس والطماطم والملوخية.
+                        </p>
+                        <a href="module2.html" class="station-btn">دخول المختبر 3D ←</a>
+                    </div>
+
+                    <!-- MODULE 3 -->
+                    <div class="station-card">
+                        <div class="station-header">
+                            <span class="station-num">3</span>
+                            <span class="badge" id="badgeMod3" style="background:#e8f5e9; color:#2e7d32;">معمل 3D</span>
+                        </div>
+                        <h3 class="station-title">فيزياء الضوء وامتصاص الكلوروفيل</h3>
+                        <p class="station-desc">
+                            فوتونات الضوء ثلاثية الأبعاد، ارتداد اللون الأخضر، وامتصاص الأحمر والأزرق ومحاكي الذرة المثارة.
+                        </p>
+                        <a href="module3.html" class="station-btn">دخول المختبر 3D ←</a>
+                    </div>
+
+                    <!-- MODULE 4 -->
+                    <div class="station-card">
+                        <div class="station-header">
+                            <span class="station-num">4</span>
+                            <span class="badge" id="badgeMod4" style="background:#e8f5e9; color:#2e7d32;">معمل 3D</span>
+                        </div>
+                        <h3 class="station-title">مسار الطاقة: تفاعلات ضوئية ولاضوئية</h3>
+                        <p class="station-desc">
+                            مصنع الجزيئات 3D: شطر الماء وانطلاق الأكسجين، شحن بطارية ATP، وبناء حلقة الجلوكوز السداسية.
+                        </p>
+                        <a href="module4.html" class="station-btn">دخول المختبر 3D ←</a>
+                    </div>
+
+                    <!-- MODULE 5 -->
+                    <div class="station-card">
+                        <div class="station-header">
+                            <span class="station-num">5</span>
+                            <span class="badge" id="badgeMod5" style="background:#e8f5e9; color:#2e7d32;">معمل 3D</span>
+                        </div>
+                        <h3 class="station-title">المعادلة وتكوين النشا وبروتوكول اليود</h3>
+                        <p class="station-desc">
+                            البيكر الزجاجي 3D بمراحله الأربع (الماء المغلي، الكحول الدافئ، وتحول النشا للأزرق الداكن باليود).
+                        </p>
+                        <a href="module5.html" class="station-btn">دخول المختبر 3D ←</a>
+                    </div>
+
+                    <!-- MODULE 6 -->
+                    <div class="station-card">
+                        <div class="station-header">
+                            <span class="station-num">6</span>
+                            <span class="badge" id="badgeMod6" style="background:#e8f5e9; color:#2e7d32;">معمل 3D</span>
+                        </div>
+                        <h3 class="station-title">الزراعة العمودية وخريطة المفاهيم</h3>
+                        <p class="station-desc">
+                            محاكي غرفة الزراعة العمودية 3D بإضاءة LED ومتحكمات العوامل، مع خريطة المفاهيم التفاعلية لربط المنهج.
+                        </p>
+                        <a href="module6.html" class="station-btn">دخول المختبر 3D ←</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- INTEGRATED RELATIONSHIP BANNER -->
+            <div style="background: linear-gradient(135deg, #1b5e20, #2e7d32); color: white; border-radius: var(--radius-lg); padding: 2.2rem; display: flex; flex-direction: column; md:flex-row; justify-content: space-between; align-items: center; gap: 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow-md);">
+                <div style="max-width: 600px;">
+                    <span style="background: rgba(255,255,255,0.2); padding: 0.3rem 0.8rem; border-radius: var(--radius-xl); font-size: 0.85rem; font-weight: 700; display: inline-block; margin-bottom: 0.8rem;">
+                        🔄 الوحدة الختامية التكاملية
+                    </span>
+                    <h2 style="color: white; margin-bottom: 0.5rem; font-size: 1.6rem;">العلاقة بين البناء الضوئي والتنفس الخلوي</h2>
+                    <p style="color: rgba(255,255,255,0.85); margin: 0; font-size: 0.95rem;">
+                        اكتشف كيف ترتبط العمليتان معاً في دورة لا نهائية للطاقة والمادة الحيوية، واختبر فهمك بنشاط السحب والإفلات التفاعلي.
+                    </p>
+                </div>
+                <a href="relationship.html" class="station-btn" style="background: var(--secondary); color: #1f2937; font-weight: 800; padding: 0.8rem 1.8rem; font-size: 1rem; flex-shrink: 0;">
+                    استكشاف العلاقة الدائرية ←
+                </a>
+            </div>
+
+            <!-- FINAL ASSESSMENT CALLOUT -->
+            <div style="background: var(--bg-card); border: 2px dashed #ffc107; border-radius: var(--radius-lg); padding: 2.5rem; text-align: center; margin-bottom: 3rem;">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🏆</div>
+                <h2 style="color: var(--primary-dark); font-size: 1.7rem; margin-bottom: 0.5rem;">التقويم الختامي الشامل (15 سؤالاً معيارياً - HOTS)</h2>
+                <p style="max-width: 650px; margin: 0 auto 1.5rem; color: var(--text-secondary); font-size: 0.95rem;">
+                    يقيس نواتج التعلم ومستويات التفكير العليا المستخلصة من كتاب الوزارة وبنك أسئلة الامتحان. إحراز 75%+ يمنحك شهادة إتقان أكاديمية معتمدة قابلة للطباعة باسمك.
+                </p>
+                <a href="assessment.html" class="station-btn" style="background: #f57f17; color: white; padding: 0.8rem 2.5rem; font-size: 1.05rem;">
+                    بدء الاختبار الختامي واعتماد الشهادة
+                </a>
+            </div>
+
         </div>
-        <button id="logoutBtn" class="p-2 rounded-xl border border-slate-200 hover:bg-slate-100 text-slate-500 transition-colors cursor-pointer" title="تسجيل خروج">
-          <i data-lucide="log-out" class="w-4 h-4"></i>
-        </button>
-      </div>
-    </div>
-  </header>
+    </main>
 
-  <!-- MAIN BODY -->
-  <main class="app-container py-6 flex-1 space-y-6">
-
-    <!-- WELCOME CARD -->
-    <div class="modern-card bg-white border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="space-y-1.5">
-        <div class="inline-flex items-center space-x-1.5 space-x-reverse px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold">
-          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-          <span>منظومة التعلم للإتقان المعملي (Mastery Learning)</span>
+    <footer class="site-footer" style="background: var(--bg-card); border-top: 1px solid #e0e0e0; padding: 1.5rem 0; text-align: center; font-size: 0.85rem; color: var(--text-light);">
+        <div class="container">
+            <p>🌱 منصة تدفق الطاقة في الأحياء — منظومة التعلم للإتقان المعملي</p>
         </div>
-        <h2 class="text-lg sm:text-2xl font-black text-slate-900">
-          أهلاً بك يا <span id="welcomeName" class="text-blue-600">الباحث العلمي</span>
-        </h2>
-        <p class="text-xs sm:text-sm text-slate-600 max-w-xl leading-relaxed font-medium">
-          خطة تعليمية تفاعلية منظمة تنقسم إلى <strong>6 وحدات ومختبرات عملية ثلاثية الأبعاد (3D)</strong> تغطي درس البناء الضوئي للصف الثاني الإعدادي بالتفصيل، تنتهي باختبار ختامي من 15 سؤالاً وشهادة تفوق معتمدة.
-        </p>
-      </div>
+    </footer>
+</div>
 
-      <!-- Counter -->
-      <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-center space-x-4 space-x-reverse flex-shrink-0">
-        <div class="text-center">
-          <span id="completedUnitsCount" class="text-2xl font-black text-blue-600">0</span>
-          <span class="text-[11px] text-slate-400 block font-bold">من 6 وحدات</span>
-        </div>
-        <div class="w-px h-8 bg-slate-200"></div>
-        <div class="space-y-0.5">
-          <span class="text-xs font-bold text-slate-500 block">نسبة الإتقان:</span>
-          <span id="overallPercentage" class="text-base font-black text-slate-800">0%</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- CURRICULUM BRIDGE -->
-    <div class="modern-card border-r-4 border-r-blue-600 space-y-2">
-      <div class="flex items-center space-x-1.5 space-x-reverse text-blue-900 font-black text-xs">
-        <i data-lucide="lightbulb" class="w-4 h-4 text-blue-600"></i>
-        <span>التمهيد المعرفي والتراكم العلمي: كيف يصنع النبات غذاءه؟</span>
-      </div>
-      <p class="text-xs leading-relaxed text-slate-600 font-medium">
-        على عكس الإنسان والحيوان (كائنات غير ذاتية التغذية تعتمد على هضم الغذاء الجاهز)، يتميز النبات الأخضر بأنه <strong>كائن ذاتي التغذية</strong>؛ يمتص جزيئات غير عضوية بسيطة منخفضة الطاقة (ماء من التربة وثاني أكسيد الكربون من الهواء) ويحولها بمساعدة فوتونات الضوء والكلوروفيل إلى جزيئات سكر عالية الطاقة (جلوكوز ونشا).
-      </p>
-    </div>
-
-    <!-- 6 MODULES ROSTER -->
-    <div class="space-y-3">
-      <div class="flex items-center justify-between">
-        <h3 class="text-sm sm:text-base font-black text-slate-900 flex items-center space-x-1.5 space-x-reverse">
-          <i data-lucide="flask-conical" class="w-4 h-4 text-blue-600"></i>
-          <span>المختبرات والوحدات التعليمية الستة (المنهج الكامل بتقنية 3D)</span>
-        </h3>
-        <span class="text-xs text-slate-500 font-bold">معمل 3D مستقل لكل وحدة</span>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-        <!-- MODULE 1 -->
-        <a href="module1.html" class="modern-card block hover:border-blue-500 hover:shadow-md transition-all group">
-          <div class="flex justify-between items-start mb-2">
-            <span class="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-100">الوحدة 1 (معمل 3D)</span>
-            <span id="badgeMod1" class="text-[10px] text-slate-400 font-bold">جاهز للبدء</span>
-          </div>
-          <h4 class="text-xs sm:text-sm font-black text-slate-900 group-hover:text-blue-600 transition-colors mb-1">
-            هل يحصل النبات على غذائه من التربة؟ (فان هيلمونت)
-          </h4>
-          <p class="text-[11px] text-slate-500 leading-normal mb-3">
-            ميزان الكتل الحساس، نمو شتلة الصفصاف ثلاثي الأبعاد، والتمييز المجهري بين أوعية الخشب واللحاء.
-          </p>
-          <div class="flex items-center justify-between text-[11px] font-bold text-blue-600 pt-2 border-t border-slate-100">
-            <span>دخول المختبر 3D</span>
-            <i data-lucide="arrow-left" class="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform"></i>
-          </div>
-        </a>
-
-        <!-- MODULE 2 -->
-        <a href="module2.html" class="modern-card block hover:border-blue-500 hover:shadow-md transition-all group">
-          <div class="flex justify-between items-start mb-2">
-            <span class="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-100">الوحدة 2 (معمل 3D)</span>
-            <span id="badgeMod2" class="text-[10px] text-slate-400 font-bold">جاهز للبدء</span>
-          </div>
-          <h4 class="text-xs sm:text-sm font-black text-slate-900 group-hover:text-blue-600 transition-colors mb-1">
-            تركيب وتصنيف البلاستيدات (خضراء، ملونة، بيضاء)
-          </h4>
-          <p class="text-[11px] text-slate-500 leading-normal mb-3">
-            تشريح 3D فائق الدقة للبلاستيدة (الجرانا، الستروما، الثايلاكويد) ومجهر فحص أنسجة البطاطس والطماطم والملوخية.
-          </p>
-          <div class="flex items-center justify-between text-[11px] font-bold text-blue-600 pt-2 border-t border-slate-100">
-            <span>دخول المختبر 3D</span>
-            <i data-lucide="arrow-left" class="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform"></i>
-          </div>
-        </a>
-
-        <!-- MODULE 3 -->
-        <a href="module3.html" class="modern-card block hover:border-blue-500 hover:shadow-md transition-all group">
-          <div class="flex justify-between items-start mb-2">
-            <span class="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-100">الوحدة 3 (معمل 3D)</span>
-            <span id="badgeMod3" class="text-[10px] text-slate-400 font-bold">جاهز للبدء</span>
-          </div>
-          <h4 class="text-xs sm:text-sm font-black text-slate-900 group-hover:text-blue-600 transition-colors mb-1">
-            فيزياء الضوء وامتصاص الكلوروفيل والذرة المثارة
-          </h4>
-          <p class="text-[11px] text-slate-500 leading-normal mb-3">
-            حزم فوتونات الضوء ثلاثية الأبعاد، لماذا نرى النبات أخضر؟ وانعكاس الأخضر ومحاكي الذرة المثارة.
-          </p>
-          <div class="flex items-center justify-between text-[11px] font-bold text-blue-600 pt-2 border-t border-slate-100">
-            <span>دخول المختبر 3D</span>
-            <i data-lucide="arrow-left" class="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform"></i>
-          </div>
-        </a>
-
-        <!-- MODULE 4 -->
-        <a href="module4.html" class="modern-card block hover:border-blue-500 hover:shadow-md transition-all group">
-          <div class="flex justify-between items-start mb-2">
-            <span class="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-100">الوحدة 4 (معمل 3D)</span>
-            <span id="badgeMod4" class="text-[10px] text-slate-400 font-bold">جاهز للبدء</span>
-          </div>
-          <h4 class="text-xs sm:text-sm font-black text-slate-900 group-hover:text-blue-600 transition-colors mb-1">
-            مسار الطاقة: تفاعلات ضوئية ولاضوئية وبطاريات ATP
-          </h4>
-          <p class="text-[11px] text-slate-500 leading-normal mb-3">
-            مصنع الجزيئات 3D: شطر جزيء الماء وانطلاق O₂، شحن بطارية ATP، وبناء حلقة الجلوكوز السداسية.
-          </p>
-          <div class="flex items-center justify-between text-[11px] font-bold text-blue-600 pt-2 border-t border-slate-100">
-            <span>دخول المختبر 3D</span>
-            <i data-lucide="arrow-left" class="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform"></i>
-          </div>
-        </a>
-
-        <!-- MODULE 5 -->
-        <a href="module5.html" class="modern-card block hover:border-blue-500 hover:shadow-md transition-all group">
-          <div class="flex justify-between items-start mb-2">
-            <span class="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-100">الوحدة 5 (معمل 3D)</span>
-            <span id="badgeMod5" class="text-[10px] text-slate-400 font-bold">جاهز للبدء</span>
-          </div>
-          <h4 class="text-xs sm:text-sm font-black text-slate-900 group-hover:text-blue-600 transition-colors mb-1">
-            المعادلة الكيميائية، النمذجة، وبروتوكول اليود الأربعة
-          </h4>
-          <p class="text-[11px] text-slate-500 leading-normal mb-3">
-            بيكر زجاجي ثلاثي الأبعاد بالأحواض الأربعة، نزع الكلوروفيل، وتحول لون النشا إلى الأزرق الداكن باليود.
-          </p>
-          <div class="flex items-center justify-between text-[11px] font-bold text-blue-600 pt-2 border-t border-slate-100">
-            <span>دخول المختبر 3D</span>
-            <i data-lucide="arrow-left" class="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform"></i>
-          </div>
-        </a>
-
-        <!-- MODULE 6 -->
-        <a href="module6.html" class="modern-card block hover:border-blue-500 hover:shadow-md transition-all group">
-          <div class="flex justify-between items-start mb-2">
-            <span class="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-100">الوحدة 6 (معمل 3D)</span>
-            <span id="badgeMod6" class="text-[10px] text-slate-400 font-bold">جاهز للبدء</span>
-          </div>
-          <h4 class="text-xs sm:text-sm font-black text-slate-900 group-hover:text-blue-600 transition-colors mb-1">
-            العوامل المؤثرة، محاكي المزرعة العمودية، وخريطة المفاهيم
-          </h4>
-          <p class="text-[11px] text-slate-500 leading-normal mb-3">
-            غرفة الزراعة العمودية ثلاثية الأبعاد بأرفف المحاصيل وإضاءة LED، وخريطة المفاهيم التفاعلية لربط المنهج.
-          </p>
-          <div class="flex items-center justify-between text-[11px] font-bold text-blue-600 pt-2 border-t border-slate-100">
-            <span>دخول المختبر 3D</span>
-            <i data-lucide="arrow-left" class="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform"></i>
-          </div>
-        </a>
-
-      </div>
-    </div>
-
-    <!-- FINAL ASSESSMENT CALL TO ACTION -->
-    <div class="modern-card bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white p-6 sm:p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-      <div class="space-y-2">
-        <div class="inline-flex items-center space-x-1.5 space-x-reverse px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-bold">
-          <i data-lucide="award" class="w-4 h-4"></i>
-          <span>المرحلة الختامية: التقويم والشهادة</span>
-        </div>
-        <h3 class="text-lg sm:text-2xl font-black">الاختبار الختامي الشامل (15 سؤالاً معيارياً - كتاب الوزارة وبنك الامتحان)</h3>
-        <p class="text-xs text-slate-300 max-w-xl font-normal leading-relaxed">
-          اختبار تفاعلي يقيس الفهم العميق ومستويات التفكير العليا. عند إحراز 75%+ يتم استخراج وتوثيق شهادة إتقان أكاديمية معتمدة قابلة للطباعة والحفظ باسمك الرباعي.
-        </p>
-      </div>
-
-      <a href="assessment.html" class="btn-primary py-3.5 px-8 text-xs sm:text-sm font-black bg-amber-500 hover:bg-amber-600 text-slate-950 flex-shrink-0 shadow-lg space-x-2 space-x-reverse cursor-pointer">
-        <span>الانطلاق للاختبار واعتماد الشهادة</span>
-        <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i>
-      </a>
-    </div>
-
-  </main>
-
-  <footer class="w-full border-t border-slate-200 py-3.5 text-center text-xs text-slate-400 bg-white">
-    منظومة التعلم للإتقان المعملية | المنهج المصري المطور - تدفق الطاقة في النظم الحيوية
-  </footer>
-
-  <script>
-    if (window.lucide) {
-      lucide.createIcons();
-    }
-
-    var studentName = localStorage.getItem('student_name') || 'طالب مستكشف';
+<script src="js/app.js"></script>
+<script>
+    var studentName = localStorage.getItem('student_name') || 'الباحث العلمي';
     var welcomeEl = document.getElementById('welcomeName');
-    var headerEl = document.getElementById('studentNameHeader');
     if (welcomeEl) welcomeEl.textContent = studentName;
-    if (headerEl) headerEl.textContent = studentName;
 
-    // Load progress
-    var progress = {};
-    try {
-      progress = JSON.parse(localStorage.getItem('student_progress') || '{}');
-    } catch(e) {}
-
-    var completedCount = 0;
-    for (var i = 1; i <= 6; i++) {
-      if (progress['station_' + i] || progress['station' + i] || progress['module_' + i]) {
-        completedCount++;
-        var badge = document.getElementById('badgeMod' + i);
-        if (badge) {
-          badge.innerText = 'مكتمل بنجاح ✓';
-          badge.className = 'text-[10px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200';
-        }
-      }
+    if (window.progress) {
+        var pct = window.progress.getOverallProgress();
+        var textEl = document.getElementById('navProgressText');
+        var barEl = document.getElementById('navProgressBar');
+        if (textEl) textEl.textContent = pct + '%';
+        if (barEl) barEl.style.width = pct + '%';
     }
-
-    var countEl = document.getElementById('completedUnitsCount');
-    var pctEl = document.getElementById('overallPercentage');
-    if (countEl) countEl.textContent = completedCount;
-    if (pctEl) pctEl.textContent = Math.round((completedCount / 6) * 100) + '%';
-
-    // Logout
-    var logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-      logoutBtn.addEventListener('click', function() {
-        localStorage.removeItem('student_name');
-        localStorage.removeItem('user_role');
-        window.location.href = 'index.html';
-      });
-    }
-  </script>
+</script>
 </body>
 </html>

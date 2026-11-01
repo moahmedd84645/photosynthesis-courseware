@@ -1,470 +1,429 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>مركز التقويم الختامي واعتماد الكفاءة | كورس البناء الضوئي</title>
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>التقويم الختامي الشامل | رحلة تدفق الطاقة</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-['Cairo',sans-serif]">
-
-  <!-- HEADER -->
-  <header class="bg-white border-b border-slate-200 py-3 px-4 sm:px-8 sticky top-0 z-40 shadow-sm">
-    <div class="app-container flex items-center justify-between">
-      <div class="flex items-center space-x-3 space-x-reverse">
-        <a href="dashboard.html" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-pointer" title="العودة للوحة المسار">
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </a>
-        <div>
-          <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100 block w-fit mb-0.5">مركز الاعتماد والتقويم الأكاديمي</span>
-          <h1 class="text-sm sm:text-base font-black text-slate-900 leading-tight">التقويم الختامي الشامل (15 سؤالاً معيارياً - كتاب الوزارة وبنك الامتحان)</h1>
+<body>
+<div class="page-wrapper">
+    <!-- Top Nav -->
+    <nav class="top-nav">
+        <div class="container">
+            <a href="dashboard.html" class="logo">
+                <span class="logo-icon">🌱</span>
+                <span>رحلة الطاقة</span>
+            </a>
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-link">الوحدات التعليمية</a>
+                <a href="relationship.html" class="nav-link">العلاقة التكاملية</a>
+                <a href="guide.html" class="nav-link">دليل الاستخدام</a>
+                <a href="assessment.html" class="nav-link active">التقييم النهائي</a>
+            </div>
+            <div class="progress-mini">
+                <span id="navProgressText" class="progress-text">0%</span>
+                <div class="progress-bar-mini"><div id="navProgressBar" class="fill" style="width:0%"></div></div>
+            </div>
         </div>
-      </div>
-      
-      <div class="flex items-center space-x-2 space-x-reverse">
-        <span class="text-xs px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-800 font-bold">
-          درجة الاجتياز: 75%+
-        </span>
-      </div>
-    </div>
-  </header>
+    </nav>
 
-  <!-- MAIN ASSESSMENT FORM -->
-  <main class="app-container py-8 flex-1 space-y-6">
-
-    <!-- INTRO BANNER -->
-    <div id="quizHeaderCard" class="modern-card p-6 bg-gradient-to-r from-blue-50/70 via-white to-indigo-50/40 border border-blue-200 space-y-2">
-      <div class="flex items-center space-x-2 space-x-reverse text-blue-800 font-bold text-xs">
-        <i data-lucide="award" class="w-4 h-4 text-blue-600"></i>
-        <span>بوابة قياس نواتج التعلم ومستويات التفكير العليا (HOTS)</span>
-      </div>
-      <h2 class="text-lg sm:text-2xl font-black text-slate-900">اختبار الإتقان الشامل لمفاهيم تدفق الطاقة وعملية البناء الضوئي</h2>
-      <p class="text-xs text-slate-600 leading-relaxed font-normal">
-        يتكون هذا الاختبار من <strong>15 سؤالاً دقيقاً</strong> مصممة من صلب أسئلة كتاب الوزارة وبنك أسئلة كتاب الامتحان. يغطي الاختبار المصطلحات، الاستقصاء التاريخي، فيزياء الأطياف، التفاعلات الضوئية واللاضوئية، ومستويات التفكير العليا (HOTS). إحراز 75%+ يُصدر لك فورياً شهادة الإتقان الأكاديمية المعتمدة باسمك وتاريخ اليوم.
-      </p>
+    <!-- Content Header -->
+    <div class="content-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="dashboard.html">الرئيسية</a> <span class="sep">›</span>
+                <span>التقويم الختامي واعتماد الشهادة</span>
+            </div>
+            <h1>🏆 التقييم الختامي الشامل (15 سؤالاً معيارياً - HOTS)</h1>
+            <p class="lesson-meta">مستخلص من صلب أسئلة كتاب الوزارة وبنك أسئلة كتاب الامتحان — نسبة الاجتياز 75%+</p>
+        </div>
     </div>
 
-    <!-- QUESTIONS FORM -->
-    <form id="quizForm" class="space-y-4">
+    <main class="page-content">
+        <div class="container">
 
-      <!-- Q1 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-blue-700">السؤال 1: المفاهيم والمصطلحات</span>
-          <span class="text-[11px] text-slate-400 font-medium">المصطلح العلمي</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">المادة الأرضية البروتينية الشفافة عديمة اللون التي تملأ الفراغ الداخلي للبلاستيدة وتحتوي على إنزيمات التفاعلات اللاضوئية:</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q1" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">حبيبات الجرانا (Grana).</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q1" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">الستروما أو الحشوة (Stroma).</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q1" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">أقراص الثايلاكويد (Thylakoids).</span>
-          </label>
-        </div>
-      </div>
+            <!-- Intro Info Box -->
+            <div id="quizHeaderBox" class="info-box important">
+                <div style="font-size: 1.4rem;">🎯</div>
+                <div>
+                    <strong>تعليمات الاختبار الختامي:</strong>
+                    يتكون هذا الاختبار من <strong>15 سؤالاً</strong> تغطي المصطلحات، الاستقصاء التاريخي، فيزياء الأطياف، التفاعلات الضوئية واللاضوئية، ومستويات التفكير العليا (HOTS). عند تحقيقك لنسبة 75%+ سيتم فورياً توليد واعتماد <strong>شهادة إتقان وتفوق رسمية</strong> باسمك قابلة للطباعة PDF.
+                </div>
+            </div>
 
-      <!-- Q2 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-blue-700">السؤال 2: تجربة فان هيلمونت والكتل</span>
-          <span class="text-[11px] text-slate-400 font-medium">الاستقصاء التاريخي</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">كل مما يأتي يعد استنتاجاً صحيحاً لتجربة فان هيلمونت (1648م) ما عدا:</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q2" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">تحتاج النباتات إلى الماء كعنصر أساسي للنمو.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q2" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">نقصت كتلة التربة بمقدار كبير بلغ 50 كجم، مما يثبت أن النبات التهم التربة.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q2" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">زادت كتلة شجرة الصفصاف بمقدار هائل بلغ +74.4 كجم بينما نقصت التربة 57 جم فقط.</span>
-          </label>
-        </div>
-      </div>
+            <!-- Quiz Container -->
+            <form id="quizForm" style="display: flex; flex-direction: column; gap: 1.2rem;">
 
-      <!-- Q3 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-blue-700">السؤال 3: شبكة النقل الوعائية</span>
-          <span class="text-[11px] text-slate-400 font-medium">فسيولوجيا النبات</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">ينتقل الماء والأملاح المعدنية من الجذر إلى الأوراق عبر أوعية الخشب، بينما ينتقل الغذاء المصنوع (الجلوكوز) لجميع أجزاء النبات عبر:</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q3" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">أنابيب اللحاء (Phloem).</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q3" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">جدران الخلايا الفلينية الخارجية فقط.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q3" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">أغشية الثايلاكويد مباشرة.</span>
-          </label>
-        </div>
-      </div>
+                <!-- Q1 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: var(--primary); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 1: المصطلحات العلمية</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">المادة الأرضية البروتينية الشفافة عديمة اللون داخل البلاستيدة، وتحتوي على الإنزيمات اللازمة لتثبيت الكربون:</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q1" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) حبيبات الجرانا (Grana).</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q1" value="B" style="accent-color: var(--primary);">
+                            <span>ب) الستروما أو الحشوة (Stroma).</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q1" value="C" style="accent-color: var(--primary);">
+                            <span>ج) أقراص الثايلاكويد (Thylakoids).</span>
+                        </label>
+                    </div>
+                </div>
 
-      <!-- Q4 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-blue-700">السؤال 4: تصنيف البلاستيدات والأنسجة</span>
-          <span class="text-[11px] text-slate-400 font-medium">علم الخلية</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">تخزن النباتات النشا بكفاءة عالية في تراكيب خلوية غنية بالبلاستيدات عديمة اللون (البيضاء) مثل:</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q4" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">أوراق نبات الملوخية والسبانخ.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q4" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">بتلات أزهار الجهنمية وثمار الطماطم.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q4" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">درنات البطاطس، وجذور البطاطا، وأوراق الكرنب الداخلية.</span>
-          </label>
-        </div>
-      </div>
+                <!-- Q2 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: var(--primary); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 2: الاستقصاء التاريخي</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">كل مما يأتي يعد استنتاجاً صحيحاً لتجربة فان هيلمونت (1648م) ما عدا:</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q2" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) تحتاج النباتات إلى الماء كعنصر أساسي للنمو.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q2" value="B" style="accent-color: var(--primary);">
+                            <span>ب) نقصت كتلة التربة بمقدار كبير بلغ 50 كجم، مما يثبت أن النبات التهم التربة.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q2" value="C" style="accent-color: var(--primary);">
+                            <span>ج) زادت كتلة شجرة الصفصاف بمقدار هائل بلغ +74.4 كجم بينما نقصت التربة 57 جم فقط.</span>
+                        </label>
+                    </div>
+                </div>
 
-      <!-- Q5 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-blue-700">السؤال 5: الملاءمة الوظيفية للبلاستيدة</span>
-          <span class="text-[11px] text-slate-400 font-medium">التركيب والوظيفة</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">علل: الشكل القرصي المحدب الوجهين للبلاستيدة الخضراء؟</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q5" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">يتيح للخلية استقبال وامتصاص أكبر قدر ممكن من الأشعة الضوئية في زوايا مختلفة.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q5" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لتسريع طرد الماء الزائد خارج جدار الخلية.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q5" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لحماية النواة من حرارة الشمس المرتفعة.</span>
-          </label>
-        </div>
-      </div>
+                <!-- Q3 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: var(--primary); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 3: فسيولوجيا النبات</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">ينتقل الماء والأملاح المعدنية من الجذر إلى الأوراق عبر أوعية الخشب، بينما ينتقل الغذاء المصنوع (الجلوكوز) لجميع أجزاء النبات عبر:</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q3" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) أنابيب اللحاء (Phloem).</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q3" value="B" style="accent-color: var(--primary);">
+                            <span>ب) جدران الخلايا الفلينية الخارجية فقط.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q3" value="C" style="accent-color: var(--primary);">
+                            <span>ج) أغشية الثايلاكويد مباشرة.</span>
+                        </label>
+                    </div>
+                </div>
 
-      <!-- Q6 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-blue-700">السؤال 6: فيزياء الضوء والأطياف</span>
-          <span class="text-[11px] text-slate-400 font-medium">تكامل الفيزياء</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">تظهر أوراق النباتات باللون الأخضر للعين البشرية لأن صبغ الكلوروفيل:</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q6" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">يمتص الضوء الأخضر بنسبة 100% ويحوله إلى نشا.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q6" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">يمتص الأطياف الزرقاء والحمراء بكفاءة عظمى، ويعكس وينفذ الضوء الأخضر.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q6" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">يفرز سائلاً أخضر يغطي خلايا البشرة الخارجية.</span>
-          </label>
-        </div>
-      </div>
+                <!-- Q4 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: var(--primary); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 4: علم الخلية وتصنيف البلاستيدات</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">تخزن النباتات النشا بكفاءة عالية في تراكيب خلوية غنية بالبلاستيدات عديمة اللون (البيضاء) مثل:</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q4" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) أوراق نبات الملوخية والسبانخ.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q4" value="B" style="accent-color: var(--primary);">
+                            <span>ب) بتلات أزهار الجهنمية وثمار الطماطم.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q4" value="C" style="accent-color: var(--primary);">
+                            <span>ج) درنات البطاطس، وجذور البطاطا، وأوراق الكرنب الداخلية.</span>
+                        </label>
+                    </div>
+                </div>
 
-      <!-- Q7 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-blue-700">السؤال 7: مصدر غاز الأكسجين المتصاعد</span>
-          <span class="text-[11px] text-slate-400 font-medium">الكيمياء الحيوية</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">مصدر غاز الأكسجين (O₂) المنطلق كناتج ثانوي في التفاعلات الضوئية للبناء الضوئي هو:</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q7" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">شطر جزيء الماء (H₂O) الممتص بواسطة الطاقة الضوئية في الجرانا.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q7" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">تفكك جزيء ثاني أكسيد الكربون (CO₂) في الستروما.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q7" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">تحلل سكر الجلوكوز في الفجوة العصارية.</span>
-          </label>
-        </div>
-      </div>
+                <!-- Q5 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: var(--primary); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 5: التركيب والملاءمة الوظيفية</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">علل: الشكل القرصي المحدب الوجهين للبلاستيدة الخضراء؟</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q5" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) يتيح للخلية استقبال وامتصاص أكبر قدر ممكن من الأشعة الضوئية في زوايا مختلفة.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q5" value="B" style="accent-color: var(--primary);">
+                            <span>ب) لتسريع طرد الماء الزائد خارج جدار الخلية.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q5" value="C" style="accent-color: var(--primary);">
+                            <span>ج) لحماية النواة من حرارة الشمس المرتفعة.</span>
+                        </label>
+                    </div>
+                </div>
 
-      <!-- Q8 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-blue-700">السؤال 8: شحن بطارية الخلية ATP</span>
-          <span class="text-[11px] text-slate-400 font-medium">طاقة خلوية</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">ينشأ جزيء الأدينوسين ثلاثي الفوسفات (ATP) في أغشية الجرانا عن طريق:</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q8" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">اتحاد جزيء ADP مع مجموعة فوسفات بمساعدة طاقة الإلكترونات المثارة.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q8" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">أكسدة جزيئات النشا داخل الستروما.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q8" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">تكسير القواعد النيتروجينية بواسطة إنزيمات حامضية.</span>
-          </label>
-        </div>
-      </div>
+                <!-- Q6 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: var(--primary); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 6: تكامل الفيزياء والبصريات</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">تظهر أوراق النباتات باللون الأخضر للعين البشرية لأن صبغ الكلوروفيل:</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q6" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) يمتص الضوء الأخضر بنسبة 100% ويحوله إلى نشا.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q6" value="B" style="accent-color: var(--primary);">
+                            <span>ب) يمتص الأطياف الزرقاء والحمراء بكفاءة عظمى، ويعكس وينفذ الضوء الأخضر.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q6" value="C" style="accent-color: var(--primary);">
+                            <span>ج) يفرز سائلاً أخضر يغطي خلايا البشرة الخارجية.</span>
+                        </label>
+                    </div>
+                </div>
 
-      <!-- Q9 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-blue-700">السؤال 9: المعادلة الكيميائية الموزونة</span>
-          <span class="text-[11px] text-slate-400 font-medium">معادلات كيميائية</span>
+                <!-- Q7 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: var(--primary); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 7: الكيمياء الحيوية ومصدر الغازات</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">مصدر غاز الأكسجين (O₂) المنطلق كناتج ثانوي في التفاعلات الضوئية للبناء الضوئي هو:</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q7" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) شطر جزيء الماء (H₂O) الممتص بواسطة الطاقة الضوئية في الجرانا.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q7" value="B" style="accent-color: var(--primary);">
+                            <span>ب) تفكك جزيء ثاني أكسيد الكربون (CO₂) في الستروما.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q7" value="C" style="accent-color: var(--primary);">
+                            <span>ج) تحلل سكر الجلوكوز في الفجوة العصارية.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: var(--primary); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 8: بطاريات الخلية والفسفرة</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">ينشأ جزيء الأدينوسين ثلاثي الفوسفات (ATP) في أغشية الجرانا عن طريق:</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q8" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) اتحاد جزيء ADP مع مجموعة فوسفات بمساعدة طاقة الإلكترونات المثارة.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q8" value="B" style="accent-color: var(--primary);">
+                            <span>ب) أكسدة جزيئات النشا داخل الستروما.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q8" value="C" style="accent-color: var(--primary);">
+                            <span>ج) تكسير القواعد النيتروجينية بواسطة إنزيمات حامضية.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q9 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: var(--primary); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 9: المعادلة الكيميائية الموزونة</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">المعادلة الكيميائية الرمزية الصحيحة والموزونة المعبرة عن البناء الضوئي هي:</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem; direction: ltr; text-align: right;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q9" value="A" required style="accent-color: var(--primary);">
+                            <span style="font-family: monospace; font-size: 0.95rem;">6 CO₂ + 6 H₂O → C₆H₁₂O₆ + 6 O₂</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q9" value="B" style="accent-color: var(--primary);">
+                            <span style="font-family: monospace; font-size: 0.95rem;">C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q9" value="C" style="accent-color: var(--primary);">
+                            <span style="font-family: monospace; font-size: 0.95rem;">CO₂ + H₂O → C₆H₁₂O₆ + O₂</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: var(--primary); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 10: الضغط الأسموزي وتخزين النشا</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">علل: يخزن النبات الجلوكوز الفائض كنشا بدلاً من إبقائه كجلوكوز حر في السيتوبلازم؟</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q10" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) لأن الجلوكوز أحادي سريع الذوبان ويرفع الضغط الأسموزي للخلية مسبباً انتفاخها أو انفجارها، بينما النشا بوليمر غير ذائب لا يغير الضغط الأسموزي.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q10" value="B" style="accent-color: var(--primary);">
+                            <span>ب) لأن النشا يتحول تلقائياً إلى غاز هيدروجين يساعد في طفو الورقة.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q10" value="C" style="accent-color: var(--primary);">
+                            <span>ج) لأن الجلوكوز يمنع انتقال الماء في أوعية الخشب.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q11 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: var(--primary); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 11: بروتوكول كاشف اليود المعملي</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">علل: غلي ورقة النبات في كحول إيثيلي دافئ قبل الكشف عن النشا بمحلول اليود؟</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q11" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) لإذابة ونزع صبغ الكلوروفيل الأخضر وتبييض الورقة لتسهيل تمييز التغير اللوني لمحلول اليود.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q11" value="B" style="accent-color: var(--primary);">
+                            <span>ب) لتحويل النشا إلى سكريات أحادية ملونة.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q11" value="C" style="accent-color: var(--primary);">
+                            <span>ج) لتجفيف الورقة بالكامل من الماء.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q12 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: var(--primary); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 12: استقصاء الورقة المبرقشة والشريط المعتم</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">عند إجراء اختبار اليود على ورقة نبات مبرقشة، أظهر الاختبار تلون المناطق المركزية الخضراء بالأزرق الداكن وثبات الأطراف البيضاء بلون برتقالي، مما يثبت أن:</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q12" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) صبغ الكلوروفيل ضروري وأساسي لتصنيع النشا وحدوث البناء الضوئي.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q12" value="B" style="accent-color: var(--primary);">
+                            <span>ب) الضوء غير ضروري في وجود الكلوروفيل.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q12" value="C" style="accent-color: var(--primary);">
+                            <span>ج) المناطق البيضاء تصنع الجلوكوز دون تخزينه كنشا.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q13: HOTS 1 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: #e65100; font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 13: مستويات تفكير عليا - نشاط الإنزيمات (HOTS)</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">علل: انخفاض معدل البناء الضوئي بشدة عند ارتفاع درجة الحرارة عن 45° مئوية حتى يتوقف تماماً؟</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q13" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) لأن التفاعلات اللاضوئية تعتمد كلياً على إنزيمات بروتينية بالستروما يتشوه تركيبها وتتلف بالحرارة العالية (Denaturation).</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q13" value="B" style="accent-color: var(--primary);">
+                            <span>ب) لأن فوتونات الضوء تتوقف عن الحركة في درجات الحرارة المرتفعة.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q13" value="C" style="accent-color: var(--primary);">
+                            <span>ج) لأن غاز CO₂ يتحول إلى سائل يغلق المسام بالكامل.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q14: HOTS 2 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: #e65100; font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 14: مستويات تفكير عليا - العامل المحدد للسرعة (HOTS)</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">عند زيادة تركيز غاز CO₂ يزداد معدل البناء الضوئي طردياً ثم يثبت أفقياً عند نقطة التشبع. ما تفسير ثبات المعدل عند هذا الحد؟</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q14" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) لأن عاملاً آخر أصبح هو العامل المحدد للسرعة (Limiting Factor) كتشبع مواقع الإنزيمات أو محدودية ATP ونواتج التفاعلات الضوئية.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q14" value="B" style="accent-color: var(--primary);">
+                            <span>ب) لأن النبات يطرد غاز ثاني أكسيد الكربون بعد تشبع الجذور به.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q14" value="C" style="accent-color: var(--primary);">
+                            <span>ج) لأن الكلوروفيل يتحلل في وجود تركيزات عالية من الكربون.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q15: HOTS 3 -->
+                <div class="content-section" style="padding: 1.5rem; margin-bottom: 0;">
+                    <span style="color: #e65100; font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">السؤال 15: مستويات تفكير عليا - الزراعة العمودية (HOTS)</span>
+                    <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 1rem;">في مزارع الزراعة العمودية الحديثة (Vertical Farming)، يتم استخدام مصابيح LED تنبعث منها أطياف زرقاء وحمراء فقط بدلاً من الضوء الأبيض الكامل؛ علل ذلك؟</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q15" value="A" required style="accent-color: var(--primary);">
+                            <span>أ) لأن الكلوروفيل يمتص بشدة الضوءين الأحمر والأزرق فقط للقيام بالبناء الضوئي، مما يوفر استهلاك الطاقة الكهربائية المهدرة في إنتاج الضوء الأخضر المنعكس.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q15" value="B" style="accent-color: var(--primary);">
+                            <span>ب) لأن الضوء الأبيض يجذب الحشرات الضارة لداخل الغرف المغلقة.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); cursor: pointer;">
+                            <input type="radio" name="q15" value="C" style="accent-color: var(--primary);">
+                            <span>ج) لأن اللون الأخضر يسبب زيادة حموضة المياه في الزراعة المائية.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <button type="submit" class="station-btn" style="padding: 0.9rem 3rem; font-size: 1.1rem; background: var(--primary);">
+                        ✅ اعتماد الإجابات واستخراج شهادة الإتقان الأكاديمية
+                    </button>
+                </div>
+
+            </form>
+
+            <!-- OFFICIAL CERTIFICATE CARD -->
+            <div id="certificateCard" style="display: none; background: white; border: 3px solid #2e7d32; border-radius: var(--radius-xl); padding: 3rem 2rem; text-align: center; margin: 2rem 0; box-shadow: var(--shadow-xl); position: relative;">
+                
+                <div style="font-size: 3rem; margin-bottom: 0.5rem;">🏆</div>
+                <span style="color: var(--primary); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+                    شهادة إتقان وتفوق علمي معتمدة
+                </span>
+                
+                <h2 style="color: #1b5e20; font-size: 2.2rem; margin: 0.5rem 0 0.2rem;">رحلة تدفق الطاقة في الأحياء</h2>
+                <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 1.5rem;">Mastery Learning & Virtual Biology Laboratory Credential</p>
+
+                <p style="font-size: 1.05rem; color: #475569; margin-bottom: 0.5rem;">تشهد المنصة الأكاديمية بأن الباحث المتميز /</p>
+                <h3 id="certStudentName" style="color: #1b5e20; font-size: 2.4rem; font-weight: 900; text-decoration: underline; text-decoration-color: #4caf50; margin-bottom: 1rem;">
+                    أحمد محمد علي
+                </h3>
+
+                <p style="max-width: 650px; margin: 0 auto 2rem; font-size: 1rem; color: #334155; line-height: 1.8;">
+                    قد أتم بنجاح واقتدار كافة وحدات الاستقصاء المعملي، وأتقن مفاهيم مسارات تدفق الطاقة الحيوية، وحقق درجة الامتياز بنسبة 
+                    <strong id="certScore" style="color: #e65100; font-size: 1.25rem;">100%</strong> في التقييم الختامي الشامل المكون من 15 سؤالاً معيارياً وتفكير عليا.
+                </p>
+
+                <div style="display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 1.5rem; max-width: 550px; margin: 0 auto; font-size: 0.85rem; color: #64748b;">
+                    <div>
+                        <span style="display: block; font-size: 0.75rem;">تاريخ الاعتماد:</span>
+                        <strong id="certDate" style="color: #1e293b;">1 نوفمبر 2026</strong>
+                    </div>
+                    <div style="padding: 0.4rem 1rem; background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: var(--radius-sm); color: #1b5e20; font-family: monospace; font-weight: 700;">
+                        BIO-PHT-15Q-CERT
+                    </div>
+                    <div>
+                        <span style="display: block; font-size: 0.75rem;">الجهة المصدرة:</span>
+                        <strong style="color: #2e7d32;">مختبر الأحياء الافتراضي</strong>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                    <button type="button" onclick="window.print()" class="station-btn" style="background: #1e293b; color: white;">
+                        🖨️ طباعة الشهادة كـ PDF
+                    </button>
+                    <a href="dashboard.html" class="station-btn" style="background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1;">
+                        ← العودة للمسار التعليمي
+                    </a>
+                </div>
+
+            </div>
+
         </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">المعادلة الكيميائية الرمزية الصحيحة والموزونة المعبرة عن البناء الضوئي هي:</p>
-        <div class="space-y-2 text-xs dir-ltr text-right">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q9" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="font-mono text-xs text-slate-800">6 CO₂ + 6 H₂O → C₆H₁₂O₆ + 6 O₂</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q9" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="font-mono text-xs text-slate-800">C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q9" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="font-mono text-xs text-slate-800">CO₂ + H₂O → C₆H₁₂O₆ + O₂</span>
-          </label>
+    </main>
+
+    <footer class="site-footer" style="background: var(--bg-card); border-top: 1px solid #e0e0e0; padding: 1.5rem 0; text-align: center; font-size: 0.85rem; color: var(--text-light);">
+        <div class="container">
+            <p>🌱 رحلة تدفق الطاقة — منظومة التعلم للإتقان المعملي</p>
         </div>
-      </div>
+    </footer>
+</div>
 
-      <!-- Q10 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-blue-700">السؤال 10: مصير الجلوكوز وتخزين النشا</span>
-          <span class="text-[11px] text-slate-400 font-medium">ضغط أسموزي</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">علل: يخزن النبات الجلوكوز الفائض كنشا بدلاً من إبقائه كجلوكوز حر في السيتوبلازم؟</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q10" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لأن الجلوكوز أحادي سريع الذوبان ويرفع الضغط الأسموزي للخلية مسبباً انتفاخها أو انفجارها، بينما النشا بوليمر غير ذائب لا يغير الضغط الأسموزي.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q10" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لأن النشا يتحول تلقائياً إلى غاز هيدروجين يساعد في طفو الورقة.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q10" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لأن الجلوكوز يمنع انتقال الماء في أوعية الخشب.</span>
-          </label>
-        </div>
-      </div>
-
-      <!-- Q11 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-blue-700">السؤال 11: بروتوكول كاشف اليود</span>
-          <span class="text-[11px] text-slate-400 font-medium">تعليل مخبري</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">علل: غلي ورقة النبات في كحول إيثيلي دافئ قبل الكشف عن النشا بمحلول اليود؟</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q11" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لإذابة ونزع صبغ الكلوروفيل الأخضر وتبييض الورقة لتسهيل تمييز التغير اللوني لمحلول اليود.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q11" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لتحويل النشا إلى سكريات أحادية ملونة.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q11" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لتجفيف الورقة بالكامل من الماء.</span>
-          </label>
-        </div>
-      </div>
-
-      <!-- Q12 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-blue-700">السؤال 12: تجربة الورقة المبرقشة والشريط المعتم</span>
-          <span class="text-[11px] text-slate-400 font-medium">استقصاء علمي</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">عند إجراء اختبار اليود على ورقة نبات مبرقشة، أظهر الاختبار تلون المناطق المركزية الخضراء بالأزرق الداكن وثبات الأطراف البيضاء بلون برتقالي، مما يثبت أن:</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q12" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">صبغ الكلوروفيل ضروري وأساسي لتصنيع النشا وحدوث البناء الضوئي.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q12" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">الضوء غير ضروري في وجود الكلوروفيل.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q12" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">المناطق البيضاء تصنع الجلوكوز دون تخزينه كنشا.</span>
-          </label>
-        </div>
-      </div>
-
-      <!-- Q13: HOTS 1 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-amber-700">السؤال 13: تفكير عليا - تأثير الحرارة المفرطة (HOTS)</span>
-          <span class="text-[11px] text-slate-400 font-medium">نشاط إنزيمي</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">علل: انخفاض معدل البناء الضوئي بشدة عند ارتفاع درجة الحرارة عن 45° مئوية حتى يتوقف تماماً؟</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q13" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لأن التفاعلات اللاضوئية تعتمد كلياً على إنزيمات بروتينية بالستروما يتشوه تركيبها وتتلف بالحرارة العالية (Denaturation).</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q13" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لأن فوتونات الضوء تتوقف عن الحركة في درجات الحرارة المرتفعة.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q13" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لأن غاز CO₂ يتحول إلى سائل يغلق المسام بالكامل.</span>
-          </label>
-        </div>
-      </div>
-
-      <!-- Q14: HOTS 2 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-amber-700">السؤال 14: تفكير عليا - العامل المحدد للسرعة (HOTS)</span>
-          <span class="text-[11px] text-slate-400 font-medium">تحليل بياني</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">عند زيادة تركيز غاز CO₂ يزداد معدل البناء الضوئي طردياً ثم يثبت أفقياً عند نقطة التشبع. ما تفسير ثبات المعدل عند هذا الحد؟</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q14" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لأن عاملاً آخر أصبح هو العامل المحدد للسرعة (Limiting Factor) كتشبع مواقع الإنزيمات أو محدودية ATP ونواتج التفاعلات الضوئية.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q14" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لأن النبات يطرد غاز ثاني أكسيد الكربون بعد تشبع الجذور به.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q14" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لأن الكلوروفيل يتحلل في وجود تركيزات عالية من الكربون.</span>
-          </label>
-        </div>
-      </div>
-
-      <!-- Q15: HOTS 3 -->
-      <div class="modern-card p-5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-amber-700">السؤال 15: تفكير عليا - الزراعة العمودية وأطياف LED (HOTS)</span>
-          <span class="text-[11px] text-slate-400 font-medium">أمن غذائي وتطبيق مستقبلي</span>
-        </div>
-        <p class="text-xs sm:text-sm font-bold text-slate-900">في مزارع الزراعة العمودية الحديثة (Vertical Farming)، يتم استخدام مصابيح LED تنبعث منها أطياف زرقاء وحمراء فقط بدلاً من الضوء الأبيض الكامل؛ علل ذلك؟</p>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q15" value="A" required class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لأن الكلوروفيل يمتص بشدة الضوءين الأحمر والأزرق فقط للقيام بالبناء الضوئي، مما يوفر استهلاك الطاقة الكهربائية المهدرة في إنتاج الضوء الأخضر المنعكس.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q15" value="B" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لأن الضوء الأبيض يجذب الحشرات الضارة لداخل الغرف المغلقة.</span>
-          </label>
-          <label class="flex items-center space-x-2.5 space-x-reverse p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
-            <input type="radio" name="q15" value="C" class="accent-blue-600 cursor-pointer">
-            <span class="text-slate-800">لأن اللون الأخضر يسبب زيادة حموضة المياه في الزراعة المائية.</span>
-          </label>
-        </div>
-      </div>
-
-      <!-- Submit Button -->
-      <div class="text-center pt-4">
-        <button type="submit" id="submitAssessmentBtn" class="btn-primary px-10 py-4 text-xs sm:text-sm font-black shadow-xl shadow-blue-600/25 cursor-pointer">
-          <i data-lucide="check-check" class="w-4 h-4 ml-2"></i>
-          <span>اعتماد الإجابات واستخراج شهادة الإتقان الأكاديمية</span>
-        </button>
-      </div>
-
-    </form>
-
-    <!-- OFFICIAL CERTIFICATE CARD -->
-    <div id="certificateCard" class="hidden modern-card p-6 sm:p-12 border-2 border-blue-300 bg-white text-center relative overflow-hidden shadow-2xl">
-      <div class="border-2 border-dashed border-blue-300 p-6 sm:p-10 rounded-3xl relative bg-blue-50/20 backdrop-blur-sm">
-        
-        <div class="flex items-center justify-center space-x-2 space-x-reverse mb-3">
-          <i data-lucide="award" class="w-10 h-10 text-amber-500"></i>
-          <span class="text-xs uppercase font-black tracking-widest text-blue-900">شهادة إتقان وتفوق علمي معتمدة</span>
-        </div>
-        
-        <h2 class="text-xl sm:text-3xl font-black text-slate-900 mb-1">منصة التعلم للإتقان المعملي | كورس البناء الضوئي</h2>
-        <p class="text-xs text-slate-500 mb-6 font-medium">Mastery Learning & Virtual Biology Laboratory Credential</p>
-
-        <p class="text-xs sm:text-sm text-slate-600 mb-2">تشهد المنصة الأكاديمية بأن الباحث المتميز /</p>
-        <h3 id="certStudentName" class="text-2xl sm:text-3xl font-black text-blue-800 underline decoration-blue-400 underline-offset-8 mb-4">أحمد محمد</h3>
-        
-        <p class="text-xs sm:text-sm text-slate-700 max-w-xl mx-auto leading-relaxed mb-6 font-medium">
-          قد أتم بنجاح واقتدار كافة الوحدات التعليمية والمختبرات الاستقصائية الستة، وأتقن مفاهيم مسارات تدفق الطاقة في الأحياء، وحقق درجة الامتياز بنسبة 
-          <strong id="certScore" class="text-emerald-700 font-black text-base">100%</strong> في التقييم الختامي الشامل المكون من 15 سؤالاً معيارياً وتفكير عليا.
-        </p>
-
-        <div class="flex flex-col sm:flex-row items-center justify-between border-t border-slate-200 pt-6 max-w-lg mx-auto text-xs text-slate-500 gap-4">
-          <div>
-            <span class="block text-[11px] text-slate-400 font-semibold">تاريخ الإنجاز:</span>
-            <span id="certDate" class="font-bold text-slate-800">1 نوفمبر 2026</span>
-          </div>
-          <div class="p-2.5 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 font-mono text-[11px]">
-            رمز الاعتماد: BIO-PHT-15Q-CERT
-          </div>
-          <div>
-            <span class="block text-[11px] text-slate-400 font-semibold">الاعتماد:</span>
-            <span class="font-bold text-blue-800">مختبر الأحياء الافتراضي</span>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="mt-6 flex flex-wrap justify-center gap-3">
-        <button type="button" onclick="window.print()" class="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-bold text-white flex items-center space-x-1.5 space-x-reverse shadow-md transition-colors cursor-pointer">
-          <i data-lucide="printer" class="w-4 h-4"></i>
-          <span>طباعة الشهادة (PDF)</span>
-        </button>
-        <a href="dashboard.html" class="px-6 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-bold text-slate-700 flex items-center space-x-1.5 space-x-reverse transition-colors cursor-pointer">
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          <span>العودة للوحة المسار</span>
-        </a>
-      </div>
-    </div>
-
-  </main>
-
-  <footer class="w-full border-t border-slate-200 py-3 text-center text-xs text-slate-400 bg-white">
-    منظومة التعلم للإتقان المعملية | التقويم الختامي الشامل (15 سؤالاً)
-  </footer>
-
-  <script>
-    if (window.lucide) {
-      lucide.createIcons();
-    }
-
-    var studentName = localStorage.getItem('student_name') || 'طالب متميز';
+<script src="js/app.js"></script>
+<script>
+    var studentName = localStorage.getItem('student_name') || 'الباحث العلمي';
     var certNameEl = document.getElementById('certStudentName');
     var certDateEl = document.getElementById('certDate');
     if (certNameEl) certNameEl.textContent = studentName;
@@ -472,65 +431,70 @@
 
     var form = document.getElementById('quizForm');
     if (form) {
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
 
-        // 15 Correct Answers Key
-        var answerKey = {
-          q1: 'B', q2: 'B', q3: 'A', q4: 'C', q5: 'A',
-          q6: 'B', q7: 'A', q8: 'A', q9: 'A', q10: 'A',
-          q11: 'A', q12: 'A', q13: 'A', q14: 'A', q15: 'A'
-        };
+            var answerKey = {
+                q1: 'B', q2: 'B', q3: 'A', q4: 'C', q5: 'A',
+                q6: 'B', q7: 'A', q8: 'A', q9: 'A', q10: 'A',
+                q11: 'A', q12: 'A', q13: 'A', q14: 'A', q15: 'A'
+            };
 
-        var correctCount = 0;
-        var total = 15;
+            var correctCount = 0;
+            var total = 15;
 
-        for (var i = 1; i <= total; i++) {
-          var sel = document.querySelector('input[name="q' + i + '"]:checked');
-          if (sel && sel.value === answerKey['q' + i]) {
-            correctCount++;
-          }
-        }
-
-        var scorePct = Math.round((correctCount / total) * 100);
-
-        if (scorePct >= 75) {
-          document.getElementById('quizHeaderCard').classList.add('hidden');
-          form.classList.add('hidden');
-          var certCard = document.getElementById('certificateCard');
-          certCard.classList.remove('hidden');
-          document.getElementById('certScore').textContent = scorePct + '% (' + correctCount + ' من ' + total + ')';
-
-          // Save progress
-          var prog = {};
-          try {
-            prog = JSON.parse(localStorage.getItem('student_progress') || '{}');
-          } catch(err) {}
-          prog.assessment = true;
-          localStorage.setItem('student_progress', JSON.stringify(prog));
-          localStorage.setItem('student_score', scorePct);
-
-          // Scroll to certificate
-          certCard.scrollIntoView({ behavior: 'smooth' });
-
-          // Silent background Firebase save
-          import('./js/firebase-config.js').then(function(fb) {
-            if (fb && fb.auth && fb.auth.currentUser) {
-              fb.setDoc(fb.doc(fb.db, "students", fb.auth.currentUser.uid), {
-                "progress.assessment": true,
-                score: scorePct,
-                correctQuestions: correctCount,
-                certificateIssued: true,
-                completedAt: new Date().toISOString()
-              }, { merge: true }).catch(function(e){ console.warn(e); });
+            for (var i = 1; i <= total; i++) {
+                var sel = document.querySelector('input[name="q' + i + '"]:checked');
+                if (sel && sel.value === answerKey['q' + i]) {
+                    correctCount++;
+                }
             }
-          }).catch(function(e){ console.warn(e); });
 
-        } else {
-          alert('حققت ' + scorePct + '% (' + correctCount + ' من ' + total + '). معيار الاجتياز هو 75%+ على الأقل. راجع الوحدات التعليمية وأعد المحاولة لتحقيق الإتقان والشهادة!');
-        }
-      });
+            var scorePct = Math.round((correctCount / total) * 100);
+
+            if (scorePct >= 75) {
+                document.getElementById('quizHeaderBox').style.display = 'none';
+                form.style.display = 'none';
+                var certCard = document.getElementById('certificateCard');
+                certCard.style.display = 'block';
+                document.getElementById('certScore').textContent = scorePct + '% (' + correctCount + ' من ' + total + ')';
+
+                var prog = {};
+                try {
+                    prog = JSON.parse(localStorage.getItem('student_progress') || '{}');
+                } catch(e) {}
+                prog.assessment = true;
+                localStorage.setItem('student_progress', JSON.stringify(prog));
+                localStorage.setItem('student_score', scorePct);
+
+                certCard.scrollIntoView({ behavior: 'smooth' });
+
+                // Silent sync
+                import('./js/firebase-config.js').then(function(fb) {
+                    if (fb && fb.auth && fb.auth.currentUser) {
+                        fb.setDoc(fb.doc(fb.db, "students", fb.auth.currentUser.uid), {
+                            "progress.assessment": true,
+                            score: scorePct,
+                            correctQuestions: correctCount,
+                            certificateIssued: true,
+                            completedAt: new Date().toISOString()
+                        }, { merge: true }).catch(function(err){ console.warn(err); });
+                    }
+                }).catch(function(e){ console.warn(e); });
+
+            } else {
+                alert('حققت ' + scorePct + '% (' + correctCount + ' من ' + total + '). معيار الاجتياز هو 75%+ على الأقل. راجع الوحدات التعليمية وأعد المحاولة لتحقيق الإتقان واعتماد شهادتك!');
+            }
+        });
     }
-  </script>
+
+    if (window.progress) {
+        var pct = window.progress.getOverallProgress();
+        var textEl = document.getElementById('navProgressText');
+        var barEl = document.getElementById('navProgressBar');
+        if (textEl) textEl.textContent = pct + '%';
+        if (barEl) barEl.style.width = pct + '%';
+    }
+</script>
 </body>
 </html>

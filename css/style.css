@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
+@import url('styles.css');
 
 :root {
-  --primary-blue: #2563eb;
-  --primary-hover: #1d4ed8;
-  --primary-subtle: #eff6ff;
-  --navy-dark: #0f172a;
-  --slate-subtle: #64748b;
-  --bg-page: #f8fafc;
+  --primary-blue: #2e7d32;
+  --primary-hover: #1b5e20;
+  --primary-subtle: #e8f5e9;
+  --navy-dark: #1b3022;
+  --slate-subtle: #4a5d4e;
+  --bg-page: #f0f7f0;
   --bg-card: #ffffff;
-  --border-line: #e2e8f0;
-  --accent-amber: #d97706;
-  --accent-emerald: #16a34a;
-  --accent-purple: #7c3aed;
+  --border-line: #c8e6c9;
+  --accent-amber: #f9a825;
+  --accent-emerald: #2e7d32;
+  --accent-purple: #0288d1;
 }
 
 * {

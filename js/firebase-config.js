@@ -15,6 +15,7 @@ import {
   getFirestore, 
   doc, 
   getDoc, 
+  getDocs,
   setDoc, 
   updateDoc, 
   collection, 
@@ -36,6 +37,50 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 
+export async function markStationComplete(stationNumber, score = 100) {
+  try {
+    const stationKey = `station_${stationNumber}`;
+    localStorage.setItem(`${stationKey}_completed`, 'true');
+    localStorage.setItem(`${stationKey}_score`, score.toString());
+    
+    // Save to ProgressManager key as well
+    try {
+      const pmData = JSON.parse(localStorage.getItem('energyJourney_progress') || '{}');
+      pmData.completedSections = pmData.completedSections || [];
+      if (!pmData.completedSections.includes(stationKey)) {
+        pmData.completedSections.push(stationKey);
+      }
+      pmData.quizScores = pmData.quizScores || {};
+      pmData.quizScores[stationKey] = { score, total: 100, percentage: score, date: new Date().toISOString() };
+      localStorage.setItem('energyJourney_progress', JSON.stringify(pmData));
+    } catch (e) {
+      console.warn('Local progress update fallback', e);
+    }
+
+    if (auth.currentUser) {
+      const userRef = doc(db, "users", auth.currentUser.uid);
+      await updateDoc(userRef, {
+        [`completedStations.${stationNumber}`]: true,
+        [`stationScores.${stationNumber}`]: score,
+        lastActive: new Date().toISOString()
+      }).catch(async (err) => {
+        // If document doesn't exist yet, create it
+        await setDoc(userRef, {
+          completedStations: { [stationNumber]: true },
+          stationScores: { [stationNumber]: score },
+          lastActive: new Date().toISOString()
+        }, { merge: true });
+      });
+    }
+  } catch (err) {
+    console.warn("Could not save to Firestore, stored locally:", err);
+  }
+}
+
+if (typeof window !== 'undefined') {
+  window.markStationComplete = markStationComplete;
+}
+
 export { 
   app, 
   auth, 
@@ -50,6 +95,7 @@ export {
   updateProfile,
   doc, 
   getDoc, 
+  getDocs,
   setDoc, 
   updateDoc, 
   collection, 

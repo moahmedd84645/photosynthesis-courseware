@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>العلاقة التكاملية بين البناء الضوئي والتنفس الخلوي | رحلة تدفق الطاقة</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+<div class="page-wrapper">
+    <!-- Top Nav -->
+    <nav class="top-nav">
+        <div class="container">
+            <a href="dashboard.html" class="logo">
+                <span class="logo-icon">🌱</span>
+                <span>رحلة الطاقة</span>
+            </a>
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-link">الوحدات التعليمية</a>
+                <a href="relationship.html" class="nav-link active">العلاقة التكاملية</a>
+                <a href="guide.html" class="nav-link">دليل الاستخدام</a>
+                <a href="assessment.html" class="nav-link">التقييم النهائي</a>
+            </div>
+            <div class="progress-mini">
+                <span id="navProgressText" class="progress-text">0%</span>
+                <div class="progress-bar-mini"><div id="navProgressBar" class="fill" style="width:0%"></div></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Header -->
+    <div class="content-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="dashboard.html">الرئيسية</a> <span class="sep">›</span>
+                <span>العلاقة بين العمليتين</span>
+            </div>
+            <h1>اكتشف العلاقة بين البناء الضوئي والتنفس الخلوي</h1>
+            <p class="lesson-meta">كيف ترتبط العمليتان معاً في دورة مستمرة للطاقة والمادة الحيوية</p>
+        </div>
+    </div>
+
+    <main class="page-content">
+        <div class="container">
+            <!-- Section progress dots -->
+            <div class="section-progress">
+                <div class="dot active" data-section="cycle" title="دورة الطاقة في الطبيعة"></div>
+                <div class="dot" data-section="comparison" title="المقارنة الشاملة"></div>
+                <div class="dot" data-section="sim3d" title="المحاكاة ثلاثية الأبعاد 3D"></div>
+                <div class="dot" data-section="activity" title="نشاط سحب وإفلات تفاعلي"></div>
+                <div class="dot" data-section="quiz" title="اختبر فهمك"></div>
+            </div>
+
+            <!-- Section 1: Energy Cycle in Nature -->
+            <div class="content-section" id="cycle">
+                <h2 class="section-title"><span class="icon">🔄</span> دورة الطاقة في الطبيعة</h2>
+
+                <p>هل تساءلت يوماً كيف تنتقل الطاقة وتستمر الحياة على كوكب الأرض؟ الإجابة تكمن في <span class="key-term" data-definition="دورة مستمرة تنتقل فيها الطاقة من الشمس إلى الكائنات الحية عبر البناء الضوئي والتنفس الخلوي">دورة الطاقة</span> التي تربط بين البناء الضوئي والتنفس الخلوي.</p>
+
+                <div class="info-box important">
+                    <div style="font-size: 1.4rem;">🌍</div>
+                    <div>
+                        <strong>الفكرة الأساسية:</strong>
+                        البناء الضوئي والتنفس الخلوي عمليتان متكاملتان تماماً؛ نواتج كل عملية هي المواد المتفاعلة للعملية الأخرى في دورة لا تتوقف!
+                    </div>
+                </div>
+
+                <h3>كيف تعمل دورة تدفق الطاقة؟</h3>
+                <ol style="list-style: decimal; padding-right: 1.5rem; margin-bottom: 1.5rem; color: var(--text-secondary);">
+                    <li style="margin-bottom: 0.5rem;"><strong>الشمس هي مصدر الطاقة الأساسي:</strong> تنبعث من الشمس فوتونات ضوئية يستقبلها النبات.</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>البناء الضوئي (في البلاستيدات الخضراء):</strong> يمتص النبات الماء (H₂O) وثاني أكسيد الكربون (CO₂) والضوء لبناء سكر الجلوكوز عالي الطاقة وإطلاق الأكسجين (O₂).</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>التنفس الخلوي (في الميتوكوندريا):</strong> تؤكسد الخلايا الجلوكوز في وجود الأكسجين لتحرير الطاقة في صورة جزيئات <strong>ATP</strong>، وينتج ماء وCO₂.</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>اكتمال الدورة:</strong> يعود الـ CO₂ و H₂O الناتجين من التنفس ليدخلا في البناء الضوئي مجدداً!</li>
+                </ol>
+
+                <!-- Energy Cycle SVG Diagram -->
+                <div class="illustration-container" style="margin: 2rem 0;">
+                    <svg viewBox="0 0 700 450" xmlns="http://www.w3.org/2000/svg" style="max-width:700px; margin: 0 auto; display: block;">
+                        <defs>
+                            <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:0.25"/>
+                                <stop offset="100%" style="stop-color:#E8F5E9;stop-opacity:0.3"/>
+                            </linearGradient>
+                            <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#2E7D32"/>
+                            </marker>
+                            <marker id="arrowOrange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#E65100"/>
+                            </marker>
+                        </defs>
+                        <rect width="700" height="450" fill="url(#skyGrad)" rx="20"/>
+
+                        <!-- Sun -->
+                        <circle cx="350" cy="50" r="32" fill="#FFC107" stroke="#FF8F00" stroke-width="2"/>
+                        <text x="350" y="55" text-anchor="middle" font-size="12" font-weight="bold" fill="#E65100" font-family="Cairo">☀️ الشمس</text>
+
+                        <!-- Sun rays -->
+                        <line x1="315" y1="55" x2="180" y2="130" stroke="#FFC107" stroke-width="2.5" stroke-dasharray="6,4"/>
+                        <line x1="385" y1="55" x2="520" y2="130" stroke="#FFC107" stroke-width="2.5" stroke-dasharray="6,4"/>
+
+                        <!-- Photosynthesis box (left) -->
+                        <rect x="60" y="130" width="220" height="120" rx="15" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2.5"/>
+                        <text x="170" y="160" text-anchor="middle" font-size="15" font-weight="bold" fill="#1B5E20" font-family="Cairo">🌿 البناء الضوئي</text>
+                        <text x="170" y="185" text-anchor="middle" font-size="11" fill="#2E7D32" font-family="Cairo">في البلاستيدات الخضراء</text>
+                        <text x="170" y="210" text-anchor="middle" font-size="12" fill="#333" font-family="Cairo">CO₂ + H₂O + ضوء</text>
+                        <text x="170" y="230" text-anchor="middle" font-size="12" fill="#333" font-family="Cairo">→ جلوكوز + O₂</text>
+
+                        <!-- Cellular Respiration box (right) -->
+                        <rect x="420" y="130" width="220" height="120" rx="15" fill="#FFF3E0" stroke="#E65100" stroke-width="2.5"/>
+                        <text x="530" y="160" text-anchor="middle" font-size="15" font-weight="bold" fill="#BF360C" font-family="Cairo">🔥 التنفس الخلوي</text>
+                        <text x="530" y="185" text-anchor="middle" font-size="11" fill="#E65100" font-family="Cairo">في الميتوكوندريا</text>
+                        <text x="530" y="210" text-anchor="middle" font-size="12" fill="#333" font-family="Cairo">جلوكوز + O₂</text>
+                        <text x="530" y="230" text-anchor="middle" font-size="12" fill="#333" font-family="Cairo">→ CO₂ + H₂O + ATP</text>
+
+                        <!-- Top arrow: Glucose + O₂ -->
+                        <path d="M 280 165 C 340 120, 400 120, 420 165" fill="none" stroke="#2E7D32" stroke-width="3" marker-end="url(#arrowGreen)"/>
+                        <text x="350" y="115" text-anchor="middle" font-size="12" font-weight="bold" fill="#2E7D32" font-family="Cairo">جلوكوز + O₂ (نواتج البناء)</text>
+
+                        <!-- Bottom arrow: CO₂ + H₂O -->
+                        <path d="M 420 230 C 390 290, 310 290, 280 230" fill="none" stroke="#E65100" stroke-width="3" marker-end="url(#arrowOrange)"/>
+                        <text x="350" y="300" text-anchor="middle" font-size="12" font-weight="bold" fill="#E65100" font-family="Cairo">CO₂ + H₂O (نواتج التنفس)</text>
+
+                        <!-- Energy flow banner -->
+                        <rect x="200" y="330" width="300" height="50" rx="12" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+                        <text x="350" y="352" text-anchor="middle" font-size="13" font-weight="bold" fill="#1565C0" font-family="Cairo">⚡ تدفق الطاقة المستمر</text>
+                        <text x="350" y="370" text-anchor="middle" font-size="11" fill="#1565C0" font-family="Cairo">طاقة ضوئية ⟶ طاقة كيميائية (جلوكوز) ⟶ طاقة خلوية (ATP)</text>
+
+                        <!-- Legend -->
+                        <text x="350" y="420" text-anchor="middle" font-size="12" fill="#666" font-family="Cairo" font-style="italic">نواتج كل عملية = المواد الداخلة في العملية الأخرى</text>
+                    </svg>
+                </div>
+
+                <div class="info-box note">
+                    <div style="font-size: 1.4rem;">🔑</div>
+                    <div>
+                        <strong>ملاحظة علمية هامة:</strong>
+                        تقوم النباتات بالبناء الضوئي نهاراً (في وجود الضوء) وبالتنفس الخلوي طوال الوقت (ليلاً ونهاراً) لتوفير الطاقة اللازمة لحياتها ونموها، أما الإنسان والحيوان فيقومان بالتنفس الخلوي فقط ويعتمدان على أكل النباتات.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Comprehensive Comparison -->
+            <div class="content-section" id="comparison">
+                <h2 class="section-title"><span class="icon">⚖️</span> جدول المقارنة الشاملة</h2>
+
+                <p>مقارنة دقيقة تلخص أوجه التمايز والتكامل بين العمليتين وفق منهج الأحياء المعتمد:</p>
+
+                <div style="overflow-x: auto;">
+                    <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0; font-family: 'Cairo', sans-serif;">
+                        <thead>
+                            <tr style="background: linear-gradient(135deg, #1B5E20, #2E7D32); color: white;">
+                                <th style="padding: 12px 16px; text-align: right; border: 1px solid #ddd; font-size: 0.95rem;">وجه المقارنة</th>
+                                <th style="padding: 12px 16px; text-align: center; border: 1px solid #ddd; font-size: 0.95rem;">🌿 عملية البناء الضوئي</th>
+                                <th style="padding: 12px 16px; text-align: center; border: 1px solid #ddd; font-size: 0.95rem;">🔥 عملية التنفس الخلوي</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: #f9f9f9;">
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; font-weight: bold; color: #333;">نوع العملية الأيضية</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #2E7D32; font-weight: bold;">بناء (Anabolism)</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #E65100; font-weight: bold;">هدم (Catabolism)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; font-weight: bold; color: #333;">مكان الحدوث بالخلية</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #2E7D32;">البلاستيدات الخضراء</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #E65100;">الميتوكوندريا والسيتوبلازم</td>
+                            </tr>
+                            <tr style="background: #f9f9f9;">
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; font-weight: bold; color: #333;">المواد الداخلة (المتفاعلات)</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #2E7D32;">CO₂ + H₂O + طاقة ضوء</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #E65100;">جلوكوز (C₆H₁₂O₆) + O₂</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; font-weight: bold; color: #333;">النواتج</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #2E7D32;">جلوكوز + O₂ (كناتج ثانوي)</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #E65100;">CO₂ + H₂O + طاقة ATP</td>
+                            </tr>
+                            <tr style="background: #f9f9f9;">
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; font-weight: bold; color: #333;">تحولات الطاقة</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #2E7D32;">تُختزن في روابط الجلوكوز والنشا</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #E65100;">تتحرر وتُشحن في صورة ATP</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; font-weight: bold; color: #333;">الحاجة إلى الضوء</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #2E7D32;">تتطلب وجود الضوء ☀️</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #E65100;">تحدث باستمرار (ليلاً ونهاراً) 🌙</td>
+                            </tr>
+                            <tr style="background: #f9f9f9;">
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; font-weight: bold; color: #333;">الكائنات التي تقوم بها</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #2E7D32;">النباتات الخضراء والطحالب فقط</td>
+                                <td style="padding: 10px 16px; border: 1px solid #ddd; text-align: center; color: #E65100;">جميع الكائنات الحية دون استثناء</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box tip">
+                    <div style="font-size: 1.4rem;">💡</div>
+                    <div>
+                        <strong>لاحظ القاعدة الذهبية:</strong>
+                        معادلة البناء الضوئي هي بالضبط عكس معادلة التنفس الخلوي في الاتجاه الكيميائي!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: 3D Molecular Simulation -->
+            <div class="content-section" id="sim3d">
+                <h2 class="section-title"><span class="icon">🧊</span> المحاكاة الجزيئية ثلاثية الأبعاد (3D)</h2>
+                <p>شاهد كيف يعاد ترتيب الذرات بين جزيء الماء وثاني أكسيد الكربون وسكر الجلوكوز المشحون بالطاقة:</p>
+                
+                <div class="simulation-canvas-wrapper" id="relationship3DCanvas"></div>
+
+                <div style="display: flex; justify-content: center; gap: 0.8rem; margin-top: 1rem;">
+                    <button id="btnRelH2O" class="station-btn" style="background: #1565C0;">1. جزيئات المتفاعلات (ماء + CO₂)</button>
+                    <button id="btnRelATP" class="station-btn" style="background: #E65100;">2. بطاريات الطاقة (ATP)</button>
+                    <button id="btnRelGlucose" class="station-btn" style="background: #2E7D32;">3. جزيء الجلوكوز (C₆H₁₂O₆)</button>
+                </div>
+            </div>
+
+            <!-- Section 4: Hands-on Drag & Drop Activity -->
+            <div class="activity-area" id="activity" style="background: var(--bg-card); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+                <div class="activity-header" style="text-align: center; margin-bottom: 1.5rem;">
+                    <h2 style="color: var(--primary-dark);"><span class="icon">🎯</span> نشاط عملي: أكمل دورة الطاقة والمادة</h2>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        اسحب كل عنصر من حوض العناصر في الأسفل وأفلته في المنطقة الحيوية المخصصة له لإكمال الدورة
+                    </p>
+                </div>
+                <div id="cycle-activity"></div>
+            </div>
+
+            <!-- Section 5: Quiz -->
+            <div class="quiz-section" id="quiz" style="background: var(--bg-card); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+                <h2 class="section-title"><span class="icon">📝</span> اختبر فهمك للعلاقة التكاملية</h2>
+                <div id="relationship-quiz"></div>
+            </div>
+
+            <!-- Page navigation -->
+            <div class="page-nav" style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
+                <a href="dashboard.html" class="station-btn" style="background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1;">→ العودة للوحدات التعليمية</a>
+                <a href="assessment.html" class="station-btn" style="background: var(--secondary); color: #1f2937; font-weight: 800;">الانطلاق للاختبار النهائي الشامل ←</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" style="background: var(--bg-card); border-top: 1px solid #e0e0e0; padding: 1.5rem 0; text-align: center; font-size: 0.85rem; color: var(--text-light);">
+        <div class="container">
+            <p>🌱 رحلة تدفق الطاقة — منظومة التعلم للإتقان المعملي</p>
+        </div>
+    </footer>
+</div>
+
+<script src="js/app.js"></script>
+<script type="module">
+    import { sims3D } from './js/simulations-3d.js';
+
+    // Mount 3D Stage
+    sims3D.initRelationship('relationship3DCanvas');
+
+    document.getElementById('btnRelH2O').addEventListener('click', () => {
+        if (sims3D.activeSims.relationship) sims3D.activeSims.relationship.setStep(1);
+    });
+    document.getElementById('btnRelATP').addEventListener('click', () => {
+        if (sims3D.activeSims.relationship) sims3D.activeSims.relationship.setStep(2);
+    });
+    document.getElementById('btnRelGlucose').addEventListener('click', () => {
+        if (sims3D.activeSims.relationship) sims3D.activeSims.relationship.setStep(3);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Drag and Drop Activity
+        new DragDropActivity('cycle-activity', {
+            activityId: 'complete-cycle',
+            items: [
+                { text: 'جلوكوز (C₆H₁₂O₆)' },
+                { text: 'أكسجين (O₂)' },
+                { text: 'ثاني أكسيد الكربون (CO₂)' },
+                { text: 'ماء (H₂O)' },
+                { text: 'طاقة ضوئية (الشمس)' },
+                { text: 'طاقة كيميائية (ATP)' }
+            ],
+            zones: [
+                { label: 'نواتج البناء الضوئي / متفاعلات التنفس' },
+                { label: 'نواتج التنفس الخلوي / متفاعلات البناء' },
+                { label: 'طاقة تدخل في البناء الضوئي' },
+                { label: 'طاقة ناتجة من التنفس الخلوي' }
+            ],
+            correctMapping: { 0: [0, 1], 1: [2, 3], 2: [4], 3: [5] },
+            feedback: {
+                correct: 'ممتاز! 🎉 أكملت دورة الطاقة بنجاح تام! الجلوكوز والأكسجين ينتقلان من البناء الضوئي إلى التنفس الخلوي، وثاني أكسيد الكربون والماء ينتقلان من التنفس إلى البناء الضوئي.',
+                wrong: 'حاول مرة أخرى! تذكر: نواتج البناء الضوئي (جلوكوز + O₂) تدخل في التنفس، ونواتج التنفس (CO₂ + H₂O) تدخل في البناء الضوئي.'
+            }
+        }).render();
+
+        // Quiz Engine
+        const quiz = new QuizEngine('relationship-quiz', { quizId: 'relationship-quiz' });
+
+        quiz.addMCQ({
+            question: 'ما العلاقة بين نواتج البناء الضوئي ومتطلبات التنفس الخلوي؟',
+            options: [
+                'نواتج البناء الضوئي (جلوكوز + O₂) هي نفسها المواد الداخلة في التنفس الخلوي',
+                'لا توجد علاقة بينهما',
+                'كلاهما ينتج نفس المركبات',
+                'كلاهما يحتاج نفس الإنزيمات فقط'
+            ],
+            correct: 0,
+            correctFeedback: 'أحسنت! ✅ نواتج البناء الضوئي (الجلوكوز والأكسجين) هي المواد الداخلة في التنفس الخلوي بدقة.',
+            wrongFeedback: 'إجابة خاطئة ❌ تذكر أن نواتج البناء الضوئي (جلوكوز + أكسجين) هي المواد التي تستهلكها الخلية في التنفس.'
+        });
+
+        quiz.addMCQ({
+            question: 'في أي عملية تُختزن الطاقة الكيميائية وفي أي عملية تتحرر؟',
+            options: [
+                'تُختزن في التنفس وتتحرر في البناء الضوئي',
+                'تُختزن في البناء الضوئي (في الجلوكوز) وتتحرر في التنفس الخلوي (في صورة ATP)',
+                'تُختزن وتتحرر في كلتا العمليتين بنفس الدرجة',
+                'لا علاقة للطاقة بأي منهما'
+            ],
+            correct: 1,
+            correctFeedback: 'ممتاز! ✅ البناء الضوئي يختزن الطاقة الشمسية في الروابط الكيميائية للجلوكوز، بينما التنفس يكسرها ليحرر ATP.',
+            wrongFeedback: 'إجابة خاطئة ❌ البناء الضوئي يختزن الطاقة في الجلوكوز، والتنفس يحررها في ATP.'
+        });
+
+        quiz.addTrueFalse({
+            question: 'البناء الضوئي والتنفس الخلوي عمليتان متعاكستان من حيث المواد الداخلة والنواتج.',
+            correct: true,
+            correctFeedback: 'صحيح تماماً! ✅ نواتج إحداهما هي متفاعلات الأخرى، مما يجعل الدورة مستمرة ومستدامة.',
+            wrongFeedback: 'إجابة خاطئة ❌ العبارة صحيحة تماماً! المواد الداخلة في البناء هي نواتج التنفس، والعكس صحيح.'
+        });
+
+        quiz.render();
+
+        // Section progress sync
+        const dots = document.querySelectorAll('.section-progress .dot');
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const targetId = dot.dataset.section;
+                const targetEl = document.getElementById(targetId);
+                if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    });
+</script>
+</body>
+</html>

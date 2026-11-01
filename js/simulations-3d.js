@@ -639,6 +639,198 @@ export class Simulations3D {
       }
     };
   }
+
+  // ==========================================
+  // RELATIONSHIP: Chloroplast & Mitochondria Interchange
+  // ==========================================
+  initRelationship(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    if (this.activeSims.relationship && this.activeSims.relationship.cleanup) {
+      this.activeSims.relationship.cleanup();
+    }
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xf0f7f0);
+
+    const width = container.clientWidth || 700;
+    const height = container.clientHeight || 380;
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+    camera.position.set(0, 3, 9);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.innerHTML = '';
+    container.appendChild(renderer.domElement);
+
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
+    scene.add(ambientLight);
+
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.9);
+    dirLight.position.set(5, 8, 5);
+    scene.add(dirLight);
+
+    const mainGroup = new THREE.Group();
+    scene.add(mainGroup);
+
+    // Left: Chloroplast (Green disc)
+    const chloroGroup = new THREE.Group();
+    chloroGroup.position.set(-3.2, 0, 0);
+    mainGroup.add(chloroGroup);
+
+    const chloroGeo = new THREE.SphereGeometry(1.4, 32, 16);
+    chloroGeo.scale(1, 0.55, 1);
+    const chloroMat = new THREE.MeshStandardMaterial({
+      color: 0x2e7d32,
+      roughness: 0.3,
+      metalness: 0.1,
+      transparent: true,
+      opacity: 0.85
+    });
+    const chloroplastMesh = new THREE.Mesh(chloroGeo, chloroMat);
+    chloroGroup.add(chloroplastMesh);
+
+    // Thylakoid stacks inside chloroplast
+    for (let i = -0.5; i <= 0.5; i += 0.5) {
+      const thyl = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.35, 0.35, 0.08, 16),
+        new THREE.MeshStandardMaterial({ color: 0x1b5e20, roughness: 0.2 })
+      );
+      thyl.position.set(i * 1.2, 0, 0);
+      chloroGroup.add(thyl);
+    }
+
+    // Right: Mitochondria (Amber/Orange capsule)
+    const mitoGroup = new THREE.Group();
+    mitoGroup.position.set(3.2, 0, 0);
+    mainGroup.add(mitoGroup);
+
+    const mitoGeo = new THREE.CylinderGeometry(0.85, 0.85, 2.2, 32);
+    mitoGeo.rotateZ(Math.PI / 2);
+    const mitoMat = new THREE.MeshStandardMaterial({
+      color: 0xe65100,
+      roughness: 0.35,
+      metalness: 0.1,
+      transparent: true,
+      opacity: 0.85
+    });
+    const mitoMesh = new THREE.Mesh(mitoGeo, mitoMat);
+    mitoGroup.add(mitoMesh);
+
+    // Inner folded cristae representation
+    for (let c = -0.6; c <= 0.6; c += 0.4) {
+      const crista = new THREE.Mesh(
+        new THREE.TorusGeometry(0.5, 0.08, 8, 16),
+        new THREE.MeshStandardMaterial({ color: 0xffb74d })
+      );
+      crista.position.set(c * 1.4, 0, 0);
+      crista.rotateY(Math.PI / 2);
+      mitoGroup.add(crista);
+    }
+
+    // Circulating exchange particles (Glucose & O2 top arc, CO2 & H2O bottom arc)
+    const particleCount = 28;
+    const particles = [];
+    const particleGroup = new THREE.Group();
+    mainGroup.add(particleGroup);
+
+    const pMatGreen = new THREE.MeshBasicMaterial({ color: 0x2e7d32 }); // Glucose/O2
+    const pMatBlue = new THREE.MeshBasicMaterial({ color: 0x0288d1 });  // H2O/CO2
+    const pMatGold = new THREE.MeshBasicMaterial({ color: 0xfbc02d });  // ATP energy
+
+    for (let i = 0; i < particleCount; i++) {
+      const isTopArc = i < particleCount / 2;
+      const sphere = new THREE.Mesh(
+        new THREE.SphereGeometry(0.12, 12, 12),
+        isTopArc ? pMatGreen : pMatBlue
+      );
+      const angle = (i / (particleCount / 2)) * Math.PI;
+      sphere.userData = {
+        arc: isTopArc ? 'top' : 'bottom',
+        t: Math.random(),
+        speed: 0.006 + Math.random() * 0.004
+      };
+      particleGroup.add(sphere);
+      particles.push(sphere);
+    }
+
+    let reqId;
+    let focusMode = 'all';
+
+    const animate = () => {
+      reqId = requestAnimationFrame(animate);
+      chloroGroup.rotation.y += 0.008;
+      mitoGroup.rotation.y += 0.008;
+
+      particles.forEach((p) => {
+        p.userData.t += p.userData.speed;
+        if (p.userData.t > 1) p.userData.t = 0;
+
+        const t = p.userData.t;
+        if (p.userData.arc === 'top') {
+          // Flow from Chloroplast (-3.2) to Mitochondrion (+3.2)
+          const x = -3.2 + t * 6.4;
+          const y = Math.sin(t * Math.PI) * 1.5;
+          p.position.set(x, y + 0.3, 0);
+        } else {
+          // Flow from Mitochondrion (+3.2) to Chloroplast (-3.2)
+          const x = 3.2 - t * 6.4;
+          const y = -Math.sin(t * Math.PI) * 1.5;
+          p.position.set(x, y - 0.3, 0);
+        }
+      });
+
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    const handleResize = () => {
+      if (!container) return;
+      const w = container.clientWidth || 700;
+      const h = container.clientHeight || 380;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    };
+    window.addEventListener('resize', handleResize);
+
+    this.activeSims.relationship = {
+      cleanup: () => {
+        cancelAnimationFrame(reqId);
+        window.removeEventListener('resize', handleResize);
+        renderer.dispose();
+      },
+      setStep: (step) => {
+        if (step === 1) {
+          // Reactants (H2O + CO2)
+          particles.forEach(p => {
+            p.material = p.userData.arc === 'bottom' ? pMatBlue : pMatBlue;
+            p.scale.set(1.4, 1.4, 1.4);
+          });
+          chloroplastMesh.scale.set(1.15, 0.65, 1.15);
+          mitoMesh.scale.set(1, 1, 1);
+        } else if (step === 2) {
+          // ATP energy batteries
+          particles.forEach(p => {
+            p.material = pMatGold;
+            p.scale.set(1.6, 1.6, 1.6);
+          });
+        } else if (step === 3) {
+          // Glucose + O2 flow
+          particles.forEach(p => {
+            p.material = p.userData.arc === 'top' ? pMatGreen : pMatGreen;
+            p.scale.set(1.4, 1.4, 1.4);
+          });
+          mitoMesh.scale.set(1.2, 1.2, 1.2);
+          chloroplastMesh.scale.set(1, 0.55, 1);
+        }
+      }
+    };
+  }
 }
 
 export const sims3D = new Simulations3D();
