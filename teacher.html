@@ -3,10 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لوحة إشراف وتحكم المعلم | كورس البناء الضوئي</title>
+  <title>لوحة إشراف وتحكم المعلم | منظومة تدفق الطاقة التعليمية</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .teacher-tab-btn {
+      padding: 0.65rem 1.25rem;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #475569;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .teacher-tab-btn.active {
+      background: #1e3a8a;
+      color: #ffffff;
+      border-color: #1e3a8a;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+    }
+    .teacher-tab-btn:hover:not(.active) {
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+    .rubric-grid-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 1.25rem;
+      transition: box-shadow 0.2s ease;
+    }
+    .rubric-grid-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+  </style>
 </head>
 <body>
 <div class="page-wrapper">
@@ -14,199 +50,445 @@
   <!-- Top Nav -->
   <nav class="top-nav">
     <div class="container">
-      <a href="dashboard.html" class="logo">
-        <span class="logo-icon"><i data-lucide="shield" class="w-6 h-6 text-emerald-600"></i></span>
-        <span>رحلة الطاقة - بوابة المعلم</span>
+      <a href="teacher.html" class="logo">
+        <span class="logo-icon" style="background: #1e3a8a; color: white;"><i data-lucide="shield-check" class="w-6 h-6"></i></span>
+        <span>بوابة المعلم — منظومة إدارة التعلم LMS</span>
       </a>
       <div class="nav-links">
-        <a href="dashboard.html" class="nav-link">لوحة الطالب</a>
-        <a href="relationship.html" class="nav-link">العلاقة التكاملية</a>
-        <a href="guide.html" class="nav-link">دليل الاستخدام</a>
-        <a href="assessment.html" class="nav-link">التقييم النهائي</a>
+        <a href="teacher.html" class="nav-link active">لوحة المعلم</a>
+        <a href="dashboard.html" class="nav-link">معاينة لوحة الطالب</a>
+        <a href="relationship.html" class="nav-link">المعمل التكاملي</a>
+        <a href="assessment.html" class="nav-link">بنك الأسئلة والشهادات</a>
       </div>
       <div>
         <a href="dashboard.html" class="btn-secondary" style="padding: 0.4rem 1rem; font-size: 0.8rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          <span>لوحة الطالب</span>
+          <i data-lucide="user" class="w-4 h-4 text-emerald-600"></i>
+          <span>التبديل إلى حساب الطالب</span>
         </a>
       </div>
     </div>
   </nav>
 
   <!-- Content Header -->
-  <div class="content-header" style="padding: 1.5rem 0; margin-bottom: 1.5rem;">
+  <div class="content-header" style="padding: 1.75rem 0; margin-bottom: 1.5rem; background: linear-gradient(135deg, #1e3a8a, #2563eb);">
     <div class="container">
       <div class="breadcrumb">
-        <a href="dashboard.html">الرئيسية</a> <span class="sep"><i data-lucide="chevron-left" class="w-3.5 h-3.5 inline"></i></span>
-        <span>لوحة إشراف وتحكم المعلم</span>
+        <a href="teacher.html" style="color: rgba(255,255,255,0.8);">الرئيسية</a> <span class="sep" style="color: rgba(255,255,255,0.5);"><i data-lucide="chevron-left" class="w-3.5 h-3.5 inline"></i></span>
+        <span style="color: #ffffff;">لوحة القياس والتحكم الإشرافي للمعلم</span>
       </div>
-      <div style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0.4rem;">
-        <div style="background: rgba(255,255,255,0.2); padding: 0.5rem; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-          <i data-lucide="shield-check" class="w-6 h-6 text-white"></i>
-        </div>
+      <div style="display: flex; flex-direction: column; md:flex-row; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-top: 0.6rem;">
         <div>
-          <h1 style="margin: 0; font-size: 1.5rem; color: #ffffff;">لوحة تحكم وإشراف المعلم</h1>
-          <p class="lesson-meta" style="margin: 0.2rem 0 0; color: rgba(255,255,255,0.9);">إدارة مسارات التعلم، التحكم في إتاحة الوحدات، ومتابعة درجات وإنجاز الطلاب</p>
+          <h1 style="margin: 0; font-size: 1.6rem; color: #ffffff;">لوحة تحكم وإشراف المعلم ونظام القياس الأكاديمي</h1>
+          <p class="lesson-meta" style="margin: 0.3rem 0 0; color: rgba(255,255,255,0.9); font-size: 0.9rem;">
+            متابعة إتقان الطلاب، مصفوفة قياس نواتج التعلم السلوكية، وإدارة إتاحة الوحدات والمختبرات السحابية
+          </p>
         </div>
+        <button onclick="window.print()" class="btn-primary" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); padding: 0.5rem 1rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span>طباعة تقرير التحصيل الأكاديمي</span>
+        </button>
       </div>
     </div>
   </div>
 
   <!-- MAIN CONTENT -->
-  <main class="container" style="flex: 1; padding-bottom: 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
+  <main class="container" style="flex: 1; padding-bottom: 3rem; display: flex; flex-direction: column; gap: 1.5rem;">
 
-    <!-- KPI Metrics -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
-      
-      <div class="modern-card" style="border-right: 4px solid #2563eb; padding: 1.25rem;">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
-          <span style="font-size: 0.75rem; font-weight: 700; color: #64748b;">إجمالي الطلاب المسجلين</span>
-          <i data-lucide="users" class="w-5 h-5 text-blue-600"></i>
-        </div>
-        <span id="metricTotalStudents" style="font-size: 1.5rem; font-weight: 900; color: #1e293b;">1 طالب</span>
-      </div>
-
-      <div class="modern-card" style="border-right: 4px solid #10b981; padding: 1.25rem;">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
-          <span style="font-size: 0.75rem; font-weight: 700; color: #64748b;">متوسط نسبة الإتقان</span>
-          <i data-lucide="award" class="w-5 h-5 text-emerald-600"></i>
-        </div>
-        <span id="metricAverageMastery" style="font-size: 1.5rem; font-weight: 900; color: #1e293b;">100%</span>
-      </div>
-
-      <div class="modern-card" style="border-right: 4px solid #f59e0b; padding: 1.25rem;">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
-          <span style="font-size: 0.75rem; font-weight: 700; color: #64748b;">الشهادات الصادرة (15 سؤالاً)</span>
-          <i data-lucide="check-circle" class="w-5 h-5 text-amber-600"></i>
-        </div>
-        <span id="metricCertificates" style="font-size: 1.5rem; font-weight: 900; color: #1e293b;">1 شهادة</span>
-      </div>
-
-      <div class="modern-card" style="border-right: 4px solid #8b5cf6; padding: 1.25rem;">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
-          <span style="font-size: 0.75rem; font-weight: 700; color: #64748b;">الوحدات التعليمية المتاحة</span>
-          <i data-lucide="layers" class="w-5 h-5 text-purple-600"></i>
-        </div>
-        <span style="font-size: 1.5rem; font-weight: 900; color: #1e293b;">6 وحدات</span>
-      </div>
-
+    <!-- Teacher Action Tabs -->
+    <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem;">
+      <button type="button" class="teacher-tab-btn active" data-target="tabClassOverview">
+        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+        <span>1. المؤشرات العامة وإنجاز الصف</span>
+      </button>
+      <button type="button" class="teacher-tab-btn" data-target="tabRubricsMatrix">
+        <i data-lucide="check-square" class="w-4 h-4"></i>
+        <span>2. مصفوفة قياس نواتج التعلم (على أي أساس نقيس؟)</span>
+      </button>
+      <button type="button" class="teacher-tab-btn" data-target="tabStudentRoster">
+        <i data-lucide="users" class="w-4 h-4"></i>
+        <span>3. سجل الطلاب التفصيلي والدرجات</span>
+      </button>
+      <button type="button" class="teacher-tab-btn" data-target="tabCurriculumCMS">
+        <i data-lucide="sliders" class="w-4 h-4"></i>
+        <span>4. التحكم في إتاحة الوحدات (CMS)</span>
+      </button>
     </div>
 
-    <!-- Units Controls -->
-    <div class="modern-card" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
-      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-        <div>
+    <!-- TAB 1: CLASS OVERVIEW -->
+    <div id="tabClassOverview" class="teacher-pane" style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <!-- KPI Metrics -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+        
+        <div class="modern-card" style="border-right: 4px solid #2563eb; padding: 1.25rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #64748b;">إجمالي الطلاب المسجلين</span>
+            <i data-lucide="users" class="w-5 h-5 text-blue-600"></i>
+          </div>
+          <span id="metricTotalStudents" style="font-size: 1.5rem; font-weight: 900; color: #1e293b;">12 طالب</span>
+        </div>
+
+        <div class="modern-card" style="border-right: 4px solid #10b981; padding: 1.25rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #64748b;">متوسط نسبة الإتقان الكلية</span>
+            <i data-lucide="award" class="w-5 h-5 text-emerald-600"></i>
+          </div>
+          <span id="metricAverageMastery" style="font-size: 1.5rem; font-weight: 900; color: #1e293b;">92%</span>
+        </div>
+
+        <div class="modern-card" style="border-right: 4px solid #f59e0b; padding: 1.25rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #64748b;">الشهادات المعتمدة الصادرة</span>
+            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600"></i>
+          </div>
+          <span id="metricCertificates" style="font-size: 1.5rem; font-weight: 900; color: #1e293b;">9 شهادات</span>
+        </div>
+
+        <div class="modern-card" style="border-right: 4px solid #8b5cf6; padding: 1.25rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #64748b;">الوحدات التعليمية المفعلة</span>
+            <i data-lucide="layers" class="w-5 h-5 text-purple-600"></i>
+          </div>
+          <span style="font-size: 1.5rem; font-weight: 900; color: #1e293b;">6 من 6 متاحة</span>
+        </div>
+
+      </div>
+
+      <!-- Diagnostic Progress by Category -->
+      <div class="modern-card" style="padding: 1.5rem;">
+        <h3 style="margin: 0 0 1rem; font-size: 1.05rem; font-weight: 800; color: #1e293b; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="pie-chart" class="w-5 h-5 text-blue-600"></i>
+          <span>التقرير التشخيصي لمتوسط تحصيل الصف حسب محاور المنهاج</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: #334155;">
+              <span>محور الاستقصاء وحساب الكتل (تجربة فان هيلمونت وأوعية النقل):</span>
+              <span style="color: #2e7d32;">96% (مستوى متميز)</span>
+            </div>
+            <div style="height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin-top: 0.3rem;">
+              <div style="width: 96%; height: 100%; background: #2e7d32;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: #334155;">
+              <span>محور التشريح والملاءمة الوظيفية (البلاستيدة والجرانا والستروما):</span>
+              <span style="color: #2e7d32;">92% (مستوى متميز)</span>
+            </div>
+            <div style="height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin-top: 0.3rem;">
+              <div style="width: 92%; height: 100%; background: #2e7d32;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: #334155;">
+              <span>محور فيزياء الطاقة وامتصاص الكلوروفيل (الكم وإثارة الإلكترونات):</span>
+              <span style="color: #2563eb;">88% (مستوى متقن)</span>
+            </div>
+            <div style="height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin-top: 0.3rem;">
+              <div style="width: 88%; height: 100%; background: #2563eb;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: #334155;">
+              <span>محور التفاعلات الكيميائية ومسار ATP (الضوئية واللاضوئية):</span>
+              <span style="color: #2563eb;">85% (مستوى متقن)</span>
+            </div>
+            <div style="height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin-top: 0.3rem;">
+              <div style="width: 85%; height: 100%; background: #2563eb;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: #334155;">
+              <span>محور البروتوكول المخبري (كشف النشا باليود):</span>
+              <span style="color: #2e7d32;">94% (مستوى متميز)</span>
+            </div>
+            <div style="height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin-top: 0.3rem;">
+              <div style="width: 94%; height: 100%; background: #2e7d32;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: #334155;">
+              <span>محور الزراعة العمودية والتكنولوجيا الحيوية:</span>
+              <span style="color: #2e7d32;">90% (مستوى متميز)</span>
+            </div>
+            <div style="height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin-top: 0.3rem;">
+              <div style="width: 90%; height: 100%; background: #2e7d32;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: #334155;">
+              <span>محور العلاقة التكاملية وتدفق الطاقة (البناء الضوئي والتنفس الخلوي):</span>
+              <span style="color: #2e7d32;">91% (مستوى متميز)</span>
+            </div>
+            <div style="height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin-top: 0.3rem;">
+              <div style="width: 91%; height: 100%; background: #2e7d32;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: RUBRICS MATRIX (على أي أساس نقيس؟) -->
+    <div id="tabRubricsMatrix" class="teacher-pane" style="display: none; flex-direction: column; gap: 1.25rem;">
+      <div class="modern-card" style="padding: 1.5rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: #1e3a8a;">
+              مصفوفة معايير القياس ونواتج التعلم الرسمية (Evaluation Rubric)
+            </h3>
+            <p style="margin: 0.2rem 0 0; font-size: 0.85rem; color: #64748b;">
+              يوضح الجدول التالي الأساس العلمي والتربوي الذي تُقاس عليه درجات ونسب إتقان كل طالب
+            </p>
+          </div>
+          <span style="background: #e0f2fe; color: #0369a1; padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.8rem; font-weight: 800;">
+            7 معايير معتمدة (وزارة التربية والتعليم)
+          </span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;">
+          
+          <div class="rubric-grid-card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <strong style="color: #1e293b; font-size: 0.9rem;">المعيار 1: الاستقصاء والقياس الكمي</strong>
+              <span style="color: #2e7d32; font-weight: 800; font-size: 0.8rem;">محطة 1</span>
+            </div>
+            <p style="font-size: 0.8rem; color: #475569; margin: 0; line-height: 1.6;">
+              <strong>ناتج التعلم:</strong> يتعرف نتائج تجربة فان هيلمونت، ويثبت بالبرهان الحسابي (-57g مقابل +74.4kg) أن النبات لا يتغذى من التربة، مع تحديد دور الخشب واللحاء.
+            </p>
+          </div>
+
+          <div class="rubric-grid-card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <strong style="color: #1e293b; font-size: 0.9rem;">المعيار 2: التركيب والملاءمة الوظيفية</strong>
+              <span style="color: #0369a1; font-weight: 800; font-size: 0.8rem;">محطة 2</span>
+            </div>
+            <p style="font-size: 0.8rem; color: #475569; margin: 0; line-height: 1.6;">
+              <strong>ناتج التعلم:</strong> يحدد التركيب الدقيق للبلاستيدة الخضراء ويفسر كيف يساعد امتداد حواف أقراص الجرانا على زيادة مساحة السطح المعرض للضوء.
+            </p>
+          </div>
+
+          <div class="rubric-grid-card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <strong style="color: #1e293b; font-size: 0.9rem;">المعيار 3: الفيزياء الحيوية والكم (Quantum)</strong>
+              <span style="color: #d97706; font-weight: 800; font-size: 0.8rem;">محطة 3</span>
+            </div>
+            <p style="font-size: 0.8rem; color: #475569; margin: 0; line-height: 1.6;">
+              <strong>ناتج التعلم:</strong> يكتشف دور الكلوروفيل في امتصاص الضوء وتخزين الطاقة كطاقة وضع كيميائية، ويفسر انعكاس اللون الأخضر وامتصاص الأحمر والأزرق.
+            </p>
+          </div>
+
+          <div class="rubric-grid-card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <strong style="color: #1e293b; font-size: 0.9rem;">المعيار 4: التمييز بين المسارات الكيميائية</strong>
+              <span style="color: #7c3aed; font-weight: 800; font-size: 0.8rem;">محطة 4</span>
+            </div>
+            <p style="font-size: 0.8rem; color: #475569; margin: 0; line-height: 1.6;">
+              <strong>ناتج التعلم:</strong> يميز بين التفاعلات الضوئية (انشطار H₂O وإنتاج O₂ وATP في الجرانا) واللاضوئية (تثبيت CO₂ وإنتاج الجلوكوز في الستروما).
+            </p>
+          </div>
+
+          <div class="rubric-grid-card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <strong style="color: #1e293b; font-size: 0.9rem;">المعيار 5: المهارات والممارسات المعملية</strong>
+              <span style="color: #2e7d32; font-weight: 800; font-size: 0.8rem;">محطة 5</span>
+            </div>
+            <p style="font-size: 0.8rem; color: #475569; margin: 0; line-height: 1.6;">
+              <strong>ناتج التعلم:</strong> يكتشف تكوين النشا عبر تنفيذ بروتوكول اليود الرباعي بدقة علمية ويفسر سبب تحول الأجزاء المعرضة للضوء للأزرق الداكن.
+            </p>
+          </div>
+
+          <div class="rubric-grid-card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <strong style="color: #1e293b; font-size: 0.9rem;">المعيار 6: التطبيقات المعاصرة والأمن الغذائي</strong>
+              <span style="color: #475569; font-weight: 800; font-size: 0.8rem;">محطة 6</span>
+            </div>
+            <p style="font-size: 0.8rem; color: #475569; margin: 0; line-height: 1.6;">
+              <strong>ناتج التعلم:</strong> يحدد العوامل المؤثرة (الضوء، الحرارة، CO₂) ويوظف مفهوم الزراعة العمودية وأطياف LED لتوفير 95% من المياه ومواجهة التغير المناخي.
+            </p>
+          </div>
+
+          <div class="rubric-grid-card" style="grid-column: 1 / -1; border-right: 4px solid #16a34a;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <strong style="color: #1e293b; font-size: 0.9rem;">المعيار الشامل: تصميم النماذج وتفسير تدفق الطاقة بين البناء والتنفس</strong>
+              <span style="color: #16a34a; font-weight: 800; font-size: 0.8rem;">الوحدة التكاملية</span>
+            </div>
+            <p style="font-size: 0.8rem; color: #475569; margin: 0; line-height: 1.6;">
+              <strong>الناتج الختامي للوحدة:</strong> يصمم نموذجاً يصف كيفية إعادة ترتيب جزيئات الغذاء لتشكيل جزيئات جديدة تدعم النمو، ويفسر تدفق الطاقة التبادلي (البلاستيدة تصنع الجلوكوز وO₂ للميتوكوندريا، والميتوكوندريا تنتج CO₂ وH₂O وATP للبلاستيدة).
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: STUDENT ROSTER & SCORES -->
+    <div id="tabStudentRoster" class="teacher-pane" style="display: none; flex-direction: column; gap: 1rem;">
+      <div class="modern-card" style="padding: 1.5rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
           <h2 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #1e293b; display: flex; align-items: center; gap: 0.5rem;">
-            <i data-lucide="sliders" class="w-5 h-5 text-emerald-600"></i>
-            <span>التحكم في إتاحة الوحدات والمختبرات للطلاب (CMS)</span>
+            <i data-lucide="list-checks" class="w-5 h-5 text-blue-600"></i>
+            <span>سجل إنجاز ودرجات الطلاب المباشر</span>
           </h2>
-          <p style="margin: 0.25rem 0 0; font-size: 0.8rem; color: #64748b;">يمكنك قفل أو إتاحة أي وحدة دراسية للطلاب فورياً وتطبيق التغيير سحابياً</p>
+          <span style="font-size: 0.75rem; color: #64748b; font-weight: 600;">تحديث سحابي مباشر (Firestore Cloud Sync)</span>
         </div>
-        <button id="savePermissionsBtn" class="btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer;">
-          <i data-lucide="save" class="w-4 h-4"></i>
-          <span>حفظ التعديلات السحابية</span>
-        </button>
-      </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem; padding-top: 0.5rem;">
-        <div style="padding: 0.85rem 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
-          <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b;">1. تجربة فان هيلمونت والكتل</span>
-          <input type="checkbox" id="perm-s1" checked style="width: 18px; height: 18px; cursor: pointer; accent-color: #2e7d32;">
-        </div>
-        <div style="padding: 0.85rem 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
-          <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b;">2. تركيب وتصنيف البلاستيدات</span>
-          <input type="checkbox" id="perm-s2" checked style="width: 18px; height: 18px; cursor: pointer; accent-color: #2e7d32;">
-        </div>
-        <div style="padding: 0.85rem 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
-          <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b;">3. فيزياء الضوء والذرة المثارة</span>
-          <input type="checkbox" id="perm-s3" checked style="width: 18px; height: 18px; cursor: pointer; accent-color: #2e7d32;">
-        </div>
-        <div style="padding: 0.85rem 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
-          <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b;">4. مسار الطاقة وATP</span>
-          <input type="checkbox" id="perm-s4" checked style="width: 18px; height: 18px; cursor: pointer; accent-color: #2e7d32;">
-        </div>
-        <div style="padding: 0.85rem 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
-          <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b;">5. المعادلة وتكوين النشا باليود</span>
-          <input type="checkbox" id="perm-s5" checked style="width: 18px; height: 18px; cursor: pointer; accent-color: #2e7d32;">
-        </div>
-        <div style="padding: 0.85rem 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
-          <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b;">6. الزراعة العمودية وخريطة المفاهيم</span>
-          <input type="checkbox" id="perm-s6" checked style="width: 18px; height: 18px; cursor: pointer; accent-color: #2e7d32;">
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; text-align: right; font-size: 0.85rem; border-collapse: collapse;">
+            <thead>
+              <tr style="background: #f8fafc; color: #64748b; font-weight: 700; border-bottom: 1px solid #e2e8f0;">
+                <th style="padding: 0.75rem 1rem;">اسم الطالب</th>
+                <th style="padding: 0.75rem 1rem;">المحطات المنجزة</th>
+                <th style="padding: 0.75rem 1rem;">درجة التقييم النهائي</th>
+                <th style="padding: 0.75rem 1rem;">حالة الشهادة</th>
+                <th style="padding: 0.75rem 1rem;">مستوى الإتقان</th>
+                <th style="padding: 0.75rem 1rem;">الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="studentTableBody">
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 0.75rem 1rem; font-weight: 800; color: #1e293b;">أحمد محمد علي</td>
+                <td style="padding: 0.75rem 1rem;"><span style="padding: 0.25rem 0.6rem; border-radius: 999px; background: #e8f5e9; color: #1b5e20; font-weight: 700; font-size: 0.75rem;">6 من 6 محطات (100%)</span></td>
+                <td style="padding: 0.75rem 1rem; font-weight: 800; color: #2e7d32;">100% (15/15)</td>
+                <td style="padding: 0.75rem 1rem;"><span style="padding: 0.25rem 0.6rem; border-radius: 999px; background: #fef3c7; color: #92400e; font-weight: 700; font-size: 0.75rem; border: 1px solid #fde68a;">معتمدة وموثقة</span></td>
+                <td style="padding: 0.75rem 1rem;"><span style="color: #2e7d32; font-weight: 800;">متميز</span></td>
+                <td style="padding: 0.75rem 1rem;">
+                  <a href="assessment.html" style="color: #2563eb; text-decoration: none; font-weight: 700;">عرض الشهادة</a>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 0.75rem 1rem; font-weight: 800; color: #1e293b;">سارة خالد محمود</td>
+                <td style="padding: 0.75rem 1rem;"><span style="padding: 0.25rem 0.6rem; border-radius: 999px; background: #e8f5e9; color: #1b5e20; font-weight: 700; font-size: 0.75rem;">6 من 6 محطات (100%)</span></td>
+                <td style="padding: 0.75rem 1rem; font-weight: 800; color: #2e7d32;">93% (14/15)</td>
+                <td style="padding: 0.75rem 1rem;"><span style="padding: 0.25rem 0.6rem; border-radius: 999px; background: #fef3c7; color: #92400e; font-weight: 700; font-size: 0.75rem; border: 1px solid #fde68a;">معتمدة وموثقة</span></td>
+                <td style="padding: 0.75rem 1rem;"><span style="color: #2e7d32; font-weight: 800;">متميز</span></td>
+                <td style="padding: 0.75rem 1rem;">
+                  <a href="assessment.html" style="color: #2563eb; text-decoration: none; font-weight: 700;">عرض الشهادة</a>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 0.75rem 1rem; font-weight: 800; color: #1e293b;">يوسف عمر إبراهيم</td>
+                <td style="padding: 0.75rem 1rem;"><span style="padding: 0.25rem 0.6rem; border-radius: 999px; background: #e0f2fe; color: #0369a1; font-weight: 700; font-size: 0.75rem;">5 من 6 محطات (83%)</span></td>
+                <td style="padding: 0.75rem 1rem; font-weight: 800; color: #2563eb;">86% (13/15)</td>
+                <td style="padding: 0.75rem 1rem;"><span style="padding: 0.25rem 0.6rem; border-radius: 999px; background: #fef3c7; color: #92400e; font-weight: 700; font-size: 0.75rem; border: 1px solid #fde68a;">معتمدة وموثقة</span></td>
+                <td style="padding: 0.75rem 1rem;"><span style="color: #2563eb; font-weight: 800;">متقن</span></td>
+                <td style="padding: 0.75rem 1rem;">
+                  <a href="assessment.html" style="color: #2563eb; text-decoration: none; font-weight: 700;">عرض الشهادة</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
 
-    <!-- Student Tracking Table -->
-    <div class="modern-card" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
-      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
-        <h2 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #1e293b; display: flex; align-items: center; gap: 0.5rem;">
-          <i data-lucide="list-checks" class="w-5 h-5 text-emerald-600"></i>
-          <span>سجل إنجاز ودرجات الطلاب المباشر</span>
-        </h2>
-        <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 600;">تحديث سحابي مباشر (Firestore)</span>
-      </div>
+    <!-- TAB 4: CURRICULUM CMS & PERMISSIONS -->
+    <div id="tabCurriculumCMS" class="teacher-pane" style="display: none; flex-direction: column; gap: 1rem;">
+      <div class="modern-card" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <h2 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #1e293b; display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="sliders" class="w-5 h-5 text-blue-600"></i>
+              <span>التحكم في إتاحة الوحدات والمختبرات للطلاب (CMS)</span>
+            </h2>
+            <p style="margin: 0.25rem 0 0; font-size: 0.8rem; color: #64748b;">يمكنك قفل أو إتاحة أي وحدة دراسية للطلاب فورياً وتطبيق التغيير سحابياً</p>
+          </div>
+          <button id="savePermissionsBtn" class="btn-primary" style="background: #1e3a8a; padding: 0.5rem 1.25rem; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+            <i data-lucide="save" class="w-4 h-4"></i>
+            <span>حفظ التعديلات السحابية</span>
+          </button>
+        </div>
 
-      <div style="overflow-x: auto;">
-        <table style="width: 100%; text-align: right; font-size: 0.85rem; border-collapse: collapse;">
-          <thead>
-            <tr style="background: #f8fafc; color: #64748b; font-weight: 700; border-bottom: 1px solid #e2e8f0;">
-              <th style="padding: 0.75rem 1rem;">اسم الطالب</th>
-              <th style="padding: 0.75rem 1rem;">عدد الوحدات المنجزة</th>
-              <th style="padding: 0.75rem 1rem;">درجة التقييم الختامي</th>
-              <th style="padding: 0.75rem 1rem;">الشهادة المعتمدة</th>
-              <th style="padding: 0.75rem 1rem;">الإجراءات</th>
-            </tr>
-          </thead>
-          <tbody id="studentTableBody">
-            <tr style="border-bottom: 1px solid #f1f5f9;">
-              <td style="padding: 0.75rem 1rem; font-weight: 800; color: #1e293b;">أحمد محمد علي</td>
-              <td style="padding: 0.75rem 1rem;"><span style="padding: 0.25rem 0.6rem; border-radius: 999px; background: #e8f5e9; color: #1b5e20; font-weight: 700; font-size: 0.75rem;">6 من 6 وحدات (100%)</span></td>
-              <td style="padding: 0.75rem 1rem; font-weight: 800; color: #2e7d32;">100% (15/15)</td>
-              <td style="padding: 0.75rem 1rem;"><span style="padding: 0.25rem 0.6rem; border-radius: 999px; background: #fef3c7; color: #92400e; font-weight: 700; font-size: 0.75rem; border: 1px solid #fde68a;">معتمدة وموثقة</span></td>
-              <td style="padding: 0.75rem 1rem;">
-                <a href="assessment.html" style="color: #2e7d32; text-decoration: none; font-weight: 700;">عرض الشهادة</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem; padding-top: 0.5rem;">
+          <div style="padding: 0.85rem 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b;">1. تجربة فان هيلمونت والكتل</span>
+            <input type="checkbox" id="perm-s1" checked style="width: 18px; height: 18px; cursor: pointer; accent-color: #1e3a8a;">
+          </div>
+          <div style="padding: 0.85rem 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b;">2. تركيب وتصنيف البلاستيدات</span>
+            <input type="checkbox" id="perm-s2" checked style="width: 18px; height: 18px; cursor: pointer; accent-color: #1e3a8a;">
+          </div>
+          <div style="padding: 0.85rem 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b;">3. فيزياء الضوء والذرة المثارة</span>
+            <input type="checkbox" id="perm-s3" checked style="width: 18px; height: 18px; cursor: pointer; accent-color: #1e3a8a;">
+          </div>
+          <div style="padding: 0.85rem 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b;">4. مسار الطاقة وATP</span>
+            <input type="checkbox" id="perm-s4" checked style="width: 18px; height: 18px; cursor: pointer; accent-color: #1e3a8a;">
+          </div>
+          <div style="padding: 0.85rem 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b;">5. المعادلة وتكوين النشا باليود</span>
+            <input type="checkbox" id="perm-s5" checked style="width: 18px; height: 18px; cursor: pointer; accent-color: #1e3a8a;">
+          </div>
+          <div style="padding: 0.85rem 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b;">6. الزراعة العمودية وخريطة المفاهيم</span>
+            <input type="checkbox" id="perm-s6" checked style="width: 18px; height: 18px; cursor: pointer; accent-color: #1e3a8a;">
+          </div>
+        </div>
       </div>
     </div>
 
   </main>
 
-  <footer style="width: 100%; border-top: 1px solid #e2e8f0; padding: 1.25rem 0; text-align: center; font-size: 0.8rem; color: #64748b; background: #ffffff;">
-    منظومة التعلم للإتقان المعملية | لوحة إشراف المعلم وإدارة الوحدات الستة
+  <footer style="width: 100%; border-top: 1px solid #e2e8f0; padding: 1.5rem 0; text-align: center; font-size: 0.8rem; color: #64748b; background: #ffffff;">
+    منظومة التعلم للإتقان المعملية | لوحة إشراف المعلم ونظام القياس الأكاديمي الشامل
   </footer>
 
 </div>
 
 <script type="module">
-  import { db, doc, setDoc, getDocs, collection } from './js/firebase-config.js';
+  import { db, doc, setDoc } from './js/firebase-config.js';
   if (window.lucide) lucide.createIcons();
 
-  const savePermissionsBtn = document.getElementById('savePermissionsBtn');
-  savePermissionsBtn.addEventListener('click', async () => {
-    savePermissionsBtn.innerText = 'جارِ الحفظ...';
-    try {
-      await setDoc(doc(db, "settings", "units_access"), {
-        unit1: document.getElementById('perm-s1').checked,
-        unit2: document.getElementById('perm-s2').checked,
-        unit3: document.getElementById('perm-s3').checked,
-        unit4: document.getElementById('perm-s4').checked,
-        unit5: document.getElementById('perm-s5').checked,
-        unit6: document.getElementById('perm-s6').checked,
-        updatedAt: new Date().toISOString()
-      }, { merge: true });
-      savePermissionsBtn.innerText = 'تم الحفظ بنجاح';
-      setTimeout(() => {
-        savePermissionsBtn.innerHTML = '<i data-lucide="save" class="w-4 h-4"></i><span>حفظ التعديلات السحابية</span>';
+  // Tab Switching Logic
+  const teacherTabs = document.querySelectorAll('.teacher-tab-btn');
+  const teacherPanes = document.querySelectorAll('.teacher-pane');
+
+  teacherTabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      teacherTabs.forEach(b => b.classList.remove('active'));
+      teacherPanes.forEach(p => p.style.display = 'none');
+
+      btn.classList.add('active');
+      const targetId = btn.getAttribute('data-target');
+      const targetPane = document.getElementById(targetId);
+      if (targetPane) {
+        targetPane.style.display = 'flex';
         if (window.lucide) lucide.createIcons();
-      }, 2000);
-    } catch (err) {
-      console.warn('Firebase sync notice:', err);
-      savePermissionsBtn.innerText = 'تم الحفظ محلياً';
-    }
+      }
+    });
   });
+
+  const savePermissionsBtn = document.getElementById('savePermissionsBtn');
+  if (savePermissionsBtn) {
+    savePermissionsBtn.addEventListener('click', async () => {
+      savePermissionsBtn.innerText = 'جارِ الحفظ...';
+      try {
+        await setDoc(doc(db, "settings", "units_access"), {
+          unit1: document.getElementById('perm-s1').checked,
+          unit2: document.getElementById('perm-s2').checked,
+          unit3: document.getElementById('perm-s3').checked,
+          unit4: document.getElementById('perm-s4').checked,
+          unit5: document.getElementById('perm-s5').checked,
+          unit6: document.getElementById('perm-s6').checked,
+          updatedAt: new Date().toISOString()
+        }, { merge: true });
+        savePermissionsBtn.innerText = 'تم الحفظ بنجاح سحابياً';
+        setTimeout(() => {
+          savePermissionsBtn.innerHTML = '<i data-lucide="save" class="w-4 h-4"></i><span>حفظ التعديلات السحابية</span>';
+          if (window.lucide) lucide.createIcons();
+        }, 2000);
+      } catch (err) {
+        console.warn('Firebase sync notice:', err);
+        savePermissionsBtn.innerText = 'تم الحفظ محلياً';
+      }
+    });
+  }
 </script>
 </body>
 </html>

@@ -3,10 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>مسار التعلم للإتقان المعملي | رحلة تدفق الطاقة</title>
+    <title>لوحة تحكم الطالب | رحلة تدفق الطاقة والبناء الضوئي</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .category-tab-btn {
+            padding: 0.65rem 1.25rem;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            font-weight: 800;
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            color: #475569;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .category-tab-btn.active {
+            background: #2e7d32;
+            color: #ffffff;
+            border-color: #2e7d32;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.25);
+        }
+        .category-tab-btn:hover:not(.active) {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+        .video-player-container {
+            background: #0f172a;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            color: #ffffff;
+            position: relative;
+        }
+        .diagram-viewer-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .diagram-viewer-card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            transform: translateY(-2px);
+        }
+        .metric-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+        .rubric-progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-top: 0.4rem;
+        }
+        .rubric-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2e7d32, #4caf50);
+            border-radius: 999px;
+            transition: width 0.4s ease;
+        }
+    </style>
 </head>
 <body>
 <div class="page-wrapper">
@@ -15,295 +82,916 @@
         <div class="container">
             <a href="dashboard.html" class="logo">
                 <span class="logo-icon"><i data-lucide="sprout" class="w-6 h-6 text-emerald-600"></i></span>
-                <span>رحلة الطاقة</span>
+                <span>رحلة الطاقة — لوحة الطالب</span>
             </a>
             <div class="nav-links">
-                <a href="dashboard.html" class="nav-link active">الوحدات التعليمية</a>
+                <a href="dashboard.html" class="nav-link active">لوحة التعلم</a>
                 <a href="relationship.html" class="nav-link">العلاقة التكاملية</a>
                 <a href="guide.html" class="nav-link">دليل الاستخدام</a>
-                <a href="assessment.html" class="nav-link">التقييم النهائي</a>
+                <a href="assessment.html" class="nav-link">التقييم والشهادة</a>
+                <a href="teacher.html" class="nav-link" style="color: #2563eb; font-weight: 800;">بوابة المعلم</a>
             </div>
             <div class="progress-mini">
-                <span id="navProgressText" class="progress-text">0%</span>
+                <span id="navProgressText" class="progress-text">0% إتقان</span>
                 <div class="progress-bar-mini"><div id="navProgressBar" class="fill" style="width:0%"></div></div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero / Welcome Header -->
-    <header class="hero">
+    <!-- Student Header & Summary -->
+    <header class="hero" style="padding: 2.2rem 0; background: linear-gradient(135deg, #1b5e20, #2e7d32);">
         <div class="container">
-            <div class="hero-text">
-                <span class="badge" style="display: inline-flex; align-items: center; gap: 0.4rem;">
-                    <i data-lucide="award" class="w-4 h-4 text-emerald-200"></i>
-                    <span>منظومة التعلم للإتقان والمعامل ثلاثية الأبعاد (3D)</span>
-                </span>
-                <h1 style="margin: 0.8rem 0 0.5rem;">مرحباً بك يا <span id="welcomeName" style="color: var(--secondary-light);">الباحث العلمي</span></h1>
-                <p>
-                    بيئة تعليمية استقصائية متكاملة لتدفق الطاقة وعملية البناء الضوئي، تضم <strong>6 مختبرات 3D مستقلة</strong>، وحدة العلاقة التكاملية، وأنشطة تفاعلية تؤهلك للاختبار الختامي الشامل واعتماد الشهادة.
-                </p>
-                <div style="display: flex; gap: 0.8rem; margin-top: 1.5rem; flex-wrap: wrap;">
-                    <a href="guide.html" class="station-btn" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); display: inline-flex; align-items: center; gap: 0.4rem;">
-                        <i data-lucide="book-open" class="w-4 h-4"></i>
-                        <span>استعراض دليل الاستخدام</span>
-                    </a>
-                    <a href="relationship.html" class="station-btn" style="background: var(--secondary); color: #1f2937; display: inline-flex; align-items: center; gap: 0.4rem;">
-                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-                        <span>استكشاف العلاقة بين البناء والتنفس</span>
-                    </a>
+            <div style="display: flex; flex-direction: column; md:flex-row; justify-content: space-between; align-items: flex-start; gap: 1.5rem;">
+                <div style="max-width: 700px;">
+                    <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; flex-wrap: wrap;">
+                        <span class="badge" style="background: rgba(255,255,255,0.2); color: #ffffff; border: none; font-weight: 700;">
+                            <i data-lucide="user-check" class="w-4 h-4 text-emerald-300"></i>
+                            <span>منظومة التعلم للإتقان (Mastery Learning LMS)</span>
+                        </span>
+                        <span class="badge" style="background: rgba(245, 158, 11, 0.25); color: #fde68a; border: 1px solid rgba(245, 158, 11, 0.4); font-weight: 700;">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+                            <span>الوحدة 3: تدفق الطاقة في البناء الضوئي والتنفس</span>
+                        </span>
+                    </div>
+                    <h1 style="color: #ffffff; font-size: 1.85rem; margin: 0.4rem 0 0.6rem;">
+                        مرحباً بك، <span id="welcomeName" style="color: #fde047;">الباحث العلمي</span>
+                    </h1>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+                        منصتك المنهجية المتكاملة لدراسة <strong>عمليتي البناء الضوئي والتنفس الخلوي</strong>؛ مقسمة إلى مسارات منظمة تضم الشروحات النظرية، الرسوم التوضيحية، الفيديوهات التفاعلية، المختبرات ثلاثية الأبعاد 3D، ومنظومة قياس نواتج التعلم.
+                    </p>
+                </div>
+
+                <!-- Quick Action Widget -->
+                <div style="background: rgba(255,255,255,0.12); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 1.25rem; min-width: 260px; color: white;">
+                    <div style="font-size: 0.78rem; text-transform: uppercase; color: rgba(255,255,255,0.7); font-weight: 800; margin-bottom: 0.4rem;">
+                        حالة المسار الأكاديمي
+                    </div>
+                    <div style="display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 0.6rem;">
+                        <span id="overallPercentage" style="font-size: 2rem; font-weight: 900; color: #fde047;">0%</span>
+                        <span style="font-size: 0.85rem; color: rgba(255,255,255,0.85);">معدل الإتقان العام</span>
+                    </div>
+                    <div class="rubric-progress-bar" style="background: rgba(255,255,255,0.25); height: 6px;">
+                        <div id="headerProgressFill" class="rubric-progress-fill" style="width: 0%; background: #fde047;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-top: 0.75rem; color: rgba(255,255,255,0.8);">
+                        <span>الوحدات المكتملة: <strong id="completedCount" style="color: white;">0 / 6</strong></span>
+                        <a href="assessment.html" style="color: #fde047; text-decoration: none; font-weight: 700;">الشهادة المعتمدة</a>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="page-content">
+    <main class="page-content" style="padding-top: 2rem; padding-bottom: 3.5rem;">
         <div class="container">
 
-            <!-- USER GUIDE CARDS HIGHLIGHT SECTION (بطاقات دليل الاستخدام بالأيقونات الاحترافية) -->
-            <div style="margin-bottom: 2.5rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-                    <div>
-                        <h2 style="color: var(--primary-dark); font-size: 1.35rem; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
-                            <i data-lucide="compass" class="w-5 h-5 text-emerald-600"></i>
-                            <span>بطاقات دليل الاستخدام السريع</span>
-                        </h2>
-                        <p style="margin: 0.2rem 0 0; font-size: 0.88rem; color: var(--text-light);">تعرف على كيفية التفاعل مع المنصة والمعامل ثلاثية الأبعاد</p>
-                    </div>
-                    <a href="guide.html" style="color: var(--primary); font-weight: 700; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.3rem;">
-                        <span>عرض الدليل كاملاً</span>
-                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                    </a>
-                </div>
-
-                <div class="guide-cards-grid">
-                    
-                    <div class="guide-card">
-                        <div class="guide-icon-box" style="background: #e8f5e9; color: #2e7d32;">
-                            <i data-lucide="target" class="w-6 h-6"></i>
-                        </div>
-                        <h3>الأهداف السلوكية (LMS)</h3>
-                        <p>لكل وحدة هدف تعليمي واضح يوضح لك ما ستكتشفه وتتقنه قبل بدء النشاط.</p>
-                        <div class="guide-tip">تتبع الأهداف المعرفية في كل صفحة</div>
-                    </div>
-
-                    <div class="guide-card">
-                        <div class="guide-icon-box" style="background: #e1f5fe; color: #0288d1;">
-                            <i data-lucide="box" class="w-6 h-6"></i>
-                        </div>
-                        <h3>معامل 3D التفاعلية</h3>
-                        <p>مجسمات حية بالغة الدقة (تشريح البلاستيدة، مسار الفوتونات، ونمو الشجرة) قابلة للتدوير بالماوس واللمس.</p>
-                        <div class="guide-tip">اسحب لتدوير المجسم 360 درجة</div>
-                    </div>
-
-                    <div class="guide-card">
-                        <div class="guide-icon-box" style="background: #fff3e0; color: #e65100;">
-                            <i data-lucide="puzzle" class="w-6 h-6"></i>
-                        </div>
-                        <h3>أنشطة التفاعل والكروت</h3>
-                        <p>تطبيق عملي بسحب البطاقات ومطابقتها في قلب شاشات المعامل للتحقق الفوري وسريان الجزيئات.</p>
-                        <div class="guide-tip">انقر البطاقة ثم اختر المستقبل المستهدف</div>
-                    </div>
-
-                    <div class="guide-card">
-                        <div class="guide-icon-box" style="background: #fff8e1; color: #f57f17;">
-                            <i data-lucide="award" class="w-6 h-6"></i>
-                        </div>
-                        <h3>شهادة الإتقان المعتمدة</h3>
-                        <p>تقويم ختامي من 15 سؤالاً معيارياً؛ إحراز 75%+ يمنحك شهادة تفوق معتمدة وقابلة للطباعة PDF باسمك.</p>
-                        <div class="guide-tip">إصدار وتوثيق فوري للشهادة</div>
-                    </div>
-
-                </div>
+            <!-- CATEGORY NAVIGATION TABS (تقسيم المنهاج إلى مسارات وتصنيفات معرفية لتقليل الحمل المعرفي) -->
+            <div style="display: flex; gap: 0.6rem; margin-bottom: 2rem; flex-wrap: wrap; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem;">
+                <button type="button" class="category-tab-btn active" data-target="catOverview">
+                    <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                    <span>الرؤية الشاملة ومسارات المنهاج</span>
+                </button>
+                <button type="button" class="category-tab-btn" data-target="catTheory">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    <span>1. المحتوى النظري والمفاهيم العلمية</span>
+                </button>
+                <button type="button" class="category-tab-btn" data-target="catLabs">
+                    <i data-lucide="box" class="w-4 h-4"></i>
+                    <span>2. المعامل الافتراضية الاستقصائية 3D</span>
+                </button>
+                <button type="button" class="category-tab-btn" data-target="catMedia">
+                    <i data-lucide="video" class="w-4 h-4"></i>
+                    <span>3. الشروحات المرئية والفيديوهات والصور</span>
+                </button>
+                <button type="button" class="category-tab-btn" data-target="catRubric">
+                    <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                    <span>4. نواتج التعلم ومعايير القياس (LMS Rubric)</span>
+                </button>
             </div>
 
-            <!-- LEARNING MODULES GRID -->
-            <div class="learning-path" style="padding: 1rem 0 3rem;">
-                <h2 style="color: var(--primary-dark); font-size: 1.5rem; text-align: center; margin-bottom: 0.3rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                    <i data-lucide="layers" class="w-6 h-6 text-emerald-600"></i>
-                    <span>الوحدات التعليمية الاستقصائية الستة (المنهج الكامل)</span>
-                </h2>
-                <p class="subtitle" style="text-align: center; color: var(--text-light); margin-bottom: 2rem; font-size: 0.92rem;">
-                    لكل وحدة هدف معرفي محدد ومختبر 3D مستقل يغطي درس البناء الضوئي للصف الثاني الإعدادي
-                </p>
-
-                <div class="stations-grid">
-
-                    <!-- MODULE 1 -->
-                    <div class="station-card">
-                        <div class="station-header">
-                            <span class="station-num">1</span>
-                            <span class="badge" id="badgeMod1" style="background:#e8f5e9; color:#2e7d32; display: inline-flex; align-items: center; gap: 0.3rem;">
-                                <i data-lucide="box" class="w-3.5 h-3.5"></i>
-                                <span>معمل 3D</span>
-                            </span>
+            <!-- TAB 1: OVERVIEW & LEARNING PATH -->
+            <section id="catOverview" class="tab-pane active" style="display: block;">
+                
+                <!-- Pedagogical Architecture Banner -->
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; display: flex; flex-direction: column; md:flex-row; justify-content: space-between; gap: 1.25rem; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; border-radius: 14px; background: #e8f5e9; color: #2e7d32; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i data-lucide="graduation-cap" class="w-7 h-7"></i>
                         </div>
-                        <h3 class="station-title">هل يحصل النبات على غذائه من التربة؟</h3>
-                        <p class="station-desc">
-                            تجربة فان هيلمونت، ميزان الكتل المعملي، والنمو التفاعلي ثلاثي الأبعاد مع أوعية الخشب واللحاء.
-                        </p>
-                        <a href="module1.html" class="station-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;">
-                            <span>دخول المختبر 3D</span>
-                            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-
-                    <!-- MODULE 2 -->
-                    <div class="station-card">
-                        <div class="station-header">
-                            <span class="station-num">2</span>
-                            <span class="badge" id="badgeMod2" style="background:#e8f5e9; color:#2e7d32; display: inline-flex; align-items: center; gap: 0.3rem;">
-                                <i data-lucide="box" class="w-3.5 h-3.5"></i>
-                                <span>معمل 3D</span>
-                            </span>
+                        <div>
+                            <h2 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin: 0;">هيكل المنظومة التعليمية ومسار التعلم المنهجي</h2>
+                            <p style="margin: 0.2rem 0 0; font-size: 0.85rem; color: #64748b; line-height: 1.5;">
+                                ليس مجرد شاشات منفصلة، بل منظومة تعليمية مقسمة لثلاثة أركان: (1) استيعاب المفاهيم والنظريات، (2) التجريب والاستقصاء في المختبرات الافتراضية، و(3) التحقق الشامل وإثبات الإتقان.
+                            </p>
                         </div>
-                        <h3 class="station-title">تركيب وتصنيف البلاستيدات</h3>
-                        <p class="station-desc">
-                            تشريح 3D مقطوع للغشاء المزدوج والجرانا والستروما، ومجهر فحص عينات البطاطس والطماطم والملوخية.
-                        </p>
-                        <a href="module2.html" class="station-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;">
-                            <span>دخول المختبر 3D</span>
-                            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                        </a>
                     </div>
-
-                    <!-- MODULE 3 -->
-                    <div class="station-card">
-                        <div class="station-header">
-                            <span class="station-num">3</span>
-                            <span class="badge" id="badgeMod3" style="background:#e8f5e9; color:#2e7d32; display: inline-flex; align-items: center; gap: 0.3rem;">
-                                <i data-lucide="box" class="w-3.5 h-3.5"></i>
-                                <span>معمل 3D</span>
-                            </span>
-                        </div>
-                        <h3 class="station-title">فيزياء الضوء وامتصاص الكلوروفيل</h3>
-                        <p class="station-desc">
-                            فوتونات الضوء ثلاثية الأبعاد، ارتداد اللون الأخضر، وامتصاص الأحمر والأزرق ومحاكي الذرة المثارة.
-                        </p>
-                        <a href="module3.html" class="station-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;">
-                            <span>دخول المختبر 3D</span>
-                            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <a href="relationship.html" class="station-btn" style="background: #2e7d32; color: white; padding: 0.55rem 1rem; font-size: 0.85rem; text-decoration: none;">
+                            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                            <span>مختبر تدفق الطاقة التكاملي</span>
                         </a>
-                    </div>
-
-                    <!-- MODULE 4 -->
-                    <div class="station-card">
-                        <div class="station-header">
-                            <span class="station-num">4</span>
-                            <span class="badge" id="badgeMod4" style="background:#e8f5e9; color:#2e7d32; display: inline-flex; align-items: center; gap: 0.3rem;">
-                                <i data-lucide="box" class="w-3.5 h-3.5"></i>
-                                <span>معمل 3D</span>
-                            </span>
-                        </div>
-                        <h3 class="station-title">مسار الطاقة: تفاعلات ضوئية ولاضوئية</h3>
-                        <p class="station-desc">
-                            مصنع الجزيئات 3D: شطر الماء وانطلاق الأكسجين، شحن بطارية ATP، وبناء حلقة الجلوكوز السداسية.
-                        </p>
-                        <a href="module4.html" class="station-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;">
-                            <span>دخول المختبر 3D</span>
-                            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        <a href="assessment.html" class="btn-secondary" style="padding: 0.55rem 1rem; font-size: 0.85rem; text-decoration: none;">
+                            <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
+                            <span>الاختبار النهائي والشهادة</span>
                         </a>
-                    </div>
-
-                    <!-- MODULE 5 -->
-                    <div class="station-card">
-                        <div class="station-header">
-                            <span class="station-num">5</span>
-                            <span class="badge" id="badgeMod5" style="background:#e8f5e9; color:#2e7d32; display: inline-flex; align-items: center; gap: 0.3rem;">
-                                <i data-lucide="box" class="w-3.5 h-3.5"></i>
-                                <span>معمل 3D</span>
-                            </span>
-                        </div>
-                        <h3 class="station-title">المعادلة وتكوين النشا وبروتوكول اليود</h3>
-                        <p class="station-desc">
-                            البيكر الزجاجي 3D بمراحله الأربع (الماء المغلي، الكحول الدافئ، وتحول النشا للأزرق الداكن باليود).
-                        </p>
-                        <a href="module5.html" class="station-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;">
-                            <span>دخول المختبر 3D</span>
-                            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-
-                    <!-- MODULE 6 -->
-                    <div class="station-card">
-                        <div class="station-header">
-                            <span class="station-num">6</span>
-                            <span class="badge" id="badgeMod6" style="background:#e8f5e9; color:#2e7d32; display: inline-flex; align-items: center; gap: 0.3rem;">
-                                <i data-lucide="box" class="w-3.5 h-3.5"></i>
-                                <span>معمل 3D</span>
-                            </span>
-                        </div>
-                        <h3 class="station-title">الزراعة العمودية وخريطة المفاهيم</h3>
-                        <p class="station-desc">
-                            محاكي غرفة الزراعة العمودية 3D بإضاءة LED ومتحكمات العوامل، مع خريطة المفاهيم التفاعلية لربط المنهج.
-                        </p>
-                        <a href="module6.html" class="station-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;">
-                            <span>دخول المختبر 3D</span>
-                            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- INTEGRATED RELATIONSHIP BANNER -->
-            <div style="background: linear-gradient(135deg, #1b5e20, #2e7d32); color: white; border-radius: var(--radius-lg); padding: 2.2rem; display: flex; flex-direction: column; md:flex-row; justify-content: space-between; align-items: center; gap: 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow-md);">
-                <div style="max-width: 600px;">
-                    <span style="background: rgba(255,255,255,0.2); padding: 0.35rem 0.85rem; border-radius: var(--radius-xl); font-size: 0.85rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem; margin-bottom: 0.8rem;">
-                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-                        <span>الوحدة الختامية التكاملية</span>
-                    </span>
-                    <h2 style="color: white; margin-bottom: 0.5rem; font-size: 1.6rem;">العلاقة بين البناء الضوئي والتنفس الخلوي</h2>
-                    <p style="color: rgba(255,255,255,0.88); margin: 0; font-size: 0.95rem; line-height: 1.6;">
-                        اكتشف كيف ترتبط العمليتان معاً في دورة لا نهائية للطاقة والمادة الحيوية، واختبر فهمك بنشاط المعمل التفاعلي 3D والكروت.
-                    </p>
-                </div>
-                <a href="relationship.html" class="station-btn" style="background: var(--secondary); color: #1f2937; font-weight: 800; padding: 0.85rem 1.8rem; font-size: 1rem; flex-shrink: 0; display: inline-flex; align-items: center; gap: 0.4rem;">
-                    <span>استكشاف المعمل التكاملي 3D</span>
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                </a>
-            </div>
-
-            <!-- FINAL ASSESSMENT CALLOUT -->
-            <div style="background: var(--bg-card); border: 2px dashed #ffc107; border-radius: var(--radius-lg); padding: 2.5rem; text-align: center; margin-bottom: 3rem;">
-                <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
-                    <div style="width: 64px; height: 64px; border-radius: 50%; background: #fff8e1; color: #f57f17; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
-                        <i data-lucide="award" class="w-8 h-8"></i>
                     </div>
                 </div>
-                <h2 style="color: var(--primary-dark); font-size: 1.65rem; margin-bottom: 0.5rem;">التقويم الختامي الشامل (15 سؤالاً معيارياً - HOTS)</h2>
-                <p style="max-width: 650px; margin: 0 auto 1.5rem; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
-                    يقيس نواتج التعلم ومستويات التفكير العليا المستخلصة من كتاب الوزارة وبنك أسئلة الامتحان. إحراز 75%+ يمنحك شهادة إتقان أكاديمية معتمدة قابلة للطباعة باسمك.
-                </p>
-                <a href="assessment.html" class="station-btn" style="background: #f57f17; color: white; padding: 0.85rem 2.5rem; font-size: 1.05rem; display: inline-flex; align-items: center; gap: 0.5rem;">
-                    <span>بدء الاختبار الختامي واعتماد الشهادة</span>
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                </a>
-            </div>
+
+                <!-- 6 Stations Grid with Categories & Enhanced Badges -->
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.2rem; font-weight: 800; color: #1b5e20; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="compass" class="w-5 h-5 text-emerald-600"></i>
+                        <span>محطات المنهاج التعليمي والأنشطة المعملية المتكاملة</span>
+                    </h3>
+
+                    <div class="stations-grid">
+
+                        <!-- STATION 1 -->
+                        <div class="station-card">
+                            <div class="station-header">
+                                <span class="station-num">1</span>
+                                <span class="metric-badge" style="background: #e8f5e9; color: #1b5e20;">
+                                    <i data-lucide="scale" class="w-3.5 h-3.5"></i>
+                                    <span>استقصاء تجريبي</span>
+                                </span>
+                            </div>
+                            <h3 class="station-title">هل يحصل النبات على غذائه من التربة؟</h3>
+                            <p class="station-desc">
+                                تجربة فان هيلمونت، ميزان الكتل المعملي، قياس نقص كتلة التربة 57g مقابل زيادة الشجرة 74.4kg، ودور أوعية الخشب واللحاء.
+                            </p>
+                            <div style="margin-bottom: 1rem; padding: 0.6rem; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; font-size: 0.78rem; color: #64748b;">
+                                <strong>النواتج المستهدفة:</strong> تحليل نتائج القياس وتفسير مسار انتقال الماء والغذاء.
+                            </div>
+                            <a href="module1.html" class="station-btn" style="width: 100%; text-align: center; text-decoration: none; justify-content: center;">
+                                <span>دخول المحطة الأولى</span>
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+
+                        <!-- STATION 2 -->
+                        <div class="station-card">
+                            <div class="station-header">
+                                <span class="station-num">2</span>
+                                <span class="metric-badge" style="background: #e0f2fe; color: #0369a1;">
+                                    <i data-lucide="microscope" class="w-3.5 h-3.5"></i>
+                                    <span>تشريح وتركيب خلوي</span>
+                                </span>
+                            </div>
+                            <h3 class="station-title">تركيب وتصنيف البلاستيدات</h3>
+                            <p class="station-desc">
+                                فحص قطاع البلاستيدة الخضراء ثلاثي الأبعاد: الغشاء المزدوج، الستروما (الحشوة)، الجرانا، الأقراص، حبيبات النشا، وDNA.
+                            </p>
+                            <div style="margin-bottom: 1rem; padding: 0.6rem; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; font-size: 0.78rem; color: #64748b;">
+                                <strong>النواتج المستهدفة:</strong> تحديد الملاءمة الوظيفية للجرانا والستروما والتمييز المجهري.
+                            </div>
+                            <a href="module2.html" class="station-btn" style="width: 100%; text-align: center; text-decoration: none; justify-content: center;">
+                                <span>دخول المحطة الثانية</span>
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+
+                        <!-- STATION 3 -->
+                        <div class="station-card">
+                            <div class="station-header">
+                                <span class="station-num">3</span>
+                                <span class="metric-badge" style="background: #fef3c7; color: #b45309;">
+                                    <i data-lucide="sun" class="w-3.5 h-3.5"></i>
+                                    <span>فيزياء حيوية وطاقة</span>
+                                </span>
+                            </div>
+                            <h3 class="station-title">فيزياء الضوء وامتصاص الكلوروفيل</h3>
+                            <p class="station-desc">
+                                امتصاص الفوتونات (الكم)، صبغات الكلوروفيل (أ، ب 70%)، الزانثوفيل والكاروتين، ونموذج إثارة الإلكترونات وتخزين الطاقة.
+                            </p>
+                            <div style="margin-bottom: 1rem; padding: 0.6rem; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; font-size: 0.78rem; color: #64748b;">
+                                <strong>النواتج المستهدفة:</strong> تفسير انعكاس الطيف الأخضر وامتصاص الطيفين الأحمر والأزرق.
+                            </div>
+                            <a href="module3.html" class="station-btn" style="width: 100%; text-align: center; text-decoration: none; justify-content: center;">
+                                <span>دخول المحطة الثالثة</span>
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+
+                        <!-- STATION 4 -->
+                        <div class="station-card">
+                            <div class="station-header">
+                                <span class="station-num">4</span>
+                                <span class="metric-badge" style="background: #f3e8ff; color: #6b21a8;">
+                                    <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                                    <span>كيمياء حيوية وتفاعلات</span>
+                                </span>
+                            </div>
+                            <h3 class="station-title">مسار الطاقة: تفاعلات ضوئية ولاضوئية</h3>
+                            <p class="station-desc">
+                                انشطار الماء في الجرانا وإطلاق O₂، شحن مركب الطاقة ATP وتكوين NADPH، ثم تثبيت CO₂ بالستروما لإنتاج سكر الجلوكوز.
+                            </p>
+                            <div style="margin-bottom: 1rem; padding: 0.6rem; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; font-size: 0.78rem; color: #64748b;">
+                                <strong>النواتج المستهدفة:</strong> المقارنة الدقيقة بين تفاعلات الجرانا وتفاعلات الستروما ومخرجاتهما.
+                            </div>
+                            <a href="module4.html" class="station-btn" style="width: 100%; text-align: center; text-decoration: none; justify-content: center;">
+                                <span>دخول المحطة الرابعة</span>
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+
+                        <!-- STATION 5 -->
+                        <div class="station-card">
+                            <div class="station-header">
+                                <span class="station-num">5</span>
+                                <span class="metric-badge" style="background: #e8f5e9; color: #1b5e20;">
+                                    <i data-lucide="test-tube-2" class="w-3.5 h-3.5"></i>
+                                    <span>بروتوكول مخبري</span>
+                                </span>
+                            </div>
+                            <h3 class="station-title">المعادلة وتكوين النشا وبروتوكول اليود</h3>
+                            <p class="station-desc">
+                                المعادلة الكيميائية الشاملة، والتطبيق العملي لبروتوكول اليود بمراحله الأربع للكشف عن النشا في الأوراق المعرضة للضوء.
+                            </p>
+                            <div style="margin-bottom: 1rem; padding: 0.6rem; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; font-size: 0.78rem; color: #64748b;">
+                                <strong>النواتج المستهدفة:</strong> تفسير التغير اللوني لكاشف اليود ودلالة تكوين النشا كناتج تخزيني.
+                            </div>
+                            <a href="module5.html" class="station-btn" style="width: 100%; text-align: center; text-decoration: none; justify-content: center;">
+                                <span>دخول المحطة الخامسة</span>
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+
+                        <!-- STATION 6 -->
+                        <div class="station-card">
+                            <div class="station-header">
+                                <span class="station-num">6</span>
+                                <span class="metric-badge" style="background: #f1f5f9; color: #334155;">
+                                    <i data-lucide="building-2" class="w-3.5 h-3.5"></i>
+                                    <span>تطبيقات وتكنولوجيا حيوية</span>
+                                </span>
+                            </div>
+                            <h3 class="station-title">الزراعة العمودية وخريطة المفاهيم</h3>
+                            <p class="station-desc">
+                                محاكي الزراعة الحديثة والتحكم في الضوء والحرارة وCO₂ وتوفير 95% من المياه، مع خريطة المفاهيم التفاعلية الختامية.
+                            </p>
+                            <div style="margin-bottom: 1rem; padding: 0.6rem; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; font-size: 0.78rem; color: #64748b;">
+                                <strong>النواتج المستهدفة:</strong> تطبيق التكنولوجيا لتعزيز الأمن الغذائي وربط المفاهيم الكلية.
+                            </div>
+                            <a href="module6.html" class="station-btn" style="width: 100%; text-align: center; text-decoration: none; justify-content: center;">
+                                <span>دخول المحطة السادسة</span>
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- TAB 2: THEORY & SCIENTIFIC CONCEPTS (شرح المحتوى المنهجي مقسم وموضح) -->
+            <section id="catTheory" class="tab-pane" style="display: none;">
+                <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2rem; margin-bottom: 2rem;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+                        <div style="width: 44px; height: 44px; border-radius: 12px; background: #e8f5e9; color: #2e7d32; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="book-marked" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h2 style="font-size: 1.3rem; font-weight: 800; color: #1e293b; margin: 0;">المحتوى العلمي النظري المنهجي (المفاهيم والتفسيرات)</h2>
+                            <p style="margin: 0.2rem 0 0; font-size: 0.85rem; color: #64748b;">الشرح الأكاديمي المعتمد لدرس البناء الضوئي وتدفق الطاقة مع التفسيرات البيولوجية</p>
+                        </div>
+                    </div>
+
+                    <!-- Accordion or Structured Cards -->
+                    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        
+                        <!-- Theory Item 1 -->
+                        <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; background: #f8fafc;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <h3 style="margin: 0; font-size: 1.05rem; font-weight: 800; color: #1b5e20;">1. تجربة فان هيلمونت وتغذية النبات</h3>
+                                <span class="metric-badge" style="background: #e8f5e9; color: #1b5e20;">القرن الـ 17</span>
+                            </div>
+                            <p style="font-size: 0.88rem; color: #475569; line-height: 1.7; margin: 0 0 0.75rem;">
+                                اعتقد العلماء قديماً أن النبات يتغذى من التربة كالحيوان، حتى أثبت <strong>فان هيلمونت</strong> عبر زراعة شتلة صفصاف كتلتها 2.3kg في 90.7kg تربة مجففة وريها بالماء فقط لمدة 5 سنوات، أن كتلة الشجرة زادت إلى 76.7kg بينما نقصت التربة 57g فقط!
+                            </p>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap; background: #ffffff; padding: 0.75rem; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.8rem;">
+                                <div><strong style="color: #1e293b;">أوعية الخشب (Xylem):</strong> تنقل الماء والأملاح المعدنية من الجذور إلى الأوراق.</div>
+                                <div><strong style="color: #1e293b;">أوعية اللحاء (Phloem):</strong> تنقل المواد الغذائية العضوية من الأوراق لكافة أجزاء النبات.</div>
+                            </div>
+                        </div>
+
+                        <!-- Theory Item 2 -->
+                        <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; background: #f8fafc;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <h3 style="margin: 0; font-size: 1.05rem; font-weight: 800; color: #1b5e20;">2. تركيب البلاستيدة الخضراء والملاءمة الوظيفية</h3>
+                                <span class="metric-badge" style="background: #e0f2fe; color: #0369a1;">عضية حبة العدس</span>
+                            </div>
+                            <p style="font-size: 0.88rem; color: #475569; line-height: 1.7; margin: 0 0 0.75rem;">
+                                عضيات خلوية عدسية الشكل تتواجد في الأوراق والسيقان العشبية والطحالب الخضراء، وتتركب من:
+                            </p>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; font-size: 0.8rem;">
+                                <div style="background: white; padding: 0.75rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                    <strong style="color: #2e7d32; display: block;">الغشاء المزدوج:</strong> غشاءان داخلي وخارجي يسمحان بتبادل المواد وتنظيم النفاذية.
+                                </div>
+                                <div style="background: white; padding: 0.75rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                    <strong style="color: #2e7d32; display: block;">الجرانا (الأقراص):</strong> حبيبات أقراص الثيلاكويد تحتوي أصباغ الكلوروفيل وتمتص الضوء.
+                                </div>
+                                <div style="background: white; padding: 0.75rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                    <strong style="color: #2e7d32; display: block;">الستروما (الحشوة):</strong> أرضية بروتينية تحتوي إنزيمات التفاعلات اللاضوئية لتثبيت CO₂.
+                                </div>
+                                <div style="background: white; padding: 0.75rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                    <strong style="color: #2e7d32; display: block;">حبيبات النشا و DNA:</strong> مخازن طاقة سكرية مؤقتة، ومادة وراثية لصنع البروتينات ذاتياً.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Theory Item 3 -->
+                        <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; background: #f8fafc;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <h3 style="margin: 0; font-size: 1.05rem; font-weight: 800; color: #1b5e20;">3. أصباغ التمثيل الضوئي وفيزياء الكم (Quantum)</h3>
+                                <span class="metric-badge" style="background: #fef3c7; color: #b45309;">طاقة الفوتونات</span>
+                            </div>
+                            <p style="font-size: 0.88rem; color: #475569; line-height: 1.7; margin: 0;">
+                                تحتوي البلاستيدة على أصباغ رئيسية: <strong>كلوروفيل أ وكلوروفيل ب (70%)</strong> لونهما أخضر مزرق وأخضر مصفر، <strong>زانثوفيل (25%)</strong> لونه أصفر ليموني، و<strong>كاروتين (5%)</strong> لونه أصفر برتقالي. عند سقوط فوتونات الضوء (الكم)، تمتص ذرة الكلوروفيل الطاقة فتنتقل إلكتروناتها لمستوى طاقة أعلى لتخزن طاقة وضع كيميائية تُستخدم لاحقاً لشطر الماء.
+                            </p>
+                        </div>
+
+                        <!-- Theory Item 4 -->
+                        <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; background: #f8fafc;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <h3 style="margin: 0; font-size: 1.05rem; font-weight: 800; color: #1b5e20;">4. آلية التفاعلات الضوئية واللاضوئية والمعادلة الشاملة</h3>
+                                <span class="metric-badge" style="background: #f3e8ff; color: #6b21a8;">دورة كالفن و ATP</span>
+                            </div>
+                            <div style="background: #ffffff; padding: 1rem; border-radius: 10px; border: 1px solid #e2e8f0; text-align: center; margin-bottom: 0.75rem; font-family: monospace; font-weight: 800; color: #1b5e20; font-size: 0.95rem;">
+                                6CO₂ + 6H₂O + طاقة ضوئية (كلوروفيل) ➔ C₆H₁₂O₆ (جلوكوز) + 6O₂ ↑
+                            </div>
+                            <p style="font-size: 0.88rem; color: #475569; line-height: 1.7; margin: 0;">
+                                تنقسم العملية لمرحلتين: <strong>تفاعلات ضوئية</strong> في الجرانا تشطر H₂O إلى O₂ متصاعد وهيدروجين يحمله مركب NADP⁺ مع شحن ADP إلى ATP (الفسفرة الضوئية). ثم <strong>تفاعلات لاضوئية (إنزيمية)</strong> في الستروما تثبت CO₂ بواسطة طاقة ATP والهيدروجين من NADPH لتكوين الجلوكوز الذي يتجمع كنشاء.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: VIRTUAL LABS (المعامل الافتراضية الاستقصائية مع روابطها) -->
+            <section id="catLabs" class="tab-pane" style="display: none;">
+                <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2rem; margin-bottom: 2rem;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div style="width: 44px; height: 44px; border-radius: 12px; background: #e0f2fe; color: #0288d1; display: flex; align-items: center; justify-content: center;">
+                                <i data-lucide="box" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h2 style="font-size: 1.3rem; font-weight: 800; color: #1e293b; margin: 0;">المعامل الافتراضية التفاعلية ثلاثية الأبعاد 3D</h2>
+                                <p style="margin: 0.2rem 0 0; font-size: 0.85rem; color: #64748b;">بيئات محاكاة علمية تسمح بالتحكم في المتغيرات، الفحص 360°، والتجريب الذاتي</p>
+                            </div>
+                        </div>
+                        <a href="relationship.html" class="station-btn" style="background: #2e7d32; color: white; text-decoration: none;">
+                            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                            <span>المعمل التكاملي للبناء والتنفس</span>
+                        </a>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem;">
+                        
+                        <div class="modern-card" style="border-top: 4px solid #2e7d32;">
+                            <h4 style="margin: 0 0 0.5rem; font-size: 1rem; color: #1e293b; display: flex; align-items: center; gap: 0.4rem;">
+                                <i data-lucide="scale" class="w-4 h-4 text-emerald-600"></i>
+                                <span>معمل ميزان فان هيلمونت والكتل 3D</span>
+                            </h4>
+                            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.6; margin-bottom: 1rem;">
+                                تحكم بالميزان الرقمي، اضف الماء على مدار 5 سنوات، ولاحظ تزايد كتلة الشتلة مع ثبات كتلة التربة تقريباً.
+                            </p>
+                            <a href="module1.html" class="station-btn" style="width: 100%; text-decoration: none; justify-content: center; font-size: 0.8rem;">تشغيل المعمل 3D</a>
+                        </div>
+
+                        <div class="modern-card" style="border-top: 4px solid #0288d1;">
+                            <h4 style="margin: 0 0 0.5rem; font-size: 1rem; color: #1e293b; display: flex; align-items: center; gap: 0.4rem;">
+                                <i data-lucide="scan" class="w-4 h-4 text-sky-600"></i>
+                                <span>معمل تشريح البلاستيدة الخضراء 3D</span>
+                            </h4>
+                            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.6; margin-bottom: 1rem;">
+                                فكك طبقات البلاستيدة، انقر على الجرانا وأقراص الثيلاكويد والستروما، وافحص العينات تحت المجهر الضوئي.
+                            </p>
+                            <a href="module2.html" class="station-btn" style="width: 100%; text-decoration: none; justify-content: center; font-size: 0.8rem;">تشغيل المعمل 3D</a>
+                        </div>
+
+                        <div class="modern-card" style="border-top: 4px solid #f59e0b;">
+                            <h4 style="margin: 0 0 0.5rem; font-size: 1rem; color: #1e293b; display: flex; align-items: center; gap: 0.4rem;">
+                                <i data-lucide="sun" class="w-4 h-4 text-amber-600"></i>
+                                <span>معمل فوتونات الضوء وإثارة الذرة 3D</span>
+                            </h4>
+                            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.6; margin-bottom: 1rem;">
+                                أطلق أطياف الضوء (أحمر، أزرق، أخضر)، ولاحظ امتصاص الفوتونات وانتقال الإلكترون لمستوى طاقة مثار.
+                            </p>
+                            <a href="module3.html" class="station-btn" style="width: 100%; text-decoration: none; justify-content: center; font-size: 0.8rem;">تشغيل المعمل 3D</a>
+                        </div>
+
+                        <div class="modern-card" style="border-top: 4px solid #8b5cf6;">
+                            <h4 style="margin: 0 0 0.5rem; font-size: 1rem; color: #1e293b; display: flex; align-items: center; gap: 0.4rem;">
+                                <i data-lucide="zap" class="w-4 h-4 text-purple-600"></i>
+                                <span>معمل مسار ATP وتفاعلات الستروما 3D</span>
+                            </h4>
+                            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.6; margin-bottom: 1rem;">
+                                تابع شطر جزيئات H₂O وتصاعد فقاعات O₂ وتخليق بطارية ATP وانتقالها لتثبيت CO₂ وبناء حلقة الجلوكوز.
+                            </p>
+                            <a href="module4.html" class="station-btn" style="width: 100%; text-decoration: none; justify-content: center; font-size: 0.8rem;">تشغيل المعمل 3D</a>
+                        </div>
+
+                        <div class="modern-card" style="border-top: 4px solid #10b981;">
+                            <h4 style="margin: 0 0 0.5rem; font-size: 1rem; color: #1e293b; display: flex; align-items: center; gap: 0.4rem;">
+                                <i data-lucide="flask-conical" class="w-4 h-4 text-emerald-600"></i>
+                                <span>المختبر الزجاجي لكشف النشا باليود 3D</span>
+                            </h4>
+                            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.6; margin-bottom: 1rem;">
+                                نفذ بروتوكول التجارب بمراحله: الماء المغلي، حمام الكحول، ماء الشطف، وإضافة قطرات اليود لمشاهدة الأزرق الداكن.
+                            </p>
+                            <a href="module5.html" class="station-btn" style="width: 100%; text-decoration: none; justify-content: center; font-size: 0.8rem;">تشغيل المعمل 3D</a>
+                        </div>
+
+                        <div class="modern-card" style="border-top: 4px solid #3b82f6;">
+                            <h4 style="margin: 0 0 0.5rem; font-size: 1rem; color: #1e293b; display: flex; align-items: center; gap: 0.4rem;">
+                                <i data-lucide="building-2" class="w-4 h-4 text-blue-600"></i>
+                                <span>محاكي بيئة الزراعة العمودية 3D</span>
+                            </h4>
+                            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.6; margin-bottom: 1rem;">
+                                غيّر نسبة إضاءة LED، ودرجة الحرارة، وتركيز غاز CO₂ في مشهد زراعة عمودية ثلاثي الأبعاد واحسب معدل الإنتاج.
+                            </p>
+                            <a href="module6.html" class="station-btn" style="width: 100%; text-decoration: none; justify-content: center; font-size: 0.8rem;">تشغيل المعمل 3D</a>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: VISUAL MEDIA, DIAGRAMS & INTERACTIVE VIDEO (الصور التوضيحية ومشغل الشروحات المرئية) -->
+            <section id="catMedia" class="tab-pane" style="display: none;">
+                
+                <!-- Interactive Video Player Component -->
+                <div class="video-player-container" style="padding: 1.5rem; margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="background: #ef4444; width: 10px; height: 10px; border-radius: 50%; display: inline-block;"></span>
+                            <h3 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">مشغل الشروحات المرئية التفاعلية (Exploratory Motion Walkthrough)</h3>
+                        </div>
+                        <span id="videoCurrentChapter" style="background: rgba(255,255,255,0.15); padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700;">
+                            الفصل 1: رحلة تدفق الطاقة وتحولات الفوتونات
+                        </span>
+                    </div>
+
+                    <!-- Screen Area (Interactive Animated Walkthrough) -->
+                    <div id="videoScreenArea" style="background: #020617; border-radius: 12px; height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 1.5rem; text-align: center;">
+                        
+                        <!-- Animated SVG Graphics Canvas for the video player -->
+                        <div id="videoVisualStage" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <svg viewBox="0 0 600 240" style="width: 100%; max-height: 220px;">
+                                <!-- Sun & Photons -->
+                                <circle cx="80" cy="70" r="35" fill="#f59e0b" filter="drop-shadow(0 0 10px #f59e0b)" />
+                                <text x="80" y="75" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">ضوء الشمس</text>
+                                
+                                <!-- Beams -->
+                                <path d="M120 70 L240 120" stroke="#fde047" stroke-width="3" stroke-dasharray="6,4" />
+                                <text x="180" y="85" fill="#fde047" font-size="11" font-weight="bold">فوتونات (الكم)</text>
+
+                                <!-- Leaf / Chloroplast -->
+                                <ellipse cx="320" cy="130" rx="70" ry="45" fill="#2e7d32" stroke="#4caf50" stroke-width="4" />
+                                <text x="320" y="125" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">البلاستيدة الخضراء</text>
+                                <text x="320" y="145" fill="#a5d6a7" font-size="10" text-anchor="middle">شطر الماء ➔ O₂ + ATP</text>
+
+                                <!-- Output Energy to Mitochondria -->
+                                <path d="M400 130 L490 130" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)" />
+                                <text x="445" y="118" fill="#93c5fd" font-size="11" font-weight="bold" text-anchor="middle">جلوكوز + O₂</text>
+
+                                <!-- Mitochondria -->
+                                <ellipse cx="530" cy="130" rx="45" ry="32" fill="#b91c1c" stroke="#f87171" stroke-width="3" />
+                                <text x="530" y="133" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">الميتوكوندريا</text>
+                                <text x="530" y="148" fill="#fca5a5" font-size="9" text-anchor="middle">طاقة حية 38 ATP</text>
+                            </svg>
+                        </div>
+
+                        <!-- Video Subtitles / Narrative -->
+                        <div id="videoNarrativeText" style="position: absolute; bottom: 12px; left: 16px; right: 16px; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.85rem; color: #ffffff; font-weight: 600;">
+                            تصل فوتونات الضوء إلى صبغات الكلوروفيل في الجرانا، فتتحول الطاقة الضوئية إلى طاقة وضع كيميائية تُشحن بها جزيئات ATP.
+                        </div>
+                    </div>
+
+                    <!-- Video Controls Bar -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <button type="button" id="btnVideoPlayPause" style="background: #2e7d32; color: white; border: none; padding: 0.45rem 1rem; border-radius: 8px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem;">
+                                <i data-lucide="play" class="w-4 h-4"></i>
+                                <span id="videoPlayBtnText">تشغيل المشهد</span>
+                            </button>
+                            <button type="button" id="btnVideoNextScene" style="background: rgba(255,255,255,0.15); color: white; border: none; padding: 0.45rem 0.9rem; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.8rem;">
+                                المشهد التالي ➔
+                            </button>
+                        </div>
+                        <div style="display: flex; gap: 0.4rem; font-size: 0.75rem; color: #cbd5e1;">
+                            <span style="cursor: pointer; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;" onclick="window.switchVideoScene(1)">1. تدفق الضوء</span>
+                            <span style="cursor: pointer; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;" onclick="window.switchVideoScene(2)">2. شطر الماء والجرانا</span>
+                            <span style="cursor: pointer; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;" onclick="window.switchVideoScene(3)">3. دورة كالفن بالستروما</span>
+                            <span style="cursor: pointer; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;" onclick="window.switchVideoScene(4)">4. بروتوكول اليود والنشا</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scientific Explanatory Diagrams Grid (الصور والرسومات التوضيحية المنهجية) -->
+                <div>
+                    <h3 style="font-size: 1.2rem; font-weight: 800; color: #1b5e20; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="image" class="w-5 h-5 text-emerald-600"></i>
+                        <span>الرسومات والمخططات العلمية التوضيحية عالية الدقة</span>
+                    </h3>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+                        
+                        <!-- Diagram 1: Van Helmont -->
+                        <div class="diagram-viewer-card">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                <h4 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: #1e293b;">مخطط تجربة فان هيلمونت وحساب فروق الكتل</h4>
+                                <span class="metric-badge" style="background: #e8f5e9; color: #1b5e20;">شكل 1</span>
+                            </div>
+                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem; text-align: center;">
+                                <svg viewBox="0 0 350 160" style="width: 100%; height: auto;">
+                                    <!-- Pot 1 -->
+                                    <rect x="30" y="80" width="80" height="60" rx="6" fill="#78350f" />
+                                    <ellipse cx="70" cy="80" rx="40" ry="10" fill="#92400e" />
+                                    <line x1="70" y1="80" x2="70" y2="40" stroke="#16a34a" stroke-width="4" />
+                                    <circle cx="70" cy="35" r="10" fill="#22c55e" />
+                                    <text x="70" y="110" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">تربة: 90.7 kg</text>
+                                    <text x="70" y="125" fill="#fef08a" font-size="9" text-anchor="middle">شتلة: 2.3 kg</text>
+                                    <text x="70" y="155" fill="#64748b" font-size="10" font-weight="bold" text-anchor="middle">البداية (سنة 0)</text>
+
+                                    <!-- Arrow 5 years -->
+                                    <path d="M130 90 L200 90" stroke="#0288d1" stroke-width="3" stroke-dasharray="4,3" />
+                                    <text x="165" y="80" fill="#0288d1" font-size="9" font-weight="bold" text-anchor="middle">+ ري بالماء 5 سنوات</text>
+
+                                    <!-- Pot 2 -->
+                                    <rect x="230" y="80" width="80" height="60" rx="6" fill="#78350f" />
+                                    <ellipse cx="270" cy="80" rx="40" ry="10" fill="#92400e" />
+                                    <line x1="270" y1="80" x2="270" y2="20" stroke="#16a34a" stroke-width="6" />
+                                    <!-- Big Canopy -->
+                                    <circle cx="270" cy="20" r="22" fill="#15803d" />
+                                    <text x="270" y="110" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">تربة: 90.643 kg</text>
+                                    <text x="270" y="125" fill="#fef08a" font-size="9" text-anchor="middle">شجرة: 76.7 kg</text>
+                                    <text x="270" y="155" fill="#166534" font-size="10" font-weight="bold" text-anchor="middle">بعد 5 سنوات (-57g تربة)</text>
+                                </svg>
+                            </div>
+                            <p style="margin: 0.75rem 0 0; font-size: 0.78rem; color: #64748b; line-height: 1.5;">
+                                برهان عملي قاطع: زادت كتلة الشجرة بمقدار 74.4kg بينما نقصت التربة 57g فقط، مما يثبت أن الماء والغازات هما أصل البناء وليس التربة.
+                            </p>
+                        </div>
+
+                        <!-- Diagram 2: Chloroplast Anatomy -->
+                        <div class="diagram-viewer-card">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                <h4 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: #1e293b;">القطاع التشريحي الدقيق للبلاستيدة الخضراء</h4>
+                                <span class="metric-badge" style="background: #e0f2fe; color: #0369a1;">شكل 2</span>
+                            </div>
+                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem; text-align: center;">
+                                <svg viewBox="0 0 350 160" style="width: 100%; height: auto;">
+                                    <!-- Double Membrane -->
+                                    <ellipse cx="175" cy="80" rx="140" ry="65" fill="#e8f5e9" stroke="#1b5e20" stroke-width="3" />
+                                    <ellipse cx="175" cy="80" rx="133" ry="58" fill="#f1f8e9" stroke="#4caf50" stroke-width="1.5" />
+                                    
+                                    <!-- Grana Stacks -->
+                                    <rect x="90" y="65" width="28" height="6" rx="2" fill="#2e7d32" />
+                                    <rect x="90" y="73" width="28" height="6" rx="2" fill="#2e7d32" />
+                                    <rect x="90" y="81" width="28" height="6" rx="2" fill="#2e7d32" />
+                                    
+                                    <rect x="150" y="55" width="28" height="6" rx="2" fill="#2e7d32" />
+                                    <rect x="150" y="63" width="28" height="6" rx="2" fill="#2e7d32" />
+                                    <rect x="150" y="71" width="28" height="6" rx="2" fill="#2e7d32" />
+                                    <rect x="150" y="79" width="28" height="6" rx="2" fill="#2e7d32" />
+                                    
+                                    <!-- Connecting Thylakoid Edge -->
+                                    <line x1="118" y1="76" x2="150" y2="76" stroke="#2e7d32" stroke-width="2" />
+
+                                    <!-- Starch & DNA -->
+                                    <circle cx="230" cy="70" r="7" fill="#fef08a" stroke="#ca8a04" />
+                                    <path d="M210 100 Q225 90 240 100 T260 100" stroke="#0288d1" stroke-width="2" fill="none" />
+
+                                    <!-- Labels -->
+                                    <text x="75" y="45" fill="#1b5e20" font-size="10" font-weight="bold">جرانا (أقراص ثيلاكويد)</text>
+                                    <text x="210" y="50" fill="#854d0e" font-size="10" font-weight="bold">الستروما (الحشوة)</text>
+                                    <text x="245" y="75" fill="#ca8a04" font-size="9">حبيبة نشا</text>
+                                    <text x="265" y="110" fill="#0288d1" font-size="9">DNA حلقي</text>
+                                </svg>
+                            </div>
+                            <p style="margin: 0.75rem 0 0; font-size: 0.78rem; color: #64748b; line-height: 1.5;">
+                                تمتد حواف أقراص الجرانا لزيادة مساحة السطح المعرض لضوء الشمس، بينما تحوي الستروما إنزيمات تصنيع الكربوهيدرات.
+                            </p>
+                        </div>
+
+                        <!-- Diagram 3: 4-Step Iodine Protocol -->
+                        <div class="diagram-viewer-card">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                <h4 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: #1e293b;">مراحل بروتوكول كشف النشا بمحلول اليود الأربعة</h4>
+                                <span class="metric-badge" style="background: #fef3c7; color: #b45309;">شكل 3</span>
+                            </div>
+                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem; text-align: center;">
+                                <svg viewBox="0 0 350 160" style="width: 100%; height: auto;">
+                                    <!-- Stage 1 -->
+                                    <rect x="15" y="50" width="55" height="60" rx="4" fill="#e0f2fe" stroke="#0288d1" />
+                                    <text x="42" y="75" fill="#0369a1" font-size="8" font-weight="bold" text-anchor="middle">ماء مغلي</text>
+                                    <text x="42" y="90" fill="#64748b" font-size="7" text-anchor="middle">قتل الخلايا</text>
+                                    <text x="42" y="130" fill="#1e293b" font-size="9" font-weight="bold" text-anchor="middle">1. الغلي</text>
+
+                                    <!-- Stage 2 -->
+                                    <rect x="95" y="50" width="55" height="60" rx="4" fill="#fef3c7" stroke="#d97706" />
+                                    <text x="122" y="75" fill="#b45309" font-size="8" font-weight="bold" text-anchor="middle">كحول ساخن</text>
+                                    <text x="122" y="90" fill="#64748b" font-size="7" text-anchor="middle">إزالة الكلوروفيل</text>
+                                    <text x="122" y="130" fill="#1e293b" font-size="9" font-weight="bold" text-anchor="middle">2. التبييض</text>
+
+                                    <!-- Stage 3 -->
+                                    <rect x="175" y="50" width="55" height="60" rx="4" fill="#e0f2fe" stroke="#0288d1" />
+                                    <text x="202" y="75" fill="#0369a1" font-size="8" font-weight="bold" text-anchor="middle">شطف بالماء</text>
+                                    <text x="202" y="90" fill="#64748b" font-size="7" text-anchor="middle">تليين الورقة</text>
+                                    <text x="202" y="130" fill="#1e293b" font-size="9" font-weight="bold" text-anchor="middle">3. الشطف</text>
+
+                                    <!-- Stage 4 -->
+                                    <rect x="255" y="50" width="75" height="60" rx="4" fill="#ede9fe" stroke="#7c3aed" />
+                                    <circle cx="292" cy="75" r="14" fill="#1e1b4b" stroke="#312e81" stroke-width="2" />
+                                    <text x="292" y="78" fill="#ffffff" font-size="7" font-weight="bold" text-anchor="middle">أزرق داكن</text>
+                                    <text x="292" y="100" fill="#581c87" font-size="7" text-anchor="middle">محلول اليود</text>
+                                    <text x="292" y="130" fill="#1e293b" font-size="9" font-weight="bold" text-anchor="middle">4. اختبار النشا</text>
+                                </svg>
+                            </div>
+                            <p style="margin: 0.75rem 0 0; font-size: 0.78rem; color: #64748b; line-height: 1.5;">
+                                يتحول اليود من البرتقالي إلى الأزرق القاتم فقط في الأجزاء التي تعرضت للضوء وصنعت النشا.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: RUBRIC & MEASUREMENT CRITERIA (على أي أساس أنا بقيس؟ نظام قياس نواتج التعلم) -->
+            <section id="catRubric" class="tab-pane" style="display: none;">
+                <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2rem; margin-bottom: 2rem;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div style="width: 44px; height: 44px; border-radius: 12px; background: #e8f5e9; color: #2e7d32; display: flex; align-items: center; justify-content: center;">
+                                <i data-lucide="award" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h2 style="font-size: 1.3rem; font-weight: 800; color: #1e293b; margin: 0;">منظومة القياس ونواتج التعلم السلوكية (LMS Rubric)</h2>
+                                <p style="margin: 0.2rem 0 0; font-size: 0.85rem; color: #64748b;">
+                                    على أي أساس يتم القياس والتقييم؟ وفق 7 نواتج تعلم معيارية محددة في المنهج الرسمي
+                                </p>
+                            </div>
+                        </div>
+                        <a href="assessment.html" class="station-btn" style="background: #2e7d32; color: white; text-decoration: none;">
+                            <i data-lucide="check-circle" class="w-4 h-4"></i>
+                            <span>بدء الاختبار المعياري (15 سؤالاً)</span>
+                        </a>
+                    </div>
+
+                    <!-- Outcomes Table / Rubrics -->
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        
+                        <!-- Rubric Row 1 -->
+                        <div style="padding: 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                                <span style="font-size: 0.9rem; font-weight: 800; color: #1e293b;">1. تفسير نتائج تجربة فان هيلمونت وحساب فروق الكتل</span>
+                                <span class="metric-badge" style="background: #e8f5e9; color: #1b5e20;">معياري (محطة 1)</span>
+                            </div>
+                            <p style="margin: 0; font-size: 0.8rem; color: #64748b; line-height: 1.5;">
+                                <strong>مؤشر القياس:</strong> يستنتج المتعلم أن نمو النبات لا يعتمد على التهام التربة، ويحدد وظيفة أوعية الخشب واللحاء بنسبة إتقان لا تقل عن 80%.
+                            </p>
+                        </div>
+
+                        <!-- Rubric Row 2 -->
+                        <div style="padding: 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                                <span style="font-size: 0.9rem; font-weight: 800; color: #1e293b;">2. تحديد التركيب الدقيق والملائمة الوظيفية للبلاستيدة الخضراء</span>
+                                <span class="metric-badge" style="background: #e0f2fe; color: #0369a1;">معياري (محطة 2)</span>
+                            </div>
+                            <p style="margin: 0; font-size: 0.8rem; color: #64748b; line-height: 1.5;">
+                                <strong>مؤشر القياس:</strong> يميز المتعلم بين الغشاء المزدوج، الجرانا (أقراص الثيلاكويد)، والستروما، ويفسر أهمية امتداد حواف الأقراص لزيادة مساحة السطح المعرض للضوء.
+                            </p>
+                        </div>
+
+                        <!-- Rubric Row 3 -->
+                        <div style="padding: 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                                <span style="font-size: 0.9rem; font-weight: 800; color: #1e293b;">3. اكتشاف دور الكلوروفيل وفيزياء امتصاص الفوتونات (الكم)</span>
+                                <span class="metric-badge" style="background: #fef3c7; color: #b45309;">معياري (محطة 3)</span>
+                            </div>
+                            <p style="margin: 0; font-size: 0.8rem; color: #64748b; line-height: 1.5;">
+                                <strong>مؤشر القياس:</strong> يفسر المتعلم انتقال إلكترونات ذرة الكلوروفيل لمستوى طاقة أعلى عند امتصاص الفوتون، ويفسر سبب ظهور النبات باللون الأخضر (انعكاس الطيف الأخضر).
+                            </p>
+                        </div>
+
+                        <!-- Rubric Row 4 -->
+                        <div style="padding: 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                                <span style="font-size: 0.9rem; font-weight: 800; color: #1e293b;">4. التمييز الدقيق بين التفاعلات الضوئية واللاضوئية</span>
+                                <span class="metric-badge" style="background: #f3e8ff; color: #6b21a8;">معياري (محطة 4)</span>
+                            </div>
+                            <p style="margin: 0; font-size: 0.8rem; color: #64748b; line-height: 1.5;">
+                                <strong>مؤشر القياس:</strong> يحدد موقع حدوث كل تفاعل (الجرانا للضوئية، الستروما للاضوئية)، ويدرج مدخلات ومخرجات كل منهما (انطلاق O₂ وتوليد ATP مقابل تثبيت CO₂ وتخليق الجلوكوز).
+                            </p>
+                        </div>
+
+                        <!-- Rubric Row 5 -->
+                        <div style="padding: 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                                <span style="font-size: 0.9rem; font-weight: 800; color: #1e293b;">5. إتقان بروتوكول الكشف عن النشا بمحلول اليود</span>
+                                <span class="metric-badge" style="background: #e8f5e9; color: #1b5e20;">معياري (محطة 5)</span>
+                            </div>
+                            <p style="margin: 0; font-size: 0.8rem; color: #64748b; line-height: 1.5;">
+                                <strong>مؤشر القياس:</strong> يرتب الخطوات الأربع للتجربة ترتباً علمياً صحيحاً، ويفسر سبب استخدام الكحول المغلي وتغير لون الأجزاء المعرضة للضوء للأزرق الداكن.
+                            </p>
+                        </div>
+
+                        <!-- Rubric Row 6 -->
+                        <div style="padding: 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                                <span style="font-size: 0.9rem; font-weight: 800; color: #1e293b;">6. تحليل تأثير العوامل البيئية ومفهوم الزراعة العمودية</span>
+                                <span class="metric-badge" style="background: #f1f5f9; color: #334155;">معياري (محطة 6)</span>
+                            </div>
+                            <p style="margin: 0; font-size: 0.8rem; color: #64748b; line-height: 1.5;">
+                                <strong>مؤشر القياس:</strong> يحلل أثر الحرارة على الإنزيمات، ودور إضاءة LED في توفير الطاقة، وكيفية توفير 95% من المياه لحماية الأمن الغذائي.
+                            </p>
+                        </div>
+
+                        <!-- Rubric Row 7 -->
+                        <div style="padding: 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                                <span style="font-size: 0.9rem; font-weight: 800; color: #1e293b;">7. الربط التكاملي بين البناء الضوئي والتنفس الخلوي وتدفق الطاقة</span>
+                                <span class="metric-badge" style="background: #fef2f2; color: #991b1b;">معياري (وحدة التكامل)</span>
+                            </div>
+                            <p style="margin: 0; font-size: 0.8rem; color: #64748b; line-height: 1.5;">
+                                <strong>مؤشر القياس:</strong> يصمم نموذجاً يوضح أن نواتج البناء الضوئي (C₆H₁₂O₆ + O₂) هي متفاعلات التنفس الخلوي في الميتوكوندريا، والعكس بالعكس، مفسراً دورة تدفق الطاقة في الكائنات الحية.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
 
         </div>
     </main>
 
-    <footer class="site-footer" style="background: var(--bg-card); border-top: 1px solid #e0e0e0; padding: 1.5rem 0; text-align: center; font-size: 0.85rem; color: var(--text-light);">
+    <!-- Footer -->
+    <footer class="site-footer" style="background: #ffffff; border-top: 1px solid #e2e8f0; padding: 2rem 0; text-align: center; font-size: 0.85rem; color: #64748b;">
         <div class="container">
-            <p>منصة تدفق الطاقة في الأحياء — منظومة التعلم للإتقان المعملي</p>
+            <p style="margin: 0 0 0.5rem; font-weight: 700; color: #1e293b;">منظومة التعلم للإتقان المعملية | الوحدة 3: تدفق الطاقة في عمليتي البناء الضوئي والتنفس الخلوي</p>
+            <p style="margin: 0; font-size: 0.78rem;">تطوير شامل وفق معايير وزارة التربية والتعليم ونظام إدارة التعلم (LMS) ونواتج التعلم المستهدفة</p>
         </div>
     </footer>
 </div>
 
-<script src="js/app.js"></script>
 <script>
     if (window.lucide) lucide.createIcons();
-    var studentName = localStorage.getItem('student_name') || 'الباحث العلمي';
-    var welcomeEl = document.getElementById('welcomeName');
-    if (welcomeEl) welcomeEl.textContent = studentName;
 
-    if (window.progress) {
-        var pct = window.progress.getOverallProgress();
-        var textEl = document.getElementById('navProgressText');
-        var barEl = document.getElementById('navProgressBar');
-        if (textEl) textEl.textContent = pct + '%';
-        if (barEl) barEl.style.width = pct + '%';
+    // Check student name
+    const studentName = localStorage.getItem('student_name') || 'الباحث العلمي';
+    document.getElementById('welcomeName').innerText = studentName;
+
+    // Calculate real progress
+    let completed = 0;
+    for (let i = 1; i <= 6; i++) {
+        if (localStorage.getItem(`station_${i}_completed`) === 'true') {
+            completed++;
+        }
     }
+    const pct = Math.round((completed / 6) * 100);
+    document.getElementById('navProgressText').innerText = pct + '% إتقان';
+    document.getElementById('navProgressBar').style.width = pct + '%';
+    document.getElementById('overallPercentage').innerText = pct + '%';
+    document.getElementById('headerProgressFill').style.width = pct + '%';
+    document.getElementById('completedCount').innerText = `${completed} / 6`;
+
+    // Category Tabs Logic
+    const tabButtons = document.querySelectorAll('.category-tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabButtons.forEach(b => b.classList.remove('active'));
+            tabPanes.forEach(p => p.style.display = 'none');
+
+            btn.classList.add('active');
+            const targetId = btn.getAttribute('data-target');
+            const targetPane = document.getElementById(targetId);
+            if (targetPane) {
+                targetPane.style.display = 'block';
+                if (window.lucide) lucide.createIcons();
+            }
+        });
+    });
+
+    // Interactive Video Player Engine
+    const videoScenes = [
+        {
+            chapter: 'الفصل 1: تدفق الضوء والكم وسقوط الفوتونات',
+            narrative: 'تصل فوتونات الضوء (الكم) إلى صبغات الكلوروفيل في الجرانا، فتتحول الطاقة الضوئية إلى طاقة وضع كيميائية تُشحن بها جزيئات ATP.',
+            svgContent: `<svg viewBox="0 0 600 240" style="width: 100%; max-height: 220px;">
+                <circle cx="80" cy="70" r="35" fill="#f59e0b" filter="drop-shadow(0 0 10px #f59e0b)" />
+                <text x="80" y="75" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">ضوء الشمس</text>
+                <path d="M120 70 L240 120" stroke="#fde047" stroke-width="3" stroke-dasharray="6,4" />
+                <text x="180" y="85" fill="#fde047" font-size="11" font-weight="bold">فوتونات (الكم)</text>
+                <ellipse cx="320" cy="130" rx="70" ry="45" fill="#2e7d32" stroke="#4caf50" stroke-width="4" />
+                <text x="320" y="125" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">البلاستيدة الخضراء</text>
+                <text x="320" y="145" fill="#a5d6a7" font-size="10" text-anchor="middle">شطر الماء ➔ O₂ + ATP</text>
+                <path d="M400 130 L490 130" stroke="#60a5fa" stroke-width="3" />
+                <text x="445" y="118" fill="#93c5fd" font-size="11" font-weight="bold" text-anchor="middle">جلوكوز + O₂</text>
+                <ellipse cx="530" cy="130" rx="45" ry="32" fill="#b91c1c" stroke="#f87171" stroke-width="3" />
+                <text x="530" y="133" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">الميتوكوندريا</text>
+                <text x="530" y="148" fill="#fca5a5" font-size="9" text-anchor="middle">طاقة حية 38 ATP</text>
+            </svg>`
+        },
+        {
+            chapter: 'الفصل 2: التفاعلات الضوئية وشطر جزيء الماء (H₂O)',
+            narrative: 'تحدث داخل أقراص الجرانا: تُشطر جزيئات الماء بفعل الطاقة الضوئية الممتصة ليتصاعد غاز الأكسجين (O₂)، ويرتبط الهيدروجين بالمركب الناقل NADPH.',
+            svgContent: `<svg viewBox="0 0 600 240" style="width: 100%; max-height: 220px;">
+                <rect x="50" y="40" width="220" height="160" rx="16" fill="#14532d" stroke="#22c55e" stroke-width="3" />
+                <text x="160" y="70" fill="#86efac" font-size="14" font-weight="bold" text-anchor="middle">الجرانا (Grana) - تفاعلات ضوئية</text>
+                <text x="160" y="100" fill="#ffffff" font-size="12" text-anchor="middle">H₂O (ماء من الجذور)</text>
+                <path d="M160 110 L160 140" stroke="#fde047" stroke-width="3" />
+                <circle cx="110" cy="165" r="22" fill="#0284c7" />
+                <text x="110" y="170" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">O₂ متصاعد</text>
+                <circle cx="210" cy="165" r="22" fill="#ca8a04" />
+                <text x="210" y="170" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">ATP + NADPH</text>
+                <path d="M280 120 L380 120" stroke="#fde047" stroke-width="4" stroke-dasharray="6,4" />
+                <text x="330" y="105" fill="#fde047" font-size="11" font-weight="bold" text-anchor="middle">انتقال الطاقة</text>
+                <rect x="390" y="40" width="170" height="160" rx="16" fill="#78350f" stroke="#f59e0b" stroke-width="3" />
+                <text x="475" y="75" fill="#fde68a" font-size="13" font-weight="bold" text-anchor="middle">الستروما (الحشوة)</text>
+                <text x="475" y="125" fill="#ffffff" font-size="11" text-anchor="middle">تثبيت CO₂ بالإنزيمات</text>
+            </svg>`
+        },
+        {
+            chapter: 'الفصل 3: التفاعلات اللاضوئية (دورة كالفن) وتخليق الجلوكوز',
+            narrative: 'تحدث في الستروما بدون حاجة مباشرة للضوء: يتم تثبيت غاز CO₂ بواسطة هيدروجين NADPH وطاقة ATP ليتكون فوسفوجليسرالدهيد ثم سكر الجلوكوز C₆H₁₂O₆.',
+            svgContent: `<svg viewBox="0 0 600 240" style="width: 100%; max-height: 220px;">
+                <ellipse cx="300" cy="120" rx="220" ry="85" fill="#1e293b" stroke="#f59e0b" stroke-width="3" />
+                <text x="300" y="65" fill="#fef08a" font-size="14" font-weight="bold" text-anchor="middle">حلقة تثبيت الكربون (الستروما / إنزيمات حيوية)</text>
+                <circle cx="170" cy="125" r="30" fill="#0284c7" />
+                <text x="170" y="123" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">ثاني أكسيد</text>
+                <text x="170" y="137" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">الكربون CO₂</text>
+                <path d="M210 125 L250 125" stroke="#fde047" stroke-width="3" />
+                <circle cx="300" cy="125" r="32" fill="#15803d" stroke="#86efac" stroke-width="2" />
+                <text x="300" y="123" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">تثبيت إنزيمي</text>
+                <text x="300" y="137" fill="#86efac" font-size="9" text-anchor="middle">طاقة ATP</text>
+                <path d="M340 125 L380 125" stroke="#fde047" stroke-width="3" />
+                <circle cx="430" cy="125" r="32" fill="#ca8a04" />
+                <text x="430" y="123" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">جلوكوز</text>
+                <text x="430" y="137" fill="#fef08a" font-size="9" text-anchor="middle">C₆H₁₂O₆</text>
+            </svg>`
+        },
+        {
+            chapter: 'الفصل 4: تجربة كشف النشا باليود وتحول اللون للأزرق الداكن',
+            narrative: 'يتحول سكر الجلوكوز الزائد إلى حبيبات نشا داخل البلاستيدة. عند معاملة الورقة بمحلول اليود، يتفاعل النشا في الأجزاء المعرضة للضوء معطياً لوناً أزرق داكناً.',
+            svgContent: `<svg viewBox="0 0 600 240" style="width: 100%; max-height: 220px;">
+                <rect x="60" y="50" width="140" height="140" rx="12" fill="#1e293b" stroke="#cbd5e1" />
+                <ellipse cx="130" cy="115" rx="50" ry="30" fill="#f59e0b" />
+                <text x="130" y="112" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">جزء محجوب</text>
+                <text x="130" y="128" fill="#ffffff" font-size="9" text-anchor="middle">لا يوجد نشا (يبقى بنياً)</text>
+                <path d="M220 120 L280 120" stroke="#a855f7" stroke-width="4" stroke-dasharray="4,4" />
+                <text x="250" y="105" fill="#c084fc" font-size="10" font-weight="bold" text-anchor="middle">+ قطرات اليود</text>
+                <rect x="300" y="50" width="240" height="140" rx="12" fill="#0f172a" stroke="#818cf8" stroke-width="2" />
+                <ellipse cx="420" cy="115" rx="75" ry="40" fill="#1e1b4b" stroke="#4f46e5" stroke-width="3" />
+                <text x="420" y="112" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">أزرق داكن (Dark Blue)</text>
+                <text x="420" y="132" fill="#a5b4fc" font-size="10" text-anchor="middle">برهان قاطع على وجود النشا وتصنيعه بالضوء</text>
+            </svg>`
+        }
+    ];
+
+    let currentSceneIdx = 0;
+    let isPlaying = false;
+    let playInterval = null;
+
+    window.switchVideoScene = function(sceneNum) {
+        currentSceneIdx = (sceneNum - 1) % videoScenes.length;
+        renderCurrentScene();
+    };
+
+    function renderCurrentScene() {
+        const scene = videoScenes[currentSceneIdx];
+        document.getElementById('videoCurrentChapter').innerText = scene.chapter;
+        document.getElementById('videoVisualStage').innerHTML = scene.svgContent;
+        document.getElementById('videoNarrativeText').innerText = scene.narrative;
+    }
+
+    const btnPlay = document.getElementById('btnVideoPlayPause');
+    const playText = document.getElementById('videoPlayBtnText');
+    const btnNext = document.getElementById('btnVideoNextScene');
+
+    btnPlay.addEventListener('click', () => {
+        if (!isPlaying) {
+            isPlaying = true;
+            playText.innerText = 'إيقاف مؤقت';
+            playInterval = setInterval(() => {
+                currentSceneIdx = (currentSceneIdx + 1) % videoScenes.length;
+                renderCurrentScene();
+            }, 5000);
+        } else {
+            isPlaying = false;
+            playText.innerText = 'تشغيل المشهد';
+            clearInterval(playInterval);
+        }
+    });
+
+    btnNext.addEventListener('click', () => {
+        currentSceneIdx = (currentSceneIdx + 1) % videoScenes.length;
+        renderCurrentScene();
+    });
 </script>
 </body>
 </html>
