@@ -9,7 +9,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white font-['Cairo',sans-serif]">
 
   <!-- TOP HEADER -->
   <header class="w-full bg-white border-b border-slate-200 py-3.5 px-4 sm:px-8 shadow-sm">
@@ -36,7 +36,7 @@
     <div class="w-full lg:w-1/2 space-y-5">
       <div class="inline-flex items-center space-x-1.5 space-x-reverse px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold">
         <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blue-600"></i>
-        <span>بيئة تعلم تفاعلية استقصائية ثلاثية الأبعاد</span>
+        <span>بيئة تعلم تفاعلية استقصائية ثلاثية الأبعاد 3D</span>
       </div>
 
       <h2 class="text-2xl sm:text-4xl font-black text-slate-900 leading-tight">
@@ -44,7 +44,7 @@
       </h2>
 
       <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-        صممت المنصة وفق معايير <strong>نظم إدارة التعلم (LMS)</strong> الحديثة؛ لكل وحدة تعليمية هدف معرفي ومهاري محدد، ومحتوى تفاعلي مدعم بالفيزياء، وممارسة عملية تفاعلية حقيقية (سحب وأوزان وتجارب كيميائية ومحاكاة زراعة عمودية)، مع اختبار ختامي معتمد (15 سؤالاً) وشهادة إتقان فورية.
+        صممت المنصة وفق معايير <strong>نظم إدارة التعلم (LMS)</strong> الحديثة؛ لكل وحدة تعليمية هدف معرفي ومهاري محدد، ومحتوى تفاعلي مدعم بالفيزياء، وممارسة عملية حقيقية في معامل ثلاثية الأبعاد (3D)، مع تقويم ختامي معتمد (15 سؤالاً) وإصدار فوري لشهادة الإتقان.
       </p>
 
       <!-- Highlights -->
@@ -53,8 +53,8 @@
           <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
             <i data-lucide="flask-conical" class="w-4 h-4"></i>
           </div>
-          <h4 class="font-bold text-slate-900">6 معامل تفاعلية مستقلة</h4>
-          <p class="text-[11px] text-slate-500">لكل نشاط هدفه الخاص وأدواته وممارسته العملية دون مجرد ضغط أزرار.</p>
+          <h4 class="font-bold text-slate-900">6 معامل 3D مستقلة</h4>
+          <p class="text-[11px] text-slate-500">أدوات ومحاكاة مخصصة لكل تجربة معملية.</p>
         </div>
 
         <div class="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
@@ -62,7 +62,7 @@
             <i data-lucide="award" class="w-4 h-4"></i>
           </div>
           <h4 class="font-bold text-slate-900">شهادة إتقان معتمدة</h4>
-          <p class="text-[11px] text-slate-500">تقويم شامل من 15 سؤالاً واختبار تفكير عليا مع إصدار الشهادة فوراً.</p>
+          <p class="text-[11px] text-slate-500">تقويم شامل من 15 سؤالاً مع طباعة الشهادة باسمك.</p>
         </div>
       </div>
     </div>
@@ -72,16 +72,16 @@
       
       <div class="text-center space-y-1">
         <h3 class="text-lg font-black text-slate-900">تسجيل الدخول للمنصة</h3>
-        <p class="text-xs text-slate-500">أدخل اسمك وكلمة المرور للبدء مباشرة</p>
+        <p class="text-xs text-slate-500">أدخل اسمك وكلمة المرور للانطلاق فوراً</p>
       </div>
 
       <!-- Role Tabs -->
       <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl border border-slate-200">
-        <button id="tabStudent" type="button" class="py-2 rounded-lg text-xs font-bold bg-white text-blue-700 shadow-sm border border-slate-200 flex items-center justify-center space-x-1.5 space-x-reverse">
+        <button id="tabStudent" type="button" class="py-2 rounded-lg text-xs font-bold bg-white text-blue-700 shadow-sm border border-slate-200 flex items-center justify-center space-x-1.5 space-x-reverse cursor-pointer">
           <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
           <span>أنا طالب</span>
         </button>
-        <button id="tabTeacher" type="button" class="py-2 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 flex items-center justify-center space-x-1.5 space-x-reverse">
+        <button id="tabTeacher" type="button" class="py-2 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 flex items-center justify-center space-x-1.5 space-x-reverse cursor-pointer">
           <i data-lucide="shield" class="w-3.5 h-3.5"></i>
           <span>أنا معلم</span>
         </button>
@@ -90,7 +90,7 @@
       <!-- Form (Name & Password Only) -->
       <form id="simpleLoginForm" class="space-y-3.5 pt-1">
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">الاسم بالكامل (أو كود المستخدم):</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1">الاسم بالكامل (أو كود الطالب):</label>
           <div class="relative">
             <input type="text" id="usernameInput" required placeholder="مثال: أحمد محمد علي" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-900 focus:outline-none focus:border-blue-500 focus:bg-white transition-all">
           </div>
@@ -103,20 +103,20 @@
           </div>
         </div>
 
-        <button type="submit" class="btn-primary w-full py-2.5 text-xs shadow-md">
+        <button type="submit" id="submitBtn" class="btn-primary w-full py-2.5 text-xs shadow-md cursor-pointer flex items-center justify-center">
           <span>دخول للمختبر الآن</span>
           <i data-lucide="arrow-left" class="w-3.5 h-3.5 mr-1.5"></i>
         </button>
       </form>
 
       <!-- Quick Guest Access -->
-      <button id="guestAccessBtn" type="button" class="w-full py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-xs flex items-center justify-center space-x-1.5 space-x-reverse transition-colors">
+      <button id="guestAccessBtn" type="button" class="w-full py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-xs flex items-center justify-center space-x-1.5 space-x-reverse transition-colors cursor-pointer">
         <i data-lucide="user-check" class="w-3.5 h-3.5 text-blue-600"></i>
         <span>تجربة سريعة كطالب مستكشف (ضيف)</span>
       </button>
 
-      <div class="text-center pt-2 border-t border-slate-100 text-[11px] text-slate-400">
-        الباك إند متصل ويعمل بسلاسة لحفظ الإنجاز والدرجات
+      <div class="text-center pt-2 border-t border-slate-100 text-[11px] text-slate-400 font-medium">
+        تسجيل مباشر وسريع بحفظ محلي وسحابي فوري
       </div>
 
     </div>
@@ -127,61 +127,69 @@
     منظومة التعلم للإتقان المعملية | المنهج المصري المطور - تدفق الطاقة في النظم الحيوية
   </footer>
 
-  <script type="module">
-    import { auth, signInAnonymously } from './js/firebase-config.js';
-    lucide.createIcons();
+  <!-- Resilient Scripts (Zero Blocking) -->
+  <script>
+    if (window.lucide) {
+      lucide.createIcons();
+    }
 
-    let currentRole = 'student';
+    var currentRole = 'student';
+    var tabStudent = document.getElementById('tabStudent');
+    var tabTeacher = document.getElementById('tabTeacher');
+    var simpleLoginForm = document.getElementById('simpleLoginForm');
+    var guestAccessBtn = document.getElementById('guestAccessBtn');
 
-    const tabStudent = document.getElementById('tabStudent');
-    const tabTeacher = document.getElementById('tabTeacher');
-    const simpleLoginForm = document.getElementById('simpleLoginForm');
-    const guestAccessBtn = document.getElementById('guestAccessBtn');
+    if (tabStudent && tabTeacher) {
+      tabStudent.addEventListener('click', function() {
+        currentRole = 'student';
+        tabStudent.className = 'py-2 rounded-lg text-xs font-bold bg-white text-blue-700 shadow-sm border border-slate-200 flex items-center justify-center space-x-1.5 space-x-reverse cursor-pointer';
+        tabTeacher.className = 'py-2 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 flex items-center justify-center space-x-1.5 space-x-reverse cursor-pointer';
+      });
 
-    tabStudent.addEventListener('click', () => {
-      currentRole = 'student';
-      tabStudent.className = 'py-2 rounded-lg text-xs font-bold bg-white text-blue-700 shadow-sm border border-slate-200 flex items-center justify-center space-x-1.5 space-x-reverse';
-      tabTeacher.className = 'py-2 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 flex items-center justify-center space-x-1.5 space-x-reverse';
-    });
+      tabTeacher.addEventListener('click', function() {
+        currentRole = 'teacher';
+        tabTeacher.className = 'py-2 rounded-lg text-xs font-bold bg-white text-blue-700 shadow-sm border border-slate-200 flex items-center justify-center space-x-1.5 space-x-reverse cursor-pointer';
+        tabStudent.className = 'py-2 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 flex items-center justify-center space-x-1.5 space-x-reverse cursor-pointer';
+      });
+    }
 
-    tabTeacher.addEventListener('click', () => {
-      currentRole = 'teacher';
-      tabTeacher.className = 'py-2 rounded-lg text-xs font-bold bg-white text-blue-700 shadow-sm border border-slate-200 flex items-center justify-center space-x-1.5 space-x-reverse';
-      tabStudent.className = 'py-2 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 flex items-center justify-center space-x-1.5 space-x-reverse';
-    });
+    if (simpleLoginForm) {
+      simpleLoginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var username = document.getElementById('usernameInput').value.trim();
+        var pass = document.getElementById('passwordInput').value.trim();
 
-    simpleLoginForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const username = document.getElementById('usernameInput').value.trim();
-      const pass = document.getElementById('passwordInput').value.trim();
+        if (!username) {
+          alert('برجاء كتابة الاسم');
+          return;
+        }
 
-      if (!username || !pass) {
-        alert('برجاء كتابة الاسم وكلمة المرور');
-        return;
-      }
+        localStorage.setItem('student_name', username);
+        localStorage.setItem('user_role', currentRole);
 
-      localStorage.setItem('student_name', username);
-      localStorage.setItem('user_role', currentRole);
+        // Background Firebase sync if available
+        import('./js/firebase-config.js').then(function(fb) {
+          if (fb && fb.signInAnonymously && fb.auth) {
+            fb.signInAnonymously(fb.auth).catch(function(err){ console.warn(err); });
+          }
+        }).catch(function(e) { console.warn(e); });
 
-      try {
-        await signInAnonymously(auth);
-      } catch (err) {
-        console.warn('Firebase silent sync:', err);
-      }
+        // Navigate immediately
+        if (currentRole === 'teacher') {
+          window.location.href = 'teacher.html';
+        } else {
+          window.location.href = 'dashboard.html';
+        }
+      });
+    }
 
-      if (currentRole === 'teacher') {
-        window.location.href = 'teacher.html';
-      } else {
+    if (guestAccessBtn) {
+      guestAccessBtn.addEventListener('click', function() {
+        localStorage.setItem('student_name', 'طالب مستكشف (ضيف)');
+        localStorage.setItem('user_role', 'student');
         window.location.href = 'dashboard.html';
-      }
-    });
-
-    guestAccessBtn.addEventListener('click', async () => {
-      try { await signInAnonymously(auth); } catch (e) {}
-      localStorage.setItem('student_name', 'طالب مستكشف');
-      localStorage.setItem('user_role', 'student');
-      window.location.href = 'dashboard.html';
-    });
+      });
+    }
   </script>
 </body>
 </html>

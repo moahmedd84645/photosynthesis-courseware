@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>الوحدة 5: المعادلة وتكوين النشا وبروتوكول اليود | منصة البناء الضوئي</title>
+  <title>الوحدة 5: بروتوكول اليود والنشا | معمل 3D</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-['Cairo',sans-serif]">
@@ -42,7 +43,7 @@
           <span>الهدف التعليمي للنشاط (وفق نظام إدارة التعلم LMS):</span>
         </div>
         <p class="text-xs text-slate-700 leading-relaxed font-semibold">
-          في نهاية هذا النشاط، يجب أن تكون قادراً على: <strong>(1)</strong> تفسير المعادلة الكيميائية الشاملة للبناء الضوئي ونمذجة إعادة ترتيب الذرات، <strong>(2)</strong> توضيح تحويل الجلوكوز إلى نشا للتخزين، <strong>(3)</strong> تنفيذ خطوات التجربة المعملية للكشف عن النشا في أوراق النبات بمحلول اليود عملياً بالملقط والمحاليل الأربعة وتفسير سبب كل خطوة.
+          في نهاية هذا النشاط، يجب أن تكون قادراً على: <strong>(1)</strong> تفسير المعادلة الكيميائية الشاملة للبناء الضوئي، <strong>(2)</strong> توضيح تحويل الجلوكوز إلى نشا للتخزين، <strong>(3)</strong> تنفيذ خطوات التجربة المعملية للكشف عن النشا في بيئة ثلاثية الأبعاد 3D بمحلول اليود وتفسير سبب كل خطوة.
         </p>
       </div>
       <div class="flex-shrink-0">
@@ -56,7 +57,7 @@
     <!-- 2-COL LAYOUT -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-      <!-- LEFT: SCIENTIFIC EQUATION & IODINE PROTOCOL (5 cols) -->
+      <!-- LEFT: THEORY (5 cols) -->
       <div class="lg:col-span-5 space-y-4">
         
         <!-- CARD: Balanced Equation -->
@@ -79,7 +80,7 @@
 
           <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900">
             <strong class="block mb-0.5 font-bold">تخزين السكر الفائض:</strong>
-            يقوم النبات ببلمرة جزيئات الجلوكوز الزائدة وربطها معاً لتكوين جزيئات معقدة من <strong>النشا غير الذائب</strong> وتخزينها في البلاستيدات لحين الحاجة إليها.
+            يقوم النبات ببلمرة جزيئات الجلوكوز الزائدة وربطها معاً لتكوين جزيئات معقدة من <strong>النشا غير الذائب</strong> وتخزينها في البلاستيدات لحين الحاجة إليها دون التأثير على الضغط الأسموزي.
           </div>
         </div>
 
@@ -114,7 +115,7 @@
 
       </div>
 
-      <!-- RIGHT: INTERACTIVE 4-BATH FORCEPS SIMULATION (7 cols) -->
+      <!-- RIGHT: 3D GLASSWARE LAB (7 cols) -->
       <div class="lg:col-span-7 space-y-4">
         
         <div class="modern-card space-y-4">
@@ -124,86 +125,31 @@
                 <i data-lucide="flask-conical" class="w-4 h-4"></i>
               </div>
               <div>
-                <h3 class="text-sm font-black text-slate-900">مختبر الأحواض الكيميائية التفاعلي بالملقط</h3>
-                <p class="text-[11px] text-slate-500 font-medium">اغمس ورقة النبات في الأحواض الأربعة بالترتيب لمشاهدة تحول النشا</p>
+                <h3 class="text-sm font-black text-slate-900">مختبر الزجاجيات الكيميائية ثلاثي الأبعاد 3D</h3>
+                <p class="text-[11px] text-slate-500 font-medium">شاهد تفاعل الورقة ومحلول البيكر الزجاجي عبر الخطوات الأربعة</p>
               </div>
             </div>
-            <span id="bathStepBadge" class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-bold text-xs border border-slate-200">الحوض 1 من 4</span>
+            <span id="bathStepBadge" class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-bold text-xs border border-slate-200">الخطوة 1: ماء مغلي</span>
           </div>
 
-          <!-- 4 Beakers Stage -->
-          <div class="simulation-canvas-wrapper flex flex-col justify-between p-4" id="chemicalStage" style="background: #0f172a;">
+          <!-- 3D Canvas -->
+          <div class="simulation-canvas-wrapper relative" id="chemicalStage">
             
-            <!-- Forceps & Leaf Visual Indicator -->
-            <div class="flex items-center justify-between px-3 py-1 bg-slate-900/80 rounded-xl border border-slate-800 text-xs">
-              <div class="flex items-center space-x-2 space-x-reverse text-slate-300">
-                <i data-lucide="scissors" class="w-4 h-4 text-blue-400 rotate-90"></i>
-                <span>الملقط الطبي يحمل:</span>
-                <span id="leafStatusText" class="font-bold text-emerald-400">ورقة نبات خضراء طازجة</span>
-              </div>
-              <span id="leafActionTip" class="text-[11px] text-amber-400 font-bold">جاهز للغمس في الحوض 1</span>
-            </div>
-
-            <!-- 4 Chemical Beakers -->
-            <div class="grid grid-cols-4 gap-2 text-center text-white py-4">
-              
-              <!-- Beaker 1: Boiling Water -->
-              <div id="beaker1" class="border-2 border-cyan-500/80 bg-cyan-950/40 p-2.5 rounded-2xl flex flex-col items-center justify-between h-36 transition-all duration-300">
-                <span class="text-[10px] font-bold text-cyan-300">1. ماء مغلي</span>
-                <div class="w-10 h-10 rounded-full bg-cyan-400/20 flex items-center justify-center">
-                  <i data-lucide="flame" class="w-5 h-5 text-cyan-400 animate-bounce"></i>
-                </div>
-                <span class="text-[9px] text-slate-400">قتل الخلايا</span>
-              </div>
-
-              <!-- Beaker 2: Boiling Alcohol -->
-              <div id="beaker2" class="border border-slate-700 bg-slate-900/40 p-2.5 rounded-2xl flex flex-col items-center justify-between h-36 opacity-50 transition-all duration-300">
-                <span class="text-[10px] font-bold text-slate-300">2. كحول دافئ</span>
-                <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                  <i data-lucide="droplet" class="w-5 h-5 text-emerald-400"></i>
-                </div>
-                <span class="text-[9px] text-slate-400">نزع الكلوروفيل</span>
-              </div>
-
-              <!-- Beaker 3: Cold Rinse -->
-              <div id="beaker3" class="border border-slate-700 bg-slate-900/40 p-2.5 rounded-2xl flex flex-col items-center justify-between h-36 opacity-50 transition-all duration-300">
-                <span class="text-[10px] font-bold text-slate-300">3. ماء بارد</span>
-                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
-                  <i data-lucide="waves" class="w-5 h-5 text-blue-400"></i>
-                </div>
-                <span class="text-[9px] text-slate-400">تليين النسيج</span>
-              </div>
-
-              <!-- Beaker 4: Iodine Solution -->
-              <div id="beaker4" class="border border-slate-700 bg-slate-900/40 p-2.5 rounded-2xl flex flex-col items-center justify-between h-36 opacity-50 transition-all duration-300">
-                <span class="text-[10px] font-bold text-slate-300">4. محلول اليود</span>
-                <div class="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
-                  <i data-lucide="flask-round" class="w-5 h-5 text-amber-400"></i>
-                </div>
-                <span class="text-[9px] text-slate-400">الكشف اللوني</span>
-              </div>
-
-            </div>
-
-            <!-- Leaf Inspection Petri Dish -->
-            <div id="petriDishView" class="hidden bg-slate-900 border border-slate-700 p-3 rounded-xl flex items-center justify-between text-xs">
-              <div class="flex items-center space-x-3 space-x-reverse">
-                <div id="leafResultGraphic" class="w-8 h-8 rounded-full bg-indigo-900 border-2 border-indigo-400 shadow-[0_0_10px_#4338ca]"></div>
-                <div>
-                  <strong class="text-white block font-bold">النتيجة المعملية للورقة:</strong>
-                  <span class="text-[11px] text-slate-300">تحول لون المنطقة المعرضة للضوء إلى <span class="text-indigo-400 font-black">الأزرق الداكن</span> دلالة على وجود النشا!</span>
-                </div>
-              </div>
+            <!-- Glassware HUD -->
+            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md border border-slate-300 text-slate-900 p-3 rounded-2xl shadow-md text-xs space-y-1 z-10 min-w-[190px]">
+              <span class="text-slate-500 text-[10px] font-bold block">حالة البيكر المعملي 3D:</span>
+              <h4 id="beakerStageTitle" class="font-black text-blue-700 text-sm">1. ماء مغلي ساخن</h4>
+              <p id="beakerStageDesc" class="text-[11px] text-slate-600">قتل الخلايا الحية وإيقاف الإنزيمات.</p>
             </div>
 
           </div>
 
           <!-- Step By Step Buttons -->
-          <div class="grid grid-cols-4 gap-2">
-            <button id="btnDipWater" class="btn-primary py-2 text-[11px] font-bold">غمس بالماء المغلي</button>
-            <button id="btnDipAlcohol" class="btn-secondary py-2 text-[11px] font-bold" disabled>غمس بالكحول</button>
-            <button id="btnDipRinse" class="btn-secondary py-2 text-[11px] font-bold" disabled>شطف بالماء</button>
-            <button id="btnDipIodine" class="btn-secondary py-2 text-[11px] font-bold" disabled>إضافة اليود</button>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <button id="btnStage1" type="button" class="btn-primary py-2 text-[11px] font-bold cursor-pointer">1. ماء مغلي</button>
+            <button id="btnStage2" type="button" class="btn-secondary py-2 text-[11px] font-bold cursor-pointer">2. كحول دافئ</button>
+            <button id="btnStage3" type="button" class="btn-secondary py-2 text-[11px] font-bold cursor-pointer">3. شطف بارد</button>
+            <button id="btnStage4" type="button" class="btn-secondary py-2 text-[11px] font-bold cursor-pointer">4. كاشف اليود</button>
           </div>
 
         </div>
@@ -218,10 +164,10 @@
             عند تغطية جزء من ورقة نبات بشريط أسود معتم وتعريضها للضوء لعدة ساعات، ثم الكشف بمحلول اليود، ماذا يحدث للجزء المغطى؟
           </p>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-            <button onclick="checkCoveredLeaf(1)" class="p-2.5 text-right rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 transition-all font-medium">
+            <button id="chkCover1" type="button" class="p-2.5 text-right rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 transition-all font-medium cursor-pointer">
               أ) يتحول إلى الأزرق الداكن لوجود النشا المخزن
             </button>
-            <button onclick="checkCoveredLeaf(2)" class="p-2.5 text-right rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 transition-all font-medium">
+            <button id="chkCover2" type="button" class="p-2.5 text-right rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 transition-all font-medium cursor-pointer">
               ب) يظل لون اليود برتقالياً لعدم تكوين النشا لغياب الضوء
             </button>
           </div>
@@ -230,12 +176,12 @@
 
         <!-- NAV -->
         <div class="flex justify-between items-center pt-2">
-          <a href="module4.html" class="btn-secondary py-3 px-5 text-xs font-bold space-x-1.5 space-x-reverse">
+          <a href="module4.html" class="btn-secondary py-3 px-5 text-xs font-bold space-x-1.5 space-x-reverse cursor-pointer">
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
             <span>الوحدة السابقة</span>
           </a>
-          <a href="module6.html" class="btn-primary py-3 px-6 text-xs font-bold space-x-1.5 space-x-reverse shadow-md">
-            <span>الانتقال إلى الوحدة 6: الزراعة العمودية وخريطة المفاهيم</span>
+          <a href="module6.html" class="btn-primary py-3 px-6 text-xs font-bold space-x-1.5 space-x-reverse shadow-md cursor-pointer">
+            <span>الانتقال إلى الوحدة 6: الزراعة العمودية 3D</span>
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
           </a>
         </div>
@@ -251,83 +197,81 @@
   </footer>
 
   <script type="module">
+    import { sims3D } from './js/simulations-3d.js';
     import { markStationComplete } from './js/firebase-config.js';
-    lucide.createIcons();
+    if (window.lucide) lucide.createIcons();
 
-    const btnDipWater = document.getElementById('btnDipWater');
-    const btnDipAlcohol = document.getElementById('btnDipAlcohol');
-    const btnDipRinse = document.getElementById('btnDipRinse');
-    const btnDipIodine = document.getElementById('btnDipIodine');
+    // Mount 3D Glassware
+    sims3D.initStation5('chemicalStage');
 
-    const beaker1 = document.getElementById('beaker1');
-    const beaker2 = document.getElementById('beaker2');
-    const beaker3 = document.getElementById('beaker3');
-    const beaker4 = document.getElementById('beaker4');
-
-    const leafStatusText = document.getElementById('leafStatusText');
-    const leafActionTip = document.getElementById('leafActionTip');
+    const beakerStageTitle = document.getElementById('beakerStageTitle');
+    const beakerStageDesc = document.getElementById('beakerStageDesc');
     const bathStepBadge = document.getElementById('bathStepBadge');
-    const petriDishView = document.getElementById('petriDishView');
 
-    // Step 1: Boiling Water
-    btnDipWater.addEventListener('click', () => {
-      beaker1.className = 'border-2 border-cyan-500 bg-cyan-900/60 p-2.5 rounded-2xl flex flex-col items-center justify-between h-36';
-      leafStatusText.innerText = 'ورقة ميتة خلوياً ولينة الجدار';
-      leafActionTip.innerText = 'تم قتل الخلايا! انتقل للحوض 2 لإذابة الكلوروفيل بالكحول.';
-      bathStepBadge.innerText = 'الحوض 2 من 4';
+    const btnStage1 = document.getElementById('btnStage1');
+    const btnStage2 = document.getElementById('btnStage2');
+    const btnStage3 = document.getElementById('btnStage3');
+    const btnStage4 = document.getElementById('btnStage4');
 
-      btnDipWater.className = 'btn-secondary py-2 text-[11px] font-bold';
-      btnDipAlcohol.disabled = false;
-      btnDipAlcohol.className = 'btn-primary py-2 text-[11px] font-bold';
-      beaker2.classList.remove('opacity-50');
-      beaker2.className = 'border-2 border-emerald-500/80 bg-emerald-950/40 p-2.5 rounded-2xl flex flex-col items-center justify-between h-36';
+    btnStage1.addEventListener('click', () => {
+      if (sims3D.activeSims.station5) sims3D.activeSims.station5.applyStage(1);
+      beakerStageTitle.innerText = '1. ماء مغلي ساخن';
+      beakerStageDesc.innerText = 'قتل الخلايا الحية وإيقاف عمل الإنزيمات فوراً.';
+      bathStepBadge.innerText = 'الخطوة 1: ماء مغلي';
+      btnStage1.className = 'btn-primary py-2 text-[11px] font-bold cursor-pointer';
+      btnStage2.className = 'btn-secondary py-2 text-[11px] font-bold cursor-pointer';
+      btnStage3.className = 'btn-secondary py-2 text-[11px] font-bold cursor-pointer';
+      btnStage4.className = 'btn-secondary py-2 text-[11px] font-bold cursor-pointer';
     });
 
-    // Step 2: Alcohol
-    btnDipAlcohol.addEventListener('click', () => {
-      leafStatusText.innerText = 'ورقة بيضاء شاحبة (أزيل الكلوروفيل)';
-      leafActionTip.innerText = 'ذاب الكلوروفيل بالكامل! انتقل للحوض 3 للشطف والتليين بالماء البارد.';
-      bathStepBadge.innerText = 'الحوض 3 من 4';
-
-      btnDipAlcohol.className = 'btn-secondary py-2 text-[11px] font-bold';
-      btnDipRinse.disabled = false;
-      btnDipRinse.className = 'btn-primary py-2 text-[11px] font-bold';
-      beaker3.classList.remove('opacity-50');
-      beaker3.className = 'border-2 border-blue-500/80 bg-blue-950/40 p-2.5 rounded-2xl flex flex-col items-center justify-between h-36';
+    btnStage2.addEventListener('click', () => {
+      if (sims3D.activeSims.station5) sims3D.activeSims.station5.applyStage(2);
+      beakerStageTitle.innerText = '2. كحول إيثيلي دافئ';
+      beakerStageDesc.innerText = 'إذابة الكلوروفيل الأخضر، فاصبحت الورقة بيضاء شاحبة.';
+      bathStepBadge.innerText = 'الخطوة 2: كحول دافئ';
+      btnStage2.className = 'btn-primary py-2 text-[11px] font-bold cursor-pointer';
+      btnStage1.className = 'btn-secondary py-2 text-[11px] font-bold cursor-pointer';
+      btnStage3.className = 'btn-secondary py-2 text-[11px] font-bold cursor-pointer';
+      btnStage4.className = 'btn-secondary py-2 text-[11px] font-bold cursor-pointer';
     });
 
-    // Step 3: Cold Rinse
-    btnDipRinse.addEventListener('click', () => {
-      leafStatusText.innerText = 'ورقة مغسولة ومرنة جاهزة للكاشف';
-      leafActionTip.innerText = 'جاهز الآن لإضافة قطرات اليود في الحوض 4 لرؤية النشا!';
-      bathStepBadge.innerText = 'الحوض 4 من 4';
-
-      btnDipRinse.className = 'btn-secondary py-2 text-[11px] font-bold';
-      btnDipIodine.disabled = false;
-      btnDipIodine.className = 'btn-primary py-2 text-[11px] font-bold';
-      beaker4.classList.remove('opacity-50');
-      beaker4.className = 'border-2 border-amber-500/80 bg-amber-950/40 p-2.5 rounded-2xl flex flex-col items-center justify-between h-36';
+    btnStage3.addEventListener('click', () => {
+      if (sims3D.activeSims.station5) sims3D.activeSims.station5.applyStage(3);
+      beakerStageTitle.innerText = '3. شطف بماء بارد';
+      beakerStageDesc.innerText = 'غسل الكحول الزائد وتليين نسيج الورقة.';
+      bathStepBadge.innerText = 'الخطوة 3: شطف بارد';
+      btnStage3.className = 'btn-primary py-2 text-[11px] font-bold cursor-pointer';
+      btnStage1.className = 'btn-secondary py-2 text-[11px] font-bold cursor-pointer';
+      btnStage2.className = 'btn-secondary py-2 text-[11px] font-bold cursor-pointer';
+      btnStage4.className = 'btn-secondary py-2 text-[11px] font-bold cursor-pointer';
     });
 
-    // Step 4: Iodine
-    btnDipIodine.addEventListener('click', () => {
-      leafStatusText.innerText = 'تفاعل إيجابي مع اليود (أزرق داكن)';
-      leafActionTip.innerText = 'مبروك! تشاهد تحول اليود البرتقالي إلى الأزرق الداكن في مناطق النشا.';
-      petriDishView.classList.remove('hidden');
+    btnStage4.addEventListener('click', () => {
+      if (sims3D.activeSims.station5) sims3D.activeSims.station5.applyStage(4);
+      beakerStageTitle.innerText = '4. محلول اليود (تفاعل إيجابي)';
+      beakerStageDesc.innerText = 'تحول لون الورقة إلى الأزرق الداكن دلالة على وجود النشا!';
+      bathStepBadge.innerText = 'الخطوة 4: كاشف اليود (أزرق داكن)';
+      btnStage4.className = 'btn-primary py-2 text-[11px] font-bold cursor-pointer';
+      btnStage1.className = 'btn-secondary py-2 text-[11px] font-bold cursor-pointer';
+      btnStage2.className = 'btn-secondary py-2 text-[11px] font-bold cursor-pointer';
+      btnStage3.className = 'btn-secondary py-2 text-[11px] font-bold cursor-pointer';
       markStationComplete(5, 100);
     });
 
-    window.checkCoveredLeaf = function(opt) {
+    // Formative check
+    document.getElementById('chkCover1').addEventListener('click', () => {
       const fb = document.getElementById('coveredFeedback');
       fb.classList.remove('hidden');
-      if (opt === 2) {
-        fb.className = 'p-3 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
-        fb.innerHTML = 'إجابة عبقرية وصحيحة! الجزء المحجوب لم يصله الضوء فلم يقم بالبناء الضوئي ولم يصنع نشا، فيظل لون اليود برتقالياً كالأصل.';
-      } else {
-        fb.className = 'p-3 rounded-xl text-xs font-bold bg-red-100 text-red-800 border border-red-300';
-        fb.innerHTML = 'إجابة غير صحيحة. انتبه: الضوء شرط أساسي لتكوين النشا، وبغياب الضوء تحت الشريط المعتم لا يتكون النشا فيبقى لون اليود برتقالياً.';
-      }
-    };
+      fb.className = 'p-3 rounded-xl text-xs font-bold bg-red-100 text-red-800 border border-red-300';
+      fb.innerHTML = 'إجابة غير صحيحة. انتبه: الضوء شرط أساسي لتكوين النشا، وبغياب الضوء تحت الشريط المعتم لا يتكون النشا فيبقى لون اليود برتقالياً.';
+    });
+
+    document.getElementById('chkCover2').addEventListener('click', () => {
+      const fb = document.getElementById('coveredFeedback');
+      fb.classList.remove('hidden');
+      fb.className = 'p-3 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
+      fb.innerHTML = 'إجابة عبقرية وصحيحة! الجزء المحجوب لم يصله الضوء فلم يقم بالبناء الضوئي ولم يصنع نشا، فيظل لون اليود برتقالياً كالأصل.';
+    });
   </script>
 </body>
 </html>

@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>الوحدة 3: فيزياء الضوء وامتصاص الكلوروفيل | منصة البناء الضوئي</title>
+  <title>الوحدة 3: فيزياء الضوء وامتصاص الكلوروفيل | معمل 3D</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-['Cairo',sans-serif]">
@@ -42,7 +43,7 @@
           <span>الهدف التعليمي للنشاط (وفق نظام إدارة التعلم LMS):</span>
         </div>
         <p class="text-xs text-slate-700 leading-relaxed font-semibold">
-          في نهاية هذا النشاط، يجب أن تكون قادراً على: <strong>(1)</strong> تفسير سبب ظهور أوراق النبات باللون الأخضر عبر فيزياء امتصاص وانعكاس الضوء، <strong>(2)</strong> مقارنة كفاءة امتصاص الكلوروفيل للأطياف المختلفة (الأحمر والأزرق مقابل الأخضر)، <strong>(3)</strong> وصف كيفية إثارة إلكترونات ذرة الكلوروفيل عند امتصاص كم من الطاقة الضوئية (الكم / الفوتون).
+          في نهاية هذا النشاط، يجب أن تكون قادراً على: <strong>(1)</strong> تفسير سبب ظهور أوراق النبات باللون الأخضر عبر فيزياء امتصاص وانعكاس الضوء ثلاثي الأبعاد، <strong>(2)</strong> مقارنة كفاءة امتصاص الكلوروفيل للأطياف المختلفة (الأحمر والأزرق مقابل الأخضر)، <strong>(3)</strong> وصف كيفية إثارة إلكترونات ذرة الكلوروفيل عند امتصاص كم من الطاقة الضوئية (الكم / الفوتون).
         </p>
       </div>
       <div class="flex-shrink-0">
@@ -56,7 +57,7 @@
     <!-- 2-COL LAYOUT -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-      <!-- LEFT: THEORY & PHYSICS INTEGRATION (5 cols) -->
+      <!-- LEFT: THEORY (5 cols) -->
       <div class="lg:col-span-5 space-y-4">
         
         <!-- CARD: Physics Integration & Prism -->
@@ -70,7 +71,7 @@
 
           <div class="text-xs text-slate-600 space-y-2 leading-relaxed">
             <p>
-              ضوء الشمس الأبيض ليس لوناً واحداً، بل خليط من 7 ألوان تسمى <strong>ألوان الطيف</strong> تتحلل بالمنشور الثلاثي (أحمر، برتقالي، أصفر، أخضر، أزرق، نيلي، بنفسجي).
+              ضوء الشمس الأبيض خليط من 7 ألوان تسمى <strong>ألوان الطيف</strong> تتحلل بالمنشور الثلاثي (أحمر، برتقالي، أصفر، أخضر، أزرق، نيلي، بنفسجي).
             </p>
             <div class="p-3 bg-blue-50/60 border border-blue-200 rounded-xl space-y-1">
               <strong class="text-blue-900 block text-xs">لماذا تظهر أوراق النبات باللون الأخضر؟</strong>
@@ -97,14 +98,14 @@
             <ol class="list-decimal list-inside space-y-1 text-slate-700 pr-1 font-medium">
               <li>يمتص الإلكترون طاقة الفوتون بالكامل.</li>
               <li>يقفز الإلكترون من مداره الأصلي المستقر إلى مدار طاقة أعلى فتصبح <strong>الذرة مثارة</strong>.</li>
-              <li>تتحول الطاقة الضوئية الحركية إلى <strong>طاقة وضع كيميائية مخزنة</strong> تُستخدم لشحن جزيئات ATP وشطر الماء!</li>
+              <li>تتحول الطاقة الضوئية إلى <strong>طاقة وضع كيميائية مخزنة</strong> لشحن جزيئات ATP وشطر الماء!</li>
             </ol>
           </div>
         </div>
 
       </div>
 
-      <!-- RIGHT: INTERACTIVE OPTICS LAB & ATOM SIMULATOR (7 cols) -->
+      <!-- RIGHT: 3D PHOTON LAB & ATOM SIMULATOR (7 cols) -->
       <div class="lg:col-span-7 space-y-4">
         
         <div class="modern-card space-y-4">
@@ -114,108 +115,66 @@
                 <i data-lucide="compass" class="w-4 h-4"></i>
               </div>
               <div>
-                <h3 class="text-sm font-black text-slate-900">مختبر قياس الامتصاص الطيفي ومحاكي الذرة المثارة</h3>
-                <p class="text-[11px] text-slate-500 font-medium">اختر لون الطيف وشاهد تفاعل جزيء الكلوروفيل ومستويات الطاقة</p>
+                <h3 class="text-sm font-black text-slate-900">مختبر الفوتونات 3D ومحاكي الذرة المثارة</h3>
+                <p class="text-[11px] text-slate-500 font-medium">وجّه فوتونات الضوء ثلاثية الأبعاد وشاهد الامتصاص والانعكاس الفيزيائي المباشر</p>
               </div>
             </div>
 
             <!-- Mode Selector -->
             <div class="flex bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold">
-              <button id="modeSpectro" class="py-1 px-2.5 rounded-lg bg-white text-blue-700 shadow-sm border border-slate-200">المطياف الضوئي</button>
-              <button id="modeAtom" class="py-1 px-2.5 rounded-lg text-slate-500 hover:text-slate-800">الذرة المثارة</button>
+              <button id="modeSpectro" type="button" class="py-1 px-2.5 rounded-lg bg-white text-blue-700 shadow-sm border border-slate-200 cursor-pointer">فوتونات 3D</button>
+              <button id="modeAtom" type="button" class="py-1 px-2.5 rounded-lg text-slate-500 hover:text-slate-800 cursor-pointer">الذرة المثارة</button>
             </div>
           </div>
 
-          <!-- Interactive Visual Stage -->
-          <div class="simulation-canvas-wrapper flex items-center justify-center p-4 relative" id="opticsStage" style="background: #0f172a;">
+          <!-- 3D Stage / Atom Stage -->
+          <div class="simulation-canvas-wrapper relative" id="opticsStage">
             
-            <!-- SPECTRO VIEW -->
-            <div id="spectroView" class="w-full h-full flex flex-col justify-between p-3 text-white">
-              
-              <!-- Light Source Beam & Leaf -->
-              <div class="flex items-center justify-between h-36 px-4">
-                <!-- Light Lamp -->
-                <div class="text-center space-y-1">
-                  <div id="lampBulb" class="w-12 h-12 rounded-full bg-white shadow-[0_0_20px_#ffffff] flex items-center justify-center mx-auto transition-all">
-                    <i data-lucide="sun" class="w-6 h-6 text-slate-900"></i>
-                  </div>
-                  <span class="text-[10px] text-slate-400 block font-bold" id="lampColorLabel">ضوء أحمر</span>
-                </div>
-
-                <!-- Light Beam Graphic -->
-                <div class="flex-1 mx-4 h-3 rounded-full relative overflow-hidden bg-slate-800">
-                  <div id="beamGraphic" class="h-full bg-rose-500 w-full animate-pulse transition-all duration-300"></div>
-                </div>
-
-                <!-- Chlorophyll Leaf Target -->
-                <div class="text-center space-y-1">
-                  <div id="leafTarget" class="w-16 h-16 rounded-2xl bg-emerald-600 border-2 border-emerald-400 flex items-center justify-center shadow-lg transition-transform duration-300">
-                    <i data-lucide="leaf" class="w-8 h-8 text-emerald-200"></i>
-                  </div>
-                  <span class="text-[10px] text-emerald-400 block font-bold">كلوروفيل النبات</span>
-                </div>
+            <!-- Spectrum Gauge HUD -->
+            <div id="spectrumHUD" class="absolute top-3 left-3 bg-white/90 backdrop-blur-md border border-slate-300 text-slate-900 p-3 rounded-2xl shadow-md text-xs space-y-1 z-10 min-w-[180px]">
+              <span class="text-slate-500 text-[10px] font-bold block">معدل امتصاص الكلوروفيل:</span>
+              <div class="flex items-center justify-between">
+                <span id="absorbRateText" class="text-lg font-black text-rose-600">96%</span>
+                <span id="absorbStatusBadge" class="text-[10px] bg-rose-50 text-rose-700 border border-rose-200 px-2 py-0.5 rounded-full font-bold">امتصاص فائق</span>
               </div>
-
-              <!-- Absorption Gauge & Scientific Analysis -->
-              <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex items-center justify-between">
-                <div>
-                  <span class="text-[10px] text-slate-400 block font-bold">معدل امتصاص الكلوروفيل:</span>
-                  <div class="flex items-center space-x-2 space-x-reverse">
-                    <span id="absorbRateText" class="text-xl font-black text-rose-400">96%</span>
-                    <span id="absorbStatusBadge" class="text-[10px] bg-rose-950 text-rose-300 border border-rose-800 px-2 py-0.5 rounded-full font-bold">امتصاص فائق (طاقة عالية)</span>
-                  </div>
-                </div>
-                <div class="text-left">
-                  <span class="text-[10px] text-slate-400 block font-bold">حالة الضوء:</span>
-                  <span id="lightOutcomeText" class="text-xs font-bold text-white">يُمتص لتنشيط التفاعلات الضوئية</span>
-                </div>
-              </div>
-
+              <span id="lightOutcomeText" class="text-[11px] text-slate-600 block font-medium">يُمتص بالكامل لتنشيط التفاعل</span>
             </div>
 
-            <!-- ATOM VIEW (Initially Hidden) -->
-            <div id="atomView" class="hidden w-full h-full flex flex-col items-center justify-center p-3 text-white space-y-3">
+            <!-- Atom Interactive Overlay -->
+            <div id="atomView" class="hidden absolute inset-0 bg-slate-950 flex flex-col items-center justify-center p-4 text-white space-y-3 z-20">
               <div class="relative w-44 h-44 flex items-center justify-center">
-                <!-- Outer Orbit -->
                 <div class="absolute inset-0 rounded-full border border-dashed border-blue-400/50"></div>
-                <!-- Middle Orbit -->
-                <div class="absolute inset-4 rounded-full border border-dashed border-slate-500"></div>
-                <!-- Nucleus (Mg Atom) -->
+                <div class="absolute inset-4 rounded-full border border-dashed border-slate-600"></div>
                 <div class="w-12 h-12 rounded-full bg-amber-500 flex items-center justify-center font-black text-xs text-slate-950 shadow-[0_0_15px_#f59e0b]">
                   Mg²⁺
                 </div>
-                <!-- Jumping Electron -->
                 <div id="jumpingElectron" class="absolute w-4 h-4 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee] top-8 right-8 transition-all duration-700"></div>
               </div>
-
               <div class="text-center space-y-1">
                 <span id="atomStatusText" class="text-xs font-extrabold text-cyan-400">الذرة مثارة: الإلكترون قفز لمدار طاقة أعلى!</span>
-                <p class="text-[11px] text-slate-400">تم تخزين طاقة فوتون الضوء في صورة طاقة كيميائية جاهزة لبناء ATP.</p>
+                <p class="text-[11px] text-slate-400">تم تخزين طاقة فوتون الضوء في صورة طاقة وضع كيميائية.</p>
               </div>
+              <button id="btnTriggerPhoton" type="button" class="btn-primary py-2 px-5 text-xs font-bold flex items-center space-x-1.5 space-x-reverse cursor-pointer">
+                <i data-lucide="zap" class="w-4 h-4 text-amber-300"></i>
+                <span>إطلاق فوتون ضوئي (Quantum) لإثارة الذرة</span>
+              </button>
             </div>
 
           </div>
 
           <!-- Color Buttons -->
           <div id="spectroButtons" class="grid grid-cols-3 gap-2">
-            <button id="btnRedLight" class="btn-primary py-2.5 text-xs font-bold bg-rose-600 hover:bg-rose-700 border-none flex items-center justify-center space-x-1.5 space-x-reverse">
+            <button id="btnRedLight" type="button" class="btn-primary py-2.5 text-xs font-bold bg-rose-600 hover:bg-rose-700 border-none flex items-center justify-center space-x-1.5 space-x-reverse cursor-pointer">
               <span class="w-2.5 h-2.5 rounded-full bg-white"></span>
-              <span>1. ضوء أحمر (680nm)</span>
+              <span>1. ضوء أحمر 3D</span>
             </button>
-            <button id="btnGreenLight" class="btn-secondary py-2.5 text-xs font-bold flex items-center justify-center space-x-1.5 space-x-reverse">
+            <button id="btnGreenLight" type="button" class="btn-secondary py-2.5 text-xs font-bold flex items-center justify-center space-x-1.5 space-x-reverse cursor-pointer">
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-              <span>2. ضوء أخضر (550nm)</span>
+              <span>2. ضوء أخضر (ينعكس!)</span>
             </button>
-            <button id="btnBlueLight" class="btn-secondary py-2.5 text-xs font-bold flex items-center justify-center space-x-1.5 space-x-reverse">
+            <button id="btnBlueLight" type="button" class="btn-secondary py-2.5 text-xs font-bold flex items-center justify-center space-x-1.5 space-x-reverse cursor-pointer">
               <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
-              <span>3. ضوء أزرق (450nm)</span>
-            </button>
-          </div>
-
-          <div id="atomButtons" class="hidden flex justify-center">
-            <button id="btnTriggerPhoton" class="btn-primary py-2.5 px-6 text-xs font-bold flex items-center space-x-2 space-x-reverse">
-              <i data-lucide="zap" class="w-4 h-4 text-amber-300"></i>
-              <span>إطلاق فوتون ضوئي (Quantum) لإثارة الذرة</span>
+              <span>3. ضوء أزرق 3D</span>
             </button>
           </div>
 
@@ -231,13 +190,13 @@
             أي الأطياف الضوئية التالية يكون معدل امتصاص الكلوروفيل لها أقل ما يمكن وتنعكس في الغالب؟
           </p>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
-            <button onclick="checkColor(1)" class="p-2.5 text-center rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 transition-all font-medium">
+            <button id="chkColor1" type="button" class="p-2.5 text-center rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 transition-all font-medium cursor-pointer">
               الضوء الأحمر
             </button>
-            <button onclick="checkColor(2)" class="p-2.5 text-center rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 transition-all font-medium">
+            <button id="chkColor2" type="button" class="p-2.5 text-center rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 transition-all font-medium cursor-pointer">
               الضوء الأخضر
             </button>
-            <button onclick="checkColor(3)" class="p-2.5 text-center rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 transition-all font-medium">
+            <button id="chkColor3" type="button" class="p-2.5 text-center rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 transition-all font-medium cursor-pointer">
               الضوء الأزرق
             </button>
           </div>
@@ -246,12 +205,12 @@
 
         <!-- NAV -->
         <div class="flex justify-between items-center pt-2">
-          <a href="module2.html" class="btn-secondary py-3 px-5 text-xs font-bold space-x-1.5 space-x-reverse">
+          <a href="module2.html" class="btn-secondary py-3 px-5 text-xs font-bold space-x-1.5 space-x-reverse cursor-pointer">
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
             <span>الوحدة السابقة</span>
           </a>
-          <a href="module4.html" class="btn-primary py-3 px-6 text-xs font-bold space-x-1.5 space-x-reverse shadow-md">
-            <span>الانتقال إلى الوحدة 4: مسار الطاقة والتفاعلات الضوئية واللاضوئية</span>
+          <a href="module4.html" class="btn-primary py-3 px-6 text-xs font-bold space-x-1.5 space-x-reverse shadow-md cursor-pointer">
+            <span>الانتقال إلى الوحدة 4: مسار الطاقة 3D</span>
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
           </a>
         </div>
@@ -267,79 +226,69 @@
   </footer>
 
   <script type="module">
+    import { sims3D } from './js/simulations-3d.js';
     import { markStationComplete } from './js/firebase-config.js';
-    lucide.createIcons();
+    if (window.lucide) lucide.createIcons();
+
+    // Mount 3D Photons
+    sims3D.initStation3('opticsStage');
 
     const modeSpectro = document.getElementById('modeSpectro');
     const modeAtom = document.getElementById('modeAtom');
-    const spectroView = document.getElementById('spectroView');
     const atomView = document.getElementById('atomView');
+    const spectrumHUD = document.getElementById('spectrumHUD');
     const spectroButtons = document.getElementById('spectroButtons');
-    const atomButtons = document.getElementById('atomButtons');
 
-    // Switch between Spectrometer and Atom view
     modeSpectro.addEventListener('click', () => {
-      modeSpectro.className = 'py-1 px-2.5 rounded-lg bg-white text-blue-700 shadow-sm border border-slate-200';
-      modeAtom.className = 'py-1 px-2.5 rounded-lg text-slate-500 hover:text-slate-800';
-      spectroView.classList.remove('hidden');
+      modeSpectro.className = 'py-1 px-2.5 rounded-lg bg-white text-blue-700 shadow-sm border border-slate-200 cursor-pointer';
+      modeAtom.className = 'py-1 px-2.5 rounded-lg text-slate-500 hover:text-slate-800 cursor-pointer';
       atomView.classList.add('hidden');
+      spectrumHUD.classList.remove('hidden');
       spectroButtons.classList.remove('hidden');
-      atomButtons.classList.add('hidden');
     });
 
     modeAtom.addEventListener('click', () => {
-      modeAtom.className = 'py-1 px-2.5 rounded-lg bg-white text-blue-700 shadow-sm border border-slate-200';
-      modeSpectro.className = 'py-1 px-2.5 rounded-lg text-slate-500 hover:text-slate-800';
+      modeAtom.className = 'py-1 px-2.5 rounded-lg bg-white text-blue-700 shadow-sm border border-slate-200 cursor-pointer';
+      modeSpectro.className = 'py-1 px-2.5 rounded-lg text-slate-500 hover:text-slate-800 cursor-pointer';
       atomView.classList.remove('hidden');
-      spectroView.classList.add('hidden');
-      atomButtons.classList.remove('hidden');
+      spectrumHUD.classList.add('hidden');
       spectroButtons.classList.add('hidden');
     });
 
-    // Spectrometer Logic
-    const lampBulb = document.getElementById('lampBulb');
-    const lampColorLabel = document.getElementById('lampColorLabel');
-    const beamGraphic = document.getElementById('beamGraphic');
     const absorbRateText = document.getElementById('absorbRateText');
     const absorbStatusBadge = document.getElementById('absorbStatusBadge');
     const lightOutcomeText = document.getElementById('lightOutcomeText');
 
     document.getElementById('btnRedLight').addEventListener('click', () => {
-      lampBulb.className = 'w-12 h-12 rounded-full bg-rose-500 shadow-[0_0_20px_#f43f5e] flex items-center justify-center mx-auto transition-all';
-      lampColorLabel.innerText = 'ضوء أحمر (طول موجي طويل)';
-      beamGraphic.className = 'h-full bg-rose-500 w-full animate-pulse transition-all duration-300';
+      if (sims3D.activeSims.station3) sims3D.activeSims.station3.setLight('red');
       absorbRateText.innerText = '96%';
-      absorbRateText.className = 'text-xl font-black text-rose-400';
-      absorbStatusBadge.className = 'text-[10px] bg-rose-950 text-rose-300 border border-rose-800 px-2 py-0.5 rounded-full font-bold';
-      absorbStatusBadge.innerText = 'امتصاص فائق (طاقة عالية)';
-      lightOutcomeText.innerText = 'يُمتص بالكامل لإثارة الإلكترونات وشطر الماء';
+      absorbRateText.className = 'text-lg font-black text-rose-600';
+      absorbStatusBadge.className = 'text-[10px] bg-rose-50 text-rose-700 border border-rose-200 px-2 py-0.5 rounded-full font-bold';
+      absorbStatusBadge.innerText = 'امتصاص فائق';
+      lightOutcomeText.innerText = 'يُمتص بالكامل لتنشيط التفاعل وشطر الماء';
       markStationComplete(3, 100);
     });
 
     document.getElementById('btnGreenLight').addEventListener('click', () => {
-      lampBulb.className = 'w-12 h-12 rounded-full bg-emerald-500 shadow-[0_0_20px_#10b981] flex items-center justify-center mx-auto transition-all';
-      lampColorLabel.innerText = 'ضوء أخضر (طول موجي متوسط)';
-      beamGraphic.className = 'h-full bg-emerald-500 w-full animate-pulse transition-all duration-300';
+      if (sims3D.activeSims.station3) sims3D.activeSims.station3.setLight('green');
       absorbRateText.innerText = '4%';
-      absorbRateText.className = 'text-xl font-black text-emerald-400';
-      absorbStatusBadge.className = 'text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded-full font-bold';
-      absorbStatusBadge.innerText = 'انعكاس شبه تام (لا امتصاص)';
+      absorbRateText.className = 'text-lg font-black text-emerald-600';
+      absorbStatusBadge.className = 'text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full font-bold';
+      absorbStatusBadge.innerText = 'انعكاس تام 3D';
       lightOutcomeText.innerText = 'ينعكس وينفذ، ولهذا ترى أعيننا أوراق النبات خضراء!';
     });
 
     document.getElementById('btnBlueLight').addEventListener('click', () => {
-      lampBulb.className = 'w-12 h-12 rounded-full bg-blue-500 shadow-[0_0_20px_#3b82f6] flex items-center justify-center mx-auto transition-all';
-      lampColorLabel.innerText = 'ضوء أزرق (طول موجي قصير وطاقة عالية)';
-      beamGraphic.className = 'h-full bg-blue-500 w-full animate-pulse transition-all duration-300';
+      if (sims3D.activeSims.station3) sims3D.activeSims.station3.setLight('blue');
       absorbRateText.innerText = '94%';
-      absorbRateText.className = 'text-xl font-black text-blue-400';
-      absorbStatusBadge.className = 'text-[10px] bg-blue-950 text-blue-300 border border-blue-800 px-2 py-0.5 rounded-full font-bold';
-      absorbStatusBadge.innerText = 'امتصاص أقصى (طاقة كيميائية)';
+      absorbRateText.className = 'text-lg font-black text-blue-600';
+      absorbStatusBadge.className = 'text-[10px] bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-full font-bold';
+      absorbStatusBadge.innerText = 'امتصاص أقصى';
       lightOutcomeText.innerText = 'يُمتص بكفاءة قصوى لبناء جزيئات الطاقة ATP';
       markStationComplete(3, 100);
     });
 
-    // Atom Logic
+    // Atom Trigger
     const electron = document.getElementById('jumpingElectron');
     const atomStatus = document.getElementById('atomStatusText');
     let isExcited = false;
@@ -362,17 +311,27 @@
       markStationComplete(3, 100);
     });
 
-    window.checkColor = function(opt) {
+    // Formative check
+    document.getElementById('chkColor1').addEventListener('click', () => {
       const fb = document.getElementById('colorFeedback');
       fb.classList.remove('hidden');
-      if (opt === 2) {
-        fb.className = 'p-3 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
-        fb.innerHTML = 'إجابة صحيحة وممتازة! الكلوروفيل يعكس وينفذ الضوء الأخضر ويكاد لا يمتصه، ولذلك يظهر النبات باللون الأخضر.';
-      } else {
-        fb.className = 'p-3 rounded-xl text-xs font-bold bg-red-100 text-red-800 border border-red-300';
-        fb.innerHTML = 'إجابة غير صحيحة. تذكر أن الكلوروفيل يمتص الضوء الأحمر والأزرق بنسبة تقارب 95% بينما يعكس اللون الأخضر.';
-      }
-    };
+      fb.className = 'p-3 rounded-xl text-xs font-bold bg-red-100 text-red-800 border border-red-300';
+      fb.innerHTML = 'إجابة غير صحيحة. الكلوروفيل يمتص الضوء الأحمر بكفاءة عظمى.';
+    });
+
+    document.getElementById('chkColor2').addEventListener('click', () => {
+      const fb = document.getElementById('colorFeedback');
+      fb.classList.remove('hidden');
+      fb.className = 'p-3 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
+      fb.innerHTML = 'إجابة صحيحة وممتازة! الكلوروفيل يعكس وينفذ الضوء الأخضر ويكاد لا يمتصه، ولذلك يظهر النبات باللون الأخضر.';
+    });
+
+    document.getElementById('chkColor3').addEventListener('click', () => {
+      const fb = document.getElementById('colorFeedback');
+      fb.classList.remove('hidden');
+      fb.className = 'p-3 rounded-xl text-xs font-bold bg-red-100 text-red-800 border border-red-300';
+      fb.innerHTML = 'إجابة غير صحيحة. الكلوروفيل يمتص الضوء الأزرق بنسبة تفوق 90%.';
+    });
   </script>
 </body>
 </html>
